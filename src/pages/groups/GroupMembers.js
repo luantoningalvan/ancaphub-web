@@ -1,10 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import UserCard from '../../components/users/UserCard';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
-import Paper from '../../components/ui/Paper';
-import LoadContent from '../../components/ui/LoadContent';
+
+import {
+  Paper,
+  LoadContent,
+} from '../../components/ui'
 
 const users = [
   {
@@ -106,13 +107,13 @@ const Members = () => (
         <FormattedMessage id="profile.followers.noFollowers" description="User has no followers" />
       </Paper>
     ) : (
-      <GridContainer spacing={2} style={{ marginTop: 8 }}>
+      <div spacing={2} style={{ marginTop: 8 }}>
         {users.map((user) => (
-          <GridItem xs={3}>
+          <div xs={3}>
             <UserCard user={user.user} />
-          </GridItem>
+          </div>
         ))}
-      </GridContainer>
+      </div>
     )}
   </LoadContent>
 );

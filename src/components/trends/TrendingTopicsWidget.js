@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-// import { Link } from 'react-router-dom';
-import Card from '../ui/Card';
-import CardHeader from '../ui/CardHeader';
-import CardBody from '../ui/CardBody';
-import CardFooter from '../ui/CardFooter';
+
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+} from '../ui'
 
 const TrendingList = styled.ul`
 li {

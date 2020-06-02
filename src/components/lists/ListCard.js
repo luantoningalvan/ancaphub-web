@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ListIcon from 'react-ionicons/lib/IosList';
-import Paper from '../ui/Paper';
+import {Paper} from '../ui';
 
 const ListCard = styled.div`
   width: 100%;

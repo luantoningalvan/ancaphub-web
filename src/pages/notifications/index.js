@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import Container from '../../components/ui/Container';
-import Hero from '../../components/ui/Hero';
-import Paper from '../../components/ui/Paper';
-import Loader from '../../components/ui/Loader';
 import Notification from '../../components/notifications';
+
+import { 
+  Container,
+  Hero,
+  Paper,
+  Spinner,
+} from '../../components/ui'
+
 import {
   getNotificationsRequest,
   markAllAsReadRequest,
@@ -57,7 +61,7 @@ export default () => {
           </>
         ) : (
           <Paper padding style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Loader />
+            <Spinner />
           </Paper>
         )}
       </div>

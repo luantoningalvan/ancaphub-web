@@ -12,15 +12,19 @@ import CommentIcon from 'react-ionicons/lib/IosTextOutline';
 import DeleteIcon from 'react-ionicons/lib/IosRemoveCircleOutline';
 import { useDispatch, useSelector } from 'react-redux';
 import CommentBox from '../comments/CommentBox';
-import IconButton from '../ui/IconButton';
-import DropdownListItem from '../ui/DropdownListItem';
-import DropdownListContainer from '../ui/DropdownListContainer';
-import Dropdown from '../ui/Dropdown';
+
+import {
+  IconButton,
+  DropdownListItem,
+  Dropdown,
+  ImageBox,
+  ConfirmationDialog,
+  DropdownListContainer,
+} from '../ui'
+
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
-import ImageBox from '../ui/ImageBox';
 import LikeBox from './LikeBox';
 import PostPoll from './PostPoll';
-import Confirm from '../ui/Confirm';
 import { PostContainer } from './styles.css';
 import { likePostRequest, deletePostRequest } from '../../actions/posts';
 
@@ -84,9 +88,7 @@ const PostCard = ({ data }) => {
               offsetX={15}
               placement="left-start"
               toggle={(
-                <IconButton>
-                  <MdMore color="#fff" fontSize="24px" />
-                </IconButton>
+              <IconButton icon={<MdMore color="#fff" fontSize="24px" />} />
               )}
             >
               <DropdownListContainer>
@@ -95,7 +97,7 @@ const PostCard = ({ data }) => {
                 </DropdownListItem>
               </DropdownListContainer>
             </Dropdown>
-            <Confirm
+            <ConfirmationDialog
               show={deleteDialogState}
               onClose={handleDelete}
               onConfirm={() => handleDeletePost(data._id)}

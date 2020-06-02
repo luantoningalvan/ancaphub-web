@@ -3,12 +3,17 @@ import { FormattedMessage } from 'react-intl';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  ExpansionPanel,
+} from '../../../components/ui'
+
 import TextField from '../../../components/form/Input';
-import Button from '../../../components/ui/Button';
-import Card from '../../../components/ui/Card';
-import CardBody from '../../../components/ui/CardBody';
-import CardHeader from '../../../components/ui/CardHeader';
-import ExpansionPanel from '../../../components/ui/ExpansionPanel';
+
 import {
   updateEmailRequest,
   updateUsernameRequest,
@@ -98,11 +103,8 @@ export default () => {
 
   return (
     <Card>
-      <CardHeader>
-        <h3>
-          <FormattedMessage id="account.settings.accessAndSecurity" />
-        </h3>
-      </CardHeader>
+      <CardHeader title={<FormattedMessage id="account.settings.accessAndSecurity" />} />
+
       <CardBody>
         <ExpansionPanel title={<FormattedMessage id="common.username" />}>
           <Form

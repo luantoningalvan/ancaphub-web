@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
-import TextField from '../ui/TextField';
+import {TextField} from '../ui'
 
 export default function Input({ name, type = 'text', ...rest }) {
   const inputRef = useRef(null);

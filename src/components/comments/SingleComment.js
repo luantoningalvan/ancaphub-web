@@ -8,13 +8,16 @@ import { FormattedRelativeTime, FormattedMessage } from 'react-intl';
 import { differenceInSeconds, parseISO, getTime } from 'date-fns';
 import UserAvatar from '../users/UserAvatar';
 import UserName from '../users/UserName';
-import Dropdown from '../ui/Dropdown';
-import DropdownListContainer from '../ui/DropdownListContainer';
-import DropdownListItem from '../ui/DropdownListItem';
-import IconButton from '../ui/IconButton';
 import CommentBox from './CommentBox';
 import { deleteCommentRequest, likeCommentRequest } from '../../actions/comments';
-import Confirm from '../ui/Confirm';
+
+import {
+  Dropdown,
+  DropdownListContainer,
+  DropdownListItem,
+  IconButton,
+  ConfirmationDialog,
+} from '../ui'
 
 const SingleCommentStyle = styled.div`
   .teste {
@@ -143,9 +146,7 @@ const SingleComment = ({ comment, post }) => {
           <Dropdown
             placement="left-start"
             toggle={(
-              <IconButton>
-                <MdMore />
-              </IconButton>
+            <IconButton icon={<MdMore />}/>
           )}
           >
             <DropdownListContainer>
@@ -158,7 +159,7 @@ const SingleComment = ({ comment, post }) => {
               </DropdownListItem>
             </DropdownListContainer>
           </Dropdown>
-          <Confirm
+          <ConfirmationDialog
             show={deleteBox}
             onClose={() => setDeleteBox(false)}
             onConfirm={handleDelete}

@@ -10,17 +10,19 @@ import SiteIcon from 'react-ionicons/lib/IosLinkOutline';
 import EditIcon from 'react-ionicons/lib/IosCreate';
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import defaultProfileCover from '../../assets/default-profile-cover.jpg';
-import Paper from '../../components/ui/Paper';
-import Button from '../../components/ui/Button';
-import Loader from '../../components/ui/Loader';
-import Container from '../../components/ui/Container';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
+
+import { 
+  Paper,
+  Button,
+  Spinner,
+  Container,
+  Tabs,
+  Tab,
+} from '../../components/ui'
+
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
 import EditAvatar from '../../components/users/EditAvatar';
-import Tabs from '../../components/ui/Tabs';
-import Tab from '../../components/ui/Tab';
 
 import { getSingleUserRequest } from '../../actions/users';
 import {
@@ -76,7 +78,7 @@ export default () => {
           display: 'flex', flexBasis: '100%', flexGrow: 1, justifyContent: 'center', alignItems: 'center',
         }}
         >
-          <Loader size={128} />
+          <Spinner size={128} />
         </div>
       ) : (
         <>
@@ -160,8 +162,8 @@ export default () => {
               </div>
             </ProfileInfo>
           </ProfileHeader>
-          <GridContainer style={{ marginTop: 16 }} spacing={2}>
-            <GridItem lg={3} sm={12}>
+          <div style={{ marginTop: 16 }} spacing={2}>
+            <div lg={3} sm={12}>
               <Paper padding style={{ width: '100%' }}>
                 <UserAbout>
                   <h3>
@@ -199,8 +201,8 @@ export default () => {
                   </ul>
                 </UserAbout>
               </Paper>
-            </GridItem>
-            <GridItem sm={12} lg={9}>
+            </div>
+            <div sm={12} lg={9}>
               <Paper style={{ width: '100%' }}>
                 <Tabs style={{
                   height: 48, padding: '0px 8px', overflow: 'hidden', flexGrow: 1,
@@ -228,10 +230,10 @@ export default () => {
                 width: '100%', margin: '16px 0',
               }}
               >
-                <Suspense fallback={<Loader size={96} />}>{Page}</Suspense>
+                <Suspense fallback={<Spinner size={96} />}>{Page}</Suspense>
               </div>
-            </GridItem>
-          </GridContainer>
+            </div>
+          </div>
         </>
       )}
     </Container>

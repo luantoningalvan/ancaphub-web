@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import ArrowIcon from 'react-ionicons/lib/IosArrowDown';
-import Card from '../../components/ui/Card';
-import CardBody from '../../components/ui/CardBody';
-import CardHeader from '../../components/ui/CardHeader';
-import Collapse from '../../components/ui/Collapse';
+
+import { 
+  Card,
+  CardBody,
+  CardHeader,
+  Collapse,
+} from '../../components/ui'
 
 const FAQQuestion = styled.div`
   margin-bottom: 1em;

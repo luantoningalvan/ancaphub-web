@@ -6,20 +6,24 @@ import EmbedIcon from 'react-ionicons/lib/IosCode';
 import PollIcon from 'react-ionicons/lib/IosPodiumOutline';
 import CloseIcon from 'react-ionicons/lib/IosClose';
 import AddIcon from 'react-ionicons/lib/IosAdd';
+
 import { EditorState, RichUtils, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createListPlugin from 'draft-js-list-plugin';
 import { FormattedMessage } from 'react-intl';
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
-
 import { bindActionCreators } from 'redux';
-import TextField from '../../ui/TextField';
-import CardBody from '../../ui/CardBody';
-import CardFooter from '../../ui/CardFooter';
-import Card from '../../ui/Card';
-import IconButton from '../../ui/IconButton';
-import Button from '../../ui/Button';
+
+import {
+  TextField,
+  CardBody,
+  CardFooter,
+  Card,
+  IconButton,
+  Button
+} from '../../ui'
+
 import basicTextStylePlugin from '../../editor/plugins/basicTextStylePlugin';
 import 'draft-js/dist/Draft.css';
 import 'draft-js-linkify-plugin/lib/plugin.css';
@@ -145,11 +149,10 @@ function PostForm({ createPostRequest: createPost }) {
               {media.type === 'image' && (
                 <div className="image-box">
                   <IconButton
+                    icon={<CloseIcon />}
                     onClick={handleRemoveMedia}
                     className="close-icon"
-                  >
-                    <CloseIcon />
-                  </IconButton>
+                  />
                   <img src={preview} alt="preview" />
                 </div>
               )}
@@ -183,9 +186,11 @@ function PostForm({ createPostRequest: createPost }) {
                       }}
                     >
                       {media.data.length < 4 && (
-                        <IconButton color="secondary" disableElevation>
-                          <AddIcon onClick={addPollOption} />
-                        </IconButton>
+                        <IconButton 
+                        icon={<AddIcon  />}
+                        color="secondary" 
+                        onClick={addPollOption}
+                        />
                       )}
                     </div>
                   </div>
@@ -237,12 +242,10 @@ function PostForm({ createPostRequest: createPost }) {
               <input id="image-input" type="file" onChange={(e) => handleAddImage(e)} />
             </label>
           </div>
-          <IconButton size="small" onClick={handleAddPoll}>
-            <PollIcon />
-          </IconButton>
-          <IconButton size="small" onClick={handleAddEmbed}>
-            <EmbedIcon />
-          </IconButton>
+          
+          <IconButton icon={<PollIcon />} size="small" onClick={handleAddPoll} />
+          
+          <IconButton  icon={<EmbedIcon />} size="small" onClick={handleAddEmbed}/>
 
           <Button
             variant="contained"

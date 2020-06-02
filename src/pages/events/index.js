@@ -8,12 +8,14 @@ import {
 import locale from 'date-fns/locale/pt-BR';
 import BackButton from 'react-ionicons/lib/IosArrowBack';
 import NextButton from 'react-ionicons/lib/IosArrowForward';
-import Container from '../../components/ui/Container';
-import Hero from '../../components/ui/Hero';
-import Button from '../../components/ui/Button';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
-import IconButton from '../../components/ui/IconButton';
+
+import {
+  Container,
+  Hero,
+  Button,
+  IconButton,
+} from '../../components/ui'
+
 import EventCard from '../../components/events/EventCard';
 import CreateEvent from '../../components/events/CreateEvent';
 
@@ -135,15 +137,10 @@ const Toolbar = (toolbar) => {
   return (
     <div className="rbc-toolbar">
       <div className="month-switch">
-        <IconButton onClick={goToBack}>
-          <BackButton />
-        </IconButton>
+        <IconButton icon={<BackButton />} onClick={goToBack} />
+
         <span>{toolbar.label}</span>
-        <IconButton onClick={goToNext}>
-          {' '}
-          <NextButton />
-          {' '}
-        </IconButton>
+        <IconButton icon={<NextButton />} onClick={goToNext} />
       </div>
       <ul className="view-switch">
         <li>
@@ -233,13 +230,13 @@ export default () => {
         />
 
         <h3 style={{ marginTop: 24, fontSize: '1.7em' }}>Eventos Próximos</h3>
-        <GridContainer style={{ margin: '16px 0px' }}>
+        <div style={{ margin: '16px 0px' }}>
           {events.map((event) => (
-            <GridItem xs={3}>
+            <div xs={3}>
               <EventCard event={event} />
-            </GridItem>
+            </div>
           ))}
-        </GridContainer>
+        </div>
       </div>
     </Container>
   );

@@ -3,12 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import Card from '../ui/Card';
-import CardFooter from '../ui/CardFooter';
-import CardHeader from '../ui/CardHeader';
-import CardBody from '../ui/CardBody';
-import defaultCover from '../../assets/default-book-cover.jpg';
-import LoadContent from '../ui/LoadContent';
+import {isEmpty} from 'lodash'
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardBody,
+  LoadContent,
+} from '../ui'
+
 import { getRecentItemsRequest } from '../../actions/library';
 import MiniLibraryCard from './MiniLibraryCard';
 
@@ -81,20 +84,20 @@ const LastItemsWidget = () => {
   return (
     <div style={{ width: '100%' }}>
       <Card>
-        <CardHeader>
-          <h3>
-            <FormattedMessage
-              id="common.lastItems"
-            />
-          </h3>
-        </CardHeader>
+        <CardHeader title={<FormattedMessage id="common.lastItems"/>} />
+
         <CardBody>
           <LoadContent loading={loading}>
+            {items && !isEmpty(items) ? (
             <LastItems>
-              {items && items.map((item) => (
-                <MiniLibraryCard item={item} />
-              ))}
-            </LastItems>
+            {items && items.map((item) => (
+              <MiniLibraryCard item={item} />
+            ))}
+          </LastItems>
+            ) : (
+              <p>Nenhum item recente</p>
+            )}
+
           </LoadContent>
         </CardBody>
         <CardFooter link="/library" label={<FormattedMessage id="common.showMore" />} />

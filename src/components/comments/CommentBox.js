@@ -2,10 +2,13 @@ import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import Collapse from '../ui/Collapse';
+import {
+  Collapse
+} from '../ui'
 import CommentForm from './CommentForm';
 import Comment from './SingleComment';
 import { loadCommentsRequest } from '../../actions/comments';
+
 
 const CommentBoxStyle = styled.div`
   margin: ${(props) => (props.indent ? '10px 0px 10px 43px' : 'none')}

@@ -4,23 +4,24 @@ import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UploadButton from 'react-ionicons/lib/IosCloudUpload';
 import { isEmpty } from 'lodash';
-import Container from '../../components/ui/Container';
-import Hero from '../../components/ui/Hero';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
-import Card from '../../components/ui/Card';
-import CardHeader from '../../components/ui/CardHeader';
 import LibraryCard from '../../components/library/LibraryCard';
-import Menu from '../../components/ui/Menu';
-import MenuItem from '../../components/ui/MenuItem';
-import Tab from '../../components/ui/Tab';
-import Tabs from '../../components/ui/Tabs';
-import Button from '../../components/ui/Button';
+
 import { loadCategoriesRequest } from '../../actions/categories';
 import { getItemsRequest } from '../../actions/library';
-import LoadContent from '../../components/ui/LoadContent';
-import Paper from '../../components/ui/Paper';
 
+import { 
+  Container,
+  Hero,
+  Card,
+  CardHeader,
+  Menu,
+  MenuItem,
+  Tab,
+  Tabs,
+  Button,
+  LoadContent,
+  Paper,
+} from '../../components/ui'
 
 export default () => {
   // eslint-disable-next-line no-unused-vars
@@ -67,8 +68,8 @@ export default () => {
         )}
       />
 
-      <GridContainer spacing={2} style={{ marginTop: 8 }}>
-        <GridItem xs={12}>
+      <div spacing={2} style={{ marginTop: 8 }}>
+        <div xs={12}>
           <Card style={{ width: '100%' }}>
             <CardHeader style={{ paddingBottom: 8 }}>
               <h3>
@@ -92,8 +93,8 @@ export default () => {
               </LoadContent>
             </Menu>
           </Card>
-        </GridItem>
-        <GridItem xs={12}>
+        </div>
+        <div xs={12}>
           <div style={{ width: '100%' }}>
             <Paper>
               <Tabs style={{ height: 48, padding: '0px 8px' }}>
@@ -126,19 +127,19 @@ export default () => {
                     <FormattedMessage id="library.noneFound" />
                   </Paper>
                 ) : (
-                  <GridContainer spacing={2}>
+                  <div spacing={2}>
                     {items.map((item) => (
-                      <GridItem xs={12}>
+                      <div xs={12}>
                         <LibraryCard item={item} />
-                      </GridItem>
+                      </div>
                     ))}
-                  </GridContainer>
+                  </div>
                 )}
               </LoadContent>
             </div>
           </div>
-        </GridItem>
-      </GridContainer>
+        </div>
+      </div>
     </Container>
   );
 };

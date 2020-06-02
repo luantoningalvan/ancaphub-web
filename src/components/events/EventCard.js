@@ -3,8 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LocationIcon from 'react-ionicons/lib/IosPinOutline';
-import Paper from '../ui/Paper';
-import Button from '../ui/Button';
+import {
+  Button,
+  Paper
+} from '../ui'
 
 const Event = styled(Paper)`
   position: relative;

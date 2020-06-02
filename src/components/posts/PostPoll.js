@@ -1,15 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-
-// Redux
 import VotedIcon from 'react-ionicons/lib/IosCheckmarkCircleOutline';
 import { FormattedMessage, FormattedPlural } from 'react-intl';
 import { votePostPollRequest } from '../../actions/posts';
-
-// i18n
-
-// Icons
 
 const PostPollWrap = styled.div`
   display: flex;

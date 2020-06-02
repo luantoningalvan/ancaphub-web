@@ -6,7 +6,7 @@ import LocateIcon from 'react-ionicons/lib/MdLocate';
 import { FormattedMessage } from 'react-intl';
 import { Link, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
-import IconButton from '../ui/IconButton';
+import {IconButton} from '../ui';
 
 const SearchWrapper = styled.div`
   .not-collapsed {
@@ -116,14 +116,11 @@ const Search = () => {
     <SearchWrapper>
       <div className={clsx('mobile-search', !collapsed && 'not-collapsed')}>
         {collapsed ? (
-          <IconButton onClick={() => setCollapsed(false)}>
-            <SearchIcon />
-          </IconButton>
+          <IconButton icon={<SearchIcon />} onClick={() => setCollapsed(false)} />
         ) : (
           <>
-            <IconButton onClick={() => setCollapsed(true)}>
-              <BackIcon />
-            </IconButton>
+            <IconButton icon={<BackIcon />} onClick={() => setCollapsed(true)} />
+              
             <FormattedMessage
               id="common.search"
               description="Input de pesquisa"

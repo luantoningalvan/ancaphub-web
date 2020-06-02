@@ -3,10 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserFollowersRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
-import Paper from '../../components/ui/Paper';
-import LoadContent from '../../components/ui/LoadContent';
+
+import { 
+  Paper,
+  LoadContent 
+} from '../../components/ui'
 
 const Feed = ({ user: userId }) => {
   const dispatch = useDispatch();
@@ -23,13 +24,13 @@ const Feed = ({ user: userId }) => {
           <FormattedMessage id="profile.followers.noFollowers" />
         </Paper>
       ) : (
-        <GridContainer spacing={1}>
+        <div spacing={1}>
           {followers.map((user) => (
-            <GridItem xs={4}>
+            <div xs={4}>
               <UserCard user={user.user} />
-            </GridItem>
+            </div>
           ))}
-        </GridContainer>
+        </div>
       )}
     </LoadContent>
   );

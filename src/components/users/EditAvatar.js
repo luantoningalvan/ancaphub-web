@@ -6,11 +6,15 @@ import CloseIcon from 'react-ionicons/lib/MdClose';
 import Slider from 'rc-slider';
 import Cropper from 'react-easy-crop';
 import { useDispatch } from 'react-redux';
-import IconButton from '../ui/IconButton';
-import Button from '../ui/Button';
-import CardHeader from '../ui/CardHeader';
-import CardBody from '../ui/CardBody';
-import Dialog from '../ui/Dialog';
+
+import {
+  IconButton,
+  Button,
+  CardHeader,
+  CardBody,
+  Dialog,
+} from '../ui'
+
 import { updateProfilePictureRequest as updateProfilePicture } from '../../actions/users';
 
 const UplaodArea = styled.label`
@@ -97,9 +101,8 @@ export default ({ open, onClose }) => {
     <Dialog show={open}>
       <CardHeader style={{ padding: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton onClick={handleCancel}>
-            <CloseIcon />
-          </IconButton>
+          <IconButton icon={<CloseIcon />}onClick={handleCancel} />
+
           <h3>
             <FormattedMessage id="components.editAvatar.heading" />
           </h3>

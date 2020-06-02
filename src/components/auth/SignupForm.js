@@ -1,14 +1,12 @@
-import React, { useRef } from 'react';
-import { Form } from '@unform/web';
-import { FormattedMessage, useIntl } from 'react-intl';
-import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import Button from '../ui/Button';
-import Input from '../form/Input';
-import { createUserRequest } from '../../actions/users';
-import GridContainer from '../ui/GridContainer';
-import GridItem from '../ui/GridItem';
+import React, { useRef } from "react";
+import { Form } from "@unform/web";
+import { FormattedMessage, useIntl } from "react-intl";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import Input from "../form/Input";
+import { createUserRequest } from "../../actions/users";
 
+import { Button } from "../ui";
 export default () => {
   const dispatch = useDispatch();
   const signupFormRef = useRef(null);
@@ -18,26 +16,71 @@ export default () => {
     try {
       const schema = Yup.object().shape({
         name: Yup.string()
-          .min(3, formatMessage({ id: 'account.settings.validation.usernameShort' }))
-          .max(30, formatMessage({ id: 'account.settings.validation.usernameLong' }))
-          .required(formatMessage({ id: 'account.settings.validation.usernameRequired' })),
+          .min(
+            3,
+            formatMessage({ id: "account.settings.validation.usernameShort" })
+          )
+          .max(
+            30,
+            formatMessage({ id: "account.settings.validation.usernameLong" })
+          )
+          .required(
+            formatMessage({
+              id: "account.settings.validation.usernameRequired",
+            })
+          ),
         username: Yup.string()
-          .min(3, formatMessage({ id: 'account.settings.validation.usernameShort' }))
-          .max(20, formatMessage({ id: 'account.settings.validation.usernameLong' }))
-          .matches(/^[a-zA-Z0-9_]+$/, formatMessage({ id: 'account.settings.validation.regex' }))
-          .required(formatMessage({ id: 'account.settings.validation.usernameRequired' })),
+          .min(
+            3,
+            formatMessage({ id: "account.settings.validation.usernameShort" })
+          )
+          .max(
+            20,
+            formatMessage({ id: "account.settings.validation.usernameLong" })
+          )
+          .matches(
+            /^[a-zA-Z0-9_]+$/,
+            formatMessage({ id: "account.settings.validation.regex" })
+          )
+          .required(
+            formatMessage({
+              id: "account.settings.validation.usernameRequired",
+            })
+          ),
         email: Yup.string()
-          .email(formatMessage({ id: 'account.settings.validation.emailInvalid' }))
-          .required(formatMessage({ id: 'account.settings.validation.emailRequired' })),
+          .email(
+            formatMessage({ id: "account.settings.validation.emailInvalid" })
+          )
+          .required(
+            formatMessage({ id: "account.settings.validation.emailRequired" })
+          ),
         password: Yup.string()
-          .required(formatMessage({ id: 'account.settings.validation.currentPasswordRequired' }))
-          .min(6, formatMessage({ id: 'account.settings.validation.minPasswordLength' })),
+          .required(
+            formatMessage({
+              id: "account.settings.validation.currentPasswordRequired",
+            })
+          )
+          .min(
+            6,
+            formatMessage({
+              id: "account.settings.validation.minPasswordLength",
+            })
+          ),
         confirmPassword: Yup.string()
-          .required(formatMessage({ id: 'account.settings.validation.confirmPasswordRequired' }))
-          .oneOf([Yup.ref('password'), null], formatMessage({ id: 'account.settings.validation.passwordMismatch' })),
+          .required(
+            formatMessage({
+              id: "account.settings.validation.confirmPasswordRequired",
+            })
+          )
+          .oneOf(
+            [Yup.ref("password"), null],
+            formatMessage({
+              id: "account.settings.validation.passwordMismatch",
+            })
+          ),
         code: Yup.string()
-          .required(formatMessage({ id: 'alpha.validation.inviteRequired' }))
-          .length(20, formatMessage({ id: 'alpha.validation.inviteLength' })),
+          .required(formatMessage({ id: "alpha.validation.inviteRequired" }))
+          .length(20, formatMessage({ id: "alpha.validation.inviteLength" })),
       });
       await schema.validate(data, {
         abortEarly: false,
@@ -56,8 +99,8 @@ export default () => {
 
   return (
     <Form onSubmit={handleSubmit} ref={signupFormRef}>
-      <GridContainer spacing={1}>
-        <GridItem xs={12}>
+      <div spacing={1}>
+        <div className="form-row">
           <FormattedMessage id="common.name">
             {(msg) => (
               <Input
@@ -68,22 +111,22 @@ export default () => {
               />
             )}
           </FormattedMessage>
-        </GridItem>
+        </div>
 
-        <GridItem xs={12}>
+        <div className="form-row">
           <FormattedMessage id="common.username">
-            { (msg) => (
+            {(msg) => (
               <Input
                 type="text"
                 placeholder={msg}
                 name="username"
                 autoComplete="username"
               />
-            ) }
+            )}
           </FormattedMessage>
-        </GridItem>
+        </div>
 
-        <GridItem xs={12}>
+        <div className="form-row">
           <FormattedMessage id="common.email">
             {(msg) => (
               <Input
@@ -94,9 +137,8 @@ export default () => {
               />
             )}
           </FormattedMessage>
-        </GridItem>
-
-        <GridItem xs={6}>
+        </div>
+        <div className="form-row">
           <FormattedMessage id="common.password">
             {(msg) => (
               <Input
@@ -107,9 +149,7 @@ export default () => {
               />
             )}
           </FormattedMessage>
-        </GridItem>
 
-        <GridItem xs={6}>
           <FormattedMessage id="components.auth.signUp.confirmPassword">
             {(msg) => (
               <Input
@@ -120,17 +160,25 @@ export default () => {
               />
             )}
           </FormattedMessage>
-        </GridItem>
+        </div>
 
-        <GridItem xs={12}>
-          <Input type="text" placeholder="Convite" name="code" />
-        </GridItem>
-        <GridItem xs={12}>
-          <Button type="submit" color="secondary" style={{ width: '100%' }}>
+        <div className="form-row">
+
+        <FormattedMessage id="components.auth.signUp.code">
+            {(msg) => (
+          <Input 
+          type="text" 
+          placeholder={msg}
+          name="code" />
+            )}
+          </FormattedMessage>
+        </div>
+        <div className="form-row">
+          <Button type="submit" color="secondary" style={{ width: "100%" }}>
             <FormattedMessage id="common.register" />
           </Button>
-        </GridItem>
-      </GridContainer>
+        </div>
+      </div>
     </Form>
   );
 };

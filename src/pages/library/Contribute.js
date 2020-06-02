@@ -4,14 +4,15 @@ import ArticleIcon from 'react-ionicons/lib/IosPaper';
 import BookIcon from 'react-ionicons/lib/IosBook';
 import VideoIcon from 'react-ionicons/lib/IosPlay';
 import styled from 'styled-components';
-import Button from '../../components/ui/Button';
-import Container from '../../components/ui/Container';
-import Paper from '../../components/ui/Paper';
-import TextField from '../../components/ui/TextField';
-import Stepper from '../../components/ui/Stepper';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
 import LibraryCard from '../../components/library/LibraryCard';
+
+import {
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Stepper,
+} from '../../components/ui'
 
 const UploadBox = styled.div`
   height: 100px;
@@ -210,8 +211,8 @@ export default (props) => {
               flexDirection: 'column',
             }}
           >
-            <GridContainer spacing={4} style={{ width: '600px' }}>
-              <GridItem xs={7}>
+            <div spacing={4} style={{ width: '600px' }}>
+              <div xs={7}>
                 <Paper padding style={{ width: '100%' }}>
                   <UploadBox>
                     <FormattedMessage id="library.contribute.noneSelected" />
@@ -224,8 +225,8 @@ export default (props) => {
                     <FormattedMessage id="common.next" />
                   </Button>
                 </Paper>
-              </GridItem>
-              <GridItem xs={5}>
+              </div>
+              <div xs={5}>
                 <h3
                   style={{
                     fontSize: '0.9em',
@@ -241,8 +242,8 @@ export default (props) => {
                     title: <FormattedMessage id="common.untitled" />,
                   }}
                 />
-              </GridItem>
-            </GridContainer>
+              </div>
+            </div>
           </div>
         )}
       </Contribute>

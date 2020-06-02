@@ -5,17 +5,18 @@ import { isEmpty } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import LocateIcon from 'react-ionicons/lib/MdLocate';
 import styled from 'styled-components';
-import Container from '../../components/ui/Container';
-import Hero from '../../components/ui/Hero';
-import Paper from '../../components/ui/Paper';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
-import Switch from '../../components/ui/FlipSwitch';
-import UserCard from '../../components/users/UserCard';
-import Loader from '../../components/ui/Loader';
+
 import { searchNearbyUserRequest } from '../../actions/search';
 import { updateGeoLocationsRequest } from '../../actions/settings';
 import 'rc-slider/assets/index.css';
+import UserCard from '../../components/users/UserCard'
+import { 
+  Container,
+  Hero,
+  Paper,
+  Switcher,
+  Spinner,
+} from '../../components/ui'
 
 export default () => {
   const [radius, setRadius] = useState(50);
@@ -85,7 +86,7 @@ export default () => {
             <span style={{ display: 'block', marginRight: 8 }}>
               <FormattedMessage id="nearby.location" />
             </span>
-            <Switch value={geoLocation} onChange={switchPreferences} />
+            <Switcher value={geoLocation} onChange={switchPreferences} />
           </div>
         )}
       />
@@ -139,13 +140,13 @@ export default () => {
                     </Paper>
 
                     {!isEmpty(results) ? (
-                      <GridContainer spacing={2} style={{ marginTop: 8 }}>
+                      <div spacing={2} style={{ marginTop: 8 }}>
                         {Array.isArray(results) && results.map((user) => (
-                          <GridItem xs={3}>
+                          <div xs={3}>
                             <UserCard user={user.user} />
-                          </GridItem>
+                          </div>
                         ))}
-                      </GridContainer>
+                      </div>
                     ) : (
                       <Paper padding>
                         <FormattedMessage id="common.noUsersFound" />
@@ -158,7 +159,7 @@ export default () => {
           </>
         ) : (
           <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-            <Loader size={128} />
+            <Spinner size={128} />
           </div>
         )}
       </div>

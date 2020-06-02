@@ -5,7 +5,7 @@ import CloseIcon from 'react-ionicons/lib/MdClose';
 import clsx from 'clsx';
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import Menu from './Menu';
-import IconButton from '../ui/IconButton';
+import {IconButton} from '../ui';
 
 const Nav = styled.aside`
   display: ${(props) => (props.className && props.className == 'collapsed' ? 'none' : 'block')};
@@ -61,9 +61,7 @@ const Sidenav = ({ user, collapsed, setCollapsed }) => (
         <img src={user.avatar && user.avatar !== '' ? user.avatar : defaultProfilePicture} alt="profile pic" />
       </Link>
 
-      <IconButton onClick={setCollapsed}>
-        <CloseIcon />
-      </IconButton>
+      <IconButton icon={<CloseIcon />} onClick={setCollapsed}/>
     </UserMenu>
     <Menu />
   </Nav>

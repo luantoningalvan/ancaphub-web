@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
 
 const DonationCard = styled.div`
   position: relative;
@@ -12,7 +10,7 @@ const DonationCard = styled.div`
   padding-top: 40px;
   border-radius: 8px;
   margin-top: 32px;
-  line-wrap: wrap;
+  word-wrap:wrap;
 
   .icon {
     position: absolute;
@@ -77,9 +75,9 @@ export default () => (
     <h3 style={{ marginBottom: 8, fontSize: '1.4em' }}>
       <FormattedMessage id="common.crypto" />
     </h3>
-    <GridContainer spacing={2}>
+    <div spacing={2}>
       {donations.crypto.map((donation) => (
-        <GridItem xs={4}>
+        <div xs={4}>
           <DonationCard>
             <img className="icon" src={donation.icon} alt="donate icon" />
             <ul>
@@ -89,16 +87,16 @@ export default () => (
               </li>
             </ul>
           </DonationCard>
-        </GridItem>
+        </div>
       ))}
-    </GridContainer>
+    </div>
 
     <h3 style={{ marginTop: 16, marginBottom: 8, fontSize: '1.4em' }}>
       Bancos
     </h3>
-    <GridContainer spacing={2}>
+    <div spacing={2}>
       {donations.banks.map((donation) => (
-        <GridItem xs={4}>
+        <div xs={4}>
           <DonationCard>
             <img className="icon" src={donation.icon} alt="bank icon" />
             <ul>
@@ -115,16 +113,16 @@ export default () => (
               </li>
             </ul>
           </DonationCard>
-        </GridItem>
+        </div>
       ))}
-    </GridContainer>
+    </div>
 
     <h3 style={{ marginTop: 16, marginBottom: 8, fontSize: '1.4em' }}>
       <FormattedMessage id="projects.apps" />
     </h3>
-    <GridContainer spacing={2}>
+    <div spacing={2}>
       {donations.apps.map((donation) => (
-        <GridItem xs={4}>
+        <div xs={4}>
           <DonationCard>
             <img src={donation.icon} className="icon" alt="payment app icon" />
 
@@ -135,8 +133,8 @@ export default () => (
               </li>
             </ul>
           </DonationCard>
-        </GridItem>
+        </div>
       ))}
-    </GridContainer>
+    </div>
   </div>
 );

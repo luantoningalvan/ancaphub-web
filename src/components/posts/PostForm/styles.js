@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Paper from '../../ui/Paper';
+import {Paper} from '../../ui';
 
 export default styled(Paper)`
   .form-actions {
@@ -16,13 +16,14 @@ export default styled(Paper)`
   }
 
   .upload-button {
+    padding: 4px;
+
     [type="file"] {
       border: 0;
       clip: rect(0, 0, 0, 0);
       height: 1px;
       width: 1px;
       overflow: hidden;
-      padding: 0;
       position: absolute;
       white-space: nowrap;
     }

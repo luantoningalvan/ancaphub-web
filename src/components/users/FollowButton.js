@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import Button from '../ui/Button';
+import {Button} from '../ui';
 import { followUserRequest, unfollowUserRequest } from '../../actions/relationships';
 
 export default ({ user }) => {

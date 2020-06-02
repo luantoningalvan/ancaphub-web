@@ -4,12 +4,16 @@ import { FormattedMessage } from 'react-intl';
 import SearchIcon from 'react-ionicons/lib/IosSearch';
 import styled from 'styled-components';
 import { uniqueId } from 'lodash';
-import Button from '../../components/ui/Button';
-import Dropdown from '../../components/ui/Dropdown';
-import Paper from '../../components/ui/Paper';
-import Card from '../../components/ui/Card';
-import CardHeader from '../../components/ui/CardHeader';
-import CardBody from '../../components/ui/CardBody';
+
+import {
+  Button,
+  Dropdown,
+  Paper,
+  Card,
+  CardHeader,
+  CardBody,
+} from '../../components/ui'
+
 import MiniLibraryCard from '../../components/library/MiniLibraryCard';
 import MiniUserCard from '../../components/users/MiniUserCard';
 

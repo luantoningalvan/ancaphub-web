@@ -14,13 +14,17 @@ import SettingsIcon from 'react-ionicons/lib/MdSettings';
 import LogoutIcon from 'react-ionicons/lib/IosLogOut';
 import { useDispatch, useSelector } from 'react-redux';
 import Search from './Search';
-import Dropdown from '../ui/Dropdown';
-import DropdownListContainer from '../ui/DropdownListContainer';
-import DropdownListItem from '../ui/DropdownListItem';
-import DropdownHeader from '../ui/DropdownHeader';
-import CardBody from '../ui/CardBody';
-import CardFooter from '../ui/CardFooter';
-import Switch from '../ui/FlipSwitch';
+
+import {
+  Dropdown,
+  DropdownListContainer,
+  DropdownListItem,
+  DropdownHeader,
+  CardBody,
+  CardFooter,
+  Switcher,
+} from '../ui'
+
 import Notification from '../notifications';
 import { logoutRequest as logout } from '../../actions/auth';
 import { switchColorMode as changeTheme } from '../../actions/settings';
@@ -252,7 +256,7 @@ const Header = ({ user, setCollapsed }) => {
               <DropdownListItem
                 icon={<ContrastIcon />}
                 action={(
-                  <Switch
+                  <Switcher
                     value={colorMode === 'dark'}
                     onChange={() => handleChangeTheme()}
                   />

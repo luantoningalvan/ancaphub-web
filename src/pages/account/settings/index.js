@@ -1,16 +1,20 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+
+import {
+  Container,
+  Paper,
+  Hero,
+  Menu,
+  MenuItem,
+} from '../../../components/ui'
+
 import AccountIcon from 'react-ionicons/lib/IosPerson';
 import NotificationsIcon from 'react-ionicons/lib/IosNotifications';
 import PrivacyIcon from 'react-ionicons/lib/IosLock';
+
 import { useLocation } from 'react-router-dom';
-import Container from '../../../components/ui/Container';
-import Paper from '../../../components/ui/Paper';
-import Hero from '../../../components/ui/Hero';
-import GridContainer from '../../../components/ui/GridContainer';
-import GridItem from '../../../components/ui/GridItem';
-import Menu from '../../../components/ui/Menu';
-import MenuItem from '../../../components/ui/MenuItem';
+
 import Notifications from './Notifications';
 import Privacy from './Privacy';
 import AccessAndSecurity from './AccessAndSecurity';
@@ -42,9 +46,9 @@ export default () => {
         )}
       />
       <div style={{ marginTop: 16 }}>
-        <GridContainer>
-          <GridItem xs={3}>
-            <Paper style={{ width: '100%' }}>
+        <div style={{display: 'grid', gridTemplateColumns: '3fr 9fr', gap: 16}}>
+          <div>
+            <Paper>
               <Menu>
                 <MenuItem
                   current={query === 'access_and_security' || query === null || settigsMap[query] === undefined}
@@ -66,14 +70,11 @@ export default () => {
                 />
               </Menu>
             </Paper>
-          </GridItem>
-
-          <GridItem xs={9}>
-            <div style={{ width: '100%', marginLeft: 16 }}>
+            </div>
+            <div>
               <Tab />
             </div>
-          </GridItem>
-        </GridContainer>
+        </div>
       </div>
     </Container>
   );

@@ -4,14 +4,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPostsRequest as getPostsAction } from '../../actions/posts';
 
-// Components
+import { Container } from '../../components/ui'
+
 import PostForm from '../../components/posts/PostForm';
-import Container from '../../components/ui/Container';
-import GridItem from '../../components/ui/GridItem';
-import GridContainer from '../../components/ui/GridContainer';
 import LastItemsWidget from '../../components/library/LastItemsWidget';
-import UserListWidget from '../../components/users/UserListWidget';
-import TrendingTopicsWidget from '../../components/trends/TrendingTopicsWidget';
 import ShowPosts from '../../components/posts/ShowPosts';
 
 const Feed = () => {
@@ -25,17 +21,17 @@ const Feed = () => {
 
   return (
     <Container style={{ marginTop: 8 }}>
-      <GridContainer spacing={2}>
-        <GridItem xs={12} lg={8}>
+      <div style={{ marginTop: 16, display: 'grid', gridTemplateColumns: '8fr 4fr', gap: '16px'}}>
+        <div>
           <PostForm />
           <div style={{ marginTop: 16, width: '100%' }}>
             <ShowPosts posts={items} loading={loading} />
           </div>
-        </GridItem>
-        <GridItem xs={12} lg={4} xl={3}>
+        </div>
+        <div>
           <LastItemsWidget />
-        </GridItem>
-      </GridContainer>
+        </div>
+      </div>
     </Container>
   );
 };

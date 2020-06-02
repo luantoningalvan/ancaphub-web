@@ -1,13 +1,12 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import Container from '../../components/ui/Container';
-import Hero from '../../components/ui/Hero';
-import Button from '../../components/ui/Button';
 import GroupCard from '../../components/groups/GroupCard';
-import GridItem from '../../components/ui/GridItem';
-import GridContainer from '../../components/ui/GridContainer';
 
-// i18n
+import {
+  Container,
+  Hero,
+  Button,
+} from '../../components/ui'
 
 const groups = [
   {
@@ -65,12 +64,12 @@ export default () => (
       <FormattedMessage id="groups.explore" />
     </h3>
 
-    <GridContainer spacing={2}>
+    <div spacing={2}>
       {groups.map((group) => (
-        <GridItem xs={12} md={6} lg={4}>
+        <div xs={12} md={6} lg={4}>
           <GroupCard data={group} />
-        </GridItem>
+        </div>
       ))}
-    </GridContainer>
+    </div>
   </Container>
 );

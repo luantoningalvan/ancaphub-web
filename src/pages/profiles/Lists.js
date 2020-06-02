@@ -1,7 +1,5 @@
 import React from 'react';
 import ListCard from '../../components/lists/ListCard';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
 
 const Lists = () => {
   const lists = [
@@ -23,13 +21,13 @@ const Lists = () => {
   ];
 
   return (
-    <GridContainer spacing={2}>
+    <div spacing={2}>
       {lists.map((list) => (
-        <GridItem sm={6} lg={4}>
+        <div sm={6} lg={4}>
           <ListCard list={list} />
-        </GridItem>
+        </div>
       ))}
-    </GridContainer>
+    </div>
   );
 };
 

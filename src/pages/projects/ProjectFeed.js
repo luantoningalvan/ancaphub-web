@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import CalendarIcon from 'react-ionicons/lib/IosCalendar';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
-import CardBody from '../../components/ui/CardBody';
-import CardHeader from '../../components/ui/CardHeader';
-import Card from '../../components/ui/Card';
-import Paper from '../../components/ui/Paper';
+
+import { 
+  Card,
+  CardBody,
+  CardHeader,
+  Paper,
+} from '../../components/ui'
 
 const Post = styled(Paper)`
   display: flex;
@@ -43,8 +44,8 @@ const Post = styled(Paper)`
 `;
 
 export default () => (
-  <GridContainer spacing={2}>
-    <GridItem xs={7}>
+  <div spacing={2}>
+    <div xs={7}>
       <Post>
         <div className="post-cover">
           <img src="https://i.ytimg.com/vi/ld4fLpniEp0/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCpd0xB4vV9bqgrLVD6bHLlu_YLdg" />
@@ -85,14 +86,14 @@ export default () => (
         </div>
       </Post>
 
-    </GridItem>
-    <GridItem xs={5}>
+    </div>
+    <div xs={5}>
       <Card>
         <CardHeader><h3>Widget title</h3></CardHeader>
         <CardBody>
           Widget content
         </CardBody>
       </Card>
-    </GridItem>
-  </GridContainer>
+    </div>
+  </div>
 );

@@ -173,6 +173,7 @@
   "search.results.noResults": "No results were found matching the provided terms.",
   "components.auth.login.keepMeLoggedIn": "Keep me logged in",
   "components.auth.signUp.confirmPassword": "Confirm password",
+  "components.auth.signUp.code": "Code",
   "components.categories.chooseCategory": "Select categories",
   "components.categories.uncategorized": "Uncategorized",
   "components.unavailable.heading": "Page unavailable",

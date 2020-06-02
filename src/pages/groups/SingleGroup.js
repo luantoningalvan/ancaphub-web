@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import SettingIcon from 'react-ionicons/lib/IosSettings';
-import Container from '../../components/ui/Container';
-import Tabs from '../../components/ui/Tabs';
-import Tab from '../../components/ui/Tab';
-import Loader from '../../components/ui/Loader';
+
+import {
+  Container,
+  Tabs,
+  Tab,
+  Spinner,
+} from '../../components/ui'
 
 const GroupBoard = lazy(() => import('./GroupBoard'));
 const GroupChat = lazy(() => import('./GroupChat'));
@@ -89,7 +92,7 @@ const SingleGroup = () => {
         </Container>
       </GroupHeader>
       <Container>
-        <Suspense fallback={<Loader size={96} />}>{Page}</Suspense>
+        <Suspense fallback={<Spinner size={96} />}>{Page}</Suspense>
       </Container>
     </>
   );

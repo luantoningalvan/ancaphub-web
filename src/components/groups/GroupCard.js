@@ -3,10 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import Paper from '../ui/Paper';
-import Button from '../ui/Button';
 import defaultGroupCover from '../../assets/default-group-cover.png';
-
+import {
+  Button,
+  Paper
+} from '../ui'
 const GroupCover = styled.div`
   width: 100%;
   height: 170px;

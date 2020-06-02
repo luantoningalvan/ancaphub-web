@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import Paper from '../ui/Paper';
-import Button from '../ui/Button';
+import {
+  Paper,
+  Button
+} from '../ui'
 import defaultProjectCover from '../../assets/default-group-cover.png';
 
 const ProjectCover = styled.div`

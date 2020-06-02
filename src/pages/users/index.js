@@ -2,14 +2,16 @@ import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
-import Container from '../../components/ui/Container';
-import Hero from '../../components/ui/Hero';
-import Paper from '../../components/ui/Paper';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
+
+import { 
+  Container,
+  Hero,
+  Paper,
+  LoadContent,
+} from '../../components/ui'
+
 import { getUsersRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
-import LoadContent from '../../components/ui/LoadContent';
 
 export default () => {
   const dispatch = useDispatch();
@@ -26,13 +28,13 @@ export default () => {
       <div style={{ marginTop: 16 }}>
         <LoadContent loading={loading}>
           {!isEmpty(items) ? (
-            <GridContainer spacing={2}>
+            <div spacing={2}>
               {items.map((user) => (
-                <GridItem xs={3}>
+                <div xs={3}>
                   <UserCard user={user.user} />
-                </GridItem>
+                </div>
               ))}
-            </GridContainer>
+            </div>
           ) : (
             <Paper padding>
               <FormattedMessage id="common.noUsersFound" />

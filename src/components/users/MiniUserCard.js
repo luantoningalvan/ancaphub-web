@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import Button from '../ui/Button';
+import {Button} from '../ui';
 import defaultAvatar from '../../assets/default-profile-picture.jpg';
 
 export const User = styled.div`

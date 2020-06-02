@@ -1,7 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import Card from '../../../components/ui/Card';
-import CardBody from '../../../components/ui/CardBody';
+
+import {
+  Card,
+  CardBody,
+} from '../../../components/ui'
 
 export default () => (
   <Card>

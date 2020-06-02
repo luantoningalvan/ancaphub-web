@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ThemeProvider from './Provider';
 import logo from '../../assets/logo-type.png';
-import Loader from '../ui/Loader';
+import {Spinner} from '../ui';
 
 const LoadScreen = styled.div`
   height:100vh;
@@ -23,7 +23,7 @@ export default () => (
   <ThemeProvider>
     <LoadScreen>
       <img src={logo} alt="AncapHub Logo" />
-      <Loader size={96} />
+      <Spinner size={96} />
     </LoadScreen>
   </ThemeProvider>
 );

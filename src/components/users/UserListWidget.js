@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import Card from '../ui/Card';
-import Button from '../ui/Button';
-import CardFooter from '../ui/CardFooter';
-import CardHeader from '../ui/CardHeader';
-import CardBody from '../ui/CardBody';
+
+import {
+  Card,
+  Button,
+  CardFooter,
+  CardHeader,
+  CardBody,
+} from '../ui'
+
 import defaultAvatar from '../../assets/default-profile-picture.jpg';
 import MiniUserCard from './MiniUserCard';
 

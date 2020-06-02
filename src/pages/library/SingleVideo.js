@@ -4,13 +4,10 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
-import Container from '../../components/ui/Container';
 import Categories from '../../components/categories/ShowCategories';
 
-// import LoadContent from "../../../components/loaders/loadContent"
-// import InvitedBy from "../../../components/profile/invitedBy"
+import { Container } from '../../components/ui';
 
-// Redux
 import { getSingleItemRequest as getSingleItem } from '../../actions/library';
 
 const PlayerWrapper = styled.div`
@@ -21,7 +18,7 @@ const PlayerWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    boxShadow: 0px 0px 30px rgba(0,0,0,.7);
+    box-shadow: 0px 0px 30px rgba(0,0,0,.7);
   }
 `;
 

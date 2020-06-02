@@ -1,11 +1,10 @@
 import React from 'react';
-import Container from '../../components/ui/Container';
-import Chatbox from '../../components/ui/Chatbox';
 
-// i18n
-// import { FormattedMessage } from "react-intl";
+import { 
+  Container,
+  Chatbox 
+} from '../../components/ui'
 
-// Just for prototyping and design purpose. Components will be properly edited later
 const chats = [
   {
     name: 'Zé Pequeté',

@@ -3,11 +3,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import Button from '../ui/Button';
 import Input from '../form/Input';
 import { authUserRequest } from '../../actions/auth';
-import GridContainer from '../ui/GridContainer';
-import GridItem from '../ui/GridItem';
+
+import {
+  Button
+} from '../ui'
 
 export default () => {
   const dispatch = useDispatch();
@@ -38,8 +39,8 @@ export default () => {
 
   return (
     <Form onSubmit={handleSubmit} ref={signupFormRef}>
-      <GridContainer spacing={1}>
-        <GridItem xs={12}>
+      <div spacing={1}>
+      <div className="form-row">
           <FormattedMessage id="common.email">
             {(msg) => (
               <Input
@@ -50,9 +51,9 @@ export default () => {
               />
             )}
           </FormattedMessage>
-        </GridItem>
+        </div>
 
-        <GridItem xs={12}>
+        <div className="form-row">
           <FormattedMessage id="common.password">
             {(msg) => (
               <Input
@@ -63,13 +64,13 @@ export default () => {
               />
             )}
           </FormattedMessage>
-        </GridItem>
-        <GridItem xs={12}>
+        </div>
+        <div className="form-row">
           <Button type="submit" color="secondary" style={{ width: '100%' }}>
             <FormattedMessage id="common.login" description="Login button" />
           </Button>
-        </GridItem>
-      </GridContainer>
+        </div>
+      </div>
     </Form>
   );
 };

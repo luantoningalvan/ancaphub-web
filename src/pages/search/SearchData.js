@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import Container from '../../components/ui/Container';
 import { searchTermRequest as searchTerm } from '../../actions/search';
 import UserCard from '../../components/users/UserCard';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
-import Card from '../../components/ui/Card';
-import CardHeader from '../../components/ui/CardHeader';
-import Menu from '../../components/ui/Menu';
-import MenuItem from '../../components/ui/MenuItem';
-import Loader from '../../components/ui/Loader';
+
+import { 
+  Container,
+  Card,
+  CardHeader,
+  Menu,
+  MenuItem,
+  Spinner,
+} from '../../components/ui'
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -32,8 +33,8 @@ export default () => {
   return (
     <Container style={{ marginTop: 16 }}>
       {!loading ? (
-        <GridContainer spacing={2}>
-          <GridItem xs={3}>
+        <div spacing={2}>
+          <div xs={3}>
             <Card style={{ width: '100%' }}>
               <CardHeader>
                 <h3>
@@ -46,8 +47,8 @@ export default () => {
                 <MenuItem label={<FormattedMessage id="common.users" />} />
               </Menu>
             </Card>
-          </GridItem>
-          <GridItem xs={9}>
+          </div>
+          <div xs={9}>
             <div style={{ width: '100%' }}>
               <h3 style={{ marginBottom: 16 }}>
                 <FormattedMessage id="search.showingResultsFor" values={{ term }} />
@@ -58,22 +59,22 @@ export default () => {
                   <FormattedMessage id="common.users" />
                 </h3>
                 <div style={{ width: '100%' }}>
-                  <GridContainer>
+                  <div>
                     {results.users.map((user) => (
-                      <GridItem xs={3}>
+                      <div xs={3}>
                         <UserCard user={user.user} />
-                      </GridItem>
+                      </div>
                     ))}
-                  </GridContainer>
+                  </div>
                 </div>
               </>
               )}
             </div>
-          </GridItem>
-        </GridContainer>
+          </div>
+        </div>
       ) : (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <Loader size={128} />
+          <Spinner size={128} />
         </div>
       )}
     </Container>

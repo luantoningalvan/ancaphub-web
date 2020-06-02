@@ -5,9 +5,12 @@ import ApprovedIcon from 'react-ionicons/lib/IosCheckmarkCircle';
 import PendingIcon from 'react-ionicons/lib/IosBulb';
 import ReprovedIcon from 'react-ionicons/lib/IosAlert';
 import PointsIcon from 'react-ionicons/lib/IosStar';
-import Container from '../../components/ui/Container';
-import Hero from '../../components/ui/Hero';
-import Button from '../../components/ui/Button';
+
+import {
+  Container,
+  Hero,
+  Button,
+} from '../../components/ui'
 
 const InfoList = styled.ul`
   display: grid;

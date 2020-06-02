@@ -4,16 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import parse from 'html-react-parser';
-import Paper from '../../components/ui/Paper';
-import Container from '../../components/ui/Container';
 import defaultThumbnail from '../../assets/default-book-cover.jpg';
 import Categories from '../../components/categories/ShowCategories';
 
-// import LoadContent from "../../../components/loaders/loadContent"
-// import UnavaliableContent from "../../../components/error/unavaliableContent"
-// import InvitedBy from "../../../components/profile/invitedBy"
+import {
+  Container,
+  Paper,
+} from '../../components/ui'
 
-// Redux
 import { getSingleItemRequest as getSingleItem } from '../../actions/library';
 
 const Banner = styled.div`

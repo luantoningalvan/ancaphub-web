@@ -4,20 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import DownloadIcon from 'react-ionicons/lib/IosDownload';
-import Paper from '../../components/ui/Paper';
-import Container from '../../components/ui/Container';
-import Button from '../../components/ui/Button';
-import LoadContent from '../../components/ui/LoadContent';
-import Dropdown from '../../components/ui/Dropdown';
 
-import DropdownListContainer from '../../components/ui/DropdownListContainer';
-import DropdownListItem from '../../components/ui/DropdownListItem';
+import {
+  Paper,
+  Container,
+  Button,
+  LoadContent,
+  Dropdown,
+  DropdownListContainer,
+  DropdownListItem,
+} from '../../components/ui'
+
 import defaultThumbnail from '../../assets/default-book-cover.jpg';
 import Categories from '../../components/categories/ShowCategories';
-// import Ratings from "../../../components/library/ratings";
-// import InvitedBy from "../../../components/profile/invitedBy"
-// import UnavaliableContent from "../../../components/error/unavaliableContent"
-// Redux
+
+
+
 import { getSingleItemRequest as getSingleItem } from '../../actions/library';
 
 const Title = styled.h2`

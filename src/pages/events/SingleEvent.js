@@ -5,12 +5,12 @@ import LocationIcon from 'react-ionicons/lib/IosPinOutline';
 import TicketIcon from 'react-ionicons/lib/IosCash';
 import HourIcon from 'react-ionicons/lib/IosClock';
 import PeopleIcon from 'react-ionicons/lib/IosPeople';
-import Container from '../../components/ui/Container';
-import GridContainer from '../../components/ui/GridContainer';
-import GridItem from '../../components/ui/GridItem';
-import Paper from '../../components/ui/Paper';
-import Button from '../../components/ui/Button';
 
+import {
+  Container,
+  Paper,
+  Button,
+} from '../../components/ui'
 
 const Event = styled.div`
   margin-top: 16px;
@@ -155,8 +155,8 @@ export default () => (
         </div>
       </div>
 
-      <GridContainer spacing={2} style={{ margin: '16px 0px' }}>
-        <GridItem xs={6}>
+      <div spacing={2} style={{ margin: '16px 0px' }}>
+        <div xs={6}>
           <Paper className="info-card">
             <ul>
               <li>
@@ -187,8 +187,8 @@ export default () => (
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare risus quis neque suscipit, ut semper orci rhoncus. Proin lobortis nisl eu nisi placerat, ac faucibus lacus finibus.
             </p>
           </Paper>
-        </GridItem>
-        <GridItem xs={6}>
+        </div>
+        <div xs={6}>
           <h3 style={{ marginBottom: 8 }}>
             <FormattedMessage id="events.howToGet" />
           </h3>
@@ -200,8 +200,8 @@ export default () => (
 
             style={{ width: '100%', height: 300, borderRadius: 8 }}
           />
-        </GridItem>
-      </GridContainer>
+        </div>
+      </div>
     </Event>
   </Container>
 );

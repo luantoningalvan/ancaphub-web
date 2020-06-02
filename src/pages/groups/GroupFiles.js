@@ -5,11 +5,14 @@ import DropdownIcon from 'react-ionicons/lib/MdArrowDropdown';
 import ListBoxIcon from 'react-ionicons/lib/MdListBox';
 import GridIcon from 'react-ionicons/lib/MdGrid';
 import FileIcon, { defaultStyles } from 'react-file-icon';
-import Dropdown from '../../components/ui/Dropdown';
-import DropdownListContainer from '../../components/ui/DropdownListContainer';
-import DropdownListItem from '../../components/ui/DropdownListItem';
-import Paper from '../../components/ui/Paper';
-import IconButton from '../../components/ui/IconButton';
+
+import {
+  Dropdown,
+  DropdownListContainer,
+  DropdownListItem,
+  Paper,
+  IconButton,
+} from '../../components/ui'
 
 const FileExplorer = styled.div`
   margin-top: 16px;
@@ -135,9 +138,7 @@ export default () => (
               <td style={{ width: 48 }}>
                 <Dropdown
                   toggle={(
-                    <IconButton>
-                      <DropdownIcon />
-                    </IconButton>
+                    <IconButton icon={<DropdownIcon />} />
                   )}
                 >
                   <DropdownListContainer>
