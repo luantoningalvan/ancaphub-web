@@ -13,7 +13,7 @@ import LoadScreen from '../components/template/LoadScreen';
 
 const Routes = () => {
   const { isAuthenticated, loading } = useSelector((state) => state.auth);
-
+  const history = useHistory();
   return (
     <>
       {isAuthenticated !== null && !loading ? (
@@ -26,7 +26,7 @@ const Routes = () => {
                 exact={route.exact}
                 component={(props) => {
                   if (!route.isOpen) {
-                    if (!isAuthenticated) useHistory().push('/');
+                    if (!isAuthenticated) history.push('/');
 
                     return (
                       <Template {...props}>
@@ -34,7 +34,7 @@ const Routes = () => {
                       </Template>
                     );
                   }
-                  if (isAuthenticated) useHistory().push('/home');
+                  if (isAuthenticated) history.push('/home');
 
                   return <route.component {...props} />;
                 }}
