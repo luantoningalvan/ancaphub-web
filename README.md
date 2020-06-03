@@ -5,6 +5,8 @@ Welcome to AncapHub, the network that aims to connect libertarians all over the 
 This repository contains the original code used in production for the platform's web client. 
 It is written mainly in Javascript, making use of React.js as UI framework.
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) ![David](https://img.shields.io/david/ancaphub/ancaphub-web?style=flat-square) ![GitHub](https://img.shields.io/github/license/ancaphub/ancaphub-web?style=flat-square)
+
 ## What is AncapHub?
 
 AncapHub is a community-driven effort to build a platform focused on connecting libertarians, providing an environment that while directed to studies, provides full-fledged social experience.
