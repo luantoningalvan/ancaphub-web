@@ -5,23 +5,25 @@ import { Link } from 'react-router-dom';
 
 const Category = styled.div`
   background: ${(props) => props.theme.palette.secondary};
-  padding:8px;
+  padding: 8px;
   border-radius: 4px;
   cursor: pointer;
 
-  a { color: ${(props) => props.theme.palette.text.contrast}; }
+  a {
+    color: ${(props) => props.theme.palette.text.contrast};
+  }
 
   &:hover {
     filter: brightness(90%);
   }
 `;
 
-export default ({ categories }) => (
+const ShowCategories = ({ categories }) => (
   <div style={{ display: 'flex' }}>
     {categories && categories.length > 0 ? (
       <>
         {categories.map((category) => (
-          <Category>
+          <Category key={category._id}>
             <Link to={`/library?category=${category._id}`}>
               {category.name}
             </Link>
@@ -33,6 +35,7 @@ export default ({ categories }) => (
         <FormattedMessage id="components.categories.none" />
       </p>
     )}
-
   </div>
 );
+
+export default ShowCategories;

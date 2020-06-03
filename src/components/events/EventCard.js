@@ -3,10 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LocationIcon from 'react-ionicons/lib/IosPinOutline';
-import {
-  Button,
-  Paper
-} from '../ui'
+import { Button, Paper } from '../ui';
 
 const Event = styled(Paper)`
   position: relative;
@@ -25,7 +22,7 @@ const Event = styled(Paper)`
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 
     span {
       display: flex;
@@ -46,27 +43,30 @@ const Event = styled(Paper)`
     }
   }
 
-  .event-content { padding: 16px; margin-top:20px;}
+  .event-content {
+    padding: 16px;
+    margin-top: 20px;
+  }
   h4 {
-    font-size:1em;
-    margin-top:8px;
+    font-size: 1em;
+    margin-top: 8px;
   }
   .event-location {
     margin: 16px 0px;
     display: flex;
-    align-items:center;
+    align-items: center;
 
     svg {
-      height:28px;
-      width:28px;
-      margin-left:-6px;
+      height: 28px;
+      width: 28px;
+      margin-left: -6px;
       margin-right: 2px;
       fill: ${(props) => props.theme.palette.primary};
     }
   }
 `;
 
-export default ({ event }) => (
+const EventCard = ({ event }) => (
   <Event>
     <div className="event-cover">
       <Link to={`/events/${event._id}`}>
@@ -92,3 +92,5 @@ export default ({ event }) => (
     </div>
   </Event>
 );
+
+export default EventCard;

@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 const TabStyle = styled.li`
   list-style: none;
-  border-bottom: ${(props) => (props.current
-    ? `3px solid ${props.theme.palette.secondary}`
-    : '3px solid transparent')
-};
+  border-bottom: ${(props) =>
+    props.current
+      ? `3px solid ${props.theme.palette.secondary}`
+      : '3px solid transparent'};
 
   &:hover {
     border-bottom: 3px solid ${(props) => props.theme.palette.secondary};
@@ -18,20 +18,18 @@ const TabStyle = styled.li`
     display: block;
     color: ${(props) => props.theme.palette.text.primary};
     text-decoration: none;
-    padding:  0px 16px;
-    height:100%;
-    display:flex;
-    align-items:center;
+    padding: 0px 16px;
+    height: 100%;
+    display: flex;
+    align-items: center;
 
     svg {
-      fill: ${(props) => props.theme.palette.text.primary}
+      fill: ${(props) => props.theme.palette.text.primary};
     }
   }
 `;
 
-const Tab = ({
-  label, link, current, ...props
-}) => (
+const Tab = ({ label, link, current, ...props }) => (
   <TabStyle current={current} {...props}>
     <Link to={link}>{label}</Link>
   </TabStyle>

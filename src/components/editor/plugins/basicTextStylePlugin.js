@@ -1,7 +1,4 @@
-import {
-  getDefaultKeyBinding,
-  RichUtils,
-} from 'draft-js';
+import { getDefaultKeyBinding, RichUtils } from 'draft-js';
 
 const basicTextStylePlugin = {
   keyBindingFn(event) {
@@ -9,9 +6,7 @@ const basicTextStylePlugin = {
   },
 
   handleKeyCommand(command, editorState, { setEditorState }) {
-    const newEditorState = RichUtils.handleKeyCommand(
-      editorState, command,
-    );
+    const newEditorState = RichUtils.handleKeyCommand(editorState, command);
     if (newEditorState) {
       setEditorState(newEditorState);
       return 'handled';

@@ -1,10 +1,4 @@
-import {
-  takeEvery,
-  takeLatest,
-  call,
-  fork,
-  put,
-} from 'redux-saga/effects';
+import { takeEvery, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/relationships';
 import * as alerts from '../actions/alerts';
@@ -28,7 +22,6 @@ function* unfollowUser({ payload }) {
   }
 }
 
-
 function* watchFollowUser() {
   yield takeEvery(actions.Types.FOLLOW_USER_REQUEST, followUser);
 }
@@ -37,7 +30,4 @@ function* watchUnfollowUser() {
   yield takeEvery(actions.Types.UNFOLLOW_USER_REQUEST, unfollowUser);
 }
 
-export default [
-  fork(watchFollowUser),
-  fork(watchUnfollowUser),
-];
+export default [fork(watchFollowUser), fork(watchUnfollowUser)];

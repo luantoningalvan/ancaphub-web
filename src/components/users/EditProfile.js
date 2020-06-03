@@ -1,55 +1,48 @@
-import React, { useRef } from "react";
-import { FormattedMessage } from "react-intl";
-import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
-import { Form } from "@unform/web";
-import EditIcon from "react-ionicons/lib/IosCreate";
-import CloseIcon from "react-ionicons/lib/MdClose";
-import { updateProfileInfoRequest } from "../../actions/users";
-import Input from "../form/Input";
+import React, { useRef } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { Form } from '@unform/web';
+import EditIcon from 'react-ionicons/lib/IosCreate';
+import CloseIcon from 'react-ionicons/lib/MdClose';
+import { updateProfileInfoRequest } from '../../actions/users';
+import Input from '../form/Input';
 
-import { IconButton, Button, Dialog, CardBody, CardHeader } from "../ui";
+import { IconButton, Button, Dialog, CardBody, CardHeader } from '../ui';
 
-export default () => {
+const EditProfile = () => {
+  const { formatMessage } = useIntl();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
   const data = useSelector((state) => state.profile.user);
   const handleClick = () => setOpen(!open);
   const editFormRef = useRef(null);
-  async function handleSubmit(data) {
+  async function handleSubmit(validatedData) {
     try {
       const schema = Yup.object().shape({
         name: Yup.string()
-          .min(
-            3,
-            <FormattedMessage id="account.settings.validation.nameShort" />
-          )
-          .max(
-            30,
-            <FormattedMessage id="account.settings.validation.nameLong" />
-          )
-          .required(
-            <FormattedMessage id="account.settings.validation.nameRequired" />
-          ),
+          .min(3, formatMessage('account.settings.validation.nameShort'))
+          .max(30, formatMessage('account.settings.validation.nameLong'))
+          .required(formatMessage('account.settings.validation.nameRequired')),
         bio: Yup.string().max(
           160,
-          <FormattedMessage id="account.settings.validation.maxBioLength" />
+          formatMessage('account.settings.validation.maxBioLength')
         ),
         site: Yup.string().url(
-          <FormattedMessage id="account.settings.validation.invalidURL" />
+          formatMessage('account.settings.validation.invalidURL')
         ),
         birthday: Yup.date()
           .max(
             new Date(),
-            <FormattedMessage id="account.settings.validation.invalidBirthDate" />
+            formatMessage('account.settings.validation.invalidBirthDate')
           )
           .notRequired(),
       });
 
-      await schema.validate(data, {
+      await schema.validate(validatedData, {
         abortEarly: false,
       });
-      dispatch(updateProfileInfoRequest(data));
+      dispatch(updateProfileInfoRequest(validatedData));
     } catch (err) {
       const validationErrors = {};
       if (err instanceof Yup.ValidationError) {
@@ -74,9 +67,9 @@ export default () => {
         <Form
           initialData={{
             name: data.name,
-            bio: data.bio || "",
-            currentCity: data.currentCity || "",
-            site: data.site || "",
+            bio: data.bio || '',
+            currentCity: data.currentCity || '',
+            site: data.site || '',
             birthday:
               data.birthday && data.birthday !== null
                 ? data.birthday.substring(0, 10)
@@ -92,12 +85,12 @@ export default () => {
               </Button>
             }
             title={
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <IconButton icon={<CloseIcon />} onClick={handleClick} />
                 <FormattedMessage id="components.editProfile.heading" />
               </div>
             }
-          ></CardHeader>
+          />
           <CardBody style={{ maxWidth: 420 }}>
             <FormattedMessage id="common.name">
               {(msg) => <Input placeholder={msg} name="name" />}
@@ -141,3 +134,5 @@ export default () => {
     </div>
   );
 };
+
+export default EditProfile;

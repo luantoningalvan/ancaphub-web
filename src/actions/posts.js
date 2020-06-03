@@ -77,7 +77,6 @@ export const deletePostSuccess = (postId) => ({
   payload: postId,
 });
 
-
 export const getPostLikesRequest = (postId) => ({
   type: Types.GET_POST_LIKE_REQUEST,
   payload: postId,

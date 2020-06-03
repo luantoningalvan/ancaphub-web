@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import {Paper} from '../ui';
+import { Paper } from '../ui';
 
+// eslint-disable-next-line import/prefer-default-export
 export const PostContainer = styled(Paper)`
-  margin-bottom: 16px; 
+  margin-bottom: 16px;
   flex-basis: 100%;
 
   .profile-picture {
@@ -97,7 +98,9 @@ export const PostContainer = styled(Paper)`
     span {
       cursor: pointer;
 
-      &:hover { text-decoration: underline; }
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 `;

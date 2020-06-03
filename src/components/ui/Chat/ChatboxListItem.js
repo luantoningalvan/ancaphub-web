@@ -30,7 +30,7 @@ const ChatboxListItemWrapper = styled.div`
 
       & > span.messageTime {
         &::before {
-          content: "\u2022";
+          content: '\u2022';
           margin: 0 0.5em;
         }
         line-height: 1em;
@@ -61,8 +61,7 @@ const ChatboxListItem = ({ message }) => (
     </div>
     <div className="block">
       <p className="chatUserName">
-        {message.user.name}
-        {' '}
+        {message.user.name}{' '}
         <span className="messageTime">{message.createdAt}</span>
       </p>
       <p className="lastMessage">{message.body}</p>
@@ -75,7 +74,7 @@ ChatboxListItem.propTypes = {
     user: PropTypes.object,
     body: PropTypes.string,
     createdAt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  }),
+  }).isRequired,
 };
 
 export default ChatboxListItem;

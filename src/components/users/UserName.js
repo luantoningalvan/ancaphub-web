@@ -39,7 +39,7 @@ UserName.propTypes = {
     avatar: PropTypes.string,
     bio: PropTypes.string,
     isVerified: PropTypes.bool,
-  }),
+  }).isRequired,
   fontSize: PropTypes.number,
 };
 

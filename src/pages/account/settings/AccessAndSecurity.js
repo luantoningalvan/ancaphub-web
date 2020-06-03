@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,7 @@ import {
   CardBody,
   CardHeader,
   ExpansionPanel,
-} from '../../../components/ui'
+} from '../../../components/ui';
 
 import TextField from '../../../components/form/Input';
 
@@ -20,7 +20,8 @@ import {
   updatePasswordRequest,
 } from '../../../actions/settings';
 
-export default () => {
+const AccessAndSecurity = () => {
+  const { formatMessage } = useIntl();
   const emailFormRef = useRef(null);
   const usernameFormRef = useRef(null);
   const passwordFormRef = useRef(null);
@@ -31,10 +32,13 @@ export default () => {
     try {
       const schema = Yup.object().shape({
         username: Yup.string()
-          .min(3, <FormattedMessage id="settings.validation.usernameShort" />)
-          .max(20, <FormattedMessage id="settings.validation.usernameLong" />)
-          .matches(/^[a-zA-Z0-9_]+$/, <FormattedMessage id="settings.validation.regex" />)
-          .required(<FormattedMessage id="settings.validation.usernameRequired" />),
+          .min(3, formatMessage('settings.validation.usernameShort'))
+          .max(20, formatMessage('settings.validation.usernameLong'))
+          .matches(
+            /^[a-zA-Z0-9_]+$/,
+            formatMessage('settings.validation.regex')
+          )
+          .required(formatMessage('settings.validation.usernameRequired')),
       });
 
       await schema.validate(data, {
@@ -56,8 +60,8 @@ export default () => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
-          .email(<FormattedMessage id="settings.validation.emailInvalid" />)
-          .required(<FormattedMessage id="settings.validation.emailRequired" />),
+          .email(formatMessage('settings.validation.emailInvalid'))
+          .required(formatMessage('settings.validation.emailRequired')),
       });
       await schema.validate(data, {
         abortEarly: false,
@@ -77,14 +81,22 @@ export default () => {
   const handlePasswordSubmit = async (data) => {
     try {
       const schema = Yup.object().shape({
-        current_password: Yup.string()
-          .required(<FormattedMessage id="settings.validation.currentPasswordRequired" />),
+        current_password: Yup.string().required(
+          formatMessage('settings.validation.currentPasswordRequired')
+        ),
         new_password: Yup.string()
-          .required(<FormattedMessage id="settings.validation.currentPasswordRequired" />)
-          .min(6, <FormattedMessage id="settings.validation.minPasswordLength" />),
+          .required(
+            formatMessage('settings.validation.currentPasswordRequired')
+          )
+          .min(6, formatMessage('settings.validation.minPasswordLength')),
         confirm_new_password: Yup.string()
-          .required(<FormattedMessage id="settings.validation.confirmPasswordRequired" />)
-          .oneOf([Yup.ref('new_password'), null], <FormattedMessage id="settings.validation.passwordMismatch" />),
+          .required(
+            formatMessage('settings.validation.confirmPasswordRequired')
+          )
+          .oneOf(
+            [Yup.ref('new_password'), null],
+            formatMessage('settings.validation.passwordMismatch')
+          ),
       });
       await schema.validate(data, {
         abortEarly: false,
@@ -103,7 +115,9 @@ export default () => {
 
   return (
     <Card>
-      <CardHeader title={<FormattedMessage id="account.settings.accessAndSecurity" />} />
+      <CardHeader
+        title={<FormattedMessage id="account.settings.accessAndSecurity" />}
+      />
 
       <CardBody>
         <ExpansionPanel title={<FormattedMessage id="common.username" />}>
@@ -132,7 +146,10 @@ export default () => {
             </Button>
           </Form>
         </ExpansionPanel>
-        <ExpansionPanel title={<FormattedMessage id="common.email" />} style={{ marginTop: 8 }}>
+        <ExpansionPanel
+          title={<FormattedMessage id="common.email" />}
+          style={{ marginTop: 8 }}
+        >
           <Form
             style={{
               display: 'flex',
@@ -158,7 +175,10 @@ export default () => {
             </Button>
           </Form>
         </ExpansionPanel>
-        <ExpansionPanel title={<FormattedMessage id="common.password" />} style={{ marginTop: 8 }}>
+        <ExpansionPanel
+          title={<FormattedMessage id="common.password" />}
+          style={{ marginTop: 8 }}
+        >
           <Form
             style={{
               display: 'flex',
@@ -170,7 +190,10 @@ export default () => {
           >
             <FormattedMessage id="common.password">
               {(msg) => (
-                <FormattedMessage id="common.newFemale" values={{ what: msg.toLowerCase() }}>
+                <FormattedMessage
+                  id="common.newFemale"
+                  values={{ what: msg.toLowerCase() }}
+                >
                   {(_msg) => (
                     <TextField
                       placeholder={_msg}
@@ -210,3 +233,5 @@ export default () => {
     </Card>
   );
 };
+
+export default AccessAndSecurity;

@@ -3,23 +3,18 @@ import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-import { 
-  Container,
-  Hero,
-  Paper,
-  LoadContent,
-} from '../../components/ui'
+import { Container, Hero, Paper, LoadContent } from '../../components/ui';
 
 import { getUsersRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
 
-export default () => {
+const Users = () => {
   const dispatch = useDispatch();
   const { items, loading } = useSelector((state) => state.users);
 
   useEffect(() => {
     dispatch(getUsersRequest());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -30,7 +25,7 @@ export default () => {
           {!isEmpty(items) ? (
             <div spacing={2}>
               {items.map((user) => (
-                <div xs={3}>
+                <div xs={3} key={user._id}>
                   <UserCard user={user.user} />
                 </div>
               ))}
@@ -45,3 +40,5 @@ export default () => {
     </Container>
   );
 };
+
+export default Users;

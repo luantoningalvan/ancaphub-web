@@ -4,4 +4,4 @@ import ChatboxMessageList from './ChatboxMessageList';
 import ChatboxListItem from './ChatboxListItem';
 import ChatBubble from './ChatBubble';
 
-export { Chatbox, ChatWindow, ChatboxMessageList, ChatboxListItem, ChatBubble }
+export { Chatbox, ChatWindow, ChatboxMessageList, ChatboxListItem, ChatBubble };

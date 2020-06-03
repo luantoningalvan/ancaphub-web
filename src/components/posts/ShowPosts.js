@@ -1,9 +1,9 @@
-import React from "react";
-import PostCard from "./PostCard";
-import { LoadContent, Paper } from "../ui";
-import { isEmpty } from "lodash";
+import React from 'react';
+import { isEmpty } from 'lodash';
+import PostCard from './PostCard';
+import { LoadContent, Paper } from '../ui';
 
-export default ({ posts, loading }) => (
+const ShowPosts = ({ posts, loading }) => (
   <LoadContent loading={loading}>
     {!isEmpty(posts) ? (
       <>
@@ -16,3 +16,5 @@ export default ({ posts, loading }) => (
     )}
   </LoadContent>
 );
+
+export default ShowPosts;

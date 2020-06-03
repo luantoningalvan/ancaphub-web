@@ -2,19 +2,12 @@ import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { Calendar as RCBC, dateFnsLocalizer } from 'react-big-calendar';
-import {
-  format, parse, startOfWeek, getDay,
-} from 'date-fns';
+import { format, parse, startOfWeek, getDay } from 'date-fns';
 import locale from 'date-fns/locale/pt-BR';
 import BackButton from 'react-ionicons/lib/IosArrowBack';
 import NextButton from 'react-ionicons/lib/IosArrowForward';
 
-import {
-  Container,
-  Hero,
-  Button,
-  IconButton,
-} from '../../components/ui'
+import { Container, Hero, Button, IconButton } from '../../components/ui';
 
 import EventCard from '../../components/events/EventCard';
 import CreateEvent from '../../components/events/CreateEvent';
@@ -144,17 +137,17 @@ const Toolbar = (toolbar) => {
       </div>
       <ul className="view-switch">
         <li>
-          <button>
+          <button type="button">
             <FormattedMessage id="events.month" />
           </button>
         </li>
         <li>
-          <button>
+          <button type="button">
             <FormattedMessage id="events.week" />
           </button>
         </li>
         <li>
-          <button>
+          <button type="button">
             <FormattedMessage id="events.day" />
           </button>
         </li>
@@ -162,7 +155,6 @@ const Toolbar = (toolbar) => {
     </div>
   );
 };
-
 
 export default () => {
   const [createEventState, setCreateEventState] = useState(false);
@@ -180,7 +172,8 @@ export default () => {
       start: Date.now(),
       end: Date.now(),
       title: 'AncapHub Week',
-      cover: 'https://ancaphub.com/wp-content/uploads/2020/04/maxresdefault-360x240.jpg',
+      cover:
+        'https://ancaphub.com/wp-content/uploads/2020/04/maxresdefault-360x240.jpg',
       location: 'Online',
     },
   ];
@@ -193,25 +186,31 @@ export default () => {
   return (
     <Container>
       <Hero
-        title={(
+        title={
           <FormattedMessage
             id="common.events"
             description="Título da página de eventos"
           />
-        )}
-        description={(
+        }
+        description={
           <FormattedMessage
             id="home.features.2"
             description="Descrição da página de eventos"
           />
-        )}
-        actions={<Button color="primary" onClick={() => setCreateEventState(true)}>Criar Evento</Button>}
+        }
+        actions={
+          <Button color="primary" onClick={() => setCreateEventState(true)}>
+            Criar Evento
+          </Button>
+        }
       />
 
-      <CreateEvent open={createEventState} onClose={() => setCreateEventState(false)} />
+      <CreateEvent
+        open={createEventState}
+        onClose={() => setCreateEventState(false)}
+      />
 
       <div style={{ marginTop: 16 }}>
-
         <Calendar
           startAccessor="start"
           endAccessor="end"
@@ -232,7 +231,7 @@ export default () => {
         <h3 style={{ marginTop: 24, fontSize: '1.7em' }}>Eventos Próximos</h3>
         <div style={{ margin: '16px 0px' }}>
           {events.map((event) => (
-            <div xs={3}>
+            <div xs={3} key={event._id}>
               <EventCard event={event} />
             </div>
           ))}

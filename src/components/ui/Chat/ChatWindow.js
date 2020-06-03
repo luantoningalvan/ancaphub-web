@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import defaultProfilePicture from '../../../assets/default-profile-picture.jpg';
 
 // Components
-import {Scrollable} from '../Scrollable';
+import { Scrollable } from '../Scrollable';
 import ChatBubble from './ChatBubble';
 
 // Wrap div for receiving messages input
@@ -58,8 +58,8 @@ const ChatInfoWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom:1px solid ${(props) => props.theme.palette.border};
-  background: rgba(0,0,0,.1);
+  border-bottom: 1px solid ${(props) => props.theme.palette.border};
+  background: rgba(0, 0, 0, 0.1);
   & > .block {
     padding: 16px 8px;
     display: inherit;
@@ -79,9 +79,9 @@ const ChatInfoWrapper = styled.div`
 const ChatInfo = ({ chat, showAvatar }) => (
   <ChatInfoWrapper>
     {showAvatar && (
-    <div className="block">
-      <img src={defaultProfilePicture} alt="Foto do perfil" />
-    </div>
+      <div className="block">
+        <img src={defaultProfilePicture} alt="Foto do perfil" />
+      </div>
     )}
     <div className="block grow">
       <p>{chat.name}</p>
@@ -97,12 +97,12 @@ const EnterMessageInput = () => (
   </EnterMessageInputWrapper>
 );
 
-const ChatWindow = ({
-  chat, showName, showAvatar, showHeader,
-}) => (
+const ChatWindow = ({ chat, showName, showAvatar, showHeader }) => (
   <Scrollable
     grow
-    topContent={showHeader ? <ChatInfo chat={chat} showAvatar={showAvatar} /> : null}
+    topContent={
+      showHeader ? <ChatInfo chat={chat} showAvatar={showAvatar} /> : null
+    }
     bottomContent={<EnterMessageInput />}
     scrollableContent={chat.messages.map((message) => (
       <ChatBubble
@@ -134,7 +134,7 @@ const MessagePropTypes = PropTypes.shape({
 ChatWindow.propTypes = {
   chat: PropTypes.shape({
     messages: PropTypes.arrayOf(MessagePropTypes),
-  }),
+  }).isRequired,
 };
 
 export default ChatWindow;

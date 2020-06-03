@@ -4,10 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { getUserFollowingRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
 
-import { 
-  Paper,
-  LoadContent 
-} from '../../components/ui'
+import { Paper, LoadContent } from '../../components/ui';
 
 const Feed = ({ user: userId }) => {
   const dispatch = useDispatch();
@@ -26,7 +23,7 @@ const Feed = ({ user: userId }) => {
       ) : (
         <div spacing={1}>
           {following.map((user) => (
-            <div xs={4}>
+            <div xs={4} key={user._id}>
               <UserCard user={user.user} />
             </div>
           ))}

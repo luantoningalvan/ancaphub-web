@@ -6,14 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { getPostLikesRequest } from '../../actions/posts';
 import UserList from '../users/UserList';
 
-import {
-  Dialog,
-  Card,
-  CardHeader,
-  CardBody,
-  IconButton,
-  Spinner,
-} from '../ui'
+import { Dialog, Card, CardHeader, CardBody, IconButton, Spinner } from '../ui';
 
 const LikeBox = ({ open, onClose, postId }) => {
   const dispatch = useDispatch();
@@ -23,7 +16,7 @@ const LikeBox = ({ open, onClose, postId }) => {
     if (open) {
       dispatch(getPostLikesRequest(postId));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (
@@ -31,8 +24,14 @@ const LikeBox = ({ open, onClose, postId }) => {
       {open && (
         <Card style={{ minWidth: 350 }}>
           <CardHeader>
-            <h3><FormattedMessage id="common.likePlural" /></h3>
-            <IconButton icon={<CloseIcon />} color="primary" onClick={onClose} />
+            <h3>
+              <FormattedMessage id="common.likePlural" />
+            </h3>
+            <IconButton
+              icon={<CloseIcon />}
+              color="primary"
+              onClick={onClose}
+            />
           </CardHeader>
           <CardBody>
             {likes.postLikesLoading ? (

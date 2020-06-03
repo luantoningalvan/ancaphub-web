@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 import CloseIcon from 'react-ionicons/lib/IosClose';
-import {Dialog} from '../Dialog';
-import {IconButton} from '../Button';
+import { Dialog } from '../Dialog';
+import { IconButton } from '../Button';
 
 const ImageBox = ({ src }) => {
   const [open, setOpen] = useState(false);
@@ -45,4 +47,4 @@ const ImageBox = ({ src }) => {
   );
 };
 
-export { ImageBox }
+export { ImageBox };

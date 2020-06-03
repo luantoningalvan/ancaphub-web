@@ -1,4 +1,3 @@
-
 export const Types = {
   CREATE_ITEM_REQUEST: 'library/create_item_request',
   CREATE_ITEM_SUCCESS: 'library/create_item_success',

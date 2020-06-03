@@ -30,9 +30,7 @@ const DropdownCard = styled.div`
   color: white;
 `;
 
-const Dropdown = ({
-  children, placement, offsetX, offsetY, toggle,
-}) => {
+const Dropdown = ({ children, placement, offsetX, offsetY, toggle }) => {
   const [showing, setShowing] = React.useState(false);
   const listRef = React.useRef(null);
   const wrappedComponentRef = React.useRef(null);
@@ -63,7 +61,7 @@ const Dropdown = ({
       wrappedComponentRef.current = node;
       return ref(node);
     },
-    [wrappedComponentRef],
+    [wrappedComponentRef]
   );
 
   const handleToggle = () => {
@@ -132,6 +130,12 @@ Dropdown.propTypes = {
     'bottom-end',
     'bottom-start',
   ]),
+};
+
+Dropdown.defaultProps = {
+  placement: 'auto',
+  offsetX: 0,
+  offsetY: 0,
 };
 
 export default Dropdown;

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
-import {TextField} from '../ui'
+import { TextField } from '../ui';
 
 export default function Input({ name, type = 'text', ...rest }) {
   const inputRef = useRef(null);
-  const {
-    fieldName, defaultValue, registerField, error,
-  } = useField(name);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -25,7 +23,11 @@ export default function Input({ name, type = 'text', ...rest }) {
         type={type}
         {...rest}
       />
-      { error && <span style={{ color: '#f93c3c', fontSize: '0.9em', marginTop: 8 }}>{error}</span> }
+      {error && (
+        <span style={{ color: '#f93c3c', fontSize: '0.9em', marginTop: 8 }}>
+          {error}
+        </span>
+      )}
     </>
   );
 }

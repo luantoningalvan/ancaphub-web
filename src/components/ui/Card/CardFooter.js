@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardFooterContainer } from './styles';
 import PropTypes from 'prop-types';
+import { CardFooterContainer } from './styles';
 
 const CardFooter = ({ link, action, label }) => (
   <CardFooterContainer to={link} onClick={action}>

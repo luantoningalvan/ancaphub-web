@@ -10,13 +10,20 @@ const Template = ({ children }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const handleCollapse = () => {
-    console.log('cu');
     setCollapsed(!collapsed);
   };
   return (
     <ThemeProvider>
-      <Header user={auth.user} collapsed={collapsed} setCollapsed={handleCollapse} />
-      <Sidenav user={auth.user} collapsed={collapsed} setCollapsed={handleCollapse} />
+      <Header
+        user={auth.user}
+        collapsed={collapsed}
+        setCollapsed={handleCollapse}
+      />
+      <Sidenav
+        user={auth.user}
+        collapsed={collapsed}
+        setCollapsed={handleCollapse}
+      />
       <Main>{children}</Main>
     </ThemeProvider>
   );

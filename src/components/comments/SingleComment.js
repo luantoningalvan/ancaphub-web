@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import MdMore from 'react-ionicons/lib/MdMore';
 import DeleteIcon from 'react-ionicons/lib/IosRemoveCircleOutline';
-import DocumentIcon from 'react-ionicons/lib/IosDocumentOutline';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedRelativeTime, FormattedMessage } from 'react-intl';
 import { differenceInSeconds, parseISO, getTime } from 'date-fns';
 import UserAvatar from '../users/UserAvatar';
 import UserName from '../users/UserName';
+// Dependency cycle needs to be fixed
+// eslint-disable-next-line import/no-cycle
 import CommentBox from './CommentBox';
-import { deleteCommentRequest, likeCommentRequest } from '../../actions/comments';
+import { deleteCommentRequest } from '../../actions/comments';
 
 import {
   Dropdown,
@@ -17,7 +18,7 @@ import {
   DropdownListItem,
   IconButton,
   ConfirmationDialog,
-} from '../ui'
+} from '../ui';
 
 const SingleCommentStyle = styled.div`
   .teste {
@@ -51,19 +52,19 @@ const SingleCommentStyle = styled.div`
       list-style: none;
       display: inline-block;
       &:after {
-        content: "·";
+        content: '·';
         margin: 0px 5px;
       }
 
       &:last-child {
         &:after {
-          content: "";
+          content: '';
           margin: 0;
         }
       }
     }
 
-    a {
+    span.time-link {
       color: ${(props) => props.theme.palette.text.secondary};
       text-decoration: none;
 
@@ -87,23 +88,24 @@ const SingleCommentStyle = styled.div`
 `;
 
 const SingleComment = ({ comment, post }) => {
-  const [responsesState, setResponsesState] = useState(false);
+  const [responsesState] = useState(false);
   const [deleteBox, setDeleteBox] = useState(false);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.user._id);
 
-  const handleResponse = () => {
-    setResponsesState(!responsesState);
-  };
+  // Keep commented until used for avoiding lint errors
+  // const handleResponse = () => {
+  //   setResponsesState(!responsesState);
+  // };
 
   const handleDelete = () => {
     dispatch(deleteCommentRequest(post, comment._id));
     setDeleteBox(false);
   };
 
-  const handleLikeComment = () => {
-    dispatch(likeCommentRequest(comment._id));
-  };
+  // const handleLikeComment = () => {
+  //   dispatch(likeCommentRequest(comment._id));
+  // };
 
   return (
     <SingleCommentStyle>
@@ -126,52 +128,53 @@ const SingleComment = ({ comment, post }) => {
             </li>
 */}
             <li>
-              <a>
+              <span className="time-link">
                 <FormattedRelativeTime
                   numeric="auto"
                   value={
-                  -differenceInSeconds(
-                    Date.now(),
-                    getTime(parseISO(comment.date)),
-                  )
-                }
+                    -differenceInSeconds(
+                      Date.now(),
+                      getTime(parseISO(comment.date))
+                    )
+                  }
                   updateIntervalInSeconds={30}
                 />
-              </a>
+              </span>
             </li>
           </ul>
         </div>
         {auth && auth === comment.user._id && (
-        <div className="actions">
-          <Dropdown
-            placement="left-start"
-            toggle={(
-            <IconButton icon={<MdMore />}/>
-          )}
-          >
-            <DropdownListContainer>
-              {/*
+          <div className="actions">
+            <Dropdown
+              placement="left-start"
+              toggle={<IconButton icon={<MdMore />} />}
+            >
+              <DropdownListContainer>
+                {/*
               <DropdownListItem icon={<DocumentIcon />}>
                 <FormattedMessage id="common.edit" />
               </DropdownListItem> */}
-              <DropdownListItem icon={<DeleteIcon />} onClick={() => setDeleteBox(true)}>
-                <FormattedMessage id="common.delete" />
-              </DropdownListItem>
-            </DropdownListContainer>
-          </Dropdown>
-          <ConfirmationDialog
-            show={deleteBox}
-            onClose={() => setDeleteBox(false)}
-            onConfirm={handleDelete}
-            title={<FormattedMessage id="components.commentBox.delete" />}
-            message={<FormattedMessage id="components.commentBox.confirmDelete" />}
-          />
-        </div>
+                <DropdownListItem
+                  icon={<DeleteIcon />}
+                  onClick={() => setDeleteBox(true)}
+                >
+                  <FormattedMessage id="common.delete" />
+                </DropdownListItem>
+              </DropdownListContainer>
+            </Dropdown>
+            <ConfirmationDialog
+              show={deleteBox}
+              onClose={() => setDeleteBox(false)}
+              onConfirm={handleDelete}
+              title={<FormattedMessage id="components.commentBox.delete" />}
+              message={
+                <FormattedMessage id="components.commentBox.confirmDelete" />
+              }
+            />
+          </div>
         )}
-
       </div>
       <CommentBox expanded={responsesState} indent />
-
     </SingleCommentStyle>
   );
 };

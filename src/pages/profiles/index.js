@@ -1,6 +1,4 @@
-import React, {
-  lazy, Suspense, useEffect, useState,
-} from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
@@ -11,14 +9,14 @@ import EditIcon from 'react-ionicons/lib/IosCreate';
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import defaultProfileCover from '../../assets/default-profile-cover.jpg';
 
-import { 
+import {
   Paper,
   Button,
   Spinner,
   Container,
   Tabs,
   Tab,
-} from '../../components/ui'
+} from '../../components/ui';
 
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
@@ -39,7 +37,7 @@ const Contributions = lazy(() => import('./Contributions'));
 const Followers = lazy(() => import('./Followers'));
 const Following = lazy(() => import('./Following'));
 
-export default () => {
+const Profiles = () => {
   const { user, loading } = useSelector((state) => state.profile);
   const counts = useSelector((state) => state.usersCount);
   const auth = useSelector((state) => state.auth);
@@ -63,27 +61,35 @@ export default () => {
 
   useEffect(() => {
     dispatch(getSingleUserRequest(userId));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, getSingleUserRequest]);
 
   useEffect(() => {
     setPage(() => pages[pageParam]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageParam]);
 
   return (
     <Container>
       {loading ? (
-        <div style={{
-          display: 'flex', flexBasis: '100%', flexGrow: 1, justifyContent: 'center', alignItems: 'center',
-        }}
+        <div
+          style={{
+            display: 'flex',
+            flexBasis: '100%',
+            flexGrow: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
         >
           <Spinner size={128} />
         </div>
       ) : (
         <>
           {verifyIfIsOwnProfile && (
-          <EditAvatar open={editAvatar} onClose={() => setEditAvatar(false)} />
+            <EditAvatar
+              open={editAvatar}
+              onClose={() => setEditAvatar(false)}
+            />
           )}
 
           <ProfileHeader>
@@ -141,10 +147,7 @@ export default () => {
 
               <div className="user-name">
                 <h3>{user.name}</h3>
-                <span>
-                  @
-                  {user.username}
-                </span>
+                <span>@{user.username}</span>
               </div>
 
               <div className="user-action-buttons">
@@ -152,12 +155,12 @@ export default () => {
                 {verifyIfIsOwnProfile && <EditProfile open={editProfile} />}
 
                 {!verifyIfIsOwnProfile && (
-                <Button color="primary">
-                  <FormattedMessage
-                    id="common.sendMessage"
-                    description="Enviar Mensagem"
-                  />
-                </Button>
+                  <Button color="primary">
+                    <FormattedMessage
+                      id="common.sendMessage"
+                      description="Enviar Mensagem"
+                    />
+                  </Button>
                 )}
               </div>
             </ProfileInfo>
@@ -183,7 +186,12 @@ export default () => {
                       <li>
                         <BirthIcon />
                         <span>
-                          <FormattedDate value={user.birthday} year="numeric" month="long" day="2-digit" />
+                          <FormattedDate
+                            value={user.birthday}
+                            year="numeric"
+                            month="long"
+                            day="2-digit"
+                          />
                         </span>
                       </li>
                     )}
@@ -204,9 +212,13 @@ export default () => {
             </div>
             <div sm={12} lg={9}>
               <Paper style={{ width: '100%' }}>
-                <Tabs style={{
-                  height: 48, padding: '0px 8px', overflow: 'hidden', flexGrow: 1,
-                }}
+                <Tabs
+                  style={{
+                    height: 48,
+                    padding: '0px 8px',
+                    overflow: 'hidden',
+                    flexGrow: 1,
+                  }}
                 >
                   <Tab
                     current={pageParam === undefined}
@@ -226,9 +238,11 @@ export default () => {
                 </Tabs>
               </Paper>
 
-              <div style={{
-                width: '100%', margin: '16px 0',
-              }}
+              <div
+                style={{
+                  width: '100%',
+                  margin: '16px 0',
+                }}
               >
                 <Suspense fallback={<Spinner size={96} />}>{Page}</Suspense>
               </div>
@@ -239,3 +253,5 @@ export default () => {
     </Container>
   );
 };
+
+export default Profiles;

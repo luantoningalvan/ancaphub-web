@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 export const CardContainer = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const CardContainer = styled.div`
   background: ${(props) => props.theme.palette.paper};
   color: ${(props) => props.theme.palette.text.primary};
   border: ${(props) =>
-    props.bordered ? `1px solid ${props.theme.palette.border}` : "none"};
+    props.bordered ? `1px solid ${props.theme.palette.border}` : 'none'};
   border-radius: 10px;
 `;
 

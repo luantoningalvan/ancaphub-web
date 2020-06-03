@@ -7,15 +7,13 @@ import parse from 'html-react-parser';
 import defaultThumbnail from '../../assets/default-book-cover.jpg';
 import Categories from '../../components/categories/ShowCategories';
 
-import {
-  Container,
-  Paper,
-} from '../../components/ui'
+import { Container, Paper } from '../../components/ui';
 
 import { getSingleItemRequest as getSingleItem } from '../../actions/library';
 
 const Banner = styled.div`
-  background: url(${(props) => (props.cover ? props.cover : defaultThumbnail)}) rgba(0, 0, 0, 0.8);
+  background: url(${(props) => (props.cover ? props.cover : defaultThumbnail)})
+    rgba(0, 0, 0, 0.8);
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -26,7 +24,7 @@ const Banner = styled.div`
   div {
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
   }
 `;
 
@@ -61,24 +59,26 @@ const SingleArticle = () => {
     );
   }
 
-  return singleItem && (
-    <>
-      <Banner cover={singleItem.cover && singleItem.cover.url}>
-        <Container>
-          <Categories categories={singleItem.categories} />
-          <Title>{singleItem && singleItem.title}</Title>
-          <Author>{singleItem && singleItem.title}</Author>
-        </Container>
-      </Banner>
+  return (
+    singleItem && (
+      <>
+        <Banner cover={singleItem.cover && singleItem.cover.url}>
+          <Container>
+            <Categories categories={singleItem.categories} />
+            <Title>{singleItem && singleItem.title}</Title>
+            <Author>{singleItem && singleItem.title}</Author>
+          </Container>
+        </Banner>
 
-      <div style={{ marginTop: -20 }}>
-        <Container>
-          <Paper padding>
-            {parse(`${singleItem && singleItem.content}`)}
-          </Paper>
-        </Container>
-      </div>
-    </>
+        <div style={{ marginTop: -20 }}>
+          <Container>
+            <Paper padding>
+              {parse(`${singleItem && singleItem.content}`)}
+            </Paper>
+          </Container>
+        </div>
+      </>
+    )
   );
 };
 

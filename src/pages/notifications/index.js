@@ -4,39 +4,34 @@ import { isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from '../../components/notifications';
 
-import { 
-  Container,
-  Hero,
-  Paper,
-  Spinner,
-} from '../../components/ui'
+import { Container, Hero, Paper, Spinner } from '../../components/ui';
 
 import {
   getNotificationsRequest,
   markAllAsReadRequest,
 } from '../../actions/notifications';
 
-export default () => {
+const Notifications = () => {
   const dispatch = useDispatch();
   const { notifications, loadingNotifications } = useSelector(
-    (state) => state.notifications,
+    (state) => state.notifications
   );
 
   useEffect(() => {
     dispatch(getNotificationsRequest());
     dispatch(markAllAsReadRequest());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Container>
       <Hero
-        title={(
+        title={
           <FormattedMessage
             id="common.notifications"
             description="Título da página de notificações"
           />
-        )}
+        }
       />
 
       <div style={{ marginTop: 16 }}>
@@ -60,7 +55,14 @@ export default () => {
             )}
           </>
         ) : (
-          <Paper padding style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Paper
+            padding
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
             <Spinner />
           </Paper>
         )}
@@ -68,3 +70,5 @@ export default () => {
     </Container>
   );
 };
+
+export default Notifications;

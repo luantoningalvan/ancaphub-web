@@ -1,5 +1,4 @@
 import { Types } from '../actions/search';
-import arrayToObject from '../utils/arrayToObject';
 
 const INITIAL_STATE = {
   results: [],

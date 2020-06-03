@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { generate } from 'shortid';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import UploadButton from 'react-ionicons/lib/IosCloudUpload';
@@ -9,7 +10,7 @@ import LibraryCard from '../../components/library/LibraryCard';
 import { loadCategoriesRequest } from '../../actions/categories';
 import { getItemsRequest } from '../../actions/library';
 
-import { 
+import {
   Container,
   Hero,
   Card,
@@ -21,14 +22,14 @@ import {
   Button,
   LoadContent,
   Paper,
-} from '../../components/ui'
+} from '../../components/ui';
 
-export default () => {
+const Library = () => {
   // eslint-disable-next-line no-unused-vars
   const [type, setType] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const { items: categories, loading: loadingCategories } = useSelector(
-    (state) => state.categories,
+    (state) => state.categories
   );
   const { items, loading } = useSelector((state) => state.library);
   const dispatch = useDispatch();
@@ -48,7 +49,9 @@ export default () => {
       books: 'book',
       videos: 'video',
     };
-    dispatch(getItemsRequest({ type: types[typeParam], category: selectedCategory }));
+    dispatch(
+      getItemsRequest({ type: types[typeParam], category: selectedCategory })
+    );
   }, [typeParam, selectedCategory, dispatch]);
 
   return (
@@ -56,7 +59,7 @@ export default () => {
       <Hero
         title={<FormattedMessage id="common.library" />}
         description={<FormattedMessage id="home.features.0" />}
-        actions={(
+        actions={
           <Link to="/library/contribute">
             <Button color="primary" to="/library/contribute">
               <UploadButton />
@@ -65,7 +68,7 @@ export default () => {
               </span>
             </Button>
           </Link>
-        )}
+        }
       />
 
       <div spacing={2} style={{ marginTop: 8 }}>
@@ -85,6 +88,7 @@ export default () => {
                 />
                 {categories.map((category) => (
                   <MenuItem
+                    key={category.name}
                     label={category.name}
                     current={selectedCategory === category._id}
                     onClick={() => setSelectedCategory(category._id)}
@@ -129,7 +133,7 @@ export default () => {
                 ) : (
                   <div spacing={2}>
                     {items.map((item) => (
-                      <div xs={12}>
+                      <div xs={12} key={generate()}>
                         <LibraryCard item={item} />
                       </div>
                     ))}
@@ -143,3 +147,5 @@ export default () => {
     </Container>
   );
 };
+
+export default Library;

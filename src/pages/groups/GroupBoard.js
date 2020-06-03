@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { FormattedMessage } from 'react-intl';
@@ -12,7 +13,7 @@ import {
   Card,
   CardHeader,
   CardBody,
-} from '../../components/ui'
+} from '../../components/ui';
 
 import MiniLibraryCard from '../../components/library/MiniLibraryCard';
 import MiniUserCard from '../../components/users/MiniUserCard';
@@ -90,8 +91,11 @@ const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
-  if (source.droppableId !== destination.droppableId && destination.droppableId !== 'master') {
-    if (source.droppableId == 'master') {
+  if (
+    source.droppableId !== destination.droppableId &&
+    destination.droppableId !== 'master'
+  ) {
+    if (source.droppableId === 'master') {
       const sourceColumn = masterItems;
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...masterItems];
@@ -144,7 +148,7 @@ const onDragEnd = (result, columns, setColumns) => {
   }
 };
 
-export default () => {
+const GroupBoard = () => {
   const [columns, setColumns] = useState(columnsFromBackend);
 
   return (
@@ -165,23 +169,20 @@ export default () => {
             <Fodase>
               <div className="search">
                 <FormattedMessage id="groups.board.searchComponent">
-                  {(msg) => (
-                    <input type="text" placeholder={msg} />
-                  )}
+                  {(msg) => <input type="text" placeholder={msg} />}
                 </FormattedMessage>
                 <SearchIcon />
               </div>
 
               <div>
                 <Droppable droppableId="master">
-                  {(provided, snapshot) => (
+                  {(provided) => (
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
                       style={{
                         padding: 4,
                         width: 250,
-
                       }}
                     >
                       {masterItems.map((item, index) => (
@@ -222,9 +223,7 @@ export default () => {
           </div>
           <div style={{ width: 726 }}>
             <Toolbar>
-              <Dropdown
-                toggle={<Button color="primary">Leituras</Button>}
-              />
+              <Dropdown toggle={<Button color="primary">Leituras</Button>} />
             </Toolbar>
 
             <div
@@ -236,7 +235,7 @@ export default () => {
                 overflowX: 'scroll',
               }}
             >
-              {Object.entries(columns).map(([columnId, column], index) => (
+              {Object.entries(columns).map(([columnId, column]) => (
                 <div
                   style={{
                     display: 'flex',
@@ -252,7 +251,7 @@ export default () => {
                     </CardHeader>
                     <CardBody>
                       <Droppable droppableId={columnId} key={columnId}>
-                        {(provided, snapshot) => (
+                        {(provided) => (
                           <div
                             {...provided.droppableProps}
                             ref={provided.innerRef}
@@ -305,3 +304,5 @@ export default () => {
     </div>
   );
 };
+
+export default GroupBoard;

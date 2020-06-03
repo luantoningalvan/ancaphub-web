@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import ReactPlayer from 'react-player';
+import { generate } from 'shortid';
 import ImageIcon from 'react-ionicons/lib/IosImageOutline';
 import EmbedIcon from 'react-ionicons/lib/IosCode';
 import PollIcon from 'react-ionicons/lib/IosPodiumOutline';
@@ -21,29 +23,40 @@ import {
   CardFooter,
   Card,
   IconButton,
-  Button
-} from '../../ui'
+  Button,
+} from '../../ui';
 
 import basicTextStylePlugin from '../../editor/plugins/basicTextStylePlugin';
 import 'draft-js/dist/Draft.css';
 import 'draft-js-linkify-plugin/lib/plugin.css';
 import 'draft-js-hashtag-plugin/lib/plugin.css';
-import { createPostRequest, getPostsRequest, getUserPostsRequest } from '../../../actions/posts';
+import {
+  createPostRequest,
+  getPostsRequest,
+  getUserPostsRequest,
+} from '../../../actions/posts';
 import PostFormStyle from './styles';
 
 const linkifyPlugin = createLinkifyPlugin();
 const listPlugin = createListPlugin();
 const hashtagPlugin = createHashtagPlugin();
-const plugins = [linkifyPlugin, basicTextStylePlugin, listPlugin, hashtagPlugin];
+const plugins = [
+  linkifyPlugin,
+  basicTextStylePlugin,
+  listPlugin,
+  hashtagPlugin,
+];
 
 function PostForm({ createPostRequest: createPost }) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const contentState = editorState.getCurrentContent();
   const [media, setMedia] = useState(null);
 
-  const preview = useMemo(() => (media && media.type === 'image'
-    ? URL.createObjectURL(media.data)
-    : null), [media]);
+  const preview = useMemo(
+    () =>
+      media && media.type === 'image' ? URL.createObjectURL(media.data) : null,
+    [media]
+  );
 
   // eslint-disable-next-line no-shadow
   function handleKeyCommand(command, editorState) {
@@ -161,8 +174,13 @@ function PostForm({ createPostRequest: createPost }) {
                   <div className="poll-box">
                     <ul>
                       {media.data.map((option, index) => (
-                        <li>
-                          <FormattedMessage id={`components.postForm.pollOptionNumber${index >= 2 ? 'Optional' : ''}`} values={{ optionNumber: index + 1 }}>
+                        <li key={generate()}>
+                          <FormattedMessage
+                            id={`components.postForm.pollOptionNumber${
+                              index >= 2 ? 'Optional' : ''
+                            }`}
+                            values={{ optionNumber: index + 1 }}
+                          >
                             {(msg) => (
                               <TextField
                                 fullWidth
@@ -170,7 +188,9 @@ function PostForm({ createPostRequest: createPost }) {
                                 placeholder={msg}
                                 value={media.data[index]}
                                 style={{ marginBottom: 8 }}
-                                onChange={(e) => handleChangePollOption(index, e)}
+                                onChange={(e) =>
+                                  handleChangePollOption(index, e)
+                                }
                               />
                             )}
                           </FormattedMessage>
@@ -186,16 +206,18 @@ function PostForm({ createPostRequest: createPost }) {
                       }}
                     >
                       {media.data.length < 4 && (
-                        <IconButton 
-                        icon={<AddIcon  />}
-                        color="secondary" 
-                        onClick={addPollOption}
+                        <IconButton
+                          icon={<AddIcon />}
+                          color="secondary"
+                          onClick={addPollOption}
                         />
                       )}
                     </div>
                   </div>
                   <CardFooter
-                    label={<FormattedMessage id="components.postForm.removePoll" />}
+                    label={
+                      <FormattedMessage id="components.postForm.removePoll" />
+                    }
                     action={handleRemoveMedia}
                   />
                 </Card>
@@ -209,10 +231,12 @@ function PostForm({ createPostRequest: createPost }) {
                           fullWidth
                           placeholder={msg}
                           value={media.data}
-                          onChange={(e) => setMedia({
-                            type: 'embed',
-                            data: e.target.value,
-                          })}
+                          onChange={(e) =>
+                            setMedia({
+                              type: 'embed',
+                              data: e.target.value,
+                            })
+                          }
                         />
                       )}
                     </FormattedMessage>
@@ -227,7 +251,9 @@ function PostForm({ createPostRequest: createPost }) {
                   </CardBody>
 
                   <CardFooter
-                    label={<FormattedMessage id="components.postForm.removeEmbed" />}
+                    label={
+                      <FormattedMessage id="components.postForm.removeEmbed" />
+                    }
                     action={handleRemoveMedia}
                   />
                 </Card>
@@ -239,13 +265,25 @@ function PostForm({ createPostRequest: createPost }) {
           <div className="upload-button">
             <label>
               <ImageIcon />
-              <input id="image-input" type="file" onChange={(e) => handleAddImage(e)} />
+              <input
+                id="image-input"
+                type="file"
+                onChange={(e) => handleAddImage(e)}
+              />
             </label>
           </div>
-          
-          <IconButton icon={<PollIcon />} size="small" onClick={handleAddPoll} />
-          
-          <IconButton  icon={<EmbedIcon />} size="small" onClick={handleAddEmbed}/>
+
+          <IconButton
+            icon={<PollIcon />}
+            size="small"
+            onClick={handleAddPoll}
+          />
+
+          <IconButton
+            icon={<EmbedIcon />}
+            size="small"
+            onClick={handleAddEmbed}
+          />
 
           <Button
             variant="contained"
@@ -264,5 +302,9 @@ function PostForm({ createPostRequest: createPost }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ createPostRequest, getUserPostsRequest, getPostsRequest }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    { createPostRequest, getUserPostsRequest, getPostsRequest },
+    dispatch
+  );
 export default connect(null, mapDispatchToProps)(PostForm);

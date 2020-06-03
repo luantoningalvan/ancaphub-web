@@ -1,6 +1,9 @@
 import React from 'react';
 import {
-  BrowserRouter as Router, Route, Switch, useHistory,
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Template from '../components/template';
@@ -8,7 +11,7 @@ import Template from '../components/template';
 import routeList from './routeList';
 import LoadScreen from '../components/template/LoadScreen';
 
-export default () => {
+const Routes = () => {
   const { isAuthenticated, loading } = useSelector((state) => state.auth);
 
   return (
@@ -45,3 +48,5 @@ export default () => {
     </>
   );
 };
+
+export default Routes;

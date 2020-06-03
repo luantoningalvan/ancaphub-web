@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// eslint-disable-next-line import/prefer-default-export
 export const Container = styled.div`
   position: fixed;
   bottom: 16px;
@@ -9,7 +10,13 @@ export const Container = styled.div`
   color: white;
   padding: 16px;
   display: flex;
-  align-items:center;
-  span { font-size: 1em; line-height: 1em;}
-  svg { fill: white; margin-right: 8px;}
+  align-items: center;
+  span {
+    font-size: 1em;
+    line-height: 1em;
+  }
+  svg {
+    fill: white;
+    margin-right: 8px;
+  }
 `;

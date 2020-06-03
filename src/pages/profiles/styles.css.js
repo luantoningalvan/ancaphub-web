@@ -20,19 +20,21 @@ export const ProfilePicture = styled.div`
   justify-content: center;
 
   .avatar {
-    position:relative;
+    position: relative;
     height: 128px;
     width: 128px;
     border-radius: 100%;
-    overflow:hidden;
-    cursor:pointer;
+    overflow: hidden;
+    cursor: pointer;
 
     img {
       height: 100%;
       width: 100%;
     }
 
-    ${(props) => props.isOwn && `
+    ${(props) =>
+      props.isOwn &&
+      `
     &:before {
       content: "";
       transition: all 0.3s;
@@ -70,12 +72,11 @@ export const ProfilePicture = styled.div`
     }
     `}
   }
-
 `;
 
 export const ProfileInfo = styled.div`
   display: grid;
-  grid-template-areas: "userName" "followerCount" "userActions";
+  grid-template-areas: 'userName' 'followerCount' 'userActions';
   padding: 16px;
 
   .follower-count,
@@ -105,7 +106,7 @@ export const ProfileInfo = styled.div`
         text-transform: uppercase;
 
         &::after {
-          content: "";
+          content: '';
           display: block;
           width: 1px;
           height: 20px;
@@ -148,7 +149,6 @@ export const ProfileInfo = styled.div`
       font-size: 1.3rem;
       margin-bottom: 5px;
       color: ${(props) => props.theme.palette.text.primary};
-
     }
     > span {
       font-size: 0.9rem;
@@ -160,13 +160,15 @@ export const ProfileInfo = styled.div`
     grid-area: userActions;
     justify-content: center;
 
-    button { 
-      width:100%; 
-      flex:1;
-      margin-right:16px;
+    button {
+      width: 100%;
+      flex: 1;
+      margin-right: 16px;
     }
 
-    button:last-child {margin:0px}
+    button:last-child {
+      margin: 0px;
+    }
   }
 `;
 

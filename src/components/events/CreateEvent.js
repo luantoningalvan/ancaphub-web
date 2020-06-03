@@ -10,9 +10,9 @@ import {
   TextField,
   UploadBox,
   IconButton,
-} from '../ui'
+} from '../ui';
 
-export default ({ open, onClose }) => (
+const CreateEvent = ({ open, onClose }) => (
   <Dialog show={open} onClose={onClose}>
     <div style={{ width: 400 }}>
       <CardHeader>
@@ -36,7 +36,9 @@ export default ({ open, onClose }) => (
           </div>
           <div xs={12}>
             <FormattedMessage id="common.description">
-              {(msg) => <TextField placeholder={msg} style={{ paddingBottom: 40 }} />}
+              {(msg) => (
+                <TextField placeholder={msg} style={{ paddingBottom: 40 }} />
+              )}
             </FormattedMessage>
           </div>
           <div xs={6}>
@@ -67,3 +69,5 @@ export default ({ open, onClose }) => (
     </div>
   </Dialog>
 );
+
+export default CreateEvent;

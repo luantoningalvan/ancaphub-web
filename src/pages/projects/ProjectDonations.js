@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
@@ -10,7 +11,7 @@ const DonationCard = styled.div`
   padding-top: 40px;
   border-radius: 8px;
   margin-top: 32px;
-  word-wrap:wrap;
+  word-wrap: wrap;
 
   .icon {
     position: absolute;
@@ -22,7 +23,7 @@ const DonationCard = styled.div`
 
   h4 {
     font-size: 1.4em;
-    margin-bottom:8px;
+    margin-bottom: 8px;
   }
 
   font-size: 0.9em;
@@ -48,12 +49,12 @@ const donations = {
   crypto: [
     {
       name: 'Bitcoin',
-      icon: 'https://pbs.twimg.com/profile_images/421692600446619648/dWAbC2wg_400x400.jpeg',
+      icon:
+        'https://pbs.twimg.com/profile_images/421692600446619648/dWAbC2wg_400x400.jpeg',
     },
     {
       name: 'Nano',
-      icon:
-        'https://hacked.com/wp-content/uploads/2018/02/NANO.jpg',
+      icon: 'https://hacked.com/wp-content/uploads/2018/02/NANO.jpg',
     },
     {
       name: 'Monero',
@@ -70,20 +71,26 @@ const donations = {
   ],
 };
 
-export default () => (
+const ProjectDonations = () => (
   <div>
     <h3 style={{ marginBottom: 8, fontSize: '1.4em' }}>
       <FormattedMessage id="common.crypto" />
     </h3>
     <div spacing={2}>
       {donations.crypto.map((donation) => (
-        <div xs={4}>
+        <div xs={4} key={donation.name}>
           <DonationCard>
             <img className="icon" src={donation.icon} alt="donate icon" />
             <ul>
               <h4>{donation.name}</h4>
               <li>
-                <FormattedMessage id="projects.wallet" values={{ wallet: 'ba12ta34ti56nha78', b: (...chunks) => <b>{chunks}</b> }} />
+                <FormattedMessage
+                  id="projects.wallet"
+                  values={{
+                    wallet: 'ba12ta34ti56nha78',
+                    b: (...chunks) => <b>{chunks}</b>,
+                  }}
+                />
               </li>
             </ul>
           </DonationCard>
@@ -96,20 +103,35 @@ export default () => (
     </h3>
     <div spacing={2}>
       {donations.banks.map((donation) => (
-        <div xs={4}>
+        <div xs={4} key={donation.name}>
           <DonationCard>
             <img className="icon" src={donation.icon} alt="bank icon" />
             <ul>
               <h4>{donation.name}</h4>
 
               <li>
-                <FormattedMessage id="projects.agency" values={{ agency: '000-0', b: (...chunks) => <b>{chunks}</b> }} />
+                <FormattedMessage
+                  id="projects.agency"
+                  values={{
+                    agency: '000-0',
+                    b: (...chunks) => <b>{chunks}</b>,
+                  }}
+                />
               </li>
               <li>
-                <FormattedMessage id="projects.account" values={{ acc: '0000-0', b: (...chunks) => <b>{chunks}</b> }} />
+                <FormattedMessage
+                  id="projects.account"
+                  values={{ acc: '0000-0', b: (...chunks) => <b>{chunks}</b> }}
+                />
               </li>
               <li>
-                <FormattedMessage id="projects.CPF" values={{ num: '000.000.000-00', b: (...chunks) => <b>{chunks}</b> }} />
+                <FormattedMessage
+                  id="projects.CPF"
+                  values={{
+                    num: '000.000.000-00',
+                    b: (...chunks) => <b>{chunks}</b>,
+                  }}
+                />
               </li>
             </ul>
           </DonationCard>
@@ -122,14 +144,20 @@ export default () => (
     </h3>
     <div spacing={2}>
       {donations.apps.map((donation) => (
-        <div xs={4}>
+        <div xs={4} key={donation.name}>
           <DonationCard>
             <img src={donation.icon} className="icon" alt="payment app icon" />
 
             <h4>{donation.name}</h4>
             <ul>
               <li>
-                <FormattedMessage id="projects.paymentAppUsername" values={{ username: 'ancapitao_miguxo_xd', b: (...chunks) => <b>{chunks}</b> }} />
+                <FormattedMessage
+                  id="projects.paymentAppUsername"
+                  values={{
+                    username: 'ancapitao_miguxo_xd',
+                    b: (...chunks) => <b>{chunks}</b>,
+                  }}
+                />
               </li>
             </ul>
           </DonationCard>
@@ -138,3 +166,5 @@ export default () => (
     </div>
   </div>
 );
+
+export default ProjectDonations;

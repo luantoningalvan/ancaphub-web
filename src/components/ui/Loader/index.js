@@ -1,4 +1,4 @@
-import LoadContent from './LoadContent'
-import Spinner from './Spinner'
+import LoadContent from './LoadContent';
+import Spinner from './Spinner';
 
-export { LoadContent, Spinner }
+export { LoadContent, Spinner };

@@ -15,7 +15,7 @@ const Tree = styled.ul`
   transition: 0.4s;
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     z-index: 99;
     top: 20px;
@@ -39,8 +39,9 @@ const MenuTree = ({ icon, current, children }) => (
 );
 
 MenuTree.propTypes = {
-  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.node, PropTypes.func]),
-  current: PropTypes.bool,
+  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.node, PropTypes.func])
+    .isRequired,
+  current: PropTypes.bool.isRequired,
 };
 
 export default MenuTree;

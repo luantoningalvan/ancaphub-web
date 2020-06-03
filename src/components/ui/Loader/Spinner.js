@@ -27,7 +27,14 @@ const Loader = (props) => (
         <stop offset="50%" stopColor="#FFCC00" />
         <stop offset="100%" stopColor="#FFCC00" />
       </linearGradient>
-      <circle r={5} cx={20} cy={20} fill="transparent" stroke="url(#spinner-gradient)" strokeWidth={1} />
+      <circle
+        r={5}
+        cx={20}
+        cy={20}
+        fill="transparent"
+        stroke="url(#spinner-gradient)"
+        strokeWidth={1}
+      />
     </svg>
   </LoaderWrapper>
 );

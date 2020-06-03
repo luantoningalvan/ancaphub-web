@@ -50,7 +50,6 @@ export const updateGeoLocationsSuccess = (data) => ({
   payload: data,
 });
 
-
 export const switchColorMode = (data) => ({
   type: Types.SWITCH_COLOR_MODE,
   payload: data,

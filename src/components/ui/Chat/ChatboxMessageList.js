@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // Components
 import SearchIcon from 'react-ionicons/lib/IosSearch';
 import ChatboxListItem from './ChatboxListItem';
-import {Scrollable} from '../Scrollable';
+import { Scrollable } from '../Scrollable';
 
 // Icons
 
@@ -32,7 +32,7 @@ const MessageSearchWrap = styled.div`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid ${(props) => props.theme.palette.border};
-  background: rgba(0,0,0,.1);
+  background: rgba(0, 0, 0, 0.1);
 
   & > div.searchInput {
     display: flex;
@@ -93,9 +93,11 @@ const ChatboxMessageList = ({ chats }) => (
 );
 
 ChatboxMessageList.propTypes = {
-  chats: PropTypes.arrayOf(PropTypes.shape({
-    messages: PropTypes.arrayOf(MessagePropTypes),
-  })),
+  chats: PropTypes.arrayOf(
+    PropTypes.shape({
+      messages: PropTypes.arrayOf(MessagePropTypes),
+    })
+  ).isRequired,
 };
 
 export default ChatboxMessageList;

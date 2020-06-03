@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import {ContainerDialog} from './styles';
-import {Paper} from '../Paper';
+import { ContainerDialog } from './styles';
+import { Paper } from '../Paper';
 
 const Dialog = ({ show, children }) => {
   useEffect(() => {
@@ -18,12 +18,10 @@ const Dialog = ({ show, children }) => {
 
   return ReactDOM.createPortal(
     <ContainerDialog>
-      <Paper className="content">
-        {children}
-      </Paper>
+      <Paper className="content">{children}</Paper>
     </ContainerDialog>,
-    modalRoot,
+    modalRoot
   );
 };
 
-export { Dialog }
+export { Dialog };

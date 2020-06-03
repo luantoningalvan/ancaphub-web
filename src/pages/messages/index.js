@@ -1,9 +1,6 @@
 import React from 'react';
 
-import { 
-  Container,
-  Chatbox 
-} from '../../components/ui'
+import { Container, Chatbox } from '../../components/ui';
 
 const chats = [
   {
@@ -50,8 +47,15 @@ const chats = [
   },
 ];
 
-export default () => (
+const Messages = () => (
   <Container>
-    <Chatbox chats={chats} currentChat={chats[0]} showList showAvatar showName />
+    <Chatbox
+      chats={chats}
+      currentChat={chats[0]}
+      showList
+      showAvatar
+      showName
+    />
   </Container>
 );
+export default Messages;

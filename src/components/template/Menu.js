@@ -6,13 +6,9 @@ import { useRouteMatch } from 'react-router-dom';
 import NewsFeedIcon from 'react-ionicons/lib/IosPaper';
 import LibraryIcon from 'react-ionicons/lib/IosFolderOpen';
 import UsersIcon from 'react-ionicons/lib/IosPerson';
-import GroupIcon from 'react-ionicons/lib/IosPeople';
-import EventIcon from 'react-ionicons/lib/IosCalendar';
-import ProjectIcon from 'react-ionicons/lib/IosBulb';
 
 // i18n
 import { FormattedMessage } from 'react-intl';
-import MenuTree from './MenuTree';
 import MenuItem from './MenuItem';
 
 const MenuWrapper = styled.ul`
@@ -28,12 +24,12 @@ const Menu = () => {
       <MenuItem
         current={url === '/home'}
         icon={<NewsFeedIcon />}
-        label={(
+        label={
           <FormattedMessage
             id="common.feed"
             description="Label do menu - Home"
           />
-        )}
+        }
         link="/home"
       />
       <MenuItem
@@ -86,7 +82,6 @@ const Menu = () => {
         link="/projects"
       />
     */}
-
     </MenuWrapper>
   );
 };

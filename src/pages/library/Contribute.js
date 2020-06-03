@@ -12,7 +12,7 @@ import {
   Paper,
   TextField,
   Stepper,
-} from '../../components/ui'
+} from '../../components/ui';
 
 const UploadBox = styled.div`
   height: 100px;
@@ -91,12 +91,12 @@ const Contribute = styled.div`
   }
 `;
 
-export default (props) => {
+export default () => {
   const [form, setForm] = useState('');
   const [step, setStep] = useState(1);
 
-  const handleForm = (form) => {
-    setForm(form);
+  const handleForm = (formAttr) => {
+    setForm(formAttr);
     setStep(2);
   };
 
@@ -105,9 +105,24 @@ export default (props) => {
       label: <FormattedMessage id="library.contribute.type" />,
       description: <FormattedMessage id="library.contribute.typeDescription" />,
     },
-    { label: <FormattedMessage id="library.contribute.content" />, description: <FormattedMessage id="library.contribute.contentDescription" /> },
-    { label: <FormattedMessage id="library.contribute.exhibition" />, description: <FormattedMessage id="library.contribute.exhibitionDescription" /> },
-    { label: <FormattedMessage id="library.contribute.confirm" />, description: <FormattedMessage id="library.contribute.confirmDescription" /> },
+    {
+      label: <FormattedMessage id="library.contribute.content" />,
+      description: (
+        <FormattedMessage id="library.contribute.contentDescription" />
+      ),
+    },
+    {
+      label: <FormattedMessage id="library.contribute.exhibition" />,
+      description: (
+        <FormattedMessage id="library.contribute.exhibitionDescription" />
+      ),
+    },
+    {
+      label: <FormattedMessage id="library.contribute.confirm" />,
+      description: (
+        <FormattedMessage id="library.contribute.confirmDescription" />
+      ),
+    },
   ];
 
   return (
@@ -123,7 +138,7 @@ export default (props) => {
           <Paper padding>
             <ul>
               <li>
-                <button onClick={() => handleForm('article')}>
+                <button type="button" onClick={() => handleForm('article')}>
                   <ArticleIcon />
                   <h4>
                     <FormattedMessage id="common.article" />
@@ -132,7 +147,7 @@ export default (props) => {
               </li>
 
               <li>
-                <button onClick={() => handleForm('book')}>
+                <button type="button" onClick={() => handleForm('book')}>
                   <BookIcon />
                   <h4>
                     <FormattedMessage id="common.book" />
@@ -141,7 +156,7 @@ export default (props) => {
               </li>
 
               <li>
-                <button onClick={() => handleForm('video')}>
+                <button type="button" onClick={() => handleForm('video')}>
                   <VideoIcon />
                   <h4>
                     <FormattedMessage id="common.video" />

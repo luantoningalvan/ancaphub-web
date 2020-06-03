@@ -17,7 +17,6 @@ export const Types = {
   GET_USERS_COUNT: 'users/get_users_count',
 };
 
-
 export const getUsersRequest = () => ({
   type: Types.GET_USERS_REQUEST,
 });
@@ -77,7 +76,6 @@ export const getUsersCount = (data) => ({
   payload: data,
 });
 
-
 export const updateProfilePictureRequest = (data) => ({
   type: Types.UPDATE_PROFILE_PICTURE_REQUEST,
   payload: data,
@@ -87,7 +85,6 @@ export const updateProfilePictureSuccess = (data) => ({
   type: Types.UPDATE_PROFILE_PICTURE_SUCCESS,
   payload: data,
 });
-
 
 export const updateProfileInfoRequest = (data) => ({
   type: Types.UPDATE_PROFILE_INFO_REQUEST,

@@ -12,7 +12,7 @@ import {
   DropdownListItem,
   Paper,
   IconButton,
-} from '../../components/ui'
+} from '../../components/ui';
 
 const FileExplorer = styled.div`
   margin-top: 16px;
@@ -43,8 +43,8 @@ const FileExplorer = styled.div`
       padding: 0.3333333333rem 1rem;
       vertical-align: middle;
       svg {
-        height:32px;
-        width:32px;
+        height: 32px;
+        width: 32px;
         margin-right: 8px;
       }
     }
@@ -60,20 +60,19 @@ const FileExplorer = styled.div`
 const Toolbar = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   margin-bottom: 16px;
 
-  ul{
-    display:flex;
-    align-items:center;
+  ul {
+    display: flex;
+    align-items: center;
   }
-  li { 
+  li {
     list-style: none;
     padding: 8px;
-     
-    svg{
-      fill: ${(props) => props.theme.palette.text.primary};
 
+    svg {
+      fill: ${(props) => props.theme.palette.text.primary};
     }
   }
 `;
@@ -93,15 +92,22 @@ const filelist = [
   },
 ];
 
-export default () => (
+const GroupFiles = () => (
   <FileExplorer>
     <Toolbar>
       <span>
-        <FormattedMessage id="groups.files.number" values={{ num: filelist.length }} />
+        <FormattedMessage
+          id="groups.files.number"
+          values={{ num: filelist.length }}
+        />
       </span>
       <ul>
-        <li><ListBoxIcon /></li>
-        <li><GridIcon /></li>
+        <li>
+          <ListBoxIcon />
+        </li>
+        <li>
+          <GridIcon />
+        </li>
       </ul>
     </Toolbar>
     <Paper>
@@ -119,28 +125,26 @@ export default () => (
           <th>
             <FormattedMessage id="groups.files.size" />
           </th>
-          <th />
+          <th>&nbsp;</th>
         </thead>
 
         <tbody>
           {filelist.map((file) => (
-            <tr>
+            <tr key={file.name}>
               <td>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <FileIcon extension={file.type} {...defaultStyles[file.type]} />
+                  <FileIcon
+                    extension={file.type}
+                    {...defaultStyles[file.type]}
+                  />
                   {file.name}
                 </div>
-
               </td>
               <td>{file.updatedAt}</td>
               <td>{file.type}</td>
               <td>{file.size}</td>
               <td style={{ width: 48 }}>
-                <Dropdown
-                  toggle={(
-                    <IconButton icon={<DropdownIcon />} />
-                  )}
-                >
+                <Dropdown toggle={<IconButton icon={<DropdownIcon />} />}>
                   <DropdownListContainer>
                     <DropdownListItem>
                       <FormattedMessage id="common.download" />
@@ -158,3 +162,5 @@ export default () => (
     </Paper>
   </FileExplorer>
 );
+
+export default GroupFiles;

@@ -4,50 +4,52 @@ import styled from 'styled-components';
 const DropdownListItemWrap = styled.li`
   display: flex;
   align-items: flex-start;
-  list-style:none;
+  list-style: none;
   align-items: center;
   min-width: 100px;
   max-width: 400px;
   padding: 8px 16px;
   cursor: pointer;
 
-  &:hover{
-    a, span {color: ${(props) => props.theme.palette.primary};}
+  &:hover {
+    a,
+    span {
+      color: ${(props) => props.theme.palette.primary};
+    }
 
     svg {
       fill: ${(props) => props.theme.palette.primary};
     }
   }
-  
+
   svg {
     fill: ${(props) => props.theme.palette.text.primary};
   }
-  
-  span, span a {
+
+  span,
+  span a {
     transition: color 300ms ease-in-out;
   }
 
   span {
-    color: ${(props) => props.theme.palette.text.primary};;
+    color: ${(props) => props.theme.palette.text.primary};
     margin-left: 0.5em;
   }
 
   span a {
-    color: ${(props) => props.theme.palette.text.primary};;
+    color: ${(props) => props.theme.palette.text.primary};
     text-decoration: none;
   }
 `;
 
-export default ({
-  children, icon, action, ...props
-}) => (
+const DropdownListItem = ({ children, icon, action, ...props }) => (
   <DropdownListItemWrap {...props}>
     {icon}
     <span>{children}</span>
-    { action && (
-    <div>
-      { React.cloneElement(action, { style: { margin: '0 0.5em' } }) }
-    </div>
-    ) }
+    {action && (
+      <div>{React.cloneElement(action, { style: { margin: '0 0.5em' } })}</div>
+    )}
   </DropdownListItemWrap>
 );
+
+export default DropdownListItem;

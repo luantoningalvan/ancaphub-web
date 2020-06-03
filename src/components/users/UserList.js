@@ -45,20 +45,27 @@ const Avatar = styled.div`
 const UserList = ({ users }) => (
   <div style={{ width: '100%' }}>
     <ul>
-      {!isEmpty(users) && users.map((user) => (
-        <User key={user.user._id}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Link to={`/${user.user._id}`}>
-              <Avatar src={user.user.avatar && user.user.avatar !== '' ? user.user.avatar : defaultAvatar} />
-            </Link>
-            <div>
-              <h4>{user.user.name}</h4>
-              <span>{user.user.username}</span>
+      {!isEmpty(users) &&
+        users.map((user) => (
+          <User key={user.user._id}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Link to={`/${user.user._id}`}>
+                <Avatar
+                  src={
+                    user.user.avatar && user.user.avatar !== ''
+                      ? user.user.avatar
+                      : defaultAvatar
+                  }
+                />
+              </Link>
+              <div>
+                <h4>{user.user.name}</h4>
+                <span>{user.user.username}</span>
+              </div>
             </div>
-          </div>
-          <FollowButton user={user.user._id} />
-        </User>
-      ))}
+            <FollowButton user={user.user._id} />
+          </User>
+        ))}
     </ul>
   </div>
 );

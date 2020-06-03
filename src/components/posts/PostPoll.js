@@ -15,7 +15,6 @@ const PostPollWrap = styled.div`
   border: 1px solid ${(props) => props.theme.palette.border};
 `;
 
-
 const PostPollOption = styled.div`
   font-weight: 700;
   width: 100%;
@@ -28,7 +27,8 @@ const PostPollOption = styled.div`
   cursor: ${(props) => (props.hasVoted ? 'default' : 'pointer')};
   transition: background-color 200ms ease-in-out;
   &:hover {
-    background-color: ${(props) => (props.hasVoted ? 'transparent' : props.theme.palette.border)};
+    background-color: ${(props) =>
+      props.hasVoted ? 'transparent' : props.theme.palette.border};
   }
   & > span {
     position: absolute;
@@ -37,7 +37,6 @@ const PostPollOption = styled.div`
     z-index: 2;
   }
 `;
-
 
 const PostPollOptionProgress = styled.div`
   display: flex;
@@ -49,7 +48,6 @@ const PostPollOptionProgress = styled.div`
   background-color: ${(props) => props.theme.palette.secondary};
   border-radius: 5px;
 `;
-
 
 const PostPoll = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
@@ -65,35 +63,58 @@ const PostPoll = ({ post }) => {
     <PostPollWrap>
       {post.poll.options.map((option) => (
         <>
-          <PostPollOption hasVoted={hasVoted} onClick={() => handleVote({ pollId: post.media.data, postId: post._id, vote: option.title })}>
+          <PostPollOption
+            hasVoted={hasVoted}
+            onClick={() =>
+              handleVote({
+                pollId: post.media.data,
+                postId: post._id,
+                vote: option.title,
+              })
+            }
+          >
             <span>
-              {option.title}
-              {' '}
-              {option.votes && option.votes.includes(user._id) && <VotedIcon color="white" fontSize="1em" />}
-              {' '}
+              {option.title}{' '}
+              {option.votes && option.votes.includes(user._id) && (
+                <VotedIcon color="white" fontSize="1em" />
+              )}{' '}
             </span>
-            { hasVoted && <PostPollOptionProgress percentage={(option.votesCount / post.poll.allVotesCount) * 100} /> }
+            {hasVoted && (
+              <PostPollOptionProgress
+                percentage={(option.votesCount / post.poll.allVotesCount) * 100}
+              />
+            )}
           </PostPollOption>
-          { hasVoted && (
+          {hasVoted && (
             <div display="flex" style={{ marginBottom: '.5em' }}>
               <small style={{ margin: '0 .25em' }}>
-                {(option.votesCount / post.poll.allVotesCount) * 100}
-                % -
-                {' '}
-                {option.votesCount}
-                {' '}
+                {((option.votesCount / post.poll.allVotesCount) * 100).toFixed(
+                  2
+                )}
+                % - {`${option.votesCount} `}
                 <FormattedPlural
                   value={option.votesCount}
-                  one={<FormattedMessage id="common.vote">{(txt) => <>{txt.toLowerCase()}</>}</FormattedMessage>}
-                  other={<FormattedMessage id="common.votePlural">{(txt) => <>{txt.toLowerCase()}</>}</FormattedMessage>}
+                  one={
+                    <FormattedMessage id="common.vote">
+                      {(txt) => <>{txt.toLowerCase()}</>}
+                    </FormattedMessage>
+                  }
+                  other={
+                    <FormattedMessage id="common.votePlural">
+                      {(txt) => <>{txt.toLowerCase()}</>}
+                    </FormattedMessage>
+                  }
                 />
               </small>
             </div>
-          ) }
+          )}
         </>
       ))}
       <small>
-        <FormattedMessage id="components.postPoll.votesTotal" values={{ votes: post.poll.allVotesCount || 0 }} />
+        <FormattedMessage
+          id="components.postPoll.votesTotal"
+          values={{ votes: post.poll.allVotesCount || 0 }}
+        />
       </small>
     </PostPollWrap>
   );

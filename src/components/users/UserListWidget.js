@@ -2,15 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  Card,
-  Button,
-  CardFooter,
-  CardHeader,
-  CardBody,
-} from '../ui'
+import { Card, CardFooter, CardHeader, CardBody } from '../ui';
 
-import defaultAvatar from '../../assets/default-profile-picture.jpg';
 import MiniUserCard from './MiniUserCard';
 
 export const User = styled.li`
@@ -40,15 +33,16 @@ export const User = styled.li`
     font-weight: lighter;
   }
 `;
-const Avatar = styled.div`
-  height: 42px;
-  width: 42px;
-  overflow: hidden;
-  border-radius: 100%;
-  background-image: url(${(props) => props.src});
-  background-size: cover;
-  margin-right: 10px;
-`;
+
+// const Avatar = styled.div`
+//   height: 42px;
+//   width: 42px;
+//   overflow: hidden;
+//   border-radius: 100%;
+//   background-image: url(${(props) => props.src});
+//   background-size: cover;
+//   margin-right: 10px;
+// `;
 
 const UserListWidget = () => {
   const users = [
@@ -84,8 +78,8 @@ const UserListWidget = () => {
         </CardHeader>
         <CardBody>
           <ul>
-            {users.map((user, index) => (
-              <MiniUserCard key={index} user={user} />
+            {users.map((user) => (
+              <MiniUserCard key={user.id} user={user} />
             ))}
           </ul>
         </CardBody>

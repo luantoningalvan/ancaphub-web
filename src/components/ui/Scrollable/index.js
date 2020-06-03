@@ -10,7 +10,7 @@ const ScrollableWrap = styled.div`
   position: relative;
   border-right: 1px solid #2f3749;
   & > div.wrapped {
-  padding: 16px;
+    padding: 16px;
 
     width: 100%;
     overflow-y: scroll;
@@ -56,24 +56,40 @@ const ScrollableWrap = styled.div`
   }
 `;
 
-const Scrollable = ({
-  scrollableContent, topContent, bottomContent, grow,
-}) => (
+const Scrollable = ({ scrollableContent, topContent, bottomContent, grow }) => (
   <ScrollableWrap grow={grow}>
-    {topContent}
+    {topContent && topContent}
     <div className="wrapped">
       <div className="inner">{scrollableContent}</div>
     </div>
-    {bottomContent}
+    {bottomContent && bottomContent}
     <div className="cover" />
   </ScrollableWrap>
 );
 
 Scrollable.propTypes = {
   grow: PropTypes.bool,
-  scrollableContent: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
-  topContent: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
-  bottomContent: PropTypes.oneOfType([PropTypes.node, PropTypes.element, PropTypes.func]),
+  scrollableContent: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+  ]).isRequired,
+  topContent: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
+  bottomContent: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.element,
+    PropTypes.func,
+  ]),
 };
 
-export {Scrollable};
+Scrollable.defaultProps = {
+  grow: false,
+  topContent: undefined,
+  bottomContent: undefined,
+};
+
+export { Scrollable };

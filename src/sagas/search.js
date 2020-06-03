@@ -1,6 +1,4 @@
-import {
-  takeLatest, call, fork, put,
-} from 'redux-saga/effects';
+import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/search';
 import * as api from '../api/search';
@@ -35,10 +33,10 @@ function* searchNearbyUsers(action) {
 }
 
 function* watchSearchNearbyUsers() {
-  yield takeLatest(actions.Types.SEARCH_NEARBY_USERS_REQUEST, searchNearbyUsers);
+  yield takeLatest(
+    actions.Types.SEARCH_NEARBY_USERS_REQUEST,
+    searchNearbyUsers
+  );
 }
 
-export default [
-  fork(watchSearchTerm),
-  fork(watchSearchNearbyUsers),
-];
+export default [fork(watchSearchTerm), fork(watchSearchNearbyUsers)];

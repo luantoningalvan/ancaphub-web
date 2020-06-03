@@ -17,14 +17,17 @@ const Avatar = styled.div`
   }
 `;
 
-const UserAvatar = ({
-  user, style, size, ...props
-}) => (
+const UserAvatar = ({ user, style, size, ...props }) => (
   <Avatar size={size || 35} style={{ ...style }} {...props}>
     <Link to={`/${user._id}`}>
       <img
         src={user.avatar && user.avatar !== '' ? user.avatar : defaultAvatar}
-        alt={<FormattedMessage id="profile.avatarAltText" values={{ who: user.name }} />}
+        alt={
+          <FormattedMessage
+            id="profile.avatarAltText"
+            values={{ who: user.name }}
+          />
+        }
       />
     </Link>
   </Avatar>
@@ -34,7 +37,7 @@ Avatar.propTypes = {
   avatar: PropTypes.string,
   username: PropTypes.string,
   size: PropTypes.number,
-  style: PropTypes.object,
+  style: PropTypes.instanceOf(Object),
 };
 
 export default UserAvatar;

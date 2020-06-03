@@ -83,7 +83,10 @@ export default (state = INITIAL_STATE, action) => {
           ...state.items,
           [payload.postId]: {
             ...state.items[payload.postId],
-            poll: { ...payload.data, allVotesCount: payload.data.allVotes.length },
+            poll: {
+              ...payload.data,
+              allVotesCount: payload.data.allVotes.length,
+            },
           },
         },
       };

@@ -1,15 +1,16 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  Card,
-  CardBody,
-} from '../../../components/ui'
+import { Card, CardBody } from '../../../components/ui';
 
-export default () => (
+const Notifications = () => (
   <Card>
     <CardBody>
-      <FormattedMessage id="account.settings.noneAvailable" values={{ what: <FormattedMessage id="common.notifications" /> }} />
+      <FormattedMessage
+        id="account.settings.noneAvailable"
+        values={{ what: <FormattedMessage id="common.notifications" /> }}
+      />
     </CardBody>
   </Card>
 );
+export default Notifications;

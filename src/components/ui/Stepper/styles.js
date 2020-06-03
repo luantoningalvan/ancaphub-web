@@ -24,7 +24,8 @@ export const Step = styled.div`
   .step-id {
     height: 40px;
     width: 40px;
-    background: ${({ theme, checked, current }) => (checked || current ? theme.palette.secondary : theme.palette.paper)};
+    background: ${({ theme, checked, current }) =>
+      checked || current ? theme.palette.secondary : theme.palette.paper};
     border-radius: 100%;
     display: flex;
     align-items: center;
@@ -32,32 +33,32 @@ export const Step = styled.div`
     cursor: pointer;
   }
 
-  span { 
-    position: absolute; 
+  span {
+    position: absolute;
     top: 48px;
     line-height: 20px;
   }
 
   &:after {
-    content: "";
+    content: '';
     height: 2px;
     width: calc(100% - 40px);
-    background: ${({ theme, checked }) => (checked ? theme.palette.secondary : theme.palette.paper)};
+    background: ${({ theme, checked }) =>
+      checked ? theme.palette.secondary : theme.palette.paper};
   }
 
   &:first-child {
     &:before {
-      content: "";
+      content: '';
       height: 0px;
       width: 0px;
     }
   }
 
-
   &:last-child {
     flex: inherit;
     &:after {
-      content: "";
+      content: '';
       height: 0px;
       width: 0px;
     }

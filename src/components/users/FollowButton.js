@@ -1,14 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import {Button} from '../ui';
-import { followUserRequest, unfollowUserRequest } from '../../actions/relationships';
+import { Button } from '../ui';
+import {
+  followUserRequest,
+  unfollowUserRequest,
+} from '../../actions/relationships';
 
 export default ({ user }) => {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.relationships[user]);
+  const state = useSelector((relState) => relState.relationships[user]);
   const relationship = state || {};
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector((authState) => authState.auth);
   const verifyIfIsOwnProfile = auth.isAuthenticated && auth.user._id === user;
 
   const handleFollow = () => {
@@ -29,7 +32,11 @@ export default ({ user }) => {
       variant={relationship.following ? 'normal' : 'outlined'}
       onClick={relationship.following ? handleUnfollow : handleFollow}
     >
-      {relationship.following ? <FormattedMessage id="common.following" /> : <FormattedMessage id="common.follow" />}
+      {relationship.following ? (
+        <FormattedMessage id="common.following" />
+      ) : (
+        <FormattedMessage id="common.follow" />
+      )}
     </Button>
   );
 };

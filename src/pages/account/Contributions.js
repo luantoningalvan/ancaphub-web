@@ -6,62 +6,58 @@ import PendingIcon from 'react-ionicons/lib/IosBulb';
 import ReprovedIcon from 'react-ionicons/lib/IosAlert';
 import PointsIcon from 'react-ionicons/lib/IosStar';
 
-import {
-  Container,
-  Hero,
-  Button,
-} from '../../components/ui'
+import { Container, Hero, Button } from '../../components/ui';
 
 const InfoList = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap:16px;
+  gap: 16px;
   margin-top: 16px;
 `;
 
 const InfoCard = styled.li`
   background: ${(props) => props.theme.palette.primary};
-  width:100%;
-  padding:16px;
-  list-style:none;
+  width: 100%;
+  padding: 16px;
+  list-style: none;
   border-radius: 8px;
-  position:relative;
-  display:flex;
+  position: relative;
+  display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
 
-  svg{
-    height:80px;
-    width:80px;
-    fill: rgba(0,0,0,0.2)
+  svg {
+    height: 80px;
+    width: 80px;
+    fill: rgba(0, 0, 0, 0.2);
   }
 
-  h3{
+  h3 {
     font-weight: lighter;
-    margin-top:5px;
+    margin-top: 5px;
   }
-  span{
-    display:block;
+  span {
+    display: block;
     font-size: 2em;
     font-weight: bold;
-    line-height:100%;
+    line-height: 100%;
   }
 `;
 
-export default () => (
+const Contributions = () => (
   <Container>
     <Hero
-      title={(
+      title={
         <FormattedMessage
           id="common.contributions"
           description="Título da página de contribuições"
         />
-        )}
-      actions={(
+      }
+      actions={
         <Button color="primary" variant="outlined">
           <FormattedMessage id="library.contribute" />
         </Button>
-      )}
+      }
     />
 
     <div>
@@ -104,6 +100,7 @@ export default () => (
         </InfoCard>
       </InfoList>
     </div>
-
   </Container>
 );
+
+export default Contributions;

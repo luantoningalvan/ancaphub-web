@@ -1,14 +1,14 @@
-import React, { Suspense, lazy } from "react";
-import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
-import TwitterLogo from "react-ionicons/lib/LogoTwitter";
-import FacebookLogo from "react-ionicons/lib/LogoFacebook";
-import InstagramLogo from "react-ionicons/lib/LogoInstagram";
-import YoutubeLogo from "react-ionicons/lib/LogoYoutube";
-import EmailLogo from "react-ionicons/lib/IosMail";
-import SiteLogo from "react-ionicons/lib/IosLink";
-import ShareButton from "react-ionicons/lib/MdShareAlt";
+import React, { Suspense, lazy } from 'react';
+import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
+import TwitterLogo from 'react-ionicons/lib/LogoTwitter';
+import FacebookLogo from 'react-ionicons/lib/LogoFacebook';
+import InstagramLogo from 'react-ionicons/lib/LogoInstagram';
+import YoutubeLogo from 'react-ionicons/lib/LogoYoutube';
+import EmailLogo from 'react-ionicons/lib/IosMail';
+import SiteLogo from 'react-ionicons/lib/IosLink';
+import ShareButton from 'react-ionicons/lib/MdShareAlt';
 
 import {
   Container,
@@ -21,12 +21,12 @@ import {
   Dropdown,
   DropdownListContainer,
   DropdownListItem,
-} from "../../components/ui";
+} from '../../components/ui';
 
-const ProjectFeed = lazy(() => import("./ProjectFeed"));
-const ProjectFAQ = lazy(() => import("./ProjectFAQ"));
-const ProjectAbout = lazy(() => import("./ProjectAbout"));
-const ProjectDonations = lazy(() => import("./ProjectDonations"));
+const ProjectFeed = lazy(() => import('./ProjectFeed'));
+const ProjectFAQ = lazy(() => import('./ProjectFAQ'));
+const ProjectAbout = lazy(() => import('./ProjectAbout'));
+const ProjectDonations = lazy(() => import('./ProjectDonations'));
 
 const Tabs = styled.ul`
   display: flex;
@@ -125,12 +125,12 @@ const SingleProject = () => {
         <Container>
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
             }}
           >
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 className="icon"
                 src="https://pbs.twimg.com/profile_images/1244861875109715968/HxaDA0Pu_400x400.jpg"
@@ -147,7 +147,7 @@ const SingleProject = () => {
                 </Link>
               </div>
             </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <Button color="primary" style={{ marginRight: 8 }}>
                 <FormattedMessage id="projects.enroll" />
               </Button>
@@ -170,7 +170,7 @@ const SingleProject = () => {
           <div xs={3}>
             <ProjectSocialMedia
               padding
-              style={{ width: "100%", position: "sticky", top: 80 }}
+              style={{ width: '100%', position: 'sticky', top: 80 }}
             >
               <CardHeader>
                 <h3>
@@ -237,31 +237,31 @@ const SingleProject = () => {
             </ProjectSocialMedia>
           </div>
           <div xs={9}>
-            <Paper style={{ width: "100%" }}>
+            <Paper style={{ width: '100%' }}>
               <Tabs>
-                <li className={projectPage === undefined ? "current" : ""}>
+                <li className={projectPage === undefined ? 'current' : ''}>
                   <Link to={`/projects/${projectId}`}>
                     <FormattedMessage id="projects.news" />
                   </Link>
                 </li>
-                <li className={projectPage === "faq" ? "current" : ""}>
+                <li className={projectPage === 'faq' ? 'current' : ''}>
                   <Link to={`/projects/${projectId}/faq`}>
                     <FormattedMessage id="projects.faq" />
                   </Link>
                 </li>
-                <li className={projectPage === "about" ? "current" : ""}>
+                <li className={projectPage === 'about' ? 'current' : ''}>
                   <Link to={`/projects/${projectId}/about`}>
                     <FormattedMessage id="projects.about" />
                   </Link>
                 </li>
-                <li className={projectPage === "donate" ? "current" : ""}>
+                <li className={projectPage === 'donate' ? 'current' : ''}>
                   <Link to={`/projects/${projectId}/donate`}>
                     <FormattedMessage id="projects.donate" />
                   </Link>
                 </li>
               </Tabs>
             </Paper>
-            <div style={{ width: "100%", margin: "16px 0" }}>
+            <div style={{ width: '100%', margin: '16px 0' }}>
               <Suspense fallback={<Spinner size={96} />}>{page}</Suspense>
             </div>
           </div>

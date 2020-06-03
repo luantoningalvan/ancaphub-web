@@ -1,9 +1,4 @@
-import {
-  takeLatest,
-  call,
-  fork,
-  put,
-} from 'redux-saga/effects';
+import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/categories';
 import * as api from '../api/categories';
@@ -22,6 +17,4 @@ function* watchGetCategories() {
   yield takeLatest(actions.Types.LOAD_CATEGORIES_REQUEST, getCategories);
 }
 
-export default [
-  fork(watchGetCategories),
-];
+export default [fork(watchGetCategories)];

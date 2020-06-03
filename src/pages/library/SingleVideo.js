@@ -18,7 +18,7 @@ const PlayerWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    box-shadow: 0px 0px 30px rgba(0,0,0,.7);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.7);
   }
 `;
 
@@ -49,29 +49,37 @@ const SingleVideo = () => {
 
   const { singleItem } = useSelector((state) => state.library);
 
-  return singleItem && (
-    <>
-      <Banner>
-        <Container>
-          <PlayerWrapper>
-            <ReactPlayer className="videoPlayer" width="100%" height="100%" url={singleItem.extraFields && singleItem.extraFields.videoUrl} />
-          </PlayerWrapper>
-          <div style={{ marginTop: 32 }}>
-            <Categories categories={singleItem.categories} />
+  return (
+    singleItem && (
+      <>
+        <Banner>
+          <Container>
+            <PlayerWrapper>
+              <ReactPlayer
+                className="videoPlayer"
+                width="100%"
+                height="100%"
+                url={singleItem.extraFields && singleItem.extraFields.videoUrl}
+              />
+            </PlayerWrapper>
+            <div style={{ marginTop: 32 }}>
+              <Categories categories={singleItem.categories} />
 
-            <Title>{singleItem.title}</Title>
-            <Author>
-              <FormattedMessage id="library.videos.participants" values={{ participants: singleItem.author }} />
-            </Author>
-          </div>
+              <Title>{singleItem.title}</Title>
+              <Author>
+                <FormattedMessage
+                  id="library.videos.participants"
+                  values={{ participants: singleItem.author }}
+                />
+              </Author>
+            </div>
+          </Container>
+        </Banner>
+        <Container>
+          <div style={{ marginTop: 16 }}>{singleItem.content}</div>
         </Container>
-      </Banner>
-      <Container>
-        <div style={{ marginTop: 16 }}>
-          {singleItem.content}
-        </div>
-      </Container>
-    </>
+      </>
+    )
   );
 };
 

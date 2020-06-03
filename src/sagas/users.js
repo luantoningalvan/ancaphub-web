@@ -1,10 +1,4 @@
-import {
-  takeEvery,
-  takeLatest,
-  call,
-  fork,
-  put,
-} from 'redux-saga/effects';
+import { takeEvery, takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/users';
 import * as alerts from '../actions/alerts';
@@ -68,7 +62,6 @@ function* createUser({ payload }) {
   }
 }
 
-
 function* updateUserInfo({ payload }) {
   try {
     const result = yield call(api.updateUserInfo, payload);
@@ -77,7 +70,6 @@ function* updateUserInfo({ payload }) {
     yield put(alerts.addAlert('error', e.message));
   }
 }
-
 
 function* updateUserAvatar({ payload }) {
   try {
@@ -113,7 +105,10 @@ function* watchUpdateUserInfo() {
 }
 
 function* watchUpdateUserAvatar() {
-  yield takeLatest(actions.Types.UPDATE_PROFILE_PICTURE_REQUEST, updateUserAvatar);
+  yield takeLatest(
+    actions.Types.UPDATE_PROFILE_PICTURE_REQUEST,
+    updateUserAvatar
+  );
 }
 
 export default [

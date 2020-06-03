@@ -2,11 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import GroupCard from '../../components/groups/GroupCard';
 
-import {
-  Container,
-  Hero,
-  Button,
-} from '../../components/ui'
+import { Container, Hero, Button } from '../../components/ui';
 
 const groups = [
   {
@@ -39,26 +35,26 @@ const groups = [
   },
 ];
 
-export default () => (
+const Groups = () => (
   <Container>
     <Hero
-      title={(
+      title={
         <FormattedMessage
           id="common.groups"
           description="Título da página de grupos"
         />
-        )}
-      description={(
+      }
+      description={
         <FormattedMessage
           id="home.features.1"
           description="Descrição da página de grupos"
         />
-        )}
-      actions={(
+      }
+      actions={
         <Button variant="outlined" color="primary">
           <FormattedMessage id="groups.create" />
         </Button>
-        )}
+      }
     />
     <h3 style={{ margin: '20px 0px 10px' }}>
       <FormattedMessage id="groups.explore" />
@@ -66,10 +62,12 @@ export default () => (
 
     <div spacing={2}>
       {groups.map((group) => (
-        <div xs={12} md={6} lg={4}>
+        <div xs={12} md={6} lg={4} key={group._id}>
           <GroupCard data={group} />
         </div>
       ))}
     </div>
   </Container>
 );
+
+export default Groups;

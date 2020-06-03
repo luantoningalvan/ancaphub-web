@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import {
-  Paper,
-  Button
-} from '../ui'
+import { Paper, Button } from '../ui';
 import defaultProjectCover from '../../assets/default-group-cover.png';
 
 const ProjectCover = styled.div`
@@ -19,23 +16,23 @@ const ProjectCover = styled.div`
 
 const ProjectInfo = styled.div`
   padding: 20px;
-  h4 { margin-bottom: 5px; }
-  a { 
-    text-decoration: none; 
+  h4 {
+    margin-bottom: 5px;
+  }
+  a {
+    text-decoration: none;
     color: ${(props) => props.theme.palette.text.primary};
   }
-  span { 
-    text-decoration: none; 
-    color: ${(props) => props.theme.palette.text.secondary}; 
+  span {
+    text-decoration: none;
+    color: ${(props) => props.theme.palette.text.secondary};
     display: block;
     margin-bottom: 15px;
   }
 `;
 
 const ProjectCard = ({ data }) => {
-  const {
-    _id, name, cover, peopleWatching, hasEnrolled,
-  } = data;
+  const { _id, name, cover, peopleWatching, hasEnrolled } = data;
   return (
     <div style={{ width: '100%' }}>
       <Paper>
@@ -43,12 +40,21 @@ const ProjectCard = ({ data }) => {
           <ProjectCover cover={cover || defaultProjectCover} />
         </Link>
         <ProjectInfo>
-          <h4><Link to="/projects/id">{name}</Link></h4>
+          <h4>
+            <Link to="/projects/id">{name}</Link>
+          </h4>
           <span>
-            <FormattedMessage id="projects.peopleWatching" values={{ people: peopleWatching }} />
+            <FormattedMessage
+              id="projects.peopleWatching"
+              values={{ people: peopleWatching }}
+            />
           </span>
           <Button fullwidth variant="outlined" color="secondary">
-            {hasEnrolled ? <FormattedMessage id="projects.unroll" /> : <FormattedMessage id="projects.enroll" />}
+            {hasEnrolled ? (
+              <FormattedMessage id="projects.unroll" />
+            ) : (
+              <FormattedMessage id="projects.enroll" />
+            )}
           </Button>
         </ProjectInfo>
       </Paper>
@@ -63,7 +69,7 @@ ProjectCard.propTypes = {
     cover: PropTypes.string,
     peopleWatching: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     hasEnrolled: PropTypes.bool,
-  }),
+  }).isRequired,
 };
 
 export default ProjectCard;

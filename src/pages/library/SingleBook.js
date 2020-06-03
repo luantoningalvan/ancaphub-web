@@ -13,12 +13,10 @@ import {
   Dropdown,
   DropdownListContainer,
   DropdownListItem,
-} from '../../components/ui'
+} from '../../components/ui';
 
 import defaultThumbnail from '../../assets/default-book-cover.jpg';
 import Categories from '../../components/categories/ShowCategories';
-
-
 
 import { getSingleItemRequest as getSingleItem } from '../../actions/library';
 
@@ -59,7 +57,7 @@ const Banner = styled.div`
       rgba(0, 0, 0, 0.4) 0%,
       rgba(0, 0, 0, 1) 100%
     );
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -85,9 +83,13 @@ function SingleBook() {
             : defaultThumbnail
         }
       />
-      <div style={{
-        marginTop: -137, marginBottom: 16, position: 'absolute', width: 'inherit',
-      }}
+      <div
+        style={{
+          marginTop: -137,
+          marginBottom: 16,
+          position: 'absolute',
+          width: 'inherit',
+        }}
       >
         <Container>
           <div
@@ -108,19 +110,25 @@ function SingleBook() {
                 />
                 <div style={{ padding: 10 }}>
                   <Dropdown
-                    toggle={(
-                      <Button fullwidth componente={<a />} color="secondary">
+                    toggle={
+                      <Button fullwidth color="secondary">
                         <FormattedMessage id="common.download" />
                       </Button>
-                    )}
+                    }
                     placement="top"
                   >
                     <DropdownListContainer>
-                      {singleItem.files && singleItem.files.map((file) => (
-                        <DropdownListItem icon={<DownloadIcon />}>
-                          <a href={file.url} target="_blanck">{file.originalname}</a>
-                        </DropdownListItem>
-                      ))}
+                      {singleItem.files &&
+                        singleItem.files.map((file) => (
+                          <DropdownListItem
+                            icon={<DownloadIcon />}
+                            key={file.originalname}
+                          >
+                            <a href={file.url} target="_blanck">
+                              {file.originalname}
+                            </a>
+                          </DropdownListItem>
+                        ))}
                     </DropdownListContainer>
                   </Dropdown>
                 </div>
@@ -128,7 +136,6 @@ function SingleBook() {
               {/* <InvitedBy user={user} /> */}
             </div>
             <div>
-
               <div style={{ marginBottom: 8 }}>
                 <Categories categories={singleItem.categories} />
               </div>

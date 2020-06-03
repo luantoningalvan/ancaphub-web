@@ -1,9 +1,4 @@
-import {
-  takeLatest,
-  call,
-  fork,
-  put,
-} from 'redux-saga/effects';
+import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/notifications';
 import * as api from '../api/notifications';
@@ -35,7 +30,4 @@ function* watchMarkAllAsRead() {
   yield takeLatest(actions.Types.GET_NOTIFICATIONS_REQUEST, markAllAsRead);
 }
 
-export default [
-  fork(watchGetNotifications),
-  fork(watchMarkAllAsRead),
-];
+export default [fork(watchGetNotifications), fork(watchMarkAllAsRead)];

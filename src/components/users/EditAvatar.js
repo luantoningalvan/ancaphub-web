@@ -7,13 +7,7 @@ import Slider from 'rc-slider';
 import Cropper from 'react-easy-crop';
 import { useDispatch } from 'react-redux';
 
-import {
-  IconButton,
-  Button,
-  CardHeader,
-  CardBody,
-  Dialog,
-} from '../ui'
+import { IconButton, Button, CardHeader, CardBody, Dialog } from '../ui';
 
 import { updateProfilePictureRequest as updateProfilePicture } from '../../actions/users';
 
@@ -43,18 +37,18 @@ const UplaodArea = styled.label`
 `;
 
 const CropperStyle = styled.div`
-width:450px;
+  width: 450px;
 
-.crop-content {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  position: relative;
-}
+  .crop-content {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+  }
 
-.slider {
-  padding: 16px;
-}
+  .slider {
+    padding: 16px;
+  }
 `;
 
 export default ({ open, onClose }) => {
@@ -69,6 +63,10 @@ export default ({ open, onClose }) => {
     setCropInfo({ croppedArea, croppedAreaPixels });
   }, []);
 
+  const handleCrop = () => {
+    setCropState(!cropState);
+  };
+
   const handleSelectImage = (e) => {
     setImage({
       image: e.target.files[0],
@@ -76,11 +74,6 @@ export default ({ open, onClose }) => {
     });
     handleCrop();
   };
-
-  const handleCrop = () => {
-    setCropState(!cropState);
-  };
-
   const handleCancel = () => {
     setImage('');
     onClose();
@@ -101,7 +94,7 @@ export default ({ open, onClose }) => {
     <Dialog show={open}>
       <CardHeader style={{ padding: 8 }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton icon={<CloseIcon />}onClick={handleCancel} />
+          <IconButton icon={<CloseIcon />} onClick={handleCancel} />
 
           <h3>
             <FormattedMessage id="components.editAvatar.heading" />
@@ -130,7 +123,6 @@ export default ({ open, onClose }) => {
           </div>
           <div className="slider">
             <Slider
-
               value={zoom}
               min={1}
               max={3}

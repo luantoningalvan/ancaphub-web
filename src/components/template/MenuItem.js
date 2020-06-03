@@ -8,19 +8,22 @@ export const StyledLink = styled(Link)`
   padding: 9.5px;
   margin: 10px;
   border-radius: 5px;
-  background: ${(props) => (props.current ? props.theme.palette.secondary : 'transparent')};
+  background: ${(props) =>
+    props.current ? props.theme.palette.secondary : 'transparent'};
 
   > i svg {
-    fill: ${(props) => (props.current
-    ? props.theme.palette.text.contrast
-    : props.theme.palette.text.secondary)};
+    fill: ${(props) =>
+      props.current
+        ? props.theme.palette.text.contrast
+        : props.theme.palette.text.secondary};
     margin-right: 8px;
   }
 
   span {
-    color: ${(props) => (props.current
-    ? props.theme.palette.text.contrast
-    : props.theme.palette.text.secondary)};
+    color: ${(props) =>
+      props.current
+        ? props.theme.palette.text.contrast
+        : props.theme.palette.text.secondary};
   }
 
   &:hover {
@@ -30,7 +33,11 @@ export const StyledLink = styled(Link)`
     }
   }
 
-  @media (min-width: 576px) { span {display: none}}
+  @media (min-width: 576px) {
+    span {
+      display: none;
+    }
+  }
 `;
 
 export const Item = styled.li`
@@ -38,8 +45,8 @@ export const Item = styled.li`
   position: ${(props) => props.position};
 
   a {
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
   }
 
   &:hover {
@@ -49,9 +56,7 @@ export const Item = styled.li`
   }
 `;
 
-const MenuItem = ({
-  link, icon, current, label,
-}) => (
+const MenuItem = ({ link, icon, current, label }) => (
   <Item>
     <StyledLink to={link} current={!!current}>
       <i>{icon}</i>
@@ -61,9 +66,10 @@ const MenuItem = ({
 );
 
 MenuItem.propTypes = {
-  link: PropTypes.string,
-  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.node, PropTypes.func]),
-  current: PropTypes.bool,
+  link: PropTypes.string.isRequired,
+  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.node, PropTypes.func])
+    .isRequired,
+  current: PropTypes.bool.isRequired,
 };
 
 export default MenuItem;

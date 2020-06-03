@@ -2,10 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import UserCard from '../../components/users/UserCard';
 
-import {
-  Paper,
-  LoadContent,
-} from '../../components/ui'
+import { Paper, LoadContent } from '../../components/ui';
 
 const users = [
   {
@@ -97,19 +94,21 @@ const users = [
       following: true,
     },
   },
-
 ];
 
 const Members = () => (
   <LoadContent loading={false}>
     {users.length === 0 ? (
       <Paper padding>
-        <FormattedMessage id="profile.followers.noFollowers" description="User has no followers" />
+        <FormattedMessage
+          id="profile.followers.noFollowers"
+          description="User has no followers"
+        />
       </Paper>
     ) : (
       <div spacing={2} style={{ marginTop: 8 }}>
         {users.map((user) => (
-          <div xs={3}>
+          <div xs={3} key={user._id}>
             <UserCard user={user.user} />
           </div>
         ))}

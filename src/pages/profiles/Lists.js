@@ -11,7 +11,8 @@ const Lists = () => {
     {
       title: 'Lidos',
       itemsCount: 12,
-      cover: 'https://cdn.mises.org.br/images/articles/b6f1001c42844f29b2832c713c13c5bc.jpg',
+      cover:
+        'https://cdn.mises.org.br/images/articles/b6f1001c42844f29b2832c713c13c5bc.jpg',
     },
     {
       title: 'Iniciantes',
@@ -23,7 +24,7 @@ const Lists = () => {
   return (
     <div spacing={2}>
       {lists.map((list) => (
-        <div sm={6} lg={4}>
+        <div sm={6} lg={4} key={list.title}>
           <ListCard list={list} />
         </div>
       ))}

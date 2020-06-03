@@ -16,9 +16,7 @@ const Feed = ({ user: userId }) => {
 
   return (
     <>
-      {verifyIfIsOwnProfile && (
-      <PostForm />
-      )}
+      {verifyIfIsOwnProfile && <PostForm />}
 
       <div style={{ width: '100%', marginTop: 16 }}>
         <ShowPosts posts={posts} loading={loading} />

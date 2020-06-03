@@ -4,12 +4,7 @@ import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import SettingIcon from 'react-ionicons/lib/IosSettings';
 
-import {
-  Container,
-  Tabs,
-  Tab,
-  Spinner,
-} from '../../components/ui'
+import { Container, Tabs, Tab, Spinner } from '../../components/ui';
 
 const GroupBoard = lazy(() => import('./GroupBoard'));
 const GroupChat = lazy(() => import('./GroupChat'));

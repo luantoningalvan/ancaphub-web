@@ -6,11 +6,7 @@ import TicketIcon from 'react-ionicons/lib/IosCash';
 import HourIcon from 'react-ionicons/lib/IosClock';
 import PeopleIcon from 'react-ionicons/lib/IosPeople';
 
-import {
-  Container,
-  Paper,
-  Button,
-} from '../../components/ui'
+import { Container, Paper, Button } from '../../components/ui';
 
 const Event = styled.div`
   margin-top: 16px;
@@ -34,7 +30,7 @@ const Event = styled.div`
       }
 
       &:before {
-        content: "";
+        content: '';
         position: absolute;
         width: 100%;
         height: 100%;
@@ -109,28 +105,34 @@ const Event = styled.div`
     width: 100%;
     padding: 16px;
 
-    p { padding: 8px; font-size:1em;}
+    p {
+      padding: 8px;
+      font-size: 1em;
+    }
 
     li {
-      display:flex;
-      align-items:center;
-      padding:8px;
+      display: flex;
+      align-items: center;
+      padding: 8px;
     }
     li svg {
       fill: white;
-      height:26px;
-      width:26px;
+      height: 26px;
+      width: 26px;
       margin-right: 8px;
     }
   }
 `;
 
-export default () => (
+const SingleEvent = () => (
   <Container>
     <Event>
       <div className="event-header">
         <div className="event-cover">
-          <img src="https://pbs.twimg.com/media/EWCrT8iXQAMp5s0?format=jpg&name=large" alt="event cover" />
+          <img
+            src="https://pbs.twimg.com/media/EWCrT8iXQAMp5s0?format=jpg&name=large"
+            alt="event cover"
+          />
         </div>
 
         <div className="event-header-content">
@@ -140,7 +142,10 @@ export default () => (
               <span className="day">20</span>
             </div>
             <span className="time">
-              <FormattedMessage id="events.time" values={{ from: '08:00', to: '20:00' }} />
+              <FormattedMessage
+                id="events.time"
+                values={{ from: '08:00', to: '20:00' }}
+              />
             </span>
             <h2>AncapHub Week</h2>
             <div className="event-location">
@@ -150,7 +155,12 @@ export default () => (
           </div>
 
           <div>
-            <Button color="primary" style={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.7)' }}>Tenho Interesse</Button>
+            <Button
+              color="primary"
+              style={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.7)' }}
+            >
+              Tenho Interesse
+            </Button>
           </div>
         </div>
       </div>
@@ -162,13 +172,19 @@ export default () => (
               <li>
                 <PeopleIcon />
                 <span>
-                  <FormattedMessage id="events.attendance" values={{ num: 53 }} />
+                  <FormattedMessage
+                    id="events.attendance"
+                    values={{ num: 53 }}
+                  />
                 </span>
               </li>
               <li>
                 <HourIcon />
                 <span>
-                  <FormattedMessage id="events.time" values={{ from: '08:00', to: '20:00' }} />
+                  <FormattedMessage
+                    id="events.time"
+                    values={{ from: '08:00', to: '20:00' }}
+                  />
                 </span>
               </li>
               <li>
@@ -184,7 +200,9 @@ export default () => (
             </ul>
 
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ornare risus quis neque suscipit, ut semper orci rhoncus. Proin lobortis nisl eu nisi placerat, ac faucibus lacus finibus.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
+              ornare risus quis neque suscipit, ut semper orci rhoncus. Proin
+              lobortis nisl eu nisi placerat, ac faucibus lacus finibus.
             </p>
           </Paper>
         </div>
@@ -197,7 +215,6 @@ export default () => (
             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d112277.11744442317!2d-51.7964725!3d-28.429516800000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1587573920904!5m2!1spt-BR!2sbr"
             allowFullScreen=""
             frameBorder="0"
-
             style={{ width: '100%', height: 300, borderRadius: 8 }}
           />
         </div>
@@ -205,3 +222,5 @@ export default () => (
     </Event>
   </Container>
 );
+
+export default SingleEvent;

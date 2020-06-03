@@ -1,6 +1,4 @@
-import {
-  takeLatest, call, fork, put,
-} from 'redux-saga/effects';
+import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/library';
 import * as api from '../api/library';
@@ -17,7 +15,8 @@ function* createItem(action) {
 function* getItems({ payload }) {
   try {
     const filter = {
-      ...(payload.category && payload.category !== '' && { category: payload.category }),
+      ...(payload.category &&
+        payload.category !== '' && { category: payload.category }),
       ...(payload.type && payload.type !== '' && { type: payload.type }),
     };
 

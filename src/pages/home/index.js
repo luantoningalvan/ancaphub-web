@@ -8,17 +8,23 @@ import ThemeProvider from '../../components/template/Provider';
 import SigninForm from '../../components/auth/SigninForm';
 import SignupForm from '../../components/auth/SignupForm';
 import logo from '../../assets/logo-type.png';
-import { AuthBox, Features } from './styles'
-import { Container} from '../../components/ui'
+import { AuthBox, Features } from './styles';
+import { Container } from '../../components/ui';
 
-
-export default () => {
+const Home = () => {
   const [activeBox, setActiveBox] = useState('signup');
 
   return (
     <ThemeProvider>
       <Container>
-        <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+        <div
+          style={{
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
           <div>
             <img src={logo} alt="AncapHub logo" />
             <h2 style={{ fontWeight: 'bold', marginTop: 24 }}>
@@ -28,13 +34,19 @@ export default () => {
               <li>
                 <LibraryIcon />
                 <span>
-                  <FormattedMessage id="home.features.0" description="Study materials" />
+                  <FormattedMessage
+                    id="home.features.0"
+                    description="Study materials"
+                  />
                 </span>
               </li>
               <li>
                 <LocationSearchIcon />
                 <span>
-                  <FormattedMessage id="home.features.2" description="Nearby people" />
+                  <FormattedMessage
+                    id="home.features.2"
+                    description="Nearby people"
+                  />
                 </span>
               </li>
               <li>
@@ -54,9 +66,13 @@ export default () => {
           <AuthBox>
             {activeBox === 'signin' ? (
               <>
-                <h3 style={{
-                  fontWeight: 'bold', marginBottom: 16, marginTop: 8, textAlign: 'center',
-                }}
+                <h3
+                  style={{
+                    fontWeight: 'bold',
+                    marginBottom: 16,
+                    marginTop: 8,
+                    textAlign: 'center',
+                  }}
                 >
                   <FormattedMessage id="common.login" />
                 </h3>
@@ -73,9 +89,13 @@ export default () => {
               </>
             ) : (
               <>
-                <h3 style={{
-                  fontWeight: 'bold', marginBottom: 16, marginTop: 8, textAlign: 'center',
-                }}
+                <h3
+                  style={{
+                    fontWeight: 'bold',
+                    marginBottom: 16,
+                    marginTop: 8,
+                    textAlign: 'center',
+                  }}
                 >
                   <FormattedMessage id="home.form.signUp" />
                 </h3>
@@ -97,3 +117,5 @@ export default () => {
     </ThemeProvider>
   );
 };
+
+export default Home;

@@ -9,14 +9,8 @@ import styled from 'styled-components';
 import { searchNearbyUserRequest } from '../../actions/search';
 import { updateGeoLocationsRequest } from '../../actions/settings';
 import 'rc-slider/assets/index.css';
-import UserCard from '../../components/users/UserCard'
-import { 
-  Container,
-  Hero,
-  Paper,
-  Switcher,
-  Spinner,
-} from '../../components/ui'
+import UserCard from '../../components/users/UserCard';
+import { Container, Hero, Paper, Switcher, Spinner } from '../../components/ui';
 
 export default () => {
   const [radius, setRadius] = useState(50);
@@ -24,16 +18,6 @@ export default () => {
   const dispatch = useDispatch();
   const geoLocation = useSelector((state) => state.auth.user.geoLocation);
   const { results, loading } = useSelector((state) => state.search);
-
-  useEffect(() => {
-    if (geoLocation) {
-      if (!isEmpty(location) && location !== false) {
-        dispatch(searchNearbyUserRequest({ radius, lastLocation: location }));
-      } else {
-        updateLocation();
-      }
-    }
-  }, [geoLocation, location]);
 
   const handleRadius = (value) => setRadius(value);
 
@@ -44,18 +28,28 @@ export default () => {
   function updateLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
-        (location) => {
+        (position) => {
           setLastLocation({
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
           });
         },
-        (err) => {
+        () => {
           setLastLocation(false);
-        },
+        }
       );
     }
   }
+
+  useEffect(() => {
+    if (geoLocation) {
+      if (!isEmpty(location) && location !== false) {
+        dispatch(searchNearbyUserRequest({ radius, lastLocation: location }));
+      } else {
+        updateLocation();
+      }
+    }
+  }, [dispatch, radius, geoLocation, location]);
 
   const switchPreferences = (value) => {
     dispatch(updateGeoLocationsRequest(value));
@@ -65,14 +59,14 @@ export default () => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size:1.2em;
-    text-align:center;
+    font-size: 1.2em;
+    text-align: center;
 
-    svg{
+    svg {
       fill: ${(props) => props.theme.palette.text.primary};
       height: 40px;
       width: 40px;
-      margin-bottom:16px;
+      margin-bottom: 16px;
     }
   `;
 
@@ -81,6 +75,7 @@ export default () => {
       <Hero
         title={<FormattedMessage id="nearby.title" />}
         description={<FormattedMessage id="nearby.description" />}
+        // prettier-ignore
         actions={(
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <span style={{ display: 'block', marginRight: 8 }}>
@@ -134,18 +129,18 @@ export default () => {
                         <span>
                           {radius}
                           Km
-                          {' '}
                         </span>
                       </div>
                     </Paper>
 
                     {!isEmpty(results) ? (
                       <div spacing={2} style={{ marginTop: 8 }}>
-                        {Array.isArray(results) && results.map((user) => (
-                          <div xs={3}>
-                            <UserCard user={user.user} />
-                          </div>
-                        ))}
+                        {Array.isArray(results) &&
+                          results.map((user) => (
+                            <div xs={3} key={user._id}>
+                              <UserCard user={user.user} />
+                            </div>
+                          ))}
                       </div>
                     ) : (
                       <Paper padding>
@@ -158,7 +153,9 @@ export default () => {
             )}
           </>
         ) : (
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <div
+            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          >
             <Spinner size={128} />
           </div>
         )}

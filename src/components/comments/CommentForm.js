@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,14 +8,14 @@ const CommentFormStyle = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding:16px;
-  `;
+  padding: 16px;
+`;
 
 const CommentInput = styled.input`
   padding: 15px;
   border-radius: 20px;
   background: transparent;
-  outline:none;
+  outline: none;
   border: 1px solid ${(props) => props.theme.palette.border};
   flex-grow: 1;
   color: white;

@@ -14,7 +14,9 @@ export default (state = INITIAL_STATE, action) => {
     case Types.DELETE_COMMENT_REQUEST:
       return {
         ...state,
-        [payload.postId]: state[payload.postId].filter((value) => value._id !== payload.commentId),
+        [payload.postId]: state[payload.postId].filter(
+          (value) => value._id !== payload.commentId
+        ),
       };
     case Types.ADD_COMMENT_SUCCESS:
       return {

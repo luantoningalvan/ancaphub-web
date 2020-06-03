@@ -1,6 +1,4 @@
-import {
-  takeLatest, call, fork, put,
-} from 'redux-saga/effects';
+import { takeLatest, call, fork, put } from 'redux-saga/effects';
 import * as actions from '../actions/auth';
 import { getNotificationsRequest } from '../actions/notifications';
 import * as api from '../api/auth';
@@ -26,7 +24,7 @@ function* loadUser() {
   }
 }
 
-function* logout() {
+function logout() {
   localStorage.removeItem('token');
   document.location.reload();
 }

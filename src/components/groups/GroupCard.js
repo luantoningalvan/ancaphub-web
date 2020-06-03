@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import defaultGroupCover from '../../assets/default-group-cover.png';
-import {
-  Button,
-  Paper
-} from '../ui'
+import { Button, Paper } from '../ui';
+
 const GroupCover = styled.div`
   width: 100%;
   height: 170px;
@@ -18,23 +16,23 @@ const GroupCover = styled.div`
 
 const GroupInfo = styled.div`
   padding: 20px;
-  h4 { margin-bottom: 5px; }
-  a { 
-    text-decoration: none; 
+  h4 {
+    margin-bottom: 5px;
+  }
+  a {
+    text-decoration: none;
     color: ${(props) => props.theme.palette.text.primary};
   }
-  span { 
-    text-decoration: none; 
-    color: ${(props) => props.theme.palette.text.secondary}; 
+  span {
+    text-decoration: none;
+    color: ${(props) => props.theme.palette.text.secondary};
     display: block;
     margin-bottom: 15px;
   }
 `;
 
 const GroupCard = ({ data }) => {
-  const {
-    _id, name, cover, membersCounts, hasEnrolled,
-  } = data;
+  const { _id, name, cover, membersCounts, hasEnrolled } = data;
   return (
     <div style={{ width: '100%' }}>
       <Paper>
@@ -42,14 +40,21 @@ const GroupCard = ({ data }) => {
           <GroupCover cover={cover || defaultGroupCover} />
         </Link>
         <GroupInfo>
-          <h4><Link to="/groups/id">{name}</Link></h4>
+          <h4>
+            <Link to="/groups/id">{name}</Link>
+          </h4>
           <span>
-            <FormattedMessage id="groups.membersNumber" values={{ num: membersCounts }} />
+            <FormattedMessage
+              id="groups.membersNumber"
+              values={{ num: membersCounts }}
+            />
           </span>
           <Button fullwidth variant="outlined" color="primary">
-            {hasEnrolled
-              ? <FormattedMessage id="common.semanticQuit" />
-              : <FormattedMessage id="common.semanticEnter" />}
+            {hasEnrolled ? (
+              <FormattedMessage id="common.semanticQuit" />
+            ) : (
+              <FormattedMessage id="common.semanticEnter" />
+            )}
           </Button>
         </GroupInfo>
       </Paper>
@@ -65,6 +70,10 @@ GroupCard.propTypes = {
     membersCounts: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     hasEnrolled: PropTypes.bool,
   }),
+};
+
+GroupCard.defaultProps = {
+  data: {},
 };
 
 export default GroupCard;

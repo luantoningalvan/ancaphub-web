@@ -6,7 +6,7 @@ import LocateIcon from 'react-ionicons/lib/MdLocate';
 import { FormattedMessage } from 'react-intl';
 import { Link, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
-import {IconButton} from '../ui';
+import { IconButton } from '../ui';
 
 const SearchWrapper = styled.div`
   .not-collapsed {
@@ -66,27 +66,31 @@ const SearchWrapper = styled.div`
   }
 
   @media (min-width: 576px) {
-    .mobile-search { display: none; }
+    .mobile-search {
+      display: none;
+    }
     .desktop-search {
       display: block;
-      background: rgba(0,0,0,.15);
+      background: rgba(0, 0, 0, 0.15);
       width: 360px;
       height: 50px;
       border-radius: 8px;
       display: flex;
-      align-items:center;
-      padding:8px;
+      align-items: center;
+      padding: 8px;
 
-      svg { fill: ${(props) => props.theme.palette.text.contrast}}
+      svg {
+        fill: ${(props) => props.theme.palette.text.contrast};
+      }
 
       input {
         flex: 1;
-        padding:8px;
+        padding: 8px;
         border: none;
         background: transparent;
       }
-      
-      input, 
+
+      input,
       input::placeholder {
         color: ${(props) => props.theme.palette.text.contrast};
         font-size: 1rem;
@@ -116,11 +120,17 @@ const Search = () => {
     <SearchWrapper>
       <div className={clsx('mobile-search', !collapsed && 'not-collapsed')}>
         {collapsed ? (
-          <IconButton icon={<SearchIcon />} onClick={() => setCollapsed(false)} />
+          <IconButton
+            icon={<SearchIcon />}
+            onClick={() => setCollapsed(false)}
+          />
         ) : (
           <>
-            <IconButton icon={<BackIcon />} onClick={() => setCollapsed(true)} />
-              
+            <IconButton
+              icon={<BackIcon />}
+              onClick={() => setCollapsed(true)}
+            />
+
             <FormattedMessage
               id="common.search"
               description="Input de pesquisa"

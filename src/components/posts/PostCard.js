@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FormattedRelativeTime, FormattedMessage, FormattedPlural } from 'react-intl';
+import {
+  FormattedRelativeTime,
+  FormattedMessage,
+  FormattedPlural,
+} from 'react-intl';
 import { parseISO, getTime, differenceInSeconds } from 'date-fns';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
 import ReactPlayer from 'react-player';
 import MdMore from 'react-ionicons/lib/MdMore';
 import LikeIcon from 'react-ionicons/lib/IosThumbsUpOutline';
 import LikeIconFull from 'react-ionicons/lib/IosThumbsUp';
-import ShareIcon from 'react-ionicons/lib/IosShareAltOutline';
 import CommentIcon from 'react-ionicons/lib/IosTextOutline';
 import DeleteIcon from 'react-ionicons/lib/IosRemoveCircleOutline';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +23,7 @@ import {
   ImageBox,
   ConfirmationDialog,
   DropdownListContainer,
-} from '../ui'
+} from '../ui';
 
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import LikeBox from './LikeBox';
@@ -57,7 +60,6 @@ const PostCard = ({ data }) => {
     dispatch(deletePostRequest(id));
   };
 
-
   return (
     <PostContainer>
       <div className="post-header">
@@ -75,7 +77,7 @@ const PostCard = ({ data }) => {
               value={
                 -differenceInSeconds(
                   Date.now(),
-                  getTime(parseISO(data.createdAt)),
+                  getTime(parseISO(data.createdAt))
                 )
               }
               updateIntervalInSeconds={30}
@@ -87,9 +89,9 @@ const PostCard = ({ data }) => {
             <Dropdown
               offsetX={15}
               placement="left-start"
-              toggle={(
-              <IconButton icon={<MdMore color="#fff" fontSize="24px" />} />
-              )}
+              toggle={
+                <IconButton icon={<MdMore color="#fff" fontSize="24px" />} />
+              }
             >
               <DropdownListContainer>
                 <DropdownListItem icon={<DeleteIcon />} onClick={handleDelete}>
@@ -102,7 +104,9 @@ const PostCard = ({ data }) => {
               onClose={handleDelete}
               onConfirm={() => handleDeletePost(data._id)}
               title={<FormattedMessage id="common.delete" />}
-              message={<FormattedMessage id="components.postCard.confirmDelete" />}
+              message={
+                <FormattedMessage id="components.postCard.confirmDelete" />
+              }
             />
           </div>
         )}
@@ -133,11 +137,18 @@ const PostCard = ({ data }) => {
           <div className="post-counts">
             <span onClick={() => setLikeBoxState(true)} role="presentation">
               {data.likeCount}
-              {' '}
               <FormattedPlural
                 value={data.likeCount}
-                one={<FormattedMessage id="common.likeNoun">{(txt) => <>{ txt.toLowerCase() }</>}</FormattedMessage>}
-                other={<FormattedMessage id="common.likePlural">{(txt) => <>{txt.toLowerCase()}</>}</FormattedMessage>}
+                one={
+                  <FormattedMessage id="common.likeNoun">
+                    {(txt) => <>{txt.toLowerCase()}</>}
+                  </FormattedMessage>
+                }
+                other={
+                  <FormattedMessage id="common.likePlural">
+                    {(txt) => <>{txt.toLowerCase()}</>}
+                  </FormattedMessage>
+                }
               />
             </span>
             <LikeBox
@@ -152,17 +163,22 @@ const PostCard = ({ data }) => {
       <div className="post-actions">
         <div>
           <button
+            type="button"
             onClick={() => handleLikePost(data._id)}
             className={data.hasLiked ? 'pressed' : ''}
           >
             {data.hasLiked ? <LikeIconFull /> : <LikeIcon />}
-            <span><FormattedMessage id="common.like" /></span>
+            <span>
+              <FormattedMessage id="common.like" />
+            </span>
           </button>
         </div>
         <div>
-          <button onClick={handleCommentBox}>
+          <button type="button" onClick={handleCommentBox}>
             <CommentIcon />
-            <span><FormattedMessage id="common.commentVerb" /></span>
+            <span>
+              <FormattedMessage id="common.commentVerb" />
+            </span>
           </button>
         </div>
         {/*

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -7,7 +8,7 @@ const FlipSwitchWrapper = styled.div`
   user-select: none;
   margin: 0 0.5em;
 
-  input[type="checkbox"] {
+  input[type='checkbox'] {
     display: none;
   }
 
@@ -21,15 +22,15 @@ const FlipSwitchWrapper = styled.div`
       width: 200%;
       margin-left: -100%;
       transition: margin 0.3s ease-in 0s;
-      
+
       &::before {
-        content: "";
+        content: '';
         padding-left: 16px;
         background-color: ${(props) => props.theme.palette.secondary};
       }
 
       &::after {
-        content: "";
+        content: '';
         padding-right: 16px;
         background-color: ${(props) => props.theme.palette.secondary};
         color: #888888;
@@ -69,7 +70,14 @@ const Switcher = ({ onChange = () => {}, value, ...props }) => {
 
   return (
     <FlipSwitchWrapper>
-      <input type="checkbox" checked={state} className="checkbox" id={label} onChange={handleChange} {...props} />
+      <input
+        type="checkbox"
+        checked={state}
+        className="checkbox"
+        id={label}
+        onChange={handleChange}
+        {...props}
+      />
 
       <label htmlFor={label}>
         <div className="switch-inner" />
@@ -79,4 +87,4 @@ const Switcher = ({ onChange = () => {}, value, ...props }) => {
   );
 };
 
-export { Switcher }
+export { Switcher };

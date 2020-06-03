@@ -11,8 +11,10 @@ const DropdownTitleContainerWrap = styled.div`
   }
 `;
 
-export default ({ children, ...props }) => (
+const DropdownHeader = ({ children, ...props }) => (
   <DropdownTitleContainerWrap {...props}>
     <h3>{children}</h3>
   </DropdownTitleContainerWrap>
 );
+
+export default DropdownHeader;

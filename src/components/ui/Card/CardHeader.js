@@ -1,9 +1,9 @@
-import React from 'react'
-import { CardHeaderContainer } from "./styles";
+import React from 'react';
+import { CardHeaderContainer } from './styles';
 
 const CardHeader = ({ customContent, title, icon: Icon, ...rest }) => (
   <CardHeaderContainer {...rest}>
-    {!!customContent ? (
+    {customContent ? (
       { customContent }
     ) : (
       <>

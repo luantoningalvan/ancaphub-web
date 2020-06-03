@@ -1,33 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import ListIcon from 'react-ionicons/lib/IosList';
-import {Paper} from '../ui';
+import { Paper } from '../ui';
 
-const ListCard = styled.div`
+const ListCardWrap = styled.div`
   width: 100%;
-  .list-cover { 
+  .list-cover {
     width: 100%;
     height: 120px;
-    position:relative;
-    display:flex;
+    position: relative;
+    display: flex;
     justify-content: flex-end;
 
-    img {  
-      width:100%;
-      height:100%;
+    img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
     span {
       height: 120px;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0, 0, 0, 0.8);
       width: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      position:absolute;
-      svg{
+      position: absolute;
+      svg {
         fill: white;
         margin-top: 8px;
       }
@@ -43,15 +43,17 @@ const ListCard = styled.div`
   }
 `;
 
-export default ({ list }) => (
-  <ListCard>
+const ListCard = ({ list }) => (
+  <ListCardWrap>
     <Paper className="list-cover">
-      <img src={list.cover} />
+      <img src={list.cover} alt="list cover" />
       <span>
         {list.itemsCount}
         <ListIcon />
       </span>
     </Paper>
     <h4>{list.title}</h4>
-  </ListCard>
+  </ListCardWrap>
 );
+
+export default ListCard;

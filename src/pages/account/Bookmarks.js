@@ -1,20 +1,19 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import {
-  Container,
-  Hero,
-} from '../../components/ui'
+import { Container, Hero } from '../../components/ui';
 
-export default () => (
+const Bookmarks = () => (
   <Container>
     <Hero
-      title={(
+      title={
         <FormattedMessage
           id="account.bookmarks.savedItemsHeading"
           description="Título da página de salvos"
         />
-        )}
+      }
     />
   </Container>
 );
+
+export default Bookmarks;

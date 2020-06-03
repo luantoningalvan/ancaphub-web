@@ -10,12 +10,14 @@ const HeroWrapper = styled.div`
   margin-top: 15px;
   display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
   flex-wrap: wrap;
 
-  .hero-actions { margin-top: 16px; }
-  
-  h2 { 
+  .hero-actions {
+    margin-top: 16px;
+  }
+
+  h2 {
     font-size: 30px;
     margin-bottom: 5px;
     color: ${(props) => props.theme.palette.text.primary};
@@ -33,16 +35,19 @@ const Hero = ({ title, description, actions }) => (
       <p>{description}</p>
     </div>
 
-    <div className="hero-actions">
-      {actions}
-    </div>
+    <div className="hero-actions">{actions}</div>
   </HeroWrapper>
 );
 
 Hero.propTypes = {
-  title: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  description: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-  actions: PropTypes.oneOfType([PropTypes.element, PropTypes.node, PropTypes.func]),
+  title: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+  description: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+    .isRequired,
+  actions: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.node,
+    PropTypes.func,
+  ]).isRequired,
 };
 
 export { Hero };

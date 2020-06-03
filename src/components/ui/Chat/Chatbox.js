@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {Paper} from '../Paper';
+import { Paper } from '../Paper';
 import ChatboxMessageList from './ChatboxMessageList';
 import ChatWindow from './ChatWindow';
 
@@ -18,13 +18,15 @@ const ChatboxWrapper = styled.div`
   }
 `;
 
-const Chatbox = ({
-  chats, currentChat, showName, showList, showAvatar,
-}) => (
+const Chatbox = ({ chats, currentChat, showName, showList, showAvatar }) => (
   <ChatboxWrapper>
     <Paper className="paper">
-      { showList && <ChatboxMessageList chats={chats} /> }
-      <ChatWindow chat={currentChat} showName={showName} showAvatar={showAvatar} />
+      {showList && <ChatboxMessageList chats={chats} />}
+      <ChatWindow
+        chat={currentChat}
+        showName={showName}
+        showAvatar={showAvatar}
+      />
     </Paper>
   </ChatboxWrapper>
 );
@@ -45,10 +47,12 @@ const MessagePropTypes = PropTypes.shape({
 });
 
 Chatbox.propTypes = {
-  chats: PropTypes.arrayOf(PropTypes.shape({
-    messages: PropTypes.arrayOf(MessagePropTypes),
-  })),
-  currentChat: PropTypes.arrayOf(MessagePropTypes),
+  chats: PropTypes.arrayOf(
+    PropTypes.shape({
+      messages: PropTypes.arrayOf(MessagePropTypes),
+    })
+  ).isRequired,
+  currentChat: PropTypes.arrayOf(MessagePropTypes).isRequired,
 };
 
 export default Chatbox;

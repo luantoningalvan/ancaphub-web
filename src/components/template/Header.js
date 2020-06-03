@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { generate } from 'shortid';
 import { Link, useRouteMatch } from 'react-router-dom';
 import NotificationsIcon from 'react-ionicons/lib/IosNotifications';
-import MessagesIcon from 'react-ionicons/lib/IosChatbubbles';
 import { FormattedMessage } from 'react-intl';
 import ArrowDownIcon from 'react-ionicons/lib/IosArrowDown';
 import ProfileIcon from 'react-ionicons/lib/MdPerson';
@@ -23,7 +23,7 @@ import {
   CardBody,
   CardFooter,
   Switcher,
-} from '../ui'
+} from '../ui';
 
 import Notification from '../notifications';
 import { logoutRequest as logout } from '../../actions/auth';
@@ -85,7 +85,9 @@ const Logo = styled.div`
   }
 
   @media (min-width: 576px) {
-    .collapse-button { display: none;}
+    .collapse-button {
+      display: none;
+    }
     flex: 0;
   }
 `;
@@ -110,7 +112,8 @@ const HeaderMenuItem = styled.li`
     position: relative;
     padding: 10px;
     border-radius: 5px;
-    background: ${(props) => (props.current ? 'rgba(0,0,0,0.15)' : 'transparent')};
+    background: ${(props) =>
+      props.current ? 'rgba(0,0,0,0.15)' : 'transparent'};
     transition: background 0.3s;
 
     &:hover {
@@ -138,7 +141,7 @@ const Header = ({ user, setCollapsed }) => {
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const { notifications, notReadCount } = useSelector(
-    (state) => state.notifications,
+    (state) => state.notifications
   );
 
   const { colorMode } = useSelector((state) => state.settings);
@@ -156,12 +159,16 @@ const Header = ({ user, setCollapsed }) => {
     <>
       <AppBar>
         <Logo>
-          <button className="collapse-button" onClick={setCollapsed}>
+          <button
+            type="button"
+            className="collapse-button"
+            onClick={setCollapsed}
+          >
             <MenuIcon />
           </button>
           <div className="logo">
             <Link to="/">
-              <img src={logo} />
+              <img alt="logo" src={logo} />
             </Link>
           </div>
         </Logo>
@@ -172,14 +179,14 @@ const Header = ({ user, setCollapsed }) => {
             placement="bottom"
             offsetY={16}
             offsetX="-8vw"
-            toggle={(
+            toggle={
               <HeaderMenuItem current={url.includes('/notifications')}>
                 <div>
                   <NotificationsIcon />
                   {notReadCount > 0 && <span className="badge" />}
                 </div>
               </HeaderMenuItem>
-            )}
+            }
           >
             <DropdownHeader>
               <FormattedMessage id="common.notifications" />
@@ -193,8 +200,11 @@ const Header = ({ user, setCollapsed }) => {
                     overflowY: 'scroll',
                   }}
                 >
-                  {notifications.map((notification, index) => (
-                    <Notification notification={notification} key={index} />
+                  {notifications.map((notification) => (
+                    <Notification
+                      notification={notification}
+                      key={generate()}
+                    />
                   ))}
                 </ul>
                 <CardFooter
@@ -228,13 +238,13 @@ const Header = ({ user, setCollapsed }) => {
             offsetY={16}
             offsetX="-4vw"
             placement="bottom"
-            toggle={(
+            toggle={
               <HeaderMenuItem>
                 <div>
                   <ArrowDownIcon />
                 </div>
               </HeaderMenuItem>
-            )}
+            }
           >
             <DropdownListContainer>
               <DropdownListItem icon={<ProfileIcon />}>
@@ -255,12 +265,12 @@ const Header = ({ user, setCollapsed }) => {
               </DropdownListItem>
               <DropdownListItem
                 icon={<ContrastIcon />}
-                action={(
+                action={
                   <Switcher
                     value={colorMode === 'dark'}
                     onChange={() => handleChangeTheme()}
                   />
-                )}
+                }
               >
                 <FormattedMessage id="common.darkMode" />
               </DropdownListItem>
@@ -270,6 +280,7 @@ const Header = ({ user, setCollapsed }) => {
                 </Link>
               </DropdownListItem>
               <DropdownListItem icon={<LogoutIcon />}>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <Link onClick={handleLogout}>
                   <FormattedMessage id="common.logout" />
                 </Link>

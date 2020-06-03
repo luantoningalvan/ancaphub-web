@@ -6,11 +6,9 @@ import { useDispatch } from 'react-redux';
 import Input from '../form/Input';
 import { authUserRequest } from '../../actions/auth';
 
-import {
-  Button
-} from '../ui'
+import { Button } from '../ui';
 
-export default () => {
+const SignInForm = () => {
   const dispatch = useDispatch();
   const signupFormRef = useRef(null);
   const { formatMessage } = useIntl();
@@ -18,9 +16,15 @@ export default () => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
-          .email(formatMessage({ id: 'account.settings.validation.emailInvalid' }))
-          .required(formatMessage({ id: 'account.settings.validation.emailRequired' })),
-        password: Yup.string().required({ id: 'account.settings.validation.passwordRequired' }),
+          .email(
+            formatMessage({ id: 'account.settings.validation.emailInvalid' })
+          )
+          .required(
+            formatMessage({ id: 'account.settings.validation.emailRequired' })
+          ),
+        password: Yup.string().required({
+          id: 'account.settings.validation.passwordRequired',
+        }),
       });
       await schema.validate(data, {
         abortEarly: false,
@@ -40,7 +44,7 @@ export default () => {
   return (
     <Form onSubmit={handleSubmit} ref={signupFormRef}>
       <div spacing={1}>
-      <div className="form-row">
+        <div className="form-row">
           <FormattedMessage id="common.email">
             {(msg) => (
               <Input
@@ -74,3 +78,5 @@ export default () => {
     </Form>
   );
 };
+
+export default SignInForm;
