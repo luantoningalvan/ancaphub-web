@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { generate } from 'shortid';
 
 // Components
 import SearchIcon from 'react-ionicons/lib/IosSearch';
@@ -79,16 +80,11 @@ const MessageSearch = () => (
 
 const ChatboxMessageList = ({ chats }) => (
   <>
-    <Scrollable
-      topContent={<MessageSearch />}
-      scrollableContent={chats.map((chat, index) => (
-        <ChatboxListItem
-          // eslint-disable-next-line react/no-array-index-key
-          key={index}
-          message={chat.messages[0]}
-        />
+    <Scrollable topContent={<MessageSearch />}>
+      {chats.map((chat) => (
+        <ChatboxListItem key={generate()} message={chat.messages[0]} />
       ))}
-    />
+    </Scrollable>
   </>
 );
 
