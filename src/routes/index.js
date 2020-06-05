@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useHistory,
+  Redirect,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Template from '../components/template';
@@ -13,7 +13,7 @@ import LoadScreen from '../components/template/LoadScreen';
 
 const Routes = () => {
   const { isAuthenticated, loading } = useSelector((state) => state.auth);
-  const history = useHistory();
+
   return (
     <>
       {isAuthenticated !== null && !loading ? (
@@ -26,7 +26,9 @@ const Routes = () => {
                 exact={route.exact}
                 component={(props) => {
                   if (!route.isOpen) {
-                    if (!isAuthenticated) history.push('/');
+                    if (!isAuthenticated) {
+                      return <Redirect to="/" />;
+                    }
 
                     return (
                       <Template {...props}>
@@ -34,7 +36,10 @@ const Routes = () => {
                       </Template>
                     );
                   }
-                  if (isAuthenticated) history.push('/home');
+
+                  if (isAuthenticated) {
+                    return <Redirect to="/home" />;
+                  }
 
                   return <route.component {...props} />;
                 }}
