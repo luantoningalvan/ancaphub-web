@@ -104,7 +104,8 @@ const ChatWindow = ({ chat, showName, showAvatar, showHeader }) => (
       showHeader ? <ChatInfo chat={chat} showAvatar={showAvatar} /> : null
     }
     bottomContent={<EnterMessageInput />}
-    scrollableContent={chat.messages.map((message) => (
+  >
+    {chat.messages.map((message) => (
       <ChatBubble
         key={message.body}
         message={message}
@@ -113,7 +114,7 @@ const ChatWindow = ({ chat, showName, showAvatar, showHeader }) => (
         answeringTo={message.answeringTo || false}
       />
     ))}
-  />
+  </Scrollable>
 );
 
 const UserModelPropTypes = {

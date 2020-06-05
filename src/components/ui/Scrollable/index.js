@@ -56,11 +56,11 @@ const ScrollableWrap = styled.div`
   }
 `;
 
-const Scrollable = ({ scrollableContent, topContent, bottomContent, grow }) => (
+const Scrollable = ({ children, topContent, bottomContent, grow }) => (
   <ScrollableWrap grow={grow}>
     {topContent && topContent}
     <div className="wrapped">
-      <div className="inner">{scrollableContent}</div>
+      <div className="inner">{children}</div>
     </div>
     {bottomContent && bottomContent}
     <div className="cover" />
@@ -69,11 +69,6 @@ const Scrollable = ({ scrollableContent, topContent, bottomContent, grow }) => (
 
 Scrollable.propTypes = {
   grow: PropTypes.bool,
-  scrollableContent: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.element,
-    PropTypes.func,
-  ]).isRequired,
   topContent: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.element,
