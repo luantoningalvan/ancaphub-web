@@ -1,5 +1,6 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 import * as actions from '../actions/auth';
+import { addAlert } from '../actions/alerts';
 import { getNotificationsRequest } from '../actions/notifications';
 import * as api from '../api/auth';
 
@@ -11,6 +12,13 @@ function* authUser(action) {
     document.location.reload();
   } catch (e) {
     yield put(actions.authError({ errorMessage: e.message }));
+    yield put(
+      addAlert({
+        type: 'error',
+        title: 'Erro na autenticação',
+        description: e.message,
+      })
+    );
   }
 }
 

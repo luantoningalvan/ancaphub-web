@@ -8,7 +8,7 @@ import ThemeProvider from '../../components/template/Provider';
 import SigninForm from '../../components/auth/SigninForm';
 import SignupForm from '../../components/auth/SignupForm';
 import logo from '../../assets/logo-type.png';
-import { AuthBox, Features } from './styles';
+import { AuthBox, Presentation, HomeContainer } from './styles';
 import { Container } from '../../components/ui';
 
 const Home = () => {
@@ -17,20 +17,17 @@ const Home = () => {
   return (
     <ThemeProvider>
       <Container>
-        <div
-          style={{
-            height: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          <div>
-            <img src={logo} alt="AncapHub logo" />
-            <h2 style={{ fontWeight: 'bold', marginTop: 24 }}>
+        <HomeContainer>
+          <Presentation>
+            <div className="logo">
+              <img src={logo} alt="AncapHub logo" />
+            </div>
+
+            <h2 className="welcome-message">
               <FormattedMessage id="home.welcomeHeading" />
             </h2>
-            <Features>
+
+            <ul>
               <li>
                 <LibraryIcon />
                 <span>
@@ -61,8 +58,8 @@ const Home = () => {
                   <FormattedMessage id="home.features.3" description="Events" />
                 </span>
               </li>
-            </Features>
-          </div>
+            </ul>
+          </Presentation>
           <AuthBox>
             {activeBox === 'signin' ? (
               <>
@@ -112,7 +109,7 @@ const Home = () => {
               </>
             )}
           </AuthBox>
-        </div>
+        </HomeContainer>
       </Container>
     </ThemeProvider>
   );
