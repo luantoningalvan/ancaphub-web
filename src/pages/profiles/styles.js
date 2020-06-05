@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ProfileHeader = styled.div`
   width: 100%;
@@ -6,12 +6,18 @@ export const ProfileHeader = styled.div`
   border-radius: 10px;
   margin-top: 15px;
   overflow: hidden;
-`;
 
-export const ProfileCover = styled.div`
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
+  .profile-cover {
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .profile-cover {
+      height: 200px;
+    }
+  }
 `;
 
 export const ProfilePicture = styled.div`
@@ -34,50 +40,50 @@ export const ProfilePicture = styled.div`
 
     ${(props) =>
       props.isOwn &&
-      `
-    &:before {
-      content: "";
-      transition: all 0.3s;
-    }
+      css`
+        &:before {
+          content: '';
+          transition: all 0.3s;
+        }
 
-    .edit-profile-picture {
-      display:none;
-      position: absolute;
-      height:64px;
-      width:64px;
-      top: 32px;
-      left: 32px;
-      align-items:center;
-      justify-content:center;
+        .edit-profile-picture {
+          display: none;
+          position: absolute;
+          height: 64px;
+          width: 64px;
+          top: 32px;
+          left: 32px;
+          align-items: center;
+          justify-content: center;
 
-      svg {
-        fill: ${props.theme.palette.text.contrast};
-        height:32px;
-        width:32px;
-      }
-    }
+          svg {
+            fill: ${props.theme.palette.text.contrast};
+            height: 32px;
+            width: 32px;
+          }
+        }
 
-    &:hover {
-      .edit-profile-picture {
-        display:flex;
-      }
+        &:hover {
+          .edit-profile-picture {
+            display: flex;
+          }
 
-      &:before {
-        content: "";
-        width:100%;
-        height:100%;
-        background:rgba(0,0,0,0.6);
-        position:absolute
-      }
-    }
-    `}
+          &:before {
+            content: '';
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+          }
+        }
+      `}
   }
 `;
 
 export const ProfileInfo = styled.div`
   display: grid;
   grid-template-areas: 'userName' 'followerCount' 'userActions';
-  padding: 16px;
+  padding: 32px;
 
   .follower-count,
   .user-name,
@@ -90,6 +96,7 @@ export const ProfileInfo = styled.div`
     justify-content: center;
     grid-area: followerCount;
     margin: 16px 0px;
+
     > ul {
       margin: 0;
       padding: 0;
@@ -101,9 +108,9 @@ export const ProfileInfo = styled.div`
         flex-direction: column;
         align-items: center;
         position: relative;
-        padding: 0 25px;
         font-size: 0.75rem;
         text-transform: uppercase;
+        padding-right: 24px;
 
         &::after {
           content: '';
@@ -116,9 +123,6 @@ export const ProfileInfo = styled.div`
           right: 0;
         }
 
-        &:first-child {
-          padding-left: 0px;
-        }
         &:last-child {
           &::after {
             display: none;
@@ -135,6 +139,13 @@ export const ProfileInfo = styled.div`
           color: ${(props) => props.theme.palette.text.primary};
           margin-bottom: 8px;
         }
+
+        & + li {
+          padding-left: 24px;
+        }
+        &:last-child {
+          padding-right: 0px;
+        }
       }
     }
   }
@@ -146,7 +157,7 @@ export const ProfileInfo = styled.div`
     align-items: center;
 
     > h3 {
-      font-size: 1.3rem;
+      font-size: 1.6em;
       margin-bottom: 5px;
       color: ${(props) => props.theme.palette.text.primary};
     }
@@ -170,28 +181,85 @@ export const ProfileInfo = styled.div`
       margin: 0px;
     }
   }
+
+  @media (min-width: 768px) {
+    grid-template-areas: 'followerCount userName userActions';
+    grid-template-columns: repeat(3, 1fr);
+
+    .follower-count {
+      justify-content: flex-start;
+      margin: 0px;
+    }
+
+    .user-action-buttons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      button {
+        width: inherit;
+        flex: none;
+      }
+    }
+  }
 `;
 
 export const UserAbout = styled.div`
   width: 100%;
-  > p {
-    margin: 10px 0px;
+  margin-bottom: 16px;
+
+  > div {
+    padding: 16px;
   }
-  > ul {
+
+  h3 {
+    margin-bottom: 16px;
+  }
+
+  p {
+    margin-bottom: 16px;
+    padding: 8px;
+    text-align: center;
+  }
+
+  ul {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+
+    li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+
+      a {
+        color: ${(props) => props.theme.palette.text.primary};
+      }
+
+      svg {
+        float: left;
+        fill: ${(props) => props.theme.palette.text.primary};
+        margin-right: 8px;
+      }
+
+      & + li {
+        margin-top: 16px;
+      }
+    }
   }
-  > ul li {
-    list-style: none;
-    margin: 10px 0px;
+`;
+
+export const ProfileContent = styled.div`
+  margin: 16px 0;
+  display: grid;
+
+  .profile-menu {
+    grid-area: profileMenu;
+    margin-bottom: 16px;
   }
-  > ul li a {
-    color: ${(props) => props.theme.palette.text.primary};
-  }
-  > ul li svg {
-    float: left;
-    fill: ${(props) => props.theme.palette.text.primary};
-    margin-right: 10px;
+
+  @media (min-width: 768px) {
+    gap: 16px;
+    grid-template-columns: 4fr 8fr;
   }
 `;

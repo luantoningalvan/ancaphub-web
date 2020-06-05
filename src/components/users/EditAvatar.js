@@ -7,7 +7,7 @@ import Slider from 'rc-slider';
 import Cropper from 'react-easy-crop';
 import { useDispatch } from 'react-redux';
 
-import { IconButton, Button, CardHeader, CardBody, Dialog } from '../ui';
+import { IconButton, CardHeader, CardBody, Dialog } from '../ui';
 
 import { updateProfilePictureRequest as updateProfilePicture } from '../../actions/users';
 
@@ -92,20 +92,20 @@ export default ({ open, onClose }) => {
 
   return (
     <Dialog show={open}>
-      <CardHeader style={{ padding: 8 }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <IconButton icon={<CloseIcon />} onClick={handleCancel} />
-
-          <h3>
+      <CardHeader
+        title={
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <IconButton icon={<CloseIcon />} onClick={handleCancel} />
             <FormattedMessage id="components.editAvatar.heading" />
-          </h3>
-        </div>
-        {image !== '' && (
-          <Button color="secondary" onClick={handleUpload}>
-            <FormattedMessage id="common.update" />
-          </Button>
-        )}
-      </CardHeader>
+          </div>
+        }
+        action={{
+          show: image !== '',
+          action: handleUpload,
+          label: <FormattedMessage id="common.update" />,
+        }}
+        style={{ padding: 8 }}
+      />
 
       {image !== '' ? (
         <CropperStyle>

@@ -25,11 +25,11 @@ import EditAvatar from '../../components/users/EditAvatar';
 import { getSingleUserRequest } from '../../actions/users';
 import {
   ProfileHeader,
-  ProfileCover,
   ProfilePicture,
   ProfileInfo,
   UserAbout,
-} from './styles.css';
+  ProfileContent,
+} from './styles';
 
 const Feed = lazy(() => import('./Feed'));
 const Lists = lazy(() => import('./Lists'));
@@ -93,9 +93,9 @@ const Profiles = () => {
           )}
 
           <ProfileHeader>
-            <ProfileCover>
+            <div className="profile-cover">
               <img src={defaultProfileCover} alt="default cover pic" />
-            </ProfileCover>
+            </div>
             <ProfilePicture isOwn={verifyIfIsOwnProfile}>
               <div className="avatar">
                 <img
@@ -165,89 +165,75 @@ const Profiles = () => {
               </div>
             </ProfileInfo>
           </ProfileHeader>
-          <div style={{ marginTop: 16 }} spacing={2}>
-            <div lg={3} sm={12}>
-              <Paper padding style={{ width: '100%' }}>
-                <UserAbout>
-                  <h3>
-                    <FormattedMessage id="common.about" description="Sobre" />
-                  </h3>
-                  {user.bio && <p>{user.bio}</p>}
+          <ProfileContent>
+            <UserAbout>
+              <Paper>
+                <h3>
+                  <FormattedMessage id="common.about" description="Sobre" />
+                </h3>
+                {user.bio && <p>{user.bio}</p>}
 
-                  <ul>
-                    {user.currentCity && (
-                      <li>
-                        <LocationIcon />
-                        <span>{user.currentCity}</span>
-                      </li>
-                    )}
+                <ul>
+                  {user.currentCity && (
+                    <li>
+                      <LocationIcon />
+                      <span>{user.currentCity}</span>
+                    </li>
+                  )}
 
-                    {user.birthday && (
-                      <li>
-                        <BirthIcon />
-                        <span>
-                          <FormattedDate
-                            value={user.birthday}
-                            year="numeric"
-                            month="long"
-                            day="2-digit"
-                          />
-                        </span>
-                      </li>
-                    )}
+                  {user.birthday && (
+                    <li>
+                      <BirthIcon />
+                      <span>
+                        <FormattedDate
+                          value={user.birthday}
+                          year="numeric"
+                          month="long"
+                          day="2-digit"
+                        />
+                      </span>
+                    </li>
+                  )}
 
-                    {user.site && (
-                      <li>
-                        <SiteIcon />
-                        <span>
-                          <a href="http://example.com" target="_black">
-                            {user.site}
-                          </a>
-                        </span>
-                      </li>
-                    )}
-                  </ul>
-                </UserAbout>
+                  {user.site && (
+                    <li>
+                      <SiteIcon />
+                      <span>
+                        <a href="http://example.com" target="_black">
+                          {user.site}
+                        </a>
+                      </span>
+                    </li>
+                  )}
+                </ul>
               </Paper>
-            </div>
-            <div sm={12} lg={9}>
-              <Paper style={{ width: '100%' }}>
-                <Tabs
-                  style={{
-                    height: 48,
-                    padding: '0px 8px',
-                    overflow: 'hidden',
-                    flexGrow: 1,
-                  }}
-                >
+            </UserAbout>
+            <div>
+              <Paper className="profile-menu">
+                <Tabs>
                   <Tab
                     current={pageParam === undefined}
                     label={<FormattedMessage id="common.feed" />}
                     link={`/${userId}`}
                   />
                   <Tab
-                    current={pageParam === 'lists'}
-                    label={<FormattedMessage id="common.lists" />}
-                    link={`/${userId}/lists`}
+                    current={pageParam === 'following'}
+                    label={<FormattedMessage id="common.following" />}
+                    link={`/${userId}/following`}
                   />
                   <Tab
-                    current={pageParam === 'contributions'}
-                    label={<FormattedMessage id="common.contributions" />}
-                    link={`/${userId}/contributions`}
+                    current={pageParam === 'followers'}
+                    label={<FormattedMessage id="common.followers" />}
+                    link={`/${userId}/followers`}
                   />
                 </Tabs>
               </Paper>
 
-              <div
-                style={{
-                  width: '100%',
-                  margin: '16px 0',
-                }}
-              >
+              <div className="profile-content">
                 <Suspense fallback={<Spinner size={96} />}>{Page}</Suspense>
               </div>
             </div>
-          </div>
+          </ProfileContent>
         </>
       )}
     </Container>

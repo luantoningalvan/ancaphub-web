@@ -21,20 +21,30 @@ const EditProfile = () => {
     try {
       const schema = Yup.object().shape({
         name: Yup.string()
-          .min(3, formatMessage('account.settings.validation.nameShort'))
-          .max(30, formatMessage('account.settings.validation.nameLong'))
-          .required(formatMessage('account.settings.validation.nameRequired')),
+          .min(
+            3,
+            formatMessage({ id: 'account.settings.validation.nameShort' })
+          )
+          .max(
+            30,
+            formatMessage({ id: 'account.settings.validation.nameLong' })
+          )
+          .required(
+            formatMessage({ id: 'account.settings.validation.nameRequired' })
+          ),
         bio: Yup.string().max(
           160,
-          formatMessage('account.settings.validation.maxBioLength')
+          formatMessage({ id: 'account.settings.validation.maxBioLength' })
         ),
         site: Yup.string().url(
-          formatMessage('account.settings.validation.invalidURL')
+          formatMessage({ id: 'account.settings.validation.invalidURL' })
         ),
         birthday: Yup.date()
           .max(
             new Date(),
-            formatMessage('account.settings.validation.invalidBirthDate')
+            formatMessage({
+              id: 'account.settings.validation.invalidBirthDate',
+            })
           )
           .notRequired(),
       });
@@ -55,7 +65,7 @@ const EditProfile = () => {
   }
 
   return (
-    <div>
+    <>
       <Button color="primary" size="small" onClick={() => setOpen(true)}>
         <EditIcon />
         <span>
@@ -79,11 +89,11 @@ const EditProfile = () => {
           ref={editFormRef}
         >
           <CardHeader
-            icon={
-              <Button color="secondary" type="submit">
-                <FormattedMessage id="common.edit" />
-              </Button>
-            }
+            action={{
+              label: <FormattedMessage id="common.edit" />,
+              action: () => editFormRef.current.submitForm(),
+              show: true,
+            }}
             title={
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <IconButton icon={<CloseIcon />} onClick={handleClick} />
@@ -131,7 +141,7 @@ const EditProfile = () => {
           </CardBody>
         </Form>
       </Dialog>
-    </div>
+    </>
   );
 };
 
