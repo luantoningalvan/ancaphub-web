@@ -3,13 +3,15 @@ module.exports = {
     'airbnb', 
     'plugin:react/recommended',
     'plugin:prettier/recommended',
+    'plugin:jest/recommended'
   ],
   plugins: [
-    'react-hooks'
+    'react-hooks',
   ],
   env: {
     browser: true,
     node: true,
+    jest: true
   },
   parserOptions: {
     ecmaVersion: 2020,
