@@ -5,6 +5,7 @@ import Routes from './routes';
 import setAuthToken from './utils/setAuthToken';
 import store from './store';
 import { loadUserRequest } from './actions/auth';
+import AlertContainer from './components/alerts/AlertContainer';
 
 // i18n JSON base translation files
 import i18nPt from './i18n/pt.json';
@@ -36,6 +37,7 @@ export default function App() {
     <Provider store={store}>
       <IntlProvider locale={language} messages={messages[language]}>
         <Routes />
+        <AlertContainer />
       </IntlProvider>
     </Provider>
   );

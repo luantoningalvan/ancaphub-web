@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import alerts from './alerts';
 import users from './users';
 import usersCount from './usersCount';
 import auth from './auth';
@@ -13,6 +14,7 @@ import settings from './settings';
 import categories from './categories';
 
 export default combineReducers({
+  alerts,
   users,
   usersCount,
   auth,

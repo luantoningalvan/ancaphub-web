@@ -30,6 +30,7 @@ import { Switcher } from './Switcher';
 import { Tab, Tabs } from './Tabs';
 import { TextField } from './TextField';
 import { UploadBox } from './Upload';
+import { Toast } from './Toast';
 
 export {
   Alert,
@@ -67,4 +68,5 @@ export {
   Tab,
   TextField,
   UploadBox,
+  Toast,
 };
