@@ -4,10 +4,12 @@ const Tabs = ({ children, style }) => (
   <ul
     style={{
       display: 'flex',
+      height: 48,
+      padding: '0px 8px',
       width: '100%',
-      overflowX: 'scroll',
       ...style,
     }}
+    className="tab-container"
   >
     {children}
   </ul>
