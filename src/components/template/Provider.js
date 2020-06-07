@@ -47,7 +47,7 @@ const themes = {
   },
 };
 
-const Template = ({ children, collapsed }) => {
+const Template = ({ children, collapsed = true }) => {
   const { colorMode } = useSelector((state) => state.settings);
 
   const theme = themes[colorMode];
@@ -63,11 +63,10 @@ ${
   css`
     body {
       overflow-y: hidden;
-      margin-right: 15px;
     }
     #overlay {
       height: 100vh;
-      width: 100vh;
+      width: 100vw;
       position: fixed;
       top: 0;
       left: 0;

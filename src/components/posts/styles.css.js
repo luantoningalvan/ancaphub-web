@@ -5,6 +5,7 @@ import { Paper } from '../ui';
 export const PostContainer = styled(Paper)`
   margin-bottom: 16px;
   flex-basis: 100%;
+  word-break: break-all;
 
   .profile-picture {
     height: 44px;

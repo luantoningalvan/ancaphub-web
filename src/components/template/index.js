@@ -12,8 +12,11 @@ const Template = ({ children }) => {
   const handleCollapse = () => {
     setCollapsed(!collapsed);
   };
+
+  console.log(auth.isAuthenticated);
+
   return (
-    <ThemeProvider collapsed={auth.isAuthenticated ? collapsed : true}>
+    <ThemeProvider collapsed={collapsed}>
       <Header
         user={auth.user}
         collapsed={collapsed}

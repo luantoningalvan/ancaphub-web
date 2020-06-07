@@ -1,16 +1,14 @@
 import styled from 'styled-components';
-import { Paper } from '../../components/ui';
 
 export const HomeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-
   @media (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     min-height: 100vh;
-
+    width: 100%;
     .logo {
       text-align: left;
     }
@@ -18,33 +16,38 @@ export const HomeContainer = styled.div`
 `;
 
 export const Presentation = styled.div`
-  .logo {
-    text-align: center;
-    margin: 32px 0px;
-  }
-
-  ul {
-    color: ${(props) => props.theme.palette.text.primary};
-    margin: 16px 0px;
-
-    li {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      font-size: 20px;
-      margin-bottom: 8px;
-      font-weight: lighter;
-    }
-    li > svg {
-      height: 32px;
-      width: 32px;
-      fill: ${(props) => props.theme.palette.text.primary};
-      margin-right: 8px;
-    }
-  }
-
+  display: none;
   @media (min-width: 768px) {
-    margin-right: 32px;
+    flex: 1;
+    background: url('https://source.unsplash.com/collection/10626955/1600x900'),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 212, 255, 0) 100%);
+    background-position: center;
+    background-blend-mode: overlay;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+
+    ul {
+      color: ${(props) => props.theme.palette.text.contrast};
+      margin: 16px 0px;
+
+      li {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        margin-bottom: 8px;
+        font-weight: lighter;
+      }
+      li > svg {
+        height: 32px;
+        width: 32px;
+        fill: ${(props) => props.theme.palette.text.primary};
+        margin-right: 8px;
+      }
+    }
 
     .logo {
       text-align: left;
@@ -52,15 +55,44 @@ export const Presentation = styled.div`
   }
 `;
 
-export const AuthBox = styled(Paper)`
-  width: 100%;
-  max-width: 400px;
-  margin: 16px 0px;
-  padding: 16px;
+export const AuthBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('https://source.unsplash.com/collection/10626955/1600x900'),
+    rgba(0, 0, 0, 0.8);
+  background-position: center;
+  background-blend-mode: overlay;
+  background-size: cover;
+
+  .auth-content {
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    text-align: center;
+    margin: 32px 0px;
+  }
+
+  .form {
+    width: 100%;
+    background: ${(props) => props.theme.palette.paper};
+    padding: 16px;
+    border-radius: 8px;
+  }
 
   form {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .form-row {
       margin-top: 8px;
@@ -72,15 +104,48 @@ export const AuthBox = styled(Paper)`
     }
   }
 
-  .switch-form {
-    color: ${(props) => props.theme.palette.text.primary};
+  h3 {
     text-align: center;
-    display: block;
-    margin-top: 16px;
-    cursor: pointer;
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
 
-    &:hover {
-      text-decoration: underline;
+  .switch-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 32px 0px;
+
+    button {
+      color: ${(props) => props.theme.palette.text.primary};
+      border: none;
+      background: none;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: 100%;
+    max-width: 420px;
+    padding: 0px 32px;
+    background: ${(props) => props.theme.palette.paper};
+
+    .auth-content {
+      max-width: none;
+      padding: 0px;
+    }
+
+    .switch-form {
+      padding-top: 16px;
+      border-top: 1px solid ${(props) => props.theme.palette.border};
+    }
+
+    div {
+      width: 100%;
     }
   }
 `;
