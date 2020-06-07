@@ -13,7 +13,7 @@ const Template = ({ children }) => {
     setCollapsed(!collapsed);
   };
   return (
-    <ThemeProvider>
+    <ThemeProvider collapsed={auth.isAuthenticated ? collapsed : true}>
       <Header
         user={auth.user}
         collapsed={collapsed}

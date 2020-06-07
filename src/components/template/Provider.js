@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import { ThemeProvider, createGlobalStyle, css } from 'styled-components';
 
 const themes = {
   dark: {
@@ -47,7 +47,7 @@ const themes = {
   },
 };
 
-const Template = ({ children }) => {
+const Template = ({ children, collapsed }) => {
   const { colorMode } = useSelector((state) => state.settings);
 
   const theme = themes[colorMode];
@@ -57,11 +57,32 @@ const Template = ({ children }) => {
     background: ${theme.palette.background};
     color: ${theme.palette.text.primary};
   }
+
+${
+  !collapsed &&
+  css`
+    body {
+      overflow-y: hidden;
+      margin-right: 15px;
+    }
+    #overlay {
+      height: 100vh;
+      width: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 120;
+    }
+  `
+}
+
 `;
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <div id="overlay" />
       {children}
     </ThemeProvider>
   );

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 export const StyledLink = styled(Link)`
   display: block;
-  padding: 9.5px;
-  margin: 10px;
-  border-radius: 5px;
+  text-align: center;
+  margin-right: 16px;
+  padding: 8px 16px;
+  border-radius: 0px 20px 20px 0px;
+
   background: ${(props) =>
     props.current ? props.theme.palette.secondary : 'transparent'};
 
@@ -16,7 +18,7 @@ export const StyledLink = styled(Link)`
       props.current
         ? props.theme.palette.text.contrast
         : props.theme.palette.text.secondary};
-    margin-right: 8px;
+    margin-right: 16px;
   }
 
   span {
@@ -27,13 +29,28 @@ export const StyledLink = styled(Link)`
   }
 
   &:hover {
-    background: ${(props) => props.theme.palette.secondary};
-    > i svg {
-      fill: ${(props) => props.theme.palette.text.contrast};
-    }
+    ${(props) => css`
+      background: ${props.theme.palette.secondary};
+      color: ${props.theme.palette.text.contrast};
+      > i svg {
+        fill: ${props.theme.palette.text.contrast};
+      }
+    `}
   }
 
   @media (min-width: 576px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 8px;
+    padding: 8px 0px;
+    border-radius: 4px;
+
+    > i svg {
+      margin: 0px;
+      width: 24px;
+      height: 24px;
+    }
     span {
       display: none;
     }
@@ -47,6 +64,10 @@ export const Item = styled.li`
   a {
     display: flex;
     align-items: center;
+  }
+
+  & + li {
+    margin-top: 8px;
   }
 
   &:hover {

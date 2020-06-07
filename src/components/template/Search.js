@@ -50,14 +50,19 @@ const SearchWrapper = styled.div`
     > button {
       border: none;
       border-radius: 5px;
-      padding: 10px;
+      padding: 8px;
       outline: none;
       background: transparent;
       cursor: pointer;
+      width: 40px;
 
       &:hover {
         background: rgba(0, 0, 0, 0.15);
       }
+    }
+
+    > a {
+      padding: 8px;
     }
   }
 
