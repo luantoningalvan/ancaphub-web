@@ -1,4 +1,3 @@
-import { Alert } from './Alert';
 import { Button, IconButton } from './Button';
 import { Card, CardHeader, CardBody, CardFooter } from './Card';
 import {
@@ -33,7 +32,6 @@ import { UploadBox } from './Upload';
 import { Toast } from './Toast';
 
 export {
-  Alert,
   Button,
   IconButton,
   Card,
