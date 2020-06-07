@@ -15,7 +15,6 @@ import {
   Hero,
   Card,
   CardHeader,
-  Menu,
   MenuItem,
   Tab,
   Tabs,
@@ -23,6 +22,13 @@ import {
   LoadContent,
   Paper,
 } from '../../components/ui';
+
+import {
+  LibraryContainer,
+  LibrarySidebarContainer,
+  LibraryContentContainer,
+  LibrarySidebarMenu,
+} from './styles.css';
 
 const Library = () => {
   // eslint-disable-next-line no-unused-vars
@@ -71,15 +77,15 @@ const Library = () => {
         }
       />
 
-      <div spacing={2} style={{ marginTop: 8 }}>
-        <div xs={12}>
-          <Card style={{ width: '100%' }}>
+      <LibraryContainer>
+        <LibrarySidebarContainer>
+          <Card>
             <CardHeader style={{ paddingBottom: 8 }}>
               <h3>
                 <FormattedMessage id="common.categories" />
               </h3>
             </CardHeader>
-            <Menu style={{ maxHeight: 208, overflowX: 'scroll' }}>
+            <LibrarySidebarMenu>
               <LoadContent loading={loadingCategories}>
                 <MenuItem
                   label={<FormattedMessage id="common.all" />}
@@ -95,55 +101,53 @@ const Library = () => {
                   />
                 ))}
               </LoadContent>
-            </Menu>
+            </LibrarySidebarMenu>
           </Card>
-        </div>
-        <div xs={12}>
-          <div style={{ width: '100%' }}>
-            <Paper>
-              <Tabs style={{ height: 48, padding: '0px 8px' }}>
-                <Tab
-                  label={<FormattedMessage id="common.all" />}
-                  current={typeParam === undefined}
-                  link="/library"
-                />
-                <Tab
-                  label={<FormattedMessage id="library.articles" />}
-                  current={typeParam === 'articles'}
-                  link="/library/articles"
-                />
-                <Tab
-                  label={<FormattedMessage id="library.books" />}
-                  current={typeParam === 'books'}
-                  link="/library/books"
-                />
-                <Tab
-                  label={<FormattedMessage id="library.videos" />}
-                  current={typeParam === 'videos'}
-                  link="/library/videos"
-                />
-              </Tabs>
-            </Paper>
-            <div style={{ marginTop: 16 }}>
-              <LoadContent loading={loading}>
-                {isEmpty(items) ? (
-                  <Paper padding>
-                    <FormattedMessage id="library.noneFound" />
-                  </Paper>
-                ) : (
-                  <div spacing={2}>
-                    {items.map((item) => (
-                      <div xs={12} key={generate()}>
-                        <LibraryCard item={item} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </LoadContent>
-            </div>
+        </LibrarySidebarContainer>
+        <LibraryContentContainer>
+          <Paper>
+            <Tabs style={{ height: 48, padding: '0px 8px' }}>
+              <Tab
+                label={<FormattedMessage id="common.all" />}
+                current={typeParam === undefined}
+                link="/library"
+              />
+              <Tab
+                label={<FormattedMessage id="library.articles" />}
+                current={typeParam === 'articles'}
+                link="/library/articles"
+              />
+              <Tab
+                label={<FormattedMessage id="library.books" />}
+                current={typeParam === 'books'}
+                link="/library/books"
+              />
+              <Tab
+                label={<FormattedMessage id="library.videos" />}
+                current={typeParam === 'videos'}
+                link="/library/videos"
+              />
+            </Tabs>
+          </Paper>
+          <div style={{ marginTop: 16 }}>
+            <LoadContent loading={loading}>
+              {isEmpty(items) ? (
+                <Paper padding>
+                  <FormattedMessage id="library.noneFound" />
+                </Paper>
+              ) : (
+                <div spacing={2}>
+                  {items.map((item) => (
+                    <div xs={12} key={generate()}>
+                      <LibraryCard item={item} />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </LoadContent>
           </div>
-        </div>
-      </div>
+        </LibraryContentContainer>
+      </LibraryContainer>
     </Container>
   );
 };

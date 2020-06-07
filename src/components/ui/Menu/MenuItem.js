@@ -19,7 +19,6 @@ const MenuItemWrap = styled.li`
     transition: background 0.3s;
     cursor: pointer;
     color: ${(props) => props.theme.palette.text.primary};
-
     &:hover {
       background: rgba(0, 0, 0, 0.1);
     }
