@@ -9,6 +9,7 @@ import { Container } from '../../components/ui';
 import PostForm from '../../components/posts/PostForm';
 import LastItemsWidget from '../../components/library/LastItemsWidget';
 import ShowPosts from '../../components/posts/ShowPosts';
+import { FeedContainer } from './styles';
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -21,24 +22,17 @@ const Feed = () => {
 
   return (
     <Container style={{ marginTop: 8 }}>
-      <div
-        style={{
-          marginTop: 16,
-          display: 'grid',
-          gridTemplateColumns: '8fr 4fr',
-          gap: '16px',
-        }}
-      >
-        <div>
+      <FeedContainer>
+        <div id="posts">
           <PostForm />
           <div style={{ marginTop: 16, width: '100%' }}>
             <ShowPosts posts={items} loading={loading} />
           </div>
         </div>
-        <div>
+        <div id="sidebar">
           <LastItemsWidget />
         </div>
-      </div>
+      </FeedContainer>
     </Container>
   );
 };
