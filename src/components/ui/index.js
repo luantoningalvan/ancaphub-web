@@ -30,6 +30,7 @@ import { Tab, Tabs } from './Tabs';
 import { TextField } from './TextField';
 import { UploadBox } from './Upload';
 import { Toast } from './Toast';
+import { Tooltip } from './Tooltip';
 
 export {
   Button,
@@ -67,4 +68,5 @@ export {
   TextField,
   UploadBox,
   Toast,
+  Tooltip,
 };

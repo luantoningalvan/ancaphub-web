@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import InfoIcon from 'react-ionicons/lib/IosInformationCircle';
-import ErrorIcon from 'react-ionicons/lib/IosAlert';
-import SuccessIcon from 'react-ionicons/lib/IosCheckmarkCircle';
-import CloseIcon from 'react-ionicons/lib/MdClose';
+import {
+  FiAlertCircle as ErrorIcon,
+  FiCheckCircle as SuccessIcon,
+  FiInfo as InfoIcon,
+  FiXCircle as CloseIcon,
+} from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { Container } from './styles';
 import { removeAlert } from '../../../actions/alerts';

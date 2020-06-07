@@ -143,9 +143,5 @@ export const AuthBox = styled.div`
       padding-top: 16px;
       border-top: 1px solid ${(props) => props.theme.palette.border};
     }
-
-    div {
-      width: 100%;
-    }
   }
 `;
