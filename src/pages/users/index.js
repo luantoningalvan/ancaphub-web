@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
+import { generate } from 'shortid';
 
 import { Container, Hero, Paper, LoadContent } from '../../components/ui';
+
+import { UserCardGrid } from './styles.css';
 
 import { getUsersRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
@@ -23,13 +26,11 @@ const Users = () => {
       <div style={{ marginTop: 16 }}>
         <LoadContent loading={loading}>
           {!isEmpty(items) ? (
-            <div spacing={2}>
+            <UserCardGrid>
               {items.map((user) => (
-                <div xs={3} key={user._id}>
-                  <UserCard user={user.user} />
-                </div>
+                <UserCard user={user.user} key={generate()} />
               ))}
-            </div>
+            </UserCardGrid>
           ) : (
             <Paper padding>
               <FormattedMessage id="common.noUsersFound" />
