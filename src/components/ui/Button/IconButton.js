@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes, { element } from 'prop-types';
 import { IconButtonContainer } from './styles';
 
-const IconButton = ({ icon, variant, size, ...rest }) => (
-  <IconButtonContainer variant={variant} size={size} {...rest}>
+const IconButton = forwardRef(({ variant, size, icon, ...rest }, ref) => (
+  <IconButtonContainer variant={variant} size={size} {...rest} ref={ref}>
     {icon}
   </IconButtonContainer>
-);
+));
+
+IconButton.displayName = 'IconButton';
 
 IconButton.propTypes = {
   // eslint-disable-next-line react/require-default-props
