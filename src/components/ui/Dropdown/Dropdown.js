@@ -27,7 +27,7 @@ const DropdownCard = styled.div`
   border-radius: 5px;
   flex-direction: column;
   justify-content: center;
-  color: white;
+  color: ${(props) => props.theme.palette.text.primary};
 `;
 
 const Dropdown = ({ children, placement, offsetX, offsetY, toggle }) => {

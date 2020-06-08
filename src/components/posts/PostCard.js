@@ -92,9 +92,7 @@ const PostCard = ({ data }) => {
             <Dropdown
               offsetX={15}
               placement="left-start"
-              toggle={
-                <IconButton icon={<MdMore color="#fff" fontSize="24px" />} />
-              }
+              toggle={<IconButton icon={<MdMore fontSize="24px" />} />}
             >
               <DropdownListContainer>
                 <DropdownListItem icon={<DeleteIcon />} onClick={handleDelete}>

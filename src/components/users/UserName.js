@@ -14,7 +14,7 @@ const UserNameStyle = styled(Link)`
   .verifiedUser {
     background: ${(props) => props.theme.palette.secondary};
     border-radius: 15px;
-    color: white;
+    color: ${(props) => props.theme.palette.text.primary};
     padding: 5px 10px;
     margin-right: 5px;
   }

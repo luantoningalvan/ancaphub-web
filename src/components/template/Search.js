@@ -15,6 +15,7 @@ const SearchWrapper = styled.div`
   svg {
     width: 20px;
     height: 20px;
+    color: ${(props) => props.theme.palette.text.contrast};
   }
 
   .not-collapsed {

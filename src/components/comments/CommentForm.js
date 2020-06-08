@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import UserAvatar from '../users/UserAvatar';
 import { addCommentRequest } from '../../actions/comments';
 
@@ -18,10 +19,10 @@ const CommentInput = styled.input`
   outline: none;
   border: 1px solid ${(props) => props.theme.palette.border};
   flex-grow: 1;
-  color: white;
+  color: ${(props) => props.theme.palette.text.primary};
 `;
 
-const CommentForm = ({ post, placeholder }) => {
+const CommentForm = ({ post }) => {
   const [commentData, setCommentData] = useState({ content: '' });
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.user);
@@ -41,16 +42,20 @@ const CommentForm = ({ post, placeholder }) => {
   return (
     <CommentFormStyle>
       <UserAvatar user={authUser} style={{ marginRight: 10 }} />
-      <CommentInput
-        type="text"
-        size="small"
-        variant="filled"
-        placeholder={placeholder}
-        color="secondary"
-        onKeyPress={handleKeyPress}
-        value={commentData.content}
-        onChange={handleChange}
-      />
+      <FormattedMessage id="components.commentBox.writeAComment">
+        {(txt) => (
+          <CommentInput
+            type="text"
+            size="small"
+            variant="filled"
+            placeholder={txt}
+            color="secondary"
+            onKeyPress={handleKeyPress}
+            value={commentData.content}
+            onChange={handleChange}
+          />
+        )}
+      </FormattedMessage>
     </CommentFormStyle>
   );
 };

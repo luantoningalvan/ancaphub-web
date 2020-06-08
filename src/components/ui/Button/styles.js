@@ -59,7 +59,6 @@ export const IconButtonContainer = styled(ButtonContainer)`
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
     border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   padding: 8px;
-  color: ${(props) => props.theme.palette.text.secondary};
 
   &:hover {
     background: rgba(0, 0, 0, 0.1);
@@ -69,5 +68,6 @@ export const IconButtonContainer = styled(ButtonContainer)`
     height: 20px;
     width: 20px;
     margin: 0px;
+    color: ${(props) => props.theme.palette.text.secondary};
   }
 `;

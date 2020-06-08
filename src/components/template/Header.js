@@ -75,14 +75,15 @@ const Logo = styled.div`
     width: 40px;
     height: 40px;
     margin-left: 16px;
+
     &:hover {
       background: rgba(0, 0, 0, 0.2);
     }
     border-radius: 100%;
     svg {
-      fill: ${(props) => props.theme.palette.text.contrast};
       height: 24px;
       width: 24px;
+      color: ${(props) => props.theme.palette.text.contrast};
     }
   }
 
@@ -103,6 +104,7 @@ const HeaderMenuItem = styled.li`
   list-style: none;
   margin-right: 5px;
   cursor: pointer;
+  color: ${(props) => props.theme.palette.text.contrast};
 
   &:last-child {
     margin-right: 0px;
@@ -125,10 +127,6 @@ const HeaderMenuItem = styled.li`
     &:hover {
       background: rgba(0, 0, 0, 0.15);
     }
-  }
-
-  > a {
-    color: ${(props) => props.theme.palette.text.contrast};
   }
 
   svg {

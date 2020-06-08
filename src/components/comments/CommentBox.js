@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { Collapse } from '../ui';
@@ -30,16 +29,7 @@ const CommentBox = ({ expanded, post, indent }) => {
   return (
     <Collapse expanded={expanded}>
       <CommentBoxStyle indent={indent}>
-        <CommentForm
-          post={post}
-          placeholder={
-            indent ? (
-              <FormattedMessage id="components.commentBox.reply" />
-            ) : (
-              <FormattedMessage id="components.commentBox.reply" />
-            )
-          }
-        />
+        <CommentForm post={post} />
         <div style={{ padding: '0px 16px 16px 16px', textAlign: 'center' }}>
           {comments !== undefined &&
             comments.map((comment) => (
