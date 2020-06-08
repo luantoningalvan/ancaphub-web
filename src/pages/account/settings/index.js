@@ -10,6 +10,12 @@ import {
 import { useLocation } from 'react-router-dom';
 import { Container, Paper, Hero, Menu, MenuItem } from '../../../components/ui';
 
+import {
+  SettingsContainer,
+  SettingsSidebarContainer,
+  SettingsContentContainer,
+} from './styles.css';
+
 import Notifications from './Notifications';
 import Privacy from './Privacy';
 import AccessAndSecurity from './AccessAndSecurity';
@@ -50,43 +56,39 @@ const Settings = () => {
           />
         }
       />
-      <div style={{ marginTop: 16 }}>
-        <div
-          style={{ display: 'grid', gridTemplateColumns: '3fr 9fr', gap: 16 }}
-        >
-          <div>
-            <Paper>
-              <Menu>
-                <MenuItem
-                  current={
-                    query === 'access_and_security' ||
-                    query === null ||
-                    settingsMap[query] === undefined
-                  }
-                  label={<FormattedMessage id="common.account" />}
-                  link="/settings?tab=access_and_security"
-                  icon={<AccountIcon />}
-                />
-                <MenuItem
-                  current={query === 'notifications'}
-                  label={<FormattedMessage id="common.notifications" />}
-                  link="/settings?tab=notifications"
-                  icon={<NotificationsIcon />}
-                />
-                <MenuItem
-                  current={query === 'privacy'}
-                  label={<FormattedMessage id="common.privacy" />}
-                  link="/settings?tab=privacy"
-                  icon={<PrivacyIcon />}
-                />
-              </Menu>
-            </Paper>
-          </div>
-          <div>
-            <Tab />
-          </div>
-        </div>
-      </div>
+      <SettingsContainer>
+        <SettingsSidebarContainer>
+          <Paper>
+            <Menu>
+              <MenuItem
+                current={
+                  query === 'access_and_security' ||
+                  query === null ||
+                  settingsMap[query] === undefined
+                }
+                label={<FormattedMessage id="common.account" />}
+                link="/settings?tab=access_and_security"
+                icon={<AccountIcon />}
+              />
+              <MenuItem
+                current={query === 'notifications'}
+                label={<FormattedMessage id="common.notifications" />}
+                link="/settings?tab=notifications"
+                icon={<NotificationsIcon />}
+              />
+              <MenuItem
+                current={query === 'privacy'}
+                label={<FormattedMessage id="common.privacy" />}
+                link="/settings?tab=privacy"
+                icon={<PrivacyIcon />}
+              />
+            </Menu>
+          </Paper>
+        </SettingsSidebarContainer>
+        <SettingsContentContainer>
+          <Tab />
+        </SettingsContentContainer>
+      </SettingsContainer>
     </Container>
   );
 };
