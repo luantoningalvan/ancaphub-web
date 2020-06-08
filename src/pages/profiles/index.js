@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
+import { parseISO, addDays } from 'date-fns';
 import {
   FiGlobe as SiteIcon,
   FiCalendar as BirthIcon,
@@ -189,7 +190,9 @@ const Profiles = () => {
                       <BirthIcon />
                       <span>
                         <FormattedDate
-                          value={user.birthday}
+                          // DISCLAIMER: this is a temporary solution since
+                          // we still don't know why this bug is happening
+                          value={addDays(parseISO(user.birthday), 1)}
                           year="numeric"
                           month="long"
                           day="2-digit"

@@ -16,17 +16,17 @@ import defaultVideoCover from '../../assets/default-video-cover.jpg';
 const types = {
   book: {
     icon: <BookIcon />,
-    defaulCover: defaultBookCover,
+    defaultCover: defaultBookCover,
     size: 280,
   },
   article: {
     icon: <ArticleIcon />,
-    defaulCover: defaultArticleCover,
+    defaultCover: defaultArticleCover,
     size: 200,
   },
   video: {
     icon: <VideoIcon />,
-    defaulCover: defaultVideoCover,
+    defaultCover: defaultVideoCover,
     size: 130,
   },
 };
@@ -142,7 +142,7 @@ const ItemCard = ({ item }) => (
           src={
             item.cover && item.cover.url
               ? item.cover.url
-              : types[item.type].defaulCover
+              : types[item.type].defaultCover
           }
         />
       </Link>

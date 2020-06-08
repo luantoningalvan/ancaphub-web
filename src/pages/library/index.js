@@ -26,6 +26,7 @@ import {
   LibrarySidebarContainer,
   LibraryContentContainer,
   LibrarySidebarMenu,
+  LibraryCardGrid,
 } from './styles.css';
 
 const Library = () => {
@@ -124,13 +125,13 @@ const Library = () => {
                   <FormattedMessage id="library.noneFound" />
                 </Paper>
               ) : (
-                <div spacing={2}>
+                <LibraryCardGrid>
                   {items.map((item) => (
                     <div xs={12} key={generate()}>
                       <LibraryCard item={item} />
                     </div>
                   ))}
-                </div>
+                </LibraryCardGrid>
               )}
             </LoadContent>
           </div>
