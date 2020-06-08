@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ExpandIcon from 'react-ionicons/lib/IosArrowDown';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { Card, CardHeader, CardBody } from '../Card';
 import { Collapse } from '../Collapse';
 
@@ -11,7 +11,12 @@ const ExpansionPanel = ({ title, children, ...rest }) => {
     <Card bordered {...rest}>
       <CardHeader
         title={title}
-        icon={ExpandIcon}
+        action={{
+          action: handleOpen,
+          label: open ? <FiChevronUp /> : <FiChevronDown />,
+          type: 'icon',
+          show: true,
+        }}
         onClick={handleOpen}
         style={{ cursor: 'pointer', padding: 16 }}
       />

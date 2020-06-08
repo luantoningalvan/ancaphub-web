@@ -1,9 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import AccountIcon from 'react-ionicons/lib/IosPerson';
-import NotificationsIcon from 'react-ionicons/lib/IosNotifications';
-import PrivacyIcon from 'react-ionicons/lib/IosLock';
+import {
+  FiUser as AccountIcon,
+  FiBell as NotificationsIcon,
+  FiLock as PrivacyIcon,
+} from 'react-icons/fi';
 
 import { useLocation } from 'react-router-dom';
 import { Container, Paper, Hero, Menu, MenuItem } from '../../../components/ui';

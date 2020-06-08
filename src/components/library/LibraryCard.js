@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import BookIcon from 'react-ionicons/lib/IosBook';
-import VideoIcon from 'react-ionicons/lib/IosVideocam';
-import ArticleIcon from 'react-ionicons/lib/IosPaper';
-import BookmarkButton from './BookmarkButton';
+import {
+  FiBook as BookIcon,
+  FiVideo as VideoIcon,
+  FiFile as ArticleIcon,
+  FiBookmark as BookmarkButton,
+} from 'react-icons/fi';
 
 import defaultBookCover from '../../assets/default-book-cover.jpg';
 import defaultArticleCover from '../../assets/default-article-cover.jpg';

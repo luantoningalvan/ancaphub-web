@@ -1,52 +1,80 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import VotedIcon from 'react-ionicons/lib/IosCheckmarkCircleOutline';
-import { FormattedMessage, FormattedPlural } from 'react-intl';
+import { FiCheckCircle as VotedIcon } from 'react-icons/fi';
+import { FormattedMessage } from 'react-intl';
 import { votePostPollRequest } from '../../actions/posts';
 
 const PostPollWrap = styled.div`
   display: flex;
   flex-direction: column;
   padding: 8px;
-  border-radius: 5px;
+  border-radius: 8px;
   position: relative;
-  margin-top: 1em;
+  margin-top: 16px;
   border: 1px solid ${(props) => props.theme.palette.border};
+
+  > span {
+    font-size: 16px;
+    margin-top: 8px;
+  }
 `;
 
 const PostPollOption = styled.div`
   font-weight: 700;
   width: 100%;
-  height: 48px;
-  position: relative;
-  padding: 0.5em 0;
+  display: flex;
+  flex-direction: column;
   border-radius: 5px;
   border: 1px solid ${(props) => props.theme.palette.border};
-  margin: 0.5em 0;
   cursor: ${(props) => (props.hasVoted ? 'default' : 'pointer')};
   transition: background-color 200ms ease-in-out;
+
+  .option-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      height: 17px;
+      font-size: 17px;
+      line-height: 100%;
+
+      svg {
+        display: block;
+      }
+
+      svg {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .progress-bar {
+    margin: 8px;
+    border-radius: 3px;
+    height: 6px;
+    overflow: hidden;
+    background-color: ${(props) => props.theme.palette.background};
+  }
+
   &:hover {
     background-color: ${(props) =>
       props.hasVoted ? 'transparent' : props.theme.palette.border};
   }
-  & > span {
-    position: absolute;
-    top: 12px;
-    left: 0.5em;
-    z-index: 2;
+
+  & + div {
+    margin-top: 8px;
   }
 `;
 
 const PostPollOptionProgress = styled.div`
-  display: flex;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
   width: ${(props) => props.percentage}%;
   background-color: ${(props) => props.theme.palette.secondary};
-  border-radius: 5px;
+  height: 6px;
 `;
 
 const PostPoll = ({ post }) => {
@@ -62,60 +90,48 @@ const PostPoll = ({ post }) => {
   return (
     <PostPollWrap>
       {post.poll.options.map((option) => (
-        <>
-          <PostPollOption
-            hasVoted={hasVoted}
-            onClick={() =>
-              handleVote({
-                pollId: post.media.data,
-                postId: post._id,
-                vote: option.title,
-              })
-            }
-          >
-            <span>
-              {option.title}{' '}
-              {option.votes && option.votes.includes(user._id) && (
-                <VotedIcon color="white" fontSize="1em" />
-              )}{' '}
-            </span>
-            {hasVoted && (
-              <PostPollOptionProgress
-                percentage={(option.votesCount / post.poll.allVotesCount) * 100}
-              />
-            )}
-          </PostPollOption>
-          {hasVoted && (
-            <div display="flex" style={{ marginBottom: '.5em' }}>
-              <small style={{ margin: '0 .25em' }}>
-                {((option.votesCount / post.poll.allVotesCount) * 100).toFixed(
-                  2
-                )}
-                % - {`${option.votesCount} `}
-                <FormattedPlural
-                  value={option.votesCount}
-                  one={
-                    <FormattedMessage id="common.vote">
-                      {(txt) => <>{txt.toLowerCase()}</>}
-                    </FormattedMessage>
-                  }
-                  other={
-                    <FormattedMessage id="common.votePlural">
-                      {(txt) => <>{txt.toLowerCase()}</>}
-                    </FormattedMessage>
-                  }
-                />
-              </small>
+        <PostPollOption
+          hasVoted={hasVoted}
+          key={option._id}
+          onClick={() =>
+            handleVote({
+              pollId: post.media.data,
+              postId: post._id,
+              vote: option.title,
+            })
+          }
+        >
+          <div className="option-title">
+            <div>
+              <span>{option.title}</span>
+              {option.votes && option.votes.includes(user._id) && <VotedIcon />}
             </div>
-          )}
-        </>
+
+            <span>
+              {option.votesCount === 0
+                ? 0
+                : (option.votesCount / post.poll.allVotesCount) * 100}
+              %
+            </span>
+          </div>
+
+          <div className="progress-bar">
+            <PostPollOptionProgress
+              percentage={
+                option.votesCount === 0
+                  ? 0
+                  : (option.votesCount / post.poll.allVotesCount) * 100
+              }
+            />
+          </div>
+        </PostPollOption>
       ))}
-      <small>
+      <span>
         <FormattedMessage
           id="components.postPoll.votesTotal"
           values={{ votes: post.poll.allVotesCount || 0 }}
         />
-      </small>
+      </span>
     </PostPollWrap>
   );
 };

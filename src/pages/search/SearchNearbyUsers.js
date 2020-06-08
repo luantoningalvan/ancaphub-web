@@ -3,7 +3,7 @@ import Slider from 'rc-slider';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 import { FormattedMessage } from 'react-intl';
-import LocateIcon from 'react-ionicons/lib/MdLocate';
+import { FiCrosshair as LocateIcon } from 'react-icons/fi';
 import styled from 'styled-components';
 
 import { searchNearbyUserRequest } from '../../actions/search';

@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { useRouteMatch } from 'react-router-dom';
 
 // Icons
-import NewsFeedIcon from 'react-ionicons/lib/IosPaper';
-import LibraryIcon from 'react-ionicons/lib/IosFolderOpen';
-import UsersIcon from 'react-ionicons/lib/IosPerson';
-
+import {
+  FiHome as NewsFeedIcon,
+  FiFolder as LibraryIcon,
+  FiUser as UsersIcon,
+} from 'react-icons/fi';
 // i18n
 import { FormattedMessage } from 'react-intl';
 import MenuItem from './MenuItem';

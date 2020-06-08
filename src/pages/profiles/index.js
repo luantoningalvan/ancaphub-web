@@ -2,10 +2,13 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
-import LocationIcon from 'react-ionicons/lib/IosPinOutline';
-import BirthIcon from 'react-ionicons/lib/IosEggOutline';
-import SiteIcon from 'react-ionicons/lib/IosLinkOutline';
-import EditIcon from 'react-ionicons/lib/IosCreate';
+import {
+  FiGlobe as SiteIcon,
+  FiCalendar as BirthIcon,
+  FiMapPin as LocationIcon,
+  FiEdit as EditIcon,
+} from 'react-icons/fi';
+
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import defaultProfileCover from '../../assets/default-profile-cover.jpg';
 

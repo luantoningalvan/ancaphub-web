@@ -1,14 +1,22 @@
 import React, { memo, useState } from 'react';
 import styled from 'styled-components';
-import SearchIcon from 'react-ionicons/lib/IosSearch';
-import BackIcon from 'react-ionicons/lib/IosArrowBack';
-import LocateIcon from 'react-ionicons/lib/MdLocate';
+import {
+  FiSearch as SearchIcon,
+  FiArrowLeft as BackIcon,
+  FiCrosshair as LocateIcon,
+} from 'react-icons/fi';
 import { FormattedMessage } from 'react-intl';
 import { Link, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import { IconButton } from '../ui';
 
 const SearchWrapper = styled.div`
+  i,
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
   .not-collapsed {
     height: 64px;
     width: 100%;
@@ -20,11 +28,11 @@ const SearchWrapper = styled.div`
     z-index: 100;
     display: flex;
     align-items: center;
+    color: ${(props) => props.theme.palette.text.contrast};
 
     > input {
       border: none;
       background: transparent;
-      height: 50px;
       padding: 16px;
       outline: none;
       flex: 1;
@@ -36,25 +44,19 @@ const SearchWrapper = styled.div`
         font-family: Ubuntu;
       }
     }
-
-    > a svg {
-      fill: white;
-    }
   }
+
   .mobile-search {
-    svg {
-      fill: ${(props) => props.theme.palette.text.contrast};
-      width: 22px;
-      height: 22px;
-    }
+    color: ${(props) => props.theme.palette.text.contrast};
+
     > button {
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       padding: 8px;
       outline: none;
       background: transparent;
       cursor: pointer;
-      width: 40px;
+      width: auto;
 
       &:hover {
         background: rgba(0, 0, 0, 0.15);
@@ -63,6 +65,7 @@ const SearchWrapper = styled.div`
 
     > a {
       padding: 8px;
+      color: ${(props) => props.theme.palette.text.contrast};
     }
   }
 
@@ -78,15 +81,11 @@ const SearchWrapper = styled.div`
       display: block;
       background: rgba(0, 0, 0, 0.15);
       width: 360px;
-      height: 50px;
       border-radius: 8px;
       display: flex;
       align-items: center;
       padding: 8px;
-
-      svg {
-        fill: ${(props) => props.theme.palette.text.contrast};
-      }
+      color: ${(props) => props.theme.palette.text.contrast};
 
       input {
         flex: 1;
@@ -95,6 +94,7 @@ const SearchWrapper = styled.div`
         background: transparent;
       }
 
+      a,
       input,
       input::placeholder {
         color: ${(props) => props.theme.palette.text.contrast};

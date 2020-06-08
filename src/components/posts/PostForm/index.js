@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { connect } from 'react-redux';
 import ReactPlayer from 'react-player';
 import { generate } from 'shortid';
-import ImageIcon from 'react-ionicons/lib/IosImageOutline';
-import EmbedIcon from 'react-ionicons/lib/IosCode';
-import PollIcon from 'react-ionicons/lib/IosPodiumOutline';
-import CloseIcon from 'react-ionicons/lib/IosClose';
-import AddIcon from 'react-ionicons/lib/IosAdd';
+import {
+  FiImage as ImageIcon,
+  FiCode as EmbedIcon,
+  FiBarChart as PollIcon,
+  FiX as CloseIcon,
+  FiPlusCircle as AddIcon,
+} from 'react-icons/fi';
 
 import { EditorState, RichUtils, convertToRaw } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
@@ -51,7 +53,7 @@ function PostForm({ createPostRequest: createPost }) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const contentState = editorState.getCurrentContent();
   const [media, setMedia] = useState(null);
-
+  const uploadInputRef = useRef(null);
   const preview = useMemo(
     () =>
       media && media.type === 'image' ? URL.createObjectURL(media.data) : null,
@@ -174,7 +176,7 @@ function PostForm({ createPostRequest: createPost }) {
                   <div className="poll-box">
                     <ul>
                       {media.data.map((option, index) => (
-                        <li key={generate()}>
+                        <li key={generate()} style={{ marginBottom: 8 }}>
                           <FormattedMessage
                             id={`components.postForm.pollOptionNumber${
                               index >= 2 ? 'Optional' : ''
@@ -187,7 +189,6 @@ function PostForm({ createPostRequest: createPost }) {
                                 type="text"
                                 placeholder={msg}
                                 value={media.data[index]}
-                                style={{ marginBottom: 8 }}
                                 onChange={(e) =>
                                   handleChangePollOption(index, e)
                                 }
@@ -202,13 +203,12 @@ function PostForm({ createPostRequest: createPost }) {
                         display: 'flex',
                         alignItems: 'flex-end',
                         minWidth: 56,
-                        padding: 10,
+                        padding: '16px 8px',
                       }}
                     >
                       {media.data.length < 4 && (
                         <IconButton
-                          icon={<AddIcon />}
-                          color="secondary"
+                          icon={<AddIcon size="20px" />}
                           onClick={addPollOption}
                         />
                       )}
@@ -263,14 +263,17 @@ function PostForm({ createPostRequest: createPost }) {
         </div>
         <div className="form-actions">
           <div className="upload-button">
-            <label>
-              <ImageIcon />
-              <input
-                id="image-input"
-                type="file"
-                onChange={(e) => handleAddImage(e)}
-              />
-            </label>
+            <IconButton
+              icon={<ImageIcon />}
+              size="small"
+              onClick={() => uploadInputRef.current.click()}
+            />
+            <input
+              ref={uploadInputRef}
+              id="image-input"
+              type="file"
+              onChange={(e) => handleAddImage(e)}
+            />
           </div>
 
           <IconButton

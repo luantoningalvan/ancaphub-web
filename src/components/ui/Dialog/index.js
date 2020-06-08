@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { ContainerDialog } from './styles';
 import { Paper } from '../Paper';
 
-const Dialog = ({ show, children }) => {
+const Dialog = ({ show, children, style }) => {
   useEffect(() => {
     if (!show) {
       document.body.classList.remove('modal-open');
@@ -18,7 +18,9 @@ const Dialog = ({ show, children }) => {
 
   return ReactDOM.createPortal(
     <ContainerDialog>
-      <Paper className="content">{children}</Paper>
+      <Paper className="content" style={style}>
+        {children}
+      </Paper>
     </ContainerDialog>,
     modalRoot
   );

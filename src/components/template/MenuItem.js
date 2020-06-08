@@ -13,28 +13,27 @@ export const StyledLink = styled(Link)`
   background: ${(props) =>
     props.current ? props.theme.palette.secondary : 'transparent'};
 
-  > i svg {
-    fill: ${(props) =>
-      props.current
-        ? props.theme.palette.text.contrast
-        : props.theme.palette.text.secondary};
+  span {
+    font-size: 17px;
+    line-height: 20px;
+    display: block;
+  }
+  i {
     margin-right: 16px;
+    font-size: 20px;
+    height: 20px;
+    display: block;
   }
 
-  span {
-    color: ${(props) =>
-      props.current
-        ? props.theme.palette.text.contrast
-        : props.theme.palette.text.secondary};
-  }
+  color: ${(props) =>
+    props.current
+      ? props.theme.palette.text.contrast
+      : props.theme.palette.text.secondary};
 
   &:hover {
     ${(props) => css`
       background: ${props.theme.palette.secondary};
       color: ${props.theme.palette.text.contrast};
-      > i svg {
-        fill: ${props.theme.palette.text.contrast};
-      }
     `}
   }
 
@@ -46,10 +45,9 @@ export const StyledLink = styled(Link)`
     padding: 8px 0px;
     border-radius: 4px;
 
-    > i svg {
-      margin: 0px;
-      width: 24px;
-      height: 24px;
+    i {
+      margin-right: 0px;
+      font-size: 20px;
     }
     span {
       display: none;

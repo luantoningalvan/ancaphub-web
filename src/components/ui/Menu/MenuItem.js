@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 const MenuItemWrap = styled.li`
   svg {
-    fill: ${(props) => props.theme.palette.text.primary};
-    height: 28px;
-    width: 28px;
-    margin-right: 8px;
+    color: ${(props) => props.theme.palette.text.primary};
+    height: 24px;
+    width: 24px;
+    margin-right: 16px;
   }
 
   a {

@@ -8,11 +8,14 @@ import {
 import { parseISO, getTime, differenceInSeconds } from 'date-fns';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
 import ReactPlayer from 'react-player';
-import MdMore from 'react-ionicons/lib/MdMore';
-import LikeIcon from 'react-ionicons/lib/IosThumbsUpOutline';
-import LikeIconFull from 'react-ionicons/lib/IosThumbsUp';
-import CommentIcon from 'react-ionicons/lib/IosTextOutline';
-import DeleteIcon from 'react-ionicons/lib/IosRemoveCircleOutline';
+
+import {
+  FiMoreVertical as MdMore,
+  FiThumbsUp as LikeIcon,
+  FiMessageSquare as CommentIcon,
+  FiTrash as DeleteIcon,
+} from 'react-icons/fi';
+
 import { useDispatch, useSelector } from 'react-redux';
 import CommentBox from '../comments/CommentBox';
 
@@ -136,9 +139,9 @@ const PostCard = ({ data }) => {
         {data.likeCount > 0 && (
           <div className="post-counts">
             <span onClick={() => setLikeBoxState(true)} role="presentation">
-              {data.likeCount}
+              {`${data.likeCount} `}
               <FormattedPlural
-                value={data.likeCount}
+                value={`${data.likeCount} `}
                 one={
                   <FormattedMessage id="common.likeNoun">
                     {(txt) => <>{txt.toLowerCase()}</>}
@@ -167,7 +170,7 @@ const PostCard = ({ data }) => {
             onClick={() => handleLikePost(data._id)}
             className={data.hasLiked ? 'pressed' : ''}
           >
-            {data.hasLiked ? <LikeIconFull /> : <LikeIcon />}
+            {data.hasLiked ? <LikeIcon /> : <LikeIcon />}
             <span>
               <FormattedMessage id="common.like" />
             </span>

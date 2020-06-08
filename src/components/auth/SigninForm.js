@@ -3,9 +3,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+import { FiMail, FiLock } from 'react-icons/fi';
 import Input from '../form/Input';
 import { authUserRequest } from '../../actions/auth';
-
 import { Button } from '../ui';
 
 const SignInForm = () => {
@@ -48,6 +48,7 @@ const SignInForm = () => {
           <FormattedMessage id="common.email">
             {(msg) => (
               <Input
+                icon={FiMail}
                 type="email"
                 placeholder={msg}
                 name="email"
@@ -61,6 +62,7 @@ const SignInForm = () => {
           <FormattedMessage id="common.password">
             {(msg) => (
               <Input
+                icon={FiLock}
                 type="password"
                 placeholder={msg}
                 name="password"

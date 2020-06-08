@@ -1,10 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from '@unform/core';
-import { TextField } from '../ui';
+import { Container, Error } from '../ui/TextField/styles';
 
-export default function Input({ name, type = 'text', ...rest }) {
+const Input = ({ name, icon: Icon, ...rest }) => {
+  const { fieldName, defaultValue, error, registerField } = useField(name);
   const inputRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
 
   useEffect(() => {
     registerField({
@@ -14,20 +17,33 @@ export default function Input({ name, type = 'text', ...rest }) {
     });
   }, [fieldName, registerField]);
 
+  const handleInputFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleInputBlur = useCallback(() => {
+    setIsFocused(false);
+    setIsFilled(inputRef.current !== null && !!inputRef.current.value);
+  }, []);
+
   return (
-    <>
-      <TextField
-        ref={inputRef}
+    <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
+      {Icon && <Icon size={20} />}
+      <input
         defaultValue={defaultValue}
-        hasError={error}
-        type={type}
+        type="text"
+        ref={inputRef}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
         {...rest}
       />
       {error && (
-        <span style={{ color: '#f93c3c', fontSize: '0.9em', marginTop: 8 }}>
-          {error}
-        </span>
+        <Error title={error}>
+          <FiAlertCircle color="#c53030" size="20px" />
+        </Error>
       )}
-    </>
+    </Container>
   );
-}
+};
+
+export default Input;

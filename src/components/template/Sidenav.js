@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import CloseIcon from 'react-ionicons/lib/MdClose';
+import { FiX as CloseIcon } from 'react-icons/fi';
+
 import { useTransition, animated } from 'react-spring';
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import Menu from './Menu';

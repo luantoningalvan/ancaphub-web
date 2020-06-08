@@ -57,7 +57,7 @@ export const ProfilePicture = styled.div`
           justify-content: center;
 
           svg {
-            fill: ${props.theme.palette.text.contrast};
+            color: ${props.theme.palette.text.contrast};
             height: 32px;
             width: 32px;
           }
@@ -238,7 +238,9 @@ export const UserAbout = styled.div`
 
       svg {
         float: left;
-        fill: ${(props) => props.theme.palette.text.primary};
+        height: 20px;
+        width: 20px;
+        color: ${(props) => props.theme.palette.text.primary};
         margin-right: 8px;
       }
 

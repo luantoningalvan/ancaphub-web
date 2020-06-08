@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import DownloadIcon from 'react-ionicons/lib/IosDownload';
+import { FiDownload as DownloadIcon } from 'react-icons/fi';
 
 import {
   Paper,

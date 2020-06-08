@@ -20,10 +20,6 @@ export const CardHeaderContainer = styled.div`
   h3 {
     font-size: 1em;
   }
-
-  svg {
-    fill: ${(props) => props.theme.palette.text.primary};
-  }
 `;
 
 export const CardBodyContainer = styled.div`

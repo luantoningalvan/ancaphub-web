@@ -11,19 +11,17 @@ const DropdownListItemWrap = styled.li`
   padding: 8px 16px;
   cursor: pointer;
 
-  &:hover {
-    a,
-    span {
-      color: ${(props) => props.theme.palette.primary};
-    }
-
-    svg {
-      fill: ${(props) => props.theme.palette.primary};
-    }
+  svg {
+    height: 20px;
+    width: 20px;
   }
 
-  svg {
-    fill: ${(props) => props.theme.palette.text.primary};
+  &:hover {
+    a,
+    span,
+    svg {
+      color: ${(props) => props.theme.palette.primary};
+    }
   }
 
   span,
@@ -33,7 +31,7 @@ const DropdownListItemWrap = styled.li`
 
   span {
     color: ${(props) => props.theme.palette.text.primary};
-    margin-left: 0.5em;
+    margin-left: 16px;
   }
 
   span a {

@@ -2,16 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { generate } from 'shortid';
 import { Link, useRouteMatch } from 'react-router-dom';
-import NotificationsIcon from 'react-ionicons/lib/IosNotifications';
 import { FormattedMessage } from 'react-intl';
-import ArrowDownIcon from 'react-ionicons/lib/IosArrowDown';
-import ProfileIcon from 'react-ionicons/lib/MdPerson';
-import MenuIcon from 'react-ionicons/lib/IosMenu';
-import BookIcon from 'react-ionicons/lib/MdBook';
-import BookmarkIcon from 'react-ionicons/lib/MdBookmark';
-import ContrastIcon from 'react-ionicons/lib/MdContrast';
-import SettingsIcon from 'react-ionicons/lib/MdSettings';
-import LogoutIcon from 'react-ionicons/lib/IosLogOut';
+
+import {
+  FiUser as ProfileIcon,
+  FiSun as ContrastIcon,
+  FiPower as LogoutIcon,
+  FiChevronDown as ArrowDownIcon,
+  FiBell as NotificationsIcon,
+  FiSettings as SettingsIcon,
+  FiMenu as MenuIcon,
+} from 'react-icons/fi';
+
 import { useDispatch, useSelector } from 'react-redux';
 import Search from './Search';
 
@@ -110,20 +112,28 @@ const HeaderMenuItem = styled.li`
   > div {
     display: block;
     position: relative;
-    padding: 10px;
-    border-radius: 5px;
+    margin-left: 8px;
+    padding: 8px;
+    border-radius: 8px;
     background: ${(props) =>
       props.current ? 'rgba(0,0,0,0.15)' : 'transparent'};
     transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       background: rgba(0, 0, 0, 0.15);
     }
   }
 
-  > a svg,
-  > div svg {
-    fill: ${(props) => props.theme.palette.text.contrast};
+  > a {
+    color: ${(props) => props.theme.palette.text.contrast};
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
   }
 
   .badge {
@@ -253,16 +263,6 @@ const Header = ({ user, setCollapsed }) => {
                 </Link>
               </DropdownListItem>
 
-              <DropdownListItem icon={<BookIcon />}>
-                <Link to="/contributions">
-                  <FormattedMessage id="common.contributions" />
-                </Link>
-              </DropdownListItem>
-              <DropdownListItem icon={<BookmarkIcon />}>
-                <Link to="/bookmarks">
-                  <FormattedMessage id="account.bookmarks.savedItemsHeading" />
-                </Link>
-              </DropdownListItem>
               <DropdownListItem
                 icon={<ContrastIcon />}
                 action={

@@ -73,8 +73,8 @@ export const PostContainer = styled(Paper)`
         font-size: 1.1em;
       }
 
-      > svg {
-        fill: ${(props) => props.theme.palette.text.primary};
+      svg {
+        font-size: 20px;
         margin-right: 8px;
       }
 
@@ -84,11 +84,7 @@ export const PostContainer = styled(Paper)`
     }
 
     .pressed {
-      color: ${(props) => props.theme.palette.primary};
-
-      svg {
-        fill: ${(props) => props.theme.palette.primary};
-      }
+      color: ${(props) => props.theme.palette.secondary};
     }
   }
 

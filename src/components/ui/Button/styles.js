@@ -40,7 +40,7 @@ export const ButtonContainer = styled.button`
   }
 
   svg {
-    fill: ${(props) =>
+    color: ${(props) =>
       props.variant === 'outlined'
         ? `${
             props.color
@@ -58,12 +58,16 @@ export const IconButtonContainer = styled(ButtonContainer)`
   border-radius: 100%;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out,
     border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  padding: 5px;
+  padding: 8px;
+  color: ${(props) => props.theme.palette.text.secondary};
 
-  > svg {
-    fill: ${(props) => props.theme.palette.text.secondary};
-    height: 2em;
-    width: 2em;
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  svg {
+    height: 20px;
+    width: 20px;
     margin: 0px;
   }
 `;

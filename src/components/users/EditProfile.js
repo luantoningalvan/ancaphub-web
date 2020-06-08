@@ -3,12 +3,20 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form } from '@unform/web';
-import EditIcon from 'react-ionicons/lib/IosCreate';
-import CloseIcon from 'react-ionicons/lib/MdClose';
+import {
+  FiEdit as EditIcon,
+  FiUser,
+  FiAlignJustify,
+  FiGlobe,
+  FiCalendar,
+  FiMapPin,
+  FiX as CloseIcon,
+} from 'react-icons/fi';
+
 import { updateProfileInfoRequest } from '../../actions/users';
 import Input from '../form/Input';
 
-import { IconButton, Button, Dialog, CardBody, CardHeader } from '../ui';
+import { IconButton, Button, Dialog, Card, CardBody, CardHeader } from '../ui';
 
 const EditProfile = () => {
   const { formatMessage } = useIntl();
@@ -17,6 +25,7 @@ const EditProfile = () => {
   const data = useSelector((state) => state.profile.user);
   const handleClick = () => setOpen(!open);
   const editFormRef = useRef(null);
+
   async function handleSubmit(validatedData) {
     try {
       const schema = Yup.object().shape({
@@ -66,14 +75,18 @@ const EditProfile = () => {
 
   return (
     <>
-      <Button color="primary" size="small" onClick={() => setOpen(true)}>
+      <Button color="primary" onClick={() => setOpen(true)}>
         <EditIcon />
         <span>
           <FormattedMessage id="components.editProfile.heading" />
         </span>
       </Button>
 
-      <Dialog onClose={handleClick} show={open}>
+      <Dialog
+        onClose={handleClick}
+        show={open}
+        style={{ width: '100%', maxWidth: 420 }}
+      >
         <Form
           initialData={{
             name: data.name,
@@ -88,57 +101,53 @@ const EditProfile = () => {
           onSubmit={handleSubmit}
           ref={editFormRef}
         >
-          <CardHeader
-            action={{
-              label: <FormattedMessage id="common.edit" />,
-              action: () => editFormRef.current.submitForm(),
-              show: true,
-            }}
-            title={
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                <IconButton icon={<CloseIcon />} onClick={handleClick} />
-                <FormattedMessage id="components.editProfile.heading" />
-              </div>
-            }
-          />
-          <CardBody style={{ maxWidth: 420 }}>
-            <FormattedMessage id="common.name">
-              {(msg) => <Input placeholder={msg} name="name" />}
-            </FormattedMessage>
-            <FormattedMessage id="common.bio">
-              {(msg) => (
-                <Input style={{ marginTop: 16 }} placeholder={msg} name="bio" />
-              )}
-            </FormattedMessage>
-            <FormattedMessage id="nearby.location">
-              {(msg) => (
-                <Input
-                  style={{ marginTop: 16 }}
-                  placeholder={msg}
-                  name="currentCity"
-                />
-              )}
-            </FormattedMessage>
-            <FormattedMessage id="common.website">
-              {(msg) => (
-                <Input
-                  style={{ marginTop: 16 }}
-                  placeholder={msg}
-                  name="site"
-                />
-              )}
-            </FormattedMessage>
-            <FormattedMessage id="common.birthday">
-              {(msg) => (
-                <Input
-                  type="date"
-                  style={{ marginTop: 16 }}
-                  placeholder={msg}
-                  name="birthday"
-                />
-              )}
-            </FormattedMessage>
-          </CardBody>
+          <Card>
+            <CardHeader
+              action={{
+                label: <FormattedMessage id="common.edit" />,
+                action: () => editFormRef.current.submitForm(),
+                show: true,
+              }}
+              title={
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <IconButton icon={<CloseIcon />} onClick={handleClick} />
+                  <span style={{ marginLeft: 8 }}>
+                    <FormattedMessage id="components.editProfile.heading" />
+                  </span>
+                </div>
+              }
+            />
+            <CardBody>
+              <FormattedMessage id="common.name">
+                {(msg) => <Input icon={FiUser} placeholder={msg} name="name" />}
+              </FormattedMessage>
+              <FormattedMessage id="common.bio">
+                {(msg) => (
+                  <Input icon={FiAlignJustify} placeholder={msg} name="bio" />
+                )}
+              </FormattedMessage>
+              <FormattedMessage id="nearby.location">
+                {(msg) => (
+                  <Input icon={FiMapPin} placeholder={msg} name="currentCity" />
+                )}
+              </FormattedMessage>
+              <FormattedMessage id="common.website">
+                {(msg) => (
+                  <Input icon={FiGlobe} placeholder={msg} name="site" />
+                )}
+              </FormattedMessage>
+              <FormattedMessage id="common.birthday">
+                {(msg) => (
+                  <Input
+                    icon={FiCalendar}
+                    type="date"
+                    placeholder={msg}
+                    name="birthday"
+                  />
+                )}
+              </FormattedMessage>
+            </CardBody>
+          </Card>
         </Form>
       </Dialog>
     </>

@@ -37,15 +37,18 @@ export const Presentation = styled.div`
         list-style: none;
         display: flex;
         align-items: center;
-        font-size: 20px;
-        margin-bottom: 8px;
+        font-size: 25px;
         font-weight: lighter;
-      }
-      li > svg {
-        height: 32px;
-        width: 32px;
-        fill: ${(props) => props.theme.palette.text.primary};
-        margin-right: 8px;
+
+        & + li {
+          margin-top: 16px;
+        }
+
+        svg {
+          height: 25px;
+          width: 25px;
+          margin-right: 16px;
+        }
       }
     }
 

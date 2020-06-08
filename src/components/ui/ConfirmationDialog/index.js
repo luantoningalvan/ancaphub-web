@@ -1,5 +1,5 @@
 import React from 'react';
-import CloseIcon from 'react-ionicons/lib/MdClose';
+import { FiX as CloseIcon } from 'react-icons/fi';
 import { Dialog } from '../Dialog';
 import { Button, IconButton } from '../Button';
 

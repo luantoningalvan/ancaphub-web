@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
-import UploadIcon from 'react-ionicons/lib/IosCloudUploadOutline';
+import { FiX as CloseIcon, FiUpload as UploadIcon } from 'react-icons/fi';
 import styled from 'styled-components';
-import CloseIcon from 'react-ionicons/lib/MdClose';
 import Slider from 'rc-slider';
 import Cropper from 'react-easy-crop';
 import { useDispatch } from 'react-redux';
@@ -29,7 +28,6 @@ const UplaodArea = styled.label`
   }
 
   svg {
-    fill: ${(props) => props.theme.palette.text.secondary};
     height: 40px;
     width: 40px;
     margin-bottom: 16px;

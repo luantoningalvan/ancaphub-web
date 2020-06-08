@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import CloseButton from 'react-ionicons/lib/MdClose';
-
+import { FiX as CloseButton } from 'react-icons/fi';
 import {
   Dialog,
   Button,

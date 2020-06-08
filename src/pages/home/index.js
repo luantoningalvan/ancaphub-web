@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import LibraryIcon from 'react-ionicons/lib/IosFolder';
-import GroupIcon from 'react-ionicons/lib/IosPeople';
-import EventIcon from 'react-ionicons/lib/IosCalendar';
-import LocationSearchIcon from 'react-ionicons/lib/IosLocate';
+
+import {
+  FiFolder as LibraryIcon,
+  FiUsers as GroupIcon,
+  FiCalendar as EventIcon,
+  FiCrosshair as LocationSearchIcon,
+} from 'react-icons/fi';
+
 import ThemeProvider from '../../components/template/Provider';
 import SigninForm from '../../components/auth/SigninForm';
 import SignupForm from '../../components/auth/SignupForm';

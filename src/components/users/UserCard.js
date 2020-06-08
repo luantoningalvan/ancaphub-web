@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import DistanceIcon from 'react-ionicons/lib/IosPin';
+import { FiMapPin as DistanceIcon } from 'react-icons/fi';
 import { Paper } from '../ui';
 import FollowButton from './FollowButton';
 import UserAvatar from './UserAvatar';

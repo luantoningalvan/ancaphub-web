@@ -1,12 +1,12 @@
 import React, { useEffect, memo } from 'react';
-import CloseIcon from 'react-ionicons/lib/IosClose';
+import { FiX as CloseIcon } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 import { getPostLikesRequest } from '../../actions/posts';
 import UserList from '../users/UserList';
 
-import { Dialog, Card, CardHeader, CardBody, IconButton, Spinner } from '../ui';
+import { Dialog, Card, CardHeader, CardBody, Spinner } from '../ui';
 
 const LikeBox = ({ open, onClose, postId }) => {
   const dispatch = useDispatch();
@@ -23,16 +23,15 @@ const LikeBox = ({ open, onClose, postId }) => {
     <Dialog show={open}>
       {open && (
         <Card style={{ minWidth: 350 }}>
-          <CardHeader>
-            <h3>
-              <FormattedMessage id="common.likePlural" />
-            </h3>
-            <IconButton
-              icon={<CloseIcon />}
-              color="primary"
-              onClick={onClose}
-            />
-          </CardHeader>
+          <CardHeader
+            title={<FormattedMessage id="common.likePlural" />}
+            action={{
+              type: 'icon',
+              show: true,
+              action: onClose,
+              label: <CloseIcon />,
+            }}
+          />
           <CardBody>
             {likes.postLikesLoading ? (
               <Spinner size={48} />

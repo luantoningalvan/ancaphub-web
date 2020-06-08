@@ -16,34 +16,13 @@ export default styled(Paper)`
   }
 
   .upload-button {
-    padding: 4px;
-
     [type='file'] {
-      border: 0;
-      clip: rect(0, 0, 0, 0);
-      height: 1px;
-      width: 1px;
-      overflow: hidden;
-      position: absolute;
-      white-space: nowrap;
+      display: none;
     }
-
-    svg {
-      cursor: pointer;
-      fill: ${(props) => props.theme.palette.text.secondary};
-      height: 2em;
-      width: 2em;
-      margin: 2.5px 0;
-      padding: 2px;
-    }
-
     label {
-      clear: both;
-    }
-
-    [type='file'] + label {
-      cursor: pointer;
-      display: inline-block;
+      display: block;
+      height: 100%;
+      width: 100%;
     }
   }
 

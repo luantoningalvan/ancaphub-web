@@ -1,6 +1,6 @@
 import React from 'react';
 import { CardHeaderContainer } from './styles';
-import { Button } from '../Button';
+import { Button, IconButton } from '../Button';
 
 const CardHeader = ({ customContent, title, action, ...rest }) => (
   <CardHeaderContainer {...rest}>
@@ -10,9 +10,15 @@ const CardHeader = ({ customContent, title, action, ...rest }) => (
       <>
         <h3>{title}</h3>
         {!!action && action.show && (
-          <Button onClick={() => action.action()} color="secondary">
-            {action.label}
-          </Button>
+          <>
+            {action.type === 'icon' ? (
+              <IconButton onClick={() => action.action()} icon={action.label} />
+            ) : (
+              <Button onClick={() => action.action()} color="secondary">
+                {action.label}
+              </Button>
+            )}
+          </>
         )}
       </>
     )}

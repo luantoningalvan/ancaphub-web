@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import MdMore from 'react-ionicons/lib/MdMore';
-import DeleteIcon from 'react-ionicons/lib/IosRemoveCircleOutline';
+import {
+  FiMoreVertical as MoreIcon,
+  FiTrash as DeleteIcon,
+} from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedRelativeTime, FormattedMessage } from 'react-intl';
 import { differenceInSeconds, parseISO, getTime } from 'date-fns';
 import UserAvatar from '../users/UserAvatar';
 import UserName from '../users/UserName';
-// Dependency cycle needs to be fixed
-// eslint-disable-next-line import/no-cycle
-import CommentBox from './CommentBox';
 import { deleteCommentRequest } from '../../actions/comments';
 
 import {
@@ -88,24 +87,14 @@ const SingleCommentStyle = styled.div`
 `;
 
 const SingleComment = ({ comment, post }) => {
-  const [responsesState] = useState(false);
   const [deleteBox, setDeleteBox] = useState(false);
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.user._id);
-
-  // Keep commented until used for avoiding lint errors
-  // const handleResponse = () => {
-  //   setResponsesState(!responsesState);
-  // };
 
   const handleDelete = () => {
     dispatch(deleteCommentRequest(post, comment._id));
     setDeleteBox(false);
   };
-
-  // const handleLikeComment = () => {
-  //   dispatch(likeCommentRequest(comment._id));
-  // };
 
   return (
     <SingleCommentStyle>
@@ -115,18 +104,6 @@ const SingleComment = ({ comment, post }) => {
           <UserName user={comment.user} fontSize={1} />
           <p className="comment-text">{` ${comment.content}`}</p>
           <ul className="date">
-            {/*
-            <li>
-              <a href="#" onClick={handleLikeComment}>
-                <FormattedMessage id="common.like" />
-              </a>
-            </li>
-            <li>
-              <a role="presentation" onClick={handleResponse}>
-                <FormattedMessage id="components.commentBox.reply" />
-              </a>
-            </li>
-*/}
             <li>
               <span className="time-link">
                 <FormattedRelativeTime
@@ -147,13 +124,9 @@ const SingleComment = ({ comment, post }) => {
           <div className="actions">
             <Dropdown
               placement="left-start"
-              toggle={<IconButton icon={<MdMore />} />}
+              toggle={<IconButton icon={<MoreIcon />} />}
             >
               <DropdownListContainer>
-                {/*
-              <DropdownListItem icon={<DocumentIcon />}>
-                <FormattedMessage id="common.edit" />
-              </DropdownListItem> */}
                 <DropdownListItem
                   icon={<DeleteIcon />}
                   onClick={() => setDeleteBox(true)}
@@ -174,7 +147,6 @@ const SingleComment = ({ comment, post }) => {
           </div>
         )}
       </div>
-      <CommentBox expanded={responsesState} indent />
     </SingleCommentStyle>
   );
 };

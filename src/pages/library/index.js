@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { generate } from 'shortid';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import UploadButton from 'react-ionicons/lib/IosCloudUpload';
 import { isEmpty } from 'lodash';
 import LibraryCard from '../../components/library/LibraryCard';
 
@@ -18,7 +17,6 @@ import {
   MenuItem,
   Tab,
   Tabs,
-  Button,
   LoadContent,
   Paper,
 } from '../../components/ui';
@@ -65,16 +63,6 @@ const Library = () => {
       <Hero
         title={<FormattedMessage id="common.library" />}
         description={<FormattedMessage id="home.features.0" />}
-        actions={
-          <Link to="/library/contribute">
-            <Button color="primary" to="/library/contribute">
-              <UploadButton />
-              <span>
-                <FormattedMessage id="library.contribute" />
-              </span>
-            </Button>
-          </Link>
-        }
       />
 
       <LibraryContainer>
