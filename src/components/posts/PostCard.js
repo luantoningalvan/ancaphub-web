@@ -134,7 +134,7 @@ const PostCard = ({ data }) => {
           <PostPoll post={data} />
         )}
 
-        {data.likeCount > 0 && (
+        {(data.likeCount > 0 || data.commentCount > 0) && (
           <div className="post-counts">
             <span onClick={() => setLikeBoxState(true)} role="presentation">
               {`${data.likeCount} `}
@@ -147,6 +147,22 @@ const PostCard = ({ data }) => {
                 }
                 other={
                   <FormattedMessage id="common.likePlural">
+                    {(txt) => <>{txt.toLowerCase()}</>}
+                  </FormattedMessage>
+                }
+              />
+            </span>
+            <span role="presentation" onClick={handleCommentBox}>
+              {` ${data.commentCount} `}
+              <FormattedPlural
+                value={`${data.commentCount}`}
+                one={
+                  <FormattedMessage id="common.commentVerb">
+                    {(txt) => <>{txt.toLowerCase()}</>}
+                  </FormattedMessage>
+                }
+                other={
+                  <FormattedMessage id="common.comments">
                     {(txt) => <>{txt.toLowerCase()}</>}
                   </FormattedMessage>
                 }
