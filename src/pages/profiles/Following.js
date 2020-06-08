@@ -1,10 +1,13 @@
 import React, { useEffect, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { generate } from 'shortid';
 import { getUserFollowingRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
 
 import { Paper, LoadContent } from '../../components/ui';
+
+import { UserCardGrid } from './styles';
 
 const Feed = ({ user: userId }) => {
   const dispatch = useDispatch();
@@ -21,13 +24,11 @@ const Feed = ({ user: userId }) => {
           <FormattedMessage id="profile.following.notFollowingAnyone" />
         </Paper>
       ) : (
-        <div spacing={1}>
+        <UserCardGrid>
           {following.map((user) => (
-            <div xs={4} key={user._id}>
-              <UserCard user={user.user} />
-            </div>
+            <UserCard user={user.user} key={generate()} />
           ))}
-        </div>
+        </UserCardGrid>
       )}
     </LoadContent>
   );

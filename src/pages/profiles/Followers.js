@@ -1,8 +1,11 @@
 import React, { useEffect, memo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
+import { generate } from 'shortid';
 import { getUserFollowersRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
+
+import { UserCardGrid } from './styles';
 
 import { Paper, LoadContent } from '../../components/ui';
 
@@ -21,13 +24,11 @@ const Feed = ({ user: userId }) => {
           <FormattedMessage id="profile.followers.noFollowers" />
         </Paper>
       ) : (
-        <div spacing={1}>
+        <UserCardGrid>
           {followers.map((user) => (
-            <div xs={4} key={user._id}>
-              <UserCard user={user.user} />
-            </div>
+            <UserCard user={user.user} key={generate()} />
           ))}
-        </div>
+        </UserCardGrid>
       )}
     </LoadContent>
   );

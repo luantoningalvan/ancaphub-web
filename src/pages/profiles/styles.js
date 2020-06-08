@@ -265,3 +265,16 @@ export const ProfileContent = styled.div`
     grid-template-columns: 4fr 8fr;
   }
 `;
+
+// This can be moved to other place to avoid the duplicate
+// Adding here too to have the changes done faster
+export const UserCardGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+  @media only screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
