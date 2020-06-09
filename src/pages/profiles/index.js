@@ -205,7 +205,11 @@ const Profiles = () => {
                     <li>
                       <SiteIcon />
                       <span>
-                        <a href="http://example.com" target="_black">
+                        <a
+                          href={user.site}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           {user.site}
                         </a>
                       </span>
