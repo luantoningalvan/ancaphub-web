@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { FiX as CloseIcon } from 'react-icons/fi';
 import { Dialog } from '../Dialog';
 import { Button, IconButton } from '../Button';
@@ -35,10 +36,10 @@ export const ConfirmationDialog = ({
           color="primary"
           variant="outlined"
         >
-          Cancelar
+          <FormattedMessage id="common.cancel" />
         </Button>
         <Button onClick={handleConfirm} size="small" color="secondary">
-          Deletar
+          <FormattedMessage id="common.delete" />
         </Button>
       </div>
     </Dialog>
