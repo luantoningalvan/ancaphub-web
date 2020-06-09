@@ -32,13 +32,15 @@ const AccessAndSecurity = () => {
     try {
       const schema = Yup.object().shape({
         username: Yup.string()
-          .min(3, formatMessage('settings.validation.usernameShort'))
-          .max(20, formatMessage('settings.validation.usernameLong'))
+          .min(3, formatMessage({ id: 'settings.validation.usernameShort' }))
+          .max(20, formatMessage({ id: 'settings.validation.usernameLong' }))
           .matches(
             /^[a-zA-Z0-9_]+$/,
-            formatMessage('settings.validation.regex')
+            formatMessage({ id: 'settings.validation.regex' })
           )
-          .required(formatMessage('settings.validation.usernameRequired')),
+          .required(
+            formatMessage({ id: 'settings.validation.usernameRequired' })
+          ),
       });
 
       await schema.validate(data, {
@@ -60,8 +62,8 @@ const AccessAndSecurity = () => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
-          .email(formatMessage('settings.validation.emailInvalid'))
-          .required(formatMessage('settings.validation.emailRequired')),
+          .email(formatMessage({ id: 'settings.validation.emailInvalid' }))
+          .required(formatMessage({ id: 'settings.validation.emailRequired' })),
       });
       await schema.validate(data, {
         abortEarly: false,
@@ -82,20 +84,23 @@ const AccessAndSecurity = () => {
     try {
       const schema = Yup.object().shape({
         current_password: Yup.string().required(
-          formatMessage('settings.validation.currentPasswordRequired')
+          formatMessage({ id: 'settings.validation.currentPasswordRequired' })
         ),
         new_password: Yup.string()
           .required(
-            formatMessage('settings.validation.currentPasswordRequired')
+            formatMessage({ id: 'settings.validation.currentPasswordRequired' })
           )
-          .min(6, formatMessage('settings.validation.minPasswordLength')),
+          .min(
+            6,
+            formatMessage({ id: 'settings.validation.minPasswordLength' })
+          ),
         confirm_new_password: Yup.string()
           .required(
-            formatMessage('settings.validation.confirmPasswordRequired')
+            formatMessage({ id: 'settings.validation.confirmPasswordRequired' })
           )
           .oneOf(
             [Yup.ref('new_password'), null],
-            formatMessage('settings.validation.passwordMismatch')
+            formatMessage({ id: 'settings.validation.passwordMismatch' })
           ),
       });
       await schema.validate(data, {
