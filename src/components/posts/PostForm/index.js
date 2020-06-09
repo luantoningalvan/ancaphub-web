@@ -176,7 +176,7 @@ function PostForm({ createPostRequest: createPost }) {
                   <div className="poll-box">
                     <ul>
                       {media.data.map((option, index) => (
-                        <li key={generate()} style={{ marginBottom: 8 }}>
+                        <li key={() => generate()} style={{ marginBottom: 8 }}>
                           <FormattedMessage
                             id={`components.postForm.pollOptionNumber${
                               index >= 2 ? 'Optional' : ''
