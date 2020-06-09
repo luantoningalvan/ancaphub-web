@@ -24,14 +24,14 @@ export const Container = styled(animated.div)`
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
   display: flex;
 
+  &:first-child {
+    margin: 30px 30px 0px 0px;
+  }
+
   ${(props) =>
     css`
       background: ${errorColors[props.type].background};
       color: ${errorColors[props.type].color};
-
-      svg {
-        fill: ${errorColors[props.type].color};
-      }
     `}
 
   & + div {
@@ -60,6 +60,7 @@ export const Container = styled(animated.div)`
     border: 0;
     background: transparent;
     color: inherit;
+    cursor: pointer;
   }
 
   ${(props) =>

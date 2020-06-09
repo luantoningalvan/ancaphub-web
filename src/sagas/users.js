@@ -4,6 +4,7 @@ import * as actions from '../actions/users';
 import * as alerts from '../actions/alerts';
 import * as api from '../api/users';
 import { getUsersCount } from '../actions/users';
+import { addAlert } from '../actions/alerts';
 import { getUsersRelationsips } from '../actions/relationships';
 
 function* getUsers() {
@@ -66,6 +67,13 @@ function* updateUserInfo({ payload }) {
   try {
     const result = yield call(api.updateUserInfo, payload);
     yield put(actions.updateProfileInfoSuccess(result.data));
+    yield put(
+      addAlert({
+        title: 'Suceso',
+        description: 'Perfil atualizado com sucesso',
+        type: 'success',
+      })
+    );
   } catch (e) {
     yield put(alerts.addAlert('error', e.message));
   }
@@ -75,6 +83,13 @@ function* updateUserAvatar({ payload }) {
   try {
     const result = yield call(api.updateUserAvatar, payload);
     yield put(actions.updateProfilePictureSuccess(result.data));
+    yield put(
+      addAlert({
+        title: 'Suceso',
+        description: 'Avatar atualizado com sucesso',
+        type: 'success',
+      })
+    );
   } catch (e) {
     yield put(alerts.addAlert('error', e.message));
   }
