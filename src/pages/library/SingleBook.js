@@ -18,6 +18,8 @@ import {
 import defaultThumbnail from '../../assets/default-book-cover.jpg';
 import Categories from '../../components/categories/ShowCategories';
 
+import { BookDisplayContainer, BookDisplayGrid } from './styles.css';
+
 import { getSingleItemRequest as getSingleItem } from '../../actions/library';
 
 const Title = styled.h2`
@@ -36,6 +38,10 @@ const Author = styled.h3`
 
 const BookCover = styled.img`
   width: 100%;
+  @media only screen and (max-width: 768px) {
+    height: 240px;
+    object-fit: cover;
+  }
 `;
 
 const Banner = styled.div`
@@ -83,22 +89,9 @@ function SingleBook() {
             : defaultThumbnail
         }
       />
-      <div
-        style={{
-          marginTop: -137,
-          marginBottom: 16,
-          position: 'absolute',
-          width: 'inherit',
-        }}
-      >
+      <BookDisplayContainer>
         <Container>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '33.3333% auto',
-              gap: '1.4em',
-            }}
-          >
+          <BookDisplayGrid>
             <div>
               <Paper>
                 <BookCover
@@ -145,9 +138,9 @@ function SingleBook() {
               <div>{singleItem && singleItem.content}</div>
               <div my={2}>{/* <Ratings item={book.item} /> */}</div>
             </div>
-          </div>
+          </BookDisplayGrid>
         </Container>
-      </div>
+      </BookDisplayContainer>
     </LoadContent>
   );
 }

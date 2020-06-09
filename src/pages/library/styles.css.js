@@ -51,3 +51,22 @@ export const LibrarySidebarMenu = styled(Menu)`
     overflow-x: auto;
   }
 `;
+
+// Single book
+
+export const BookDisplayContainer = styled.div`
+  position: absolute;
+  margin-top: -137px;
+  margin-bottom: 1em;
+  width: inherit;
+`;
+
+export const BookDisplayGrid = styled.div`
+  display: grid;
+  grid-template-columns: 33.3333% auto;
+  grid-template-rows: auto;
+  gap: 1.4em;
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: 100%;
+  }
+`;
