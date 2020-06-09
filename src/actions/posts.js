@@ -3,6 +3,10 @@ export const Types = {
   CREATE_POST_SUCCESS: 'posts/create_post_success',
   GET_POSTS_REQUEST: 'posts/get_posts_request',
   GET_POSTS_SUCCESS: 'posts/get_posts_success',
+  GET_POSTS_FAILURE: 'posts/get_posts_failure',
+  GET_MORE_POSTS_REQUEST: 'posts/get_more_posts_request',
+  GET_MORE_POSTS_SUCCESS: 'posts/get_more_posts_success',
+  GET_MORE_POSTS_FAILURE: 'posts/get_more_posts_failure',
   GET_USER_POSTS_REQUEST: 'posts/get_user_posts_request',
   GET_USER_POSTS_SUCCESS: 'posts/get_user_posts_success',
   GET_USER_POSTS_ERROR: 'posts/get_user_posts_error',
@@ -34,6 +38,16 @@ export const getPostsRequest = (data) => ({
 
 export const getPostsSuccess = ({ items }) => ({
   type: Types.GET_POSTS_SUCCESS,
+  payload: { items },
+});
+
+export const getMorePostsRequest = (data) => ({
+  type: Types.GET_MORE_POSTS_REQUEST,
+  payload: data,
+});
+
+export const getMorePostsSuccess = ({ items }) => ({
+  type: Types.GET_MORE_POSTS_SUCCESS,
   payload: { items },
 });
 

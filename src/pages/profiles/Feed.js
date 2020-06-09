@@ -2,7 +2,8 @@ import React, { useEffect, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserPostsRequest } from '../../actions/posts';
 import PostForm from '../../components/posts/PostForm';
-import ShowPosts from '../../components/posts/ShowPosts';
+import PostCard from '../../components/posts/PostCard';
+import { Spinner } from '../../components/ui';
 
 const Feed = ({ user: userId }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,24 @@ const Feed = ({ user: userId }) => {
       {verifyIfIsOwnProfile && <PostForm />}
 
       <div style={{ width: '100%', marginTop: 16 }}>
-        <ShowPosts posts={posts} loading={loading} />
+        {!loading ? (
+          <>
+            {Object.values(posts).map((item) => (
+              <PostCard data={item} key={item._id} />
+            ))}
+          </>
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              justifyContent: 'center',
+              display: 'flex',
+              padding: 16,
+            }}
+          >
+            <Spinner />
+          </div>
+        )}
       </div>
     </>
   );

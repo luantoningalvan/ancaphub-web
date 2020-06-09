@@ -2,7 +2,10 @@ import React from 'react';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { getPostsRequest as getPostsAction } from '../../actions/posts';
+import {
+  getPostsRequest as getPostsAction,
+  getMorePostsRequest,
+} from '../../actions/posts';
 
 import { Container } from '../../components/ui';
 
@@ -26,7 +29,11 @@ const Feed = () => {
         <div id="posts">
           <PostForm />
           <div style={{ marginTop: 16, width: '100%' }}>
-            <ShowPosts posts={items} loading={loading} />
+            <ShowPosts
+              posts={items}
+              loading={loading}
+              getMore={getMorePostsRequest}
+            />
           </div>
         </div>
         <div id="sidebar">
