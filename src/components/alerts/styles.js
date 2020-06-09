@@ -4,6 +4,6 @@ export const Container = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  padding: 30px;
   overflow: hidden;
+  z-index: 10000;
 `;

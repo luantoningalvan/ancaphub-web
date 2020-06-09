@@ -2,11 +2,19 @@ import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/settings';
 import * as api from '../api/settings';
+import { addAlert } from '../actions/alerts';
 
 function* updateUsername(action) {
   try {
     const response = yield call(api.updateUsername, action.payload);
     yield put(actions.updateUsernameSuccess(response.data));
+    yield put(
+      addAlert({
+        title: 'Suceso',
+        description: 'Username atualizado com sucesso',
+        type: 'success',
+      })
+    );
   } catch (e) {
     yield put(actions.settingsError({ errorMessage: e.message }));
   }
@@ -16,6 +24,13 @@ function* updateEmail(action) {
   try {
     const response = yield call(api.updateEmail, action.payload);
     yield put(actions.updateEmailSuccess(response.data));
+    yield put(
+      addAlert({
+        title: 'Suceso',
+        description: 'E-mail atualizado com sucesso',
+        type: 'success',
+      })
+    );
   } catch (e) {
     yield put(actions.settingsError({ errorMessage: e.message }));
   }
@@ -25,6 +40,13 @@ function* updatePassword(action) {
   try {
     const response = yield call(api.updatePassword, action.payload);
     yield put(actions.updatePasswordSuccess(response.data));
+    yield put(
+      addAlert({
+        title: 'Suceso',
+        description: 'Senha atualizada com sucesso',
+        type: 'success',
+      })
+    );
   } catch (e) {
     yield put(actions.settingsError({ errorMessage: e.message }));
   }
