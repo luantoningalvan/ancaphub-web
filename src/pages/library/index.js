@@ -55,9 +55,9 @@ const Library = () => {
       videos: 'video',
     };
     dispatch(
-      getItemsRequest({ type: types[typeParam], category: selectedCategory })
+      getItemsRequest({ type: types[type], category: selectedCategory })
     );
-  }, [typeParam, selectedCategory, dispatch]);
+  }, [type, selectedCategory, dispatch]);
 
   return (
     <Container>
@@ -127,7 +127,7 @@ const Library = () => {
               ) : (
                 <LibraryCardGrid>
                   {items.map((item) => (
-                    <div xs={12} key={generate()}>
+                    <div xs={12} key={() => generate()}>
                       <LibraryCard item={item} />
                     </div>
                   ))}

@@ -60,9 +60,7 @@ const MiniLIbraryCardSyle = styled(Link)`
 const MiniLIbraryCard = ({ item }) => (
   <MiniLIbraryCardSyle
     to={`/library/${item.type}s/${item._id}`}
-    cover={
-      item.cover !== '' && item.cover !== null ? item.cover.url : defaultCover
-    }
+    cover={item.cover ? item.cover.url : defaultCover}
   >
     <div className="cover" />
     <div className="content">
