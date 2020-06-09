@@ -20,9 +20,12 @@ const LikeBox = ({ open, onClose, postId }) => {
   }, [open]);
 
   return (
-    <Dialog show={open}>
+    <Dialog
+      show={open}
+      style={{ width: '100%', maxWidth: 350, maxHeight: '90vh' }}
+    >
       {open && (
-        <Card style={{ minWidth: 350 }}>
+        <Card>
           <CardHeader
             title={<FormattedMessage id="common.likePlural" />}
             action={{
@@ -32,9 +35,19 @@ const LikeBox = ({ open, onClose, postId }) => {
               label: <CloseIcon />,
             }}
           />
-          <CardBody>
+          <CardBody style={{ overflowX: 'auto' }}>
             {likes.postLikesLoading ? (
-              <Spinner size={48} />
+              <div
+                style={{
+                  width: '100%',
+                  height: 60,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Spinner size={48} />
+              </div>
             ) : (
               <UserList users={likes.items[postId].likes} />
             )}
