@@ -69,11 +69,11 @@ const Library = () => {
       <LibraryContainer>
         <LibrarySidebarContainer>
           <Card>
-            <CardHeader style={{ paddingBottom: 8 }}>
-              <h3>
-                <FormattedMessage id="common.categories" />
-              </h3>
-            </CardHeader>
+            <CardHeader
+              title={<FormattedMessage id="common.categories" />}
+              style={{ paddingBottom: 8 }}
+            />
+
             <LibrarySidebarMenu>
               <LoadContent loading={loadingCategories}>
                 <MenuItem

@@ -7,12 +7,12 @@ export const LibraryContainer = styled.div`
   grid-template-areas: 'sidebar content';
   grid-template-rows: auto;
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 16px;
   @media only screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
     & > div {
-      margin: 8px 0;
+      margin: 16px 0;
     }
   }
 `;
@@ -26,13 +26,21 @@ export const LibraryContentContainer = styled.div`
 `;
 
 export const LibraryCardGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  gap: 16px;
-  @media only screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
+  column-count: 3;
+  column-gap: 16px;
+
+  > div {
+    display: inline-block;
+    margin: 0 0 16px;
+    width: 100%;
+  }
+
+  @media only screen and (max-width: 992px) {
+    column-count: 2;
+  }
+
+  @media only screen and (max-width: 370px) {
+    column-count: 1;
   }
 `;
 

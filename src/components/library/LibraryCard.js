@@ -32,12 +32,11 @@ const types = {
 };
 
 const LibraryCard = styled.div`
-  padding-top: 10px;
   width: 100%;
 
   .card-cover {
     width: 100%;
-    border-radius: 16px;
+    border-radius: 8px;
     height: ${(props) => types[props.type].size}px;
     display: flex;
     align-items: center;
@@ -57,7 +56,7 @@ const LibraryCard = styled.div`
 
     .card-image {
       width: 100%;
-      border-radius: 16px;
+      border-radius: 8px;
       height: ${(props) => types[props.type].size}px;
       overflow: hidden;
 
@@ -89,7 +88,7 @@ const LibraryCard = styled.div`
           );
           content: '';
           position: absolute;
-          border-radius: 16px;
+          border-radius: 8px;
         }
       }
     }
@@ -114,16 +113,14 @@ const LibraryCard = styled.div`
 
   .card-type {
     position: absolute;
-    top: -10px;
+    top: 8px;
+    left: 8px;
     background: ${(props) => props.theme.palette.secondary};
     padding: 5px;
     border-radius: 5px;
     line-height: 100%;
     z-index: 10;
-    left: 10px;
-    > svg {
-      fill: ${(props) => props.theme.palette.text.contrast};
-    }
+    color: ${(props) => props.theme.palette.text.contrast};
   }
 
   .link {
