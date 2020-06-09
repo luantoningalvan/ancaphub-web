@@ -1,5 +1,4 @@
 import React, { memo, useState } from 'react';
-import styled from 'styled-components';
 import {
   FiSearch as SearchIcon,
   FiArrowLeft as BackIcon,
@@ -9,101 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { Link, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import { IconButton } from '../ui';
-
-const SearchWrapper = styled.div`
-  i,
-  svg {
-    width: 20px;
-    height: 20px;
-    color: ${(props) => props.theme.palette.text.contrast};
-  }
-
-  .not-collapsed {
-    height: 64px;
-    width: 100%;
-    padding: 0px 16px;
-    background: ${(props) => props.theme.palette.paper};
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    color: ${(props) => props.theme.palette.text.contrast};
-
-    > input {
-      border: none;
-      background: transparent;
-      padding: 16px;
-      outline: none;
-      flex: 1;
-      color: ${(props) => props.theme.palette.text.contrast};
-
-      &::placeholder {
-        color: ${(props) => props.theme.palette.text.contrast};
-        font-size: 16px;
-        font-family: Ubuntu;
-      }
-    }
-  }
-
-  .mobile-search {
-    color: ${(props) => props.theme.palette.text.contrast};
-
-    > button {
-      border: none;
-      border-radius: 8px;
-      padding: 8px;
-      outline: none;
-      background: transparent;
-      cursor: pointer;
-      width: auto;
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.15);
-      }
-    }
-
-    > a {
-      padding: 8px;
-      color: ${(props) => props.theme.palette.text.contrast};
-    }
-  }
-
-  .desktop-search {
-    display: none;
-  }
-
-  @media (min-width: 576px) {
-    .mobile-search {
-      display: none;
-    }
-    .desktop-search {
-      display: block;
-      background: rgba(0, 0, 0, 0.15);
-      width: 360px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      padding: 8px;
-      color: ${(props) => props.theme.palette.text.contrast};
-
-      input {
-        flex: 1;
-        padding: 8px;
-        border: none;
-        background: transparent;
-      }
-
-      a,
-      input,
-      input::placeholder {
-        color: ${(props) => props.theme.palette.text.contrast};
-        font-size: 1rem;
-      }
-    }
-  }
-`;
+import { SearchContainer } from './styles';
 
 const Search = () => {
   const [term, setTerm] = useState('');
@@ -123,7 +28,7 @@ const Search = () => {
   };
 
   return (
-    <SearchWrapper>
+    <SearchContainer>
       <div className={clsx('mobile-search', !collapsed && 'not-collapsed')}>
         {collapsed ? (
           <IconButton
@@ -178,7 +83,7 @@ const Search = () => {
           <LocateIcon />
         </Link>
       </div>
-    </SearchWrapper>
+    </SearchContainer>
   );
 };
 export default memo(Search);

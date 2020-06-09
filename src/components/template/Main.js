@@ -1,14 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import { MainContainer } from './styles';
 
-const MainWrapper = styled.main`
-  width: 100%;
-  @media (min-width: 576px) {
-    width: calc(100% - 64px);
-    margin-left: 64px;
-  }
-`;
-
-const Main = ({ children }) => <MainWrapper>{children}</MainWrapper>;
+const Main = ({ children }) => <MainContainer>{children}</MainContainer>;
 
 export default Main;

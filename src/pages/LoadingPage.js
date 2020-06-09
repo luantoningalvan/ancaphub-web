@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import ThemeProvider from './Provider';
-import logo from '../../assets/logo-type.png';
-import { Spinner } from '../ui';
+import ThemeProvider from '../components/template/Provider';
+import logo from '../assets/logo-type.png';
+import { Spinner } from '../components/ui';
 
 const LoadScreenWrap = styled.div`
   height: 100vh;

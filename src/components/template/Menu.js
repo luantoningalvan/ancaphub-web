@@ -1,89 +1,48 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useRouteMatch } from 'react-router-dom';
 
-// Icons
 import {
   FiHome as NewsFeedIcon,
   FiFolder as LibraryIcon,
   FiUser as UsersIcon,
 } from 'react-icons/fi';
-// i18n
-import { FormattedMessage } from 'react-intl';
-import MenuItem from './MenuItem';
 
-const MenuWrapper = styled.ul`
-  display: flex;
-  flex-direction: column;
-`;
+import { FormattedMessage } from 'react-intl';
+import { MenuContainer } from './styles';
+
+import MenuItemLink from './MenuItemLink';
 
 const Menu = () => {
   const { url } = useRouteMatch();
 
   return (
-    <MenuWrapper>
-      <MenuItem
-        current={url === '/home'}
-        icon={<NewsFeedIcon />}
-        label={
-          <FormattedMessage
-            id="common.feed"
-            description="Label do menu - Home"
-          />
-        }
-        link="/home"
-      />
-      <MenuItem
-        current={url.includes('/library')}
-        icon={<LibraryIcon />}
-        label="Biblioteca"
-        link="/library"
-      />
-      <MenuItem
-        current={url.includes('/users')}
-        icon={<UsersIcon />}
-        label="Usuários"
-        link="/users"
-      />
-
-      {/*
-      <MenuItem
-        current={url.includes('/groups')}
-        icon={<GroupIcon />}
-        label={(
-          <FormattedMessage
-            id="common.groups"
-            description="Label do menu - Grupos"
-          />
-        )}
-        link="/groups"
-      />
-
-      <MenuItem
-        current={url.includes('/events')}
-        icon={<EventIcon />}
-        label={(
-          <FormattedMessage
-            id="common.events"
-            description="Label do menu - Eventos"
-          />
-        )}
-        link="/events"
-      />
-
-      <MenuItem
-        current={url.includes('/projects')}
-        icon={<ProjectIcon />}
-        label={(
-          <FormattedMessage
-            id="common.projects"
-            description="Label do menu - Projetos"
-          />
-        )}
-        link="/projects"
-      />
-    */}
-    </MenuWrapper>
+    <MenuContainer>
+      <ul>
+        <MenuItemLink
+          current={url === '/home'}
+          icon={<NewsFeedIcon />}
+          label={
+            <FormattedMessage
+              id="common.feed"
+              description="Label do menu - Home"
+            />
+          }
+          link="/home"
+        />
+        <MenuItemLink
+          current={url.includes('/library')}
+          icon={<LibraryIcon />}
+          label="Biblioteca"
+          link="/library"
+        />
+        <MenuItemLink
+          current={url.includes('/users')}
+          icon={<UsersIcon />}
+          label="Usuários"
+          link="/users"
+        />
+      </ul>
+    </MenuContainer>
   );
 };
 

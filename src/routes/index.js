@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import Template from '../components/template';
 
 import routeList from './routeList';
-import LoadScreen from '../components/template/LoadScreen';
+import LoadScreen from '../pages/LoadingPage';
 
 const Routes = () => {
   const { isAuthenticated, loading } = useSelector((state) => state.auth);

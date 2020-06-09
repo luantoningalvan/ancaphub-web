@@ -13,8 +13,6 @@ const Template = ({ children }) => {
     setCollapsed(!collapsed);
   };
 
-  console.log(auth.isAuthenticated);
-
   return (
     <ThemeProvider collapsed={collapsed}>
       <Header
