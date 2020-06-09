@@ -352,6 +352,16 @@ export const Logo = styled.div`
     img {
       height: 56px;
     }
+
+    /* now dat SNEK mooooves */
+    @media only screen and (min-width: 768px) {
+      cursor: pointer;
+      transform: translateY(-16px);
+      transition: transform 200ms ease-in-out;
+      &:hover {
+        transform: translateY(0px);
+      }
+    }
   }
 
   .collapse-button {
