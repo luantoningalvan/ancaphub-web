@@ -6,13 +6,15 @@ import {
   FiFolder as LibraryIcon,
   FiUser as UsersIcon,
 } from 'react-icons/fi';
+import { AiOutlineBug as BugIcon } from 'react-icons/ai';
 
 import { FormattedMessage } from 'react-intl';
+import MenuItemButton from './MenuItemButton';
 import { MenuContainer } from './styles';
 
 import MenuItemLink from './MenuItemLink';
 
-const Menu = () => {
+const Menu = ({ handleOpenBugReport }) => {
   const { url } = useRouteMatch();
 
   return (
@@ -40,6 +42,13 @@ const Menu = () => {
           icon={<UsersIcon />}
           label="Usuários"
           link="/users"
+        />
+      </ul>
+      <ul>
+        <MenuItemButton
+          icon={<BugIcon />}
+          label="Reportar Erro"
+          action={handleOpenBugReport}
         />
       </ul>
     </MenuContainer>

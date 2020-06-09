@@ -15,6 +15,11 @@ const Sidenav = ({ user, collapsed, setCollapsed }) => {
     leave: { left: -240 },
   });
 
+  const handleOpenBugReport = () => {
+    global.Ybug.open();
+    setCollapsed(true);
+  };
+
   const SidnavContent = () => (
     <>
       <UserMenu>
@@ -33,7 +38,7 @@ const Sidenav = ({ user, collapsed, setCollapsed }) => {
           <IconButton icon={<CloseIcon />} onClick={setCollapsed} />
         </div>
       </UserMenu>
-      <Menu />
+      <Menu handleOpenBugReport={handleOpenBugReport} />
     </>
   );
 

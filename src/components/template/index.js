@@ -9,8 +9,8 @@ const Template = ({ children }) => {
   const auth = useSelector((state) => state.auth);
   const [collapsed, setCollapsed] = useState(true);
 
-  const handleCollapse = () => {
-    setCollapsed(!collapsed);
+  const handleCollapse = (value) => {
+    setCollapsed(value || !collapsed);
   };
 
   return (

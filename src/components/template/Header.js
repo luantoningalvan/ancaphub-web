@@ -38,7 +38,7 @@ import { logoutRequest as logout } from '../../actions/auth';
 import { switchColorMode as changeTheme } from '../../actions/settings';
 import logo from '../../assets/logo-prov.png';
 
-const Header = ({ user, setCollapsed }) => {
+const Header = ({ user, collapsed, setCollapsed }) => {
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const { notifications, notReadCount } = useSelector(
@@ -63,7 +63,7 @@ const Header = ({ user, setCollapsed }) => {
           <button
             type="button"
             className="collapse-button"
-            onClick={setCollapsed}
+            onClick={() => setCollapsed(!collapsed)}
           >
             <MenuIcon />
           </button>
