@@ -273,8 +273,8 @@ export const UserCardGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   gap: 16px;
+  margin-bottom: 1em;
   @media only screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: repeat(2, 1fr);
   }
 `;

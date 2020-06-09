@@ -7,7 +7,7 @@ const HeroWrapper = styled.div`
   border-radius: 5px;
   background: ${(props) => props.theme.palette.paper};
   padding: 40px 30px;
-  margin-top: 15px;
+  margin-top: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;

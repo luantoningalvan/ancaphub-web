@@ -14,6 +14,12 @@ import {
   Spinner,
 } from '../../components/ui';
 
+import {
+  SearchSidebarContainer,
+  SearchContentContainer,
+  SearchContainer,
+} from './styles.css';
+
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -33,8 +39,8 @@ const SearchData = () => {
   return (
     <Container style={{ marginTop: 16 }}>
       {!loading ? (
-        <div spacing={2}>
-          <div xs={3}>
+        <SearchContainer>
+          <SearchSidebarContainer>
             <Card style={{ width: '100%' }}>
               <CardHeader>
                 <h3>
@@ -47,34 +53,32 @@ const SearchData = () => {
                 <MenuItem label={<FormattedMessage id="common.users" />} />
               </Menu>
             </Card>
-          </div>
-          <div xs={9}>
-            <div style={{ width: '100%' }}>
-              <h3 style={{ marginBottom: 16 }}>
-                <FormattedMessage
-                  id="search.showingResultsFor"
-                  values={{ term }}
-                />
-              </h3>
-              {results.users && results.users.length > 0 && (
-                <>
-                  <h3 style={{ marginBottom: 8 }}>
-                    <FormattedMessage id="common.users" />
-                  </h3>
-                  <div style={{ width: '100%' }}>
-                    <div>
-                      {results.users.map((user) => (
-                        <div xs={3} key={user._id}>
-                          <UserCard user={user.user} />
-                        </div>
-                      ))}
-                    </div>
+          </SearchSidebarContainer>
+          <SearchContentContainer>
+            <h3 style={{ marginBottom: 16 }}>
+              <FormattedMessage
+                id="search.showingResultsFor"
+                values={{ term }}
+              />
+            </h3>
+            {results.users && results.users.length > 0 && (
+              <>
+                <h3 style={{ marginBottom: 8 }}>
+                  <FormattedMessage id="common.users" />
+                </h3>
+                <div style={{ width: '100%' }}>
+                  <div>
+                    {results.users.map((user) => (
+                      <div xs={3} key={user._id}>
+                        <UserCard user={user.user} />
+                      </div>
+                    ))}
                   </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+                </div>
+              </>
+            )}
+          </SearchContentContainer>
+        </SearchContainer>
       ) : (
         <div
           style={{ width: '100%', display: 'flex', justifyContent: 'center' }}

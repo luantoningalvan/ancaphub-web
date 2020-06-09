@@ -32,11 +32,24 @@ const Banner = styled.div`
 const Title = styled.h2`
   font-weight: bold;
   color: ${(props) => props.theme.palette.text.contrast};
+  margin-top: 1em;
 `;
 
 const Author = styled.h3`
   font-weight: lighter;
   color: ${(props) => props.theme.palette.text.contrast};
+`;
+
+const VideoContentContainer = styled.div`
+  padding: 1em 1em 1em 0;
+  max-width: 1024px;
+  margin: auto;
+  margin-bottom: 1em;
+  @media only screen and (max-width: 768px) {
+    max-width: 100%;
+    width: 100%;
+    padding: 1em;
+  }
 `;
 
 const SingleVideo = () => {
@@ -75,9 +88,7 @@ const SingleVideo = () => {
             </div>
           </Container>
         </Banner>
-        <Container>
-          <div style={{ marginTop: 16 }}>{singleItem.content}</div>
-        </Container>
+        <VideoContentContainer>{singleItem.content}</VideoContentContainer>
       </>
     )
   );
