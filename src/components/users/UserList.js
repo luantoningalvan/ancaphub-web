@@ -58,7 +58,7 @@ const UserList = ({ users }) => (
                   }
                 />
               </Link>
-              <div>
+              <div style={{ marginRight: 8 }}>
                 <h4>{user.user.name}</h4>
                 <span>{user.user.username}</span>
               </div>
