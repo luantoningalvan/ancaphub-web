@@ -80,13 +80,27 @@ const PostPollOptionProgress = styled.div`
 const PostPoll = ({ post }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const [showingResults, setShowingResults] = React.useState(false);
 
   const hasVoted = post.poll.allVotes.includes(user._id);
 
   const handleVote = ({ pollId, vote, postId }) => {
     if (hasVoted) return;
     dispatch(votePostPollRequest({ postId, pollId, vote }));
+    setShowingResults(true);
   };
+
+  const toggleShowResults = () => {
+    if (hasVoted) return;
+    setShowingResults((prev) => !prev);
+  };
+
+  React.useEffect(() => {
+    if (hasVoted) {
+      setShowingResults(true);
+    }
+  }, [setShowingResults, hasVoted]);
+
   return (
     <PostPollWrap>
       {post.poll.options.map((option) => (
@@ -107,25 +121,46 @@ const PostPoll = ({ post }) => {
               {option.votes && option.votes.includes(user._id) && <VotedIcon />}
             </div>
 
-            <span>
-              {option.votesCount === 0
-                ? 0
-                : (option.votesCount / post.poll.allVotesCount) * 100}
-              %
-            </span>
+            {showingResults && (
+              <span>
+                {option.votesCount === 0
+                  ? 0
+                  : (
+                      (option.votesCount / post.poll.allVotesCount) *
+                      100
+                    ).toFixed(2)}
+                %
+              </span>
+            )}
           </div>
 
-          <div className="progress-bar">
-            <PostPollOptionProgress
-              percentage={
-                option.votesCount === 0
-                  ? 0
-                  : (option.votesCount / post.poll.allVotesCount) * 100
-              }
-            />
-          </div>
+          {showingResults && (
+            <div className="progress-bar">
+              <PostPollOptionProgress
+                percentage={
+                  option.votesCount === 0
+                    ? 0
+                    : (
+                        (option.votesCount / post.poll.allVotesCount) *
+                        100
+                      ).toFixed(2)
+                }
+              />
+            </div>
+          )}
         </PostPollOption>
       ))}
+      {!hasVoted && (
+        <span
+          onClick={() => toggleShowResults()}
+          role="presentation"
+          style={{ margin: '1em 0', cursor: 'pointer' }}
+        >
+          <FormattedMessage
+            id={`common.${showingResults ? 'hide' : 'show'}Results`}
+          />
+        </span>
+      )}
       <span>
         <FormattedMessage
           id="components.postPoll.votesTotal"
