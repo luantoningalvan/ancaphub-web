@@ -30,6 +30,16 @@ export default (state = INITIAL_STATE, action) => {
         items: arrayToObject(payload.items, '_id'),
         loading: false,
       };
+    case Types.GET_MORE_POSTS_SUCCESS:
+      console.log('fODASE');
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          ...arrayToObject(payload.items, '_id'),
+        },
+        loading: false,
+      };
     case Types.LIKE_POST_REQUEST:
       return {
         ...state,
