@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonContainer } from './styles';
 
-const Button = ({ children, ...rest }) => (
-  <ButtonContainer {...rest}>{children}</ButtonContainer>
-);
+const Button = React.forwardRef(({ children, ...rest }, ref) => (
+  <ButtonContainer {...rest} ref={ref}>
+    {children}
+  </ButtonContainer>
+));
+
+Button.displayName = 'Button';
 
 Button.propTypes = {
   variant: PropTypes.oneOf(['outlined', 'contained', 'filled']),
