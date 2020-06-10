@@ -31,13 +31,13 @@ const Banner = styled.div`
 
 const Title = styled.h2`
   font-weight: bold;
-  color: ${(props) => props.theme.palette.text.contrast};
+  color: ${(props) => props.theme.palette.text.secondary};
   margin-top: 1em;
 `;
 
 const Author = styled.h3`
   font-weight: lighter;
-  color: ${(props) => props.theme.palette.text.contrast};
+  color: ${(props) => props.theme.palette.text.secondary};
 `;
 
 const VideoContentContainer = styled.div`
