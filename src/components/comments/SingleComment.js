@@ -105,7 +105,7 @@ const SingleComment = ({ comment, post }) => {
       matches.forEach(() => {
         newContent = reactStringReplace(newContent, handleExp, (match, i) => {
           return (
-            <a href={`https://alpha.ancaphub.com/${match}`} key={match + i}>
+            <a href={`/${match}`} key={match + i}>
               @{match}
             </a>
           );

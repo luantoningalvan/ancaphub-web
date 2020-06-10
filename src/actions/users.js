@@ -26,9 +26,9 @@ export const getUsersSuccess = ({ items }) => ({
   payload: { items },
 });
 
-export const getSingleUserRequest = (id) => ({
+export const getSingleUserRequest = (handle) => ({
   type: Types.GET_SINGLE_USER_REQUEST,
-  payload: id,
+  payload: handle,
 });
 
 export const getSingleUserSuccess = (data) => ({
@@ -36,9 +36,9 @@ export const getSingleUserSuccess = (data) => ({
   payload: data,
 });
 
-export const getUserFollowersRequest = (id) => ({
+export const getUserFollowersRequest = (handle) => ({
   type: Types.GET_USER_FOLLOWERS_REQUEST,
-  payload: id,
+  payload: handle,
 });
 
 export const getUserFollowersSuccess = (data) => ({
@@ -46,9 +46,9 @@ export const getUserFollowersSuccess = (data) => ({
   payload: data,
 });
 
-export const getUserFollowingRequest = (id) => ({
+export const getUserFollowingRequest = (handle) => ({
   type: Types.GET_USER_FOLLOWING_REQUEST,
-  payload: id,
+  payload: handle,
 });
 
 export const getUserFollowingSuccess = (data) => ({

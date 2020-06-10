@@ -73,7 +73,7 @@ const PostCard = ({ data }) => {
           />
         </div>
         <div>
-          <Link to={`/${data.user._id}`}>{data.user.name}</Link>
+          <Link to={`/${data.user.username}`}>{data.user.name}</Link>
           <span>
             <FormattedRelativeTime
               numeric="auto"

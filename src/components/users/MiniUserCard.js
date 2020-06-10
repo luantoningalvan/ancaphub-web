@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
-import { Button } from '../ui';
 import defaultAvatar from '../../assets/default-profile-picture.jpg';
+import FollowButton from './FollowButton';
 
 export const User = styled.div`
   display: flex;
@@ -44,9 +43,7 @@ const MiniUserCard = ({ user }) => (
         <span>{user.username}</span>
       </div>
     </div>
-    <Button variant="outlined" size="small" color="primary">
-      <FormattedMessage id="common.follow" />
-    </Button>
+    <FollowButton user={user.username} />
   </User>
 );
 

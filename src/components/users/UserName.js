@@ -23,7 +23,7 @@ const UserNameStyle = styled(Link)`
 const UserName = ({ user, fontSize }) => (
   <UserNameStyle
     title={user.isVerified && <FormattedMessage id="common.verified" />}
-    to={`/${user._id}`}
+    to={`/${user.username}`}
     className={clsx({ verifiedUser: user.isVerified })}
     fontSize={fontSize}
   >

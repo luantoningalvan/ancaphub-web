@@ -43,30 +43,30 @@ const Following = lazy(() => import('./Following'));
 
 const Profiles = () => {
   const { user, loading } = useSelector((state) => state.profile);
-  const counts = useSelector((state) => state.usersCount);
   const auth = useSelector((state) => state.auth);
 
   const [Page, setPage] = useState();
   const [editProfile] = useState(false);
   const [editAvatar, setEditAvatar] = useState(false);
 
-  const { id: userId, page: pageParam } = useParams();
+  const { handle, page: pageParam } = useParams();
   const dispatch = useDispatch();
 
-  const verifyIfIsOwnProfile = auth.isAuthenticated && auth.user._id === userId;
+  const verifyIfIsOwnProfile =
+    auth.isAuthenticated && auth.user.username === handle;
 
   const pages = {
-    undefined: <Feed user={userId} />,
+    undefined: <Feed user={handle} />,
     lists: <Lists />,
     contributions: <Contributions />,
-    followers: <Followers user={userId} />,
-    following: <Following user={userId} />,
+    followers: <Followers user={handle} />,
+    following: <Following user={handle} />,
   };
 
   useEffect(() => {
-    dispatch(getSingleUserRequest(userId));
+    dispatch(getSingleUserRequest(handle));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, getSingleUserRequest]);
+  }, [handle, getSingleUserRequest]);
 
   useEffect(() => {
     setPage(() => pages[pageParam]);
@@ -125,8 +125,8 @@ const Profiles = () => {
               <div className="follower-count">
                 <ul>
                   <li>
-                    <Link to={`/${userId}/followers`} className="counter">
-                      {counts[userId] ? counts[userId].followersCount : 0}
+                    <Link to={`/${handle}/followers`} className="counter">
+                      {user.followersCount}
                     </Link>
                     <span>
                       <FormattedMessage
@@ -136,8 +136,8 @@ const Profiles = () => {
                     </span>
                   </li>
                   <li>
-                    <Link to={`/${userId}/following`} className="counter">
-                      {counts[userId] ? counts[userId].followingCount : 0}
+                    <Link to={`/${handle}/following`} className="counter">
+                      {user.followingCount}
                     </Link>
                     <span>
                       <FormattedMessage
@@ -155,7 +155,7 @@ const Profiles = () => {
               </div>
 
               <div className="user-action-buttons">
-                <FollowButton user={userId} />
+                <FollowButton user={handle} />
                 {verifyIfIsOwnProfile && <EditProfile open={editProfile} />}
 
                 {!verifyIfIsOwnProfile && (
@@ -224,17 +224,17 @@ const Profiles = () => {
                   <Tab
                     current={pageParam === undefined}
                     label={<FormattedMessage id="common.feed" />}
-                    link={`/${userId}`}
+                    link={`/${handle}`}
                   />
                   <Tab
                     current={pageParam === 'following'}
                     label={<FormattedMessage id="common.following" />}
-                    link={`/${userId}/following`}
+                    link={`/${handle}/following`}
                   />
                   <Tab
                     current={pageParam === 'followers'}
                     label={<FormattedMessage id="common.followers" />}
-                    link={`/${userId}/followers`}
+                    link={`/${handle}/followers`}
                   />
                 </Tabs>
               </Paper>

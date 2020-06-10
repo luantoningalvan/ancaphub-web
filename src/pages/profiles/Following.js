@@ -9,13 +9,13 @@ import { Paper, LoadContent } from '../../components/ui';
 
 import { UserCardGrid } from './styles';
 
-const Feed = ({ user: userId }) => {
+const Feed = ({ user }) => {
   const dispatch = useDispatch();
   const { loadingFollowing, following } = useSelector((state) => state.profile);
 
   useEffect(() => {
-    dispatch(getUserFollowingRequest(userId));
-  }, [dispatch, userId]);
+    dispatch(getUserFollowingRequest(user));
+  }, [dispatch, user]);
 
   return (
     <LoadContent loading={loadingFollowing}>
@@ -25,8 +25,8 @@ const Feed = ({ user: userId }) => {
         </Paper>
       ) : (
         <UserCardGrid>
-          {following.map((user) => (
-            <UserCard user={user.user} key={generate()} />
+          {following.map((follower) => (
+            <UserCard user={follower.user} key={generate()} />
           ))}
         </UserCardGrid>
       )}

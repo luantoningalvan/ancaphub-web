@@ -51,9 +51,9 @@ export const getMorePostsSuccess = ({ items }) => ({
   payload: { items },
 });
 
-export const getUserPostsRequest = (userId) => ({
+export const getUserPostsRequest = (handle) => ({
   type: Types.GET_USER_POSTS_REQUEST,
-  payload: userId,
+  payload: handle,
 });
 
 export const getUserPostsSuccess = (data) => ({
@@ -61,9 +61,9 @@ export const getUserPostsSuccess = (data) => ({
   payload: data,
 });
 
-export const getUserFollowersRequest = (userId) => ({
+export const getUserFollowersRequest = (handle) => ({
   type: Types.GET_USER_FOLLOWERS_REQUEST,
-  payload: userId,
+  payload: handle,
 });
 
 export const getUserFollowersSuccess = (data) => ({

@@ -19,7 +19,7 @@ const Avatar = styled.div`
 
 const UserAvatar = ({ user, style, size, ...props }) => (
   <Avatar size={size || 35} style={{ ...style }} {...props}>
-    <Link to={`/${user._id}`}>
+    <Link to={`/${user.username}`}>
       <img
         src={user.avatar && user.avatar !== '' ? user.avatar : defaultAvatar}
         alt={

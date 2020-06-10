@@ -5,15 +5,17 @@ import PostForm from '../../components/posts/PostForm';
 import PostCard from '../../components/posts/PostCard';
 import { Spinner } from '../../components/ui';
 
-const Feed = ({ user: userId }) => {
+const Feed = ({ user }) => {
   const dispatch = useDispatch();
   const { items: posts, loading } = useSelector((state) => state.posts);
   const auth = useSelector((state) => state.auth);
-  const verifyIfIsOwnProfile = auth.isAuthenticated && auth.user._id === userId;
+
+  const verifyIfIsOwnProfile =
+    auth.isAuthenticated && auth.user.username === user;
 
   useEffect(() => {
-    dispatch(getUserPostsRequest(userId));
-  }, [dispatch, userId]);
+    dispatch(getUserPostsRequest(user));
+  }, [dispatch, user]);
 
   return (
     <>

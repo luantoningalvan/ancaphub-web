@@ -99,7 +99,7 @@ function* watchGetUsersRequest() {
   yield takeEvery(actions.Types.GET_USERS_REQUEST, getUsers);
 }
 
-function* whatchGetSingleUser() {
+function* watchGetSingleUser() {
   yield takeLatest(actions.Types.GET_SINGLE_USER_REQUEST, getSingleUser);
 }
 
@@ -129,7 +129,7 @@ function* watchUpdateUserAvatar() {
 export default [
   fork(watchGetUsersRequest),
   fork(watchCreateUserRequest),
-  fork(whatchGetSingleUser),
+  fork(watchGetSingleUser),
   fork(watchGetUserFollowers),
   fork(watchUpdateUserInfo),
   fork(watchUpdateUserAvatar),
