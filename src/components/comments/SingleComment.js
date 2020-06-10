@@ -20,7 +20,7 @@ import {
 } from '../ui';
 
 const SingleCommentStyle = styled.div`
-  .teste {
+  .inner-wrap {
     display: flex;
     align-items: stretch;
     margin-bottom: 10px;
@@ -39,8 +39,10 @@ const SingleCommentStyle = styled.div`
   .comment-text {
     padding-top: 3px;
     margin: 0;
-    text-align: left;
+    text-align: justify;
     font-size: 0.92em;
+    word-wrap: normal;
+    word-break: keep-all;
   }
 
   .date {
@@ -98,7 +100,7 @@ const SingleComment = ({ comment, post }) => {
 
   return (
     <SingleCommentStyle>
-      <div className="teste">
+      <div className="inner-wrap">
         <UserAvatar user={comment.user} style={{ marginRight: 8 }} />
         <div className="comment-content">
           <UserName user={comment.user} fontSize={1} />
