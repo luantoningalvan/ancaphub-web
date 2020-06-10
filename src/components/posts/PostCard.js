@@ -157,7 +157,7 @@ const PostCard = ({ data }) => {
               <FormattedPlural
                 value={`${data.commentCount}`}
                 one={
-                  <FormattedMessage id="common.commentVerb">
+                  <FormattedMessage id="common.comment">
                     {(txt) => <>{txt.toLowerCase()}</>}
                   </FormattedMessage>
                 }
