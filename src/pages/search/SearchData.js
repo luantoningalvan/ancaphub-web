@@ -42,11 +42,7 @@ const SearchData = () => {
         <SearchContainer>
           <SearchSidebarContainer>
             <Card style={{ width: '100%' }}>
-              <CardHeader>
-                <h3>
-                  <FormattedMessage id="search.filter" />
-                </h3>
-              </CardHeader>
+              <CardHeader title={<FormattedMessage id="search.filter" />} />
               <Menu>
                 <MenuItem label={<FormattedMessage id="common.all" />} />
                 <MenuItem label={<FormattedMessage id="common.library" />} />
@@ -54,6 +50,7 @@ const SearchData = () => {
               </Menu>
             </Card>
           </SearchSidebarContainer>
+
           <SearchContentContainer>
             <h3 style={{ marginBottom: 16 }}>
               <FormattedMessage
