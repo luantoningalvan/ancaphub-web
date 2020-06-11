@@ -7,6 +7,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedRelativeTime, FormattedMessage } from 'react-intl';
 import { differenceInSeconds, parseISO, getTime } from 'date-fns';
+import reactStringReplace from 'react-string-replace';
 import UserAvatar from '../users/UserAvatar';
 import UserName from '../users/UserName';
 import { deleteCommentRequest } from '../../actions/comments';
@@ -20,7 +21,7 @@ import {
 } from '../ui';
 
 const SingleCommentStyle = styled.div`
-  .teste {
+  .inner-wrap {
     display: flex;
     align-items: stretch;
     margin-bottom: 10px;
@@ -39,8 +40,13 @@ const SingleCommentStyle = styled.div`
   .comment-text {
     padding-top: 3px;
     margin: 0;
-    text-align: left;
+    text-align: justify;
     font-size: 0.92em;
+    word-wrap: normal;
+    word-break: keep-all;
+    & > a {
+      color: ${(props) => props.theme.palette.secondary};
+    }
   }
 
   .date {
@@ -91,6 +97,25 @@ const SingleComment = ({ comment, post }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.user._id);
 
+  const matchHandles = (content) => {
+    const handleExp = new RegExp(/@(\w+)/g);
+    const matches = content.match(handleExp);
+    if (matches) {
+      let newContent = content;
+      matches.forEach(() => {
+        newContent = reactStringReplace(newContent, handleExp, (match, i) => {
+          return (
+            <a href={`/${match}`} key={match + i}>
+              @{match}
+            </a>
+          );
+        });
+      });
+      return newContent;
+    }
+    return [content];
+  };
+
   const handleDelete = () => {
     dispatch(deleteCommentRequest(post, comment._id));
     setDeleteBox(false);
@@ -98,11 +123,15 @@ const SingleComment = ({ comment, post }) => {
 
   return (
     <SingleCommentStyle>
-      <div className="teste">
+      <div className="inner-wrap">
         <UserAvatar user={comment.user} style={{ marginRight: 8 }} />
         <div className="comment-content">
           <UserName user={comment.user} fontSize={1} />
-          <p className="comment-text">{` ${comment.content}`}</p>
+          <p className="comment-text">
+            {matchHandles(comment.content).map((match) => (
+              <>{match}</>
+            ))}
+          </p>
           <ul className="date">
             <li>
               <span className="time-link">

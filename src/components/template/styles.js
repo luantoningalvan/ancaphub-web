@@ -278,7 +278,7 @@ export const MenuItemButtonContainer = styled.button`
     display: block;
   }
 
-  color: ${(props) => props.theme.palette.text.contrast};
+  color: ${(props) => props.theme.palette.text.secondary};
 
   &:hover {
     background: rgba(0, 0, 0, 0.05);

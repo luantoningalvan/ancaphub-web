@@ -12,7 +12,8 @@ export default ({ user }) => {
   const state = useSelector((relState) => relState.relationships[user]);
   const relationship = state || {};
   const auth = useSelector((authState) => authState.auth);
-  const verifyIfIsOwnProfile = auth.isAuthenticated && auth.user._id === user;
+  const verifyIfIsOwnProfile =
+    auth.isAuthenticated && auth.user.username === user;
 
   const handleFollow = () => {
     dispatch(followUserRequest(user));

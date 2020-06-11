@@ -140,7 +140,7 @@ export default [
   },
   {
     exact: true,
-    path: '/:id/:page?',
+    path: '/:handle/:page?',
     component: Profile,
   },
 ];

@@ -7,7 +7,7 @@ export const getUsers = () =>
     },
   });
 
-export const getSingleUser = (payload) => axios.get(`users/${payload}`);
+export const getSingleUser = (payload) => axios.get(`users/handle/${payload}`);
 
 export const followUser = (payload) => axios.post(`users/${payload}/follow`);
 export const unfollowUser = (payload) =>

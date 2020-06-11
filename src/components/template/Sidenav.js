@@ -23,7 +23,7 @@ const Sidenav = ({ user, collapsed, setCollapsed }) => {
   const SidnavContent = () => (
     <>
       <UserMenu>
-        <Link to={`/${user._id}`}>
+        <Link to={`/${user.username}`}>
           <img
             src={
               user.avatar && user.avatar !== ''

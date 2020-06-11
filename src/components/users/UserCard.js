@@ -31,7 +31,7 @@ const UserCardWrap = styled(Paper)`
 
   .distance {
     display: flex;
-    alig-items: center;
+    align-items: center;
     margin-bottom: 8px;
 
     svg {
@@ -53,7 +53,7 @@ const UserCard = ({ user }) => (
         <span>{`${(user.dist / 1000).toFixed(0)} Km`}</span>
       </div>
     )}
-    <FollowButton user={user._id} />
+    <FollowButton user={user.username} />
   </UserCardWrap>
 );
 

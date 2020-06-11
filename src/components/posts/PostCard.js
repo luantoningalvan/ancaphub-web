@@ -73,7 +73,7 @@ const PostCard = ({ data }) => {
           />
         </div>
         <div>
-          <Link to={`/${data.user._id}`}>{data.user.name}</Link>
+          <Link to={`/${data.user.username}`}>{data.user.name}</Link>
           <span>
             <FormattedRelativeTime
               numeric="auto"
@@ -157,7 +157,7 @@ const PostCard = ({ data }) => {
               <FormattedPlural
                 value={`${data.commentCount}`}
                 one={
-                  <FormattedMessage id="common.commentVerb">
+                  <FormattedMessage id="common.comment">
                     {(txt) => <>{txt.toLowerCase()}</>}
                   </FormattedMessage>
                 }
