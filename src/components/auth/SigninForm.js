@@ -4,6 +4,7 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { FiMail, FiLock } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import Input from '../form/Input';
 import { authUserRequest } from '../../actions/auth';
 import { Button } from '../ui';
@@ -75,6 +76,14 @@ const SignInForm = () => {
           <Button type="submit" color="secondary" style={{ width: '100%' }}>
             <FormattedMessage id="common.login" description="Login button" />
           </Button>
+        </div>
+
+        <div
+          style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}
+        >
+          <Link to="/auth/forgot" style={{ color: '#bbb' }}>
+            Esqueci minha senha
+          </Link>
         </div>
       </div>
     </Form>

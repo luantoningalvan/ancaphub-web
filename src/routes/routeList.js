@@ -1,4 +1,6 @@
 import Home from '../pages/home';
+import ForgotPassword from '../pages/auth/ForgotPassword';
+import ResetPassword from '../pages/auth/ResetPassword';
 import Feed from '../pages/feed';
 import Library from '../pages/library';
 import Contribute from '../pages/library/Contribute';
@@ -27,6 +29,18 @@ export default [
     exact: true,
     path: '/',
     component: Home,
+  },
+  {
+    isOpen: true,
+    exact: true,
+    path: '/auth/forgot',
+    component: ForgotPassword,
+  },
+  {
+    isOpen: true,
+    exact: true,
+    path: '/auth/reset/:user/:token',
+    component: ResetPassword,
   },
   {
     exact: true,
