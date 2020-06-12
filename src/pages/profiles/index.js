@@ -13,14 +13,7 @@ import {
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import defaultProfileCover from '../../assets/default-profile-cover.jpg';
 
-import {
-  Paper,
-  Button,
-  Spinner,
-  Container,
-  Tabs,
-  Tab,
-} from '../../components/ui';
+import { Paper, Spinner, Container, Tabs, Tab } from '../../components/ui';
 
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
@@ -158,14 +151,14 @@ const Profiles = () => {
                 <FollowButton user={handle} />
                 {verifyIfIsOwnProfile && <EditProfile open={editProfile} />}
 
-                {!verifyIfIsOwnProfile && (
+                {/* {!verifyIfIsOwnProfile && (
                   <Button color="primary">
                     <FormattedMessage
                       id="common.sendMessage"
                       description="Enviar Mensagem"
                     />
                   </Button>
-                )}
+                )} */}
               </div>
             </ProfileInfo>
           </ProfileHeader>
