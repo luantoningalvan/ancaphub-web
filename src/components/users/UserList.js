@@ -49,7 +49,7 @@ const UserList = ({ users }) => (
         users.map((user) => (
           <User key={user.user._id}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Link to={`/${user.user._id}`}>
+              <Link to={`/${user.user.username}`}>
                 <Avatar
                   src={
                     user.user.avatar && user.user.avatar !== ''
@@ -63,7 +63,7 @@ const UserList = ({ users }) => (
                 <span>{user.user.username}</span>
               </div>
             </div>
-            <FollowButton user={user.user._id} />
+            <FollowButton user={user.user.username} />
           </User>
         ))}
     </ul>

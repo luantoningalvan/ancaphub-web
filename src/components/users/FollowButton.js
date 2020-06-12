@@ -15,25 +15,36 @@ export default ({ user }) => {
   const verifyIfIsOwnProfile =
     auth.isAuthenticated && auth.user.username === user;
 
+  const [following, setFollowing] = React.useState(null);
+
   const handleFollow = () => {
     dispatch(followUserRequest(user));
+    setFollowing(true);
   };
 
   const handleUnfollow = () => {
     dispatch(unfollowUserRequest(user));
+    setFollowing(false);
   };
+
+  React.useEffect(() => {
+    if (relationship.following) {
+      setFollowing(true);
+    }
+  }, [setFollowing, relationship]);
 
   if (verifyIfIsOwnProfile) {
     return null;
   }
+
   return (
     <Button
       color="primary"
       size="small"
-      variant={relationship.following ? 'normal' : 'outlined'}
-      onClick={relationship.following ? handleUnfollow : handleFollow}
+      variant={following ? 'normal' : 'outlined'}
+      onClick={following ? handleUnfollow : handleFollow}
     >
-      {relationship.following ? (
+      {following ? (
         <FormattedMessage id="common.following" />
       ) : (
         <FormattedMessage id="common.follow" />

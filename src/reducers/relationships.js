@@ -9,13 +9,14 @@ export default (state = INITIAL_STATE, action) => {
     case Types.GET_USER_RELATIONSHIPS: {
       const data = payload.map((obj) => ({
         _id: obj.user._id,
+        username: obj.user.username,
         following: obj.user.following,
         followed_by: obj.user.followed_by,
       }));
 
       return {
         ...state,
-        ...arrayToObject(data, '_id'),
+        ...arrayToObject(data, 'username'),
       };
     }
     case Types.FOLLOW_USER_SUCCESS:
