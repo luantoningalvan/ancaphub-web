@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import {
   FormattedRelativeTime,
@@ -34,6 +35,12 @@ import PostPoll from './PostPoll';
 import { PostContainer } from './styles.css';
 import { likePostRequest, deletePostRequest } from '../../actions/posts';
 
+const PostContent = styled.p`
+  word-wrap: normal;
+  word-break: keep-all;
+  text-align: justify;
+`;
+
 const PostCard = ({ data }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.user._id);
@@ -51,7 +58,7 @@ const PostCard = ({ data }) => {
 
       return <Editor editorState={editorState} readOnly />;
     } catch (error) {
-      return <p>{data.content}</p>;
+      return <PostContent>{data.content}</PostContent>;
     }
   };
 
