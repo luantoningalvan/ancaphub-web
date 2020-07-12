@@ -13,6 +13,9 @@ export default styled(Paper)`
   .text-box {
     padding: 20px;
     min-height: 100px;
+    .DraftEditor-root {
+      max-width: 640px;
+    }
   }
 
   .upload-button {
