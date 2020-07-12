@@ -36,7 +36,7 @@ import Search from './Search';
 import Notification from '../notifications';
 import { logoutRequest as logout } from '../../actions/auth';
 import { switchColorMode as changeTheme } from '../../actions/settings';
-import logo from '../../assets/logo-prov.png';
+import { ReactComponent as AncapHubLogo } from '../../assets/ancaphub.svg';
 
 const Header = ({ user, collapsed, setCollapsed }) => {
   const { url } = useRouteMatch();
@@ -69,7 +69,9 @@ const Header = ({ user, collapsed, setCollapsed }) => {
           </button>
           <div className="logo">
             <Link to="/">
-              <img alt="logo" src={logo} />
+              <AncapHubLogo
+                fill={colorMode === 'dark' ? '#161b28' : '#a47700'}
+              />
             </Link>
           </div>
         </Logo>

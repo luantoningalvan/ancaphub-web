@@ -348,19 +348,11 @@ export const Logo = styled.div`
     height: 64px;
     display: flex;
     justify-content: center;
-
-    img {
+    svg {
+      transition: fill 200ms ease-in-out;
+      margin: 8px;
       height: 56px;
-    }
-
-    /* now dat SNEK mooooves */
-    @media only screen and (min-width: 768px) {
-      cursor: pointer;
-      transform: translateY(-16px);
-      transition: transform 200ms ease-in-out;
-      &:hover {
-        transform: translateY(0px);
-      }
+      width: 56px;
     }
   }
 

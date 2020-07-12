@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ThemeProvider from '../components/template/Provider';
-import logo from '../assets/logo-type.png';
+import { ReactComponent as Logo } from '../assets/ancaphub.svg';
 import { Spinner } from '../components/ui';
 
 const LoadScreenWrap = styled.div`
@@ -24,7 +24,7 @@ const LoadScreenWrap = styled.div`
 const LoadScreen = () => (
   <ThemeProvider>
     <LoadScreenWrap>
-      <img src={logo} alt="AncapHub Logo" />
+      <Logo width={72} height={72} fill="#e0b30d" />
       <Spinner size={96} />
     </LoadScreenWrap>
   </ThemeProvider>
