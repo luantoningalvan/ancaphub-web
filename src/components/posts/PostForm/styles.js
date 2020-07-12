@@ -15,6 +15,25 @@ export default styled(Paper)`
     min-height: 100px;
     .DraftEditor-root {
       max-width: 640px;
+
+      & > * {
+        .draftJsLinkifyPlugin__link__2ittM,
+        .draftJsLinkifyPlugin__link__2ittM:visited {
+          color: ${(props) => props.theme.palette.secondary};
+          text-decoration: none;
+        }
+
+        .draftJsLinkifyPlugin__link__2ittM:hover,
+        .draftJsLinkifyPlugin__link__2ittM:focus {
+          color: ${(props) => props.theme.palette.secondary};
+          outline: 0; /* reset for :focus */
+          cursor: pointer;
+        }
+
+        .draftJsLinkifyPlugin__link__2ittM:active {
+          color: ${(props) => props.theme.palette.secondary};
+        }
+      }
     }
   }
 

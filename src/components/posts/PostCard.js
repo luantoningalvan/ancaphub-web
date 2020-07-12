@@ -8,6 +8,12 @@ import {
 } from 'react-intl';
 import { parseISO, getTime, differenceInSeconds } from 'date-fns';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
+
+// Draftjs plugins
+import createLinkifyPlugin from 'draft-js-linkify-plugin';
+import createHashtagPlugin from 'draft-js-hashtag-plugin';
+import 'draft-js-hashtag-plugin/lib/plugin.css';
+
 import ReactPlayer from 'react-player';
 
 import {
@@ -18,6 +24,9 @@ import {
 } from 'react-icons/fi';
 
 import { useDispatch, useSelector } from 'react-redux';
+import basicTextStylePlugin from '../editor/plugins/basicTextStylePlugin';
+import linkPluginOptions from '../editor/plugins/addLinkPlugin';
+import { getAllDecorators } from '../editor/utils/decorators';
 import CommentBox from '../comments/CommentBox';
 
 import {
@@ -41,6 +50,31 @@ const PostContent = styled.p`
   text-align: justify;
 `;
 
+const PostContentWrapper = styled.div`
+  .DraftEditor-root {
+    max-width: 640px;
+
+    & > * {
+      .draftJsLinkifyPlugin__link__2ittM,
+      .draftJsLinkifyPlugin__link__2ittM:visited {
+        color: ${(props) => props.theme.palette.secondary};
+        text-decoration: none;
+      }
+
+      .draftJsLinkifyPlugin__link__2ittM:hover,
+      .draftJsLinkifyPlugin__link__2ittM:focus {
+        color: ${(props) => props.theme.palette.secondary};
+        outline: 0; /* reset for :focus */
+        cursor: pointer;
+      }
+
+      .draftJsLinkifyPlugin__link__2ittM:active {
+        color: ${(props) => props.theme.palette.secondary};
+      }
+    }
+  }
+`;
+
 const PostCard = ({ data }) => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.user._id);
@@ -51,12 +85,30 @@ const PostCard = ({ data }) => {
   const handleCommentBox = () => setCommenteBoxState(!commentBoxState);
   const handleDelete = () => setDeleteDialogState(!deleteDialogState);
 
+  const linkifyPlugin = createLinkifyPlugin(linkPluginOptions);
+  const hashtagPlugin = createHashtagPlugin();
+
+  const plugins = [linkifyPlugin, basicTextStylePlugin, hashtagPlugin];
+
   const showPostContent = () => {
     try {
+      // Conteúdo do post que veio do banco de dados
       const contentState = convertFromRaw(JSON.parse(data.content));
-      const editorState = EditorState.createWithContent(contentState);
 
-      return <Editor editorState={editorState} readOnly />;
+      // Os decorators que precisam ser adicionados ao editor
+      const decorators = getAllDecorators(plugins);
+
+      // O que realmente é passado para o editor
+      const editorState = EditorState.createWithContent(
+        contentState,
+        decorators
+      );
+
+      return (
+        <PostContentWrapper>
+          <Editor editorState={editorState} readOnly plugins={plugins} />
+        </PostContentWrapper>
+      );
     } catch (error) {
       return <PostContent>{data.content}</PostContent>;
     }

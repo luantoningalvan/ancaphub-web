@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyBindingUtil } from 'draft-js';
+// import { KeyBindingUtil } from 'draft-js';
 
 export const linkStrategy = (contentBlock, callback, contentState) => {
   contentBlock.findEntityRanges((character) => {
@@ -28,17 +28,17 @@ export const Link = ({ children, ...props }) => {
 };
 
 const addLinkPlugin = {
-  keyBindingFn(event, { getEditorState }) {
-    const editorState = getEditorState();
-    const selection = editorState.getSelection();
-    if (selection.isCollapsed()) {
-      return null;
-    }
-    if (KeyBindingUtil.hasCommandModifier(event) && event.keyCode === 75) {
-      return 'add-link';
-    }
-    return null;
-  },
+  // keyBindingFn(event, { getEditorState }) {
+  //   const editorState = getEditorState();
+  //   const selection = editorState.getSelection();
+  //   if (selection.isCollapsed()) {
+  //     return null;
+  //   }
+  //   if (KeyBindingUtil.hasCommandModifier(event) && event.keyCode === 75) {
+  //     return 'add-link';
+  //   }
+  //   return null;
+  // },
 
   decorators: [
     {

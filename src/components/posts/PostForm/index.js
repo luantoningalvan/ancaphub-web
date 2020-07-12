@@ -30,7 +30,6 @@ import {
 
 import basicTextStylePlugin from '../../editor/plugins/basicTextStylePlugin';
 import 'draft-js/dist/Draft.css';
-import 'draft-js-linkify-plugin/lib/plugin.css';
 import 'draft-js-hashtag-plugin/lib/plugin.css';
 import {
   createPostRequest,
