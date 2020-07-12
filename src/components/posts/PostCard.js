@@ -71,6 +71,10 @@ const PostContentWrapper = styled.div`
       .draftJsLinkifyPlugin__link__2ittM:active {
         color: ${(props) => props.theme.palette.secondary};
       }
+
+      .draftJsHashtagPlugin__hashtag__1wMVC {
+        color: ${(props) => props.theme.palette.secondary};
+      }
     }
   }
 `;
