@@ -54,6 +54,11 @@ const PostContentWrapper = styled.div`
   .DraftEditor-root {
     max-width: 640px;
 
+    /* Faz com que as palavras quebrem junto com a linha */
+    text-align: justify;
+    word-wrap: normal;
+    word-break: keep-all;
+
     & > * {
       .draftJsLinkifyPlugin__link__2ittM,
       .draftJsLinkifyPlugin__link__2ittM:visited {
