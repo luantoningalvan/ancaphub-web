@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import parse from 'html-react-parser';
+
+// Ícones
+import { FiPlus, FiMinus } from 'react-icons/fi';
+
 import defaultThumbnail from '../../assets/default-book-cover.jpg';
 import Categories from '../../components/categories/ShowCategories';
 
@@ -41,15 +45,39 @@ const Author = styled.h3`
   font-size: 1.25rem;
 `;
 
+const TextControls = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 16px;
+`;
+
+const TextControlButton = styled.span`
+  cursor: pointer;
+`;
+
 const SingleArticle = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [fontSize, setFontSize] = React.useState(16);
 
   React.useEffect(() => {
     dispatch(getSingleItem({ itemId: id }));
   }, [dispatch, id]);
 
   const { singleItem } = useSelector((state) => state.library);
+
+  function handleGrowText() {
+    if (fontSize + 2 <= 20) {
+      setFontSize((prev) => prev + 2);
+    }
+  }
+
+  function handleShrinkText() {
+    if (fontSize - 2 >= 12) {
+      setFontSize((prev) => prev - 2);
+    }
+  }
 
   if (!singleItem) {
     return (
@@ -72,7 +100,18 @@ const SingleArticle = () => {
 
         <div style={{ marginTop: -20 }}>
           <Container>
-            <Paper padding>
+            <TextControls>
+              <h5>
+                <FormattedMessage id="common.fontSize" />
+              </h5>
+              <TextControlButton onClick={() => handleGrowText()}>
+                <FiPlus />
+              </TextControlButton>
+              <TextControlButton onClick={() => handleShrinkText()}>
+                <FiMinus />
+              </TextControlButton>
+            </TextControls>
+            <Paper padding style={{ fontSize }}>
               {parse(`${singleItem && singleItem.content}`)}
             </Paper>
           </Container>
