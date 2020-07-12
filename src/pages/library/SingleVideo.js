@@ -73,6 +73,14 @@ const SingleVideo = () => {
                 width="100%"
                 height="100%"
                 url={singleItem.extraFields && singleItem.extraFields.videoUrl}
+                controls
+                config={{
+                  youtube: {
+                    playerVars: {
+                      fs: 1,
+                    },
+                  },
+                }}
               />
             </PlayerWrapper>
             <div style={{ marginTop: 32 }}>
