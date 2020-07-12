@@ -82,7 +82,7 @@ const SignInForm = () => {
           style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}
         >
           <Link to="/auth/forgot" style={{ color: '#bbb' }}>
-            Esqueci minha senha
+            <FormattedMessage id="common.forgotPassword" />
           </Link>
         </div>
       </div>

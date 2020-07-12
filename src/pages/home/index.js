@@ -66,12 +66,16 @@ const Home = () => {
             <div className="form">
               {form === 'signin' ? (
                 <>
-                  <h3>Fazer Login</h3>
+                  <h3>
+                    <FormattedMessage id="common.login" />
+                  </h3>
                   <SigninForm />
                 </>
               ) : (
                 <>
-                  <h3>Criar Conta</h3>
+                  <h3>
+                    <FormattedMessage id="common.register" />
+                  </h3>
                   <SignupForm />
                 </>
               )}
@@ -79,11 +83,11 @@ const Home = () => {
             <div className="switch-form">
               {form === 'signin' ? (
                 <button type="button" onClick={() => setForm('signup')}>
-                  Criar conta
+                  <FormattedMessage id="common.register" />
                 </button>
               ) : (
                 <button type="button" onClick={() => setForm('signin')}>
-                  Já possuo uma conta
+                  <FormattedMessage id="home.form.hasAccount" />
                 </button>
               )}
             </div>
