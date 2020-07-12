@@ -13,7 +13,7 @@ import {
 } from '../../components/ui';
 import Provider from '../../components/template/Provider';
 import api from '../../api/axios';
-import logo from '../../assets/logo-type.png';
+import { ReactComponent as AncapHubLogo } from '../../assets/ancaphub.svg';
 
 const ForgotPassword = () => {
   const [, setError] = useState(false);
@@ -44,7 +44,7 @@ const ForgotPassword = () => {
           }}
         >
           <Link to="/">
-            <img src={logo} alt="AncapHub" />
+            <AncapHubLogo fill="#e0b30d" height={120} />
           </Link>
           <Card style={{ width: '100%', maxWidth: 400, marginTop: 32 }}>
             <CardHeader title="Recuperar Senha" />
