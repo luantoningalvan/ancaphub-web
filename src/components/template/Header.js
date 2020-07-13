@@ -69,9 +69,7 @@ const Header = ({ user, collapsed, setCollapsed }) => {
           </button>
           <div className="logo">
             <Link to="/">
-              <AncapHubLogo
-                fill={colorMode === 'dark' ? '#161b28' : '#a47700'}
-              />
+              <AncapHubLogo fill="#fff" />
             </Link>
           </div>
         </Logo>

@@ -82,7 +82,11 @@ export const AuthBox = styled.div`
 
   .logo {
     text-align: center;
-    margin: 32px 0px;
+    margin-top: 16px;
+    svg {
+      fill: #e0b30d;
+      width: 150px;
+    }
   }
 
   .form {

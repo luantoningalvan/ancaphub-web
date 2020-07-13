@@ -11,7 +11,7 @@ import {
 import ThemeProvider from '../../components/template/Provider';
 import SigninForm from '../../components/auth/SigninForm';
 import SignupForm from '../../components/auth/SignupForm';
-import logo from '../../assets/logo-type.png';
+import { ReactComponent as AncapHubLogo } from '../../assets/ancaphub.svg';
 import { AuthBox, Presentation, HomeContainer } from './styles';
 
 const Home = () => {
@@ -61,7 +61,7 @@ const Home = () => {
         <AuthBox>
           <div className="auth-content">
             <div className="logo">
-              <img src={logo} alt="AncapHub logo" />
+              <AncapHubLogo />
             </div>
             <div className="form">
               {form === 'signin' ? (
