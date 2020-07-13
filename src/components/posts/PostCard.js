@@ -12,7 +12,10 @@ import { Editor, EditorState, convertFromRaw } from 'draft-js';
 // Draftjs plugins
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
+import createMentionPlugin from 'draft-js-mention-plugin';
+
 import 'draft-js-hashtag-plugin/lib/plugin.css';
+import '../../assets/mentions.css';
 
 import ReactPlayer from 'react-player';
 
@@ -97,7 +100,18 @@ const PostCard = ({ data }) => {
   const linkifyPlugin = createLinkifyPlugin(linkPluginOptions);
   const hashtagPlugin = createHashtagPlugin();
 
-  const plugins = [linkifyPlugin, basicTextStylePlugin, hashtagPlugin];
+  const mentionPlugin = createMentionPlugin({
+    mentionsPrefix: '@',
+    entityMutability: 'IMMUTABLE',
+    supportWhitespace: true,
+  });
+
+  const plugins = [
+    linkifyPlugin,
+    basicTextStylePlugin,
+    hashtagPlugin,
+    mentionPlugin,
+  ];
 
   const showPostContent = () => {
     try {

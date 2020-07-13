@@ -17,6 +17,7 @@ import createListPlugin from 'draft-js-list-plugin';
 import { FormattedMessage } from 'react-intl';
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
+import createMentionPlugin from 'draft-js-mention-plugin';
 import { bindActionCreators } from 'redux';
 
 import {
@@ -28,28 +29,45 @@ import {
   Button,
 } from '../../ui';
 
+// Plugins customizados
 import basicTextStylePlugin from '../../editor/plugins/basicTextStylePlugin';
+import mentions from '../../editor/plugins/mentionPluginInfo';
+
+// CSS do editor
 import 'draft-js/dist/Draft.css';
 import 'draft-js-hashtag-plugin/lib/plugin.css';
+import '../../../assets/mentions.css';
+
 import {
   createPostRequest,
   getPostsRequest,
   getUserPostsRequest,
 } from '../../../actions/posts';
+
 import PostFormStyle from './styles';
+
+const mentionPlugin = createMentionPlugin({
+  mentionsPrefix: '@',
+  entityMutability: 'IMMUTABLE',
+  supportWhitespace: true,
+});
 
 const linkifyPlugin = createLinkifyPlugin();
 const listPlugin = createListPlugin();
 const hashtagPlugin = createHashtagPlugin();
+
+// Lista todos os plugins
 const plugins = [
   linkifyPlugin,
   basicTextStylePlugin,
   listPlugin,
   hashtagPlugin,
+  mentionPlugin,
 ];
 
 function PostForm({ createPostRequest: createPost }) {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [suggestions, setSuggestions] = useState([]);
   const contentState = editorState.getCurrentContent();
   const [media, setMedia] = useState(null);
   const uploadInputRef = useRef(null);
@@ -134,6 +152,18 @@ function PostForm({ createPostRequest: createPost }) {
     document.getElementById('image-input').value = null;
   };
 
+  // On search term changed
+  const onSearchChange = async ({ value }) => {
+    const results = await mentions(value);
+    setSuggestions(results);
+  };
+
+  // Do something with the object
+  const onAddMention = () => {};
+
+  // Suggestions box
+  const { MentionSuggestions } = mentionPlugin;
+
   // Determine whether placeholder should be displayed (to avoid overlap with lists)
   const blockType = RichUtils.getCurrentBlockType(editorState);
   const isOl = blockType === 'ordered-list-item';
@@ -157,6 +187,11 @@ function PostForm({ createPostRequest: createPost }) {
             }
             plugins={plugins}
             spellCheck
+          />
+          <MentionSuggestions
+            onSearchChange={onSearchChange}
+            suggestions={suggestions}
+            onAddMention={onAddMention}
           />
           {media && (
             <div className="media-preview">

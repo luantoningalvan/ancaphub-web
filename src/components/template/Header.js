@@ -135,7 +135,7 @@ const Header = ({ user, collapsed, setCollapsed }) => {
           >
             <DropdownListContainer>
               <DropdownListItem icon={<ProfileIcon />}>
-                <Link to={`/${user._id}`}>
+                <Link to={`/${user.username}`}>
                   <FormattedMessage id="common.profile" />
                 </Link>
               </DropdownListItem>
