@@ -9,10 +9,21 @@ import { getUsersRelationsips } from '../actions/relationships';
 
 function* getUsers() {
   try {
-    const result = yield call(api.getUsers);
+    const result = yield call(api.getUsers, { page: 1 });
     yield put(getUsersCount(result.data));
     yield put(getUsersRelationsips(result.data));
     yield put(actions.getUsersSuccess({ items: result.data }));
+  } catch (e) {
+    yield put(alerts.addAlert('error', e.message));
+  }
+}
+
+function* loadMorePosts({ payload }) {
+  try {
+    const users = yield call(api.getUsers, { page: payload.page });
+    yield put(getUsersCount(users.data));
+    yield put(getUsersRelationsips(users.data));
+    yield put(actions.loadMoreUsersSuccess({ items: users.data }));
   } catch (e) {
     yield put(alerts.addAlert('error', e.message));
   }
@@ -99,6 +110,10 @@ function* watchGetUsersRequest() {
   yield takeEvery(actions.Types.GET_USERS_REQUEST, getUsers);
 }
 
+function* watchLoadMoreUsersRequest() {
+  yield takeEvery(actions.Types.LOAD_MORE_USERS_REQUEST, loadMorePosts);
+}
+
 function* watchGetSingleUser() {
   yield takeLatest(actions.Types.GET_SINGLE_USER_REQUEST, getSingleUser);
 }
@@ -128,6 +143,7 @@ function* watchUpdateUserAvatar() {
 
 export default [
   fork(watchGetUsersRequest),
+  fork(watchLoadMoreUsersRequest),
   fork(watchCreateUserRequest),
   fork(watchGetSingleUser),
   fork(watchGetUserFollowers),

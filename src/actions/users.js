@@ -1,6 +1,8 @@
 export const Types = {
   GET_USERS_REQUEST: 'users/get_users_request',
   GET_USERS_SUCCESS: 'users/get_users_success',
+  LOAD_MORE_USERS_REQUEST: 'users/load_more_users_request',
+  LOAD_MORE_USERS_SUCCESS: 'users/load_more_users_success',
   GET_SINGLE_USER_REQUEST: 'users/get_single_user_request',
   GET_SINGLE_USER_SUCCESS: 'users/get_single_user_success',
   CREATE_USER_REQUEST: 'users/create_user_request',
@@ -17,13 +19,24 @@ export const Types = {
   GET_USERS_COUNT: 'users/get_users_count',
 };
 
-export const getUsersRequest = () => ({
+export const getUsersRequest = (data) => ({
   type: Types.GET_USERS_REQUEST,
+  payload: data,
 });
 
 export const getUsersSuccess = ({ items }) => ({
   type: Types.GET_USERS_SUCCESS,
   payload: { items },
+});
+
+export const loadMoreUsersRequest = (data) => ({
+  type: Types.LOAD_MORE_USERS_REQUEST,
+  payload: data,
+});
+
+export const loadMoreUsersSuccess = (items) => ({
+  type: Types.LOAD_MORE_USERS_SUCCESS,
+  payload: items,
 });
 
 export const getSingleUserRequest = (handle) => ({
