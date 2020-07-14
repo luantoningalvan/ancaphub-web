@@ -1,22 +1,20 @@
-import { getUsers } from '../../../api/users';
+import { searchMention } from '../../../api/search';
 
 export default async (handle) => {
-  const response = await getUsers();
+  const response = await searchMention(handle);
 
-  const actualData = [];
+  const formattedUsers = [];
 
-  response.data.forEach((item) => {
-    actualData.push({
-      name: item.user.name,
+  response.data.data.forEach((item) => {
+    formattedUsers.push({
+      name: item.name,
       avatar:
-        item.user.avatar ||
+        item.avatar ||
         'https://api.adorable.io/avatars/40/random@ancaphub.com.png',
-      link: `/${item.user.username}`,
-      username: item.user.username,
+      link: `/${item.username}`,
+      username: item.username,
     });
   });
 
-  return actualData.filter(
-    (user) => user.name.match(handle) || user.username.match(handle)
-  );
+  return formattedUsers;
 };

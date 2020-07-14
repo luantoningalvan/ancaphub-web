@@ -9,11 +9,17 @@ import { getUsersRelationsips } from '../actions/relationships';
 function* searchTerm(action) {
   try {
     const response = yield call(api.searchTerm, action.payload);
+
+    // Count relationships
     yield put(getUsersCount(response.data.users));
+
+    // Send relationships to reducer
     yield put(getUsersRelationsips(response.data.users));
+
+    // Store search results
     yield put(actions.searchTermSuccess(response.data));
   } catch (e) {
-    yield put(addAlert('error', e.message));
+    yield put(addAlert('error', e.message || 'Error performing search.'));
   }
 }
 
@@ -28,7 +34,7 @@ function* searchNearbyUsers(action) {
     yield put(getUsersRelationsips(response.data));
     yield put(actions.searchNearbyUserSuccess(response.data));
   } catch (e) {
-    yield put(addAlert('error', e.message));
+    yield put(addAlert('error', e.message || 'Error performing search.'));
   }
 }
 

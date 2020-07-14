@@ -12,6 +12,15 @@ export default (state = INITIAL_STATE, action) => {
     case Types.SEARCH_TERM_REQUEST:
       return { loading: true };
     case Types.SEARCH_TERM_SUCCESS:
+      return {
+        ...state,
+        results: {
+          users: payload.users,
+          library: payload.library,
+          events: payload.events,
+        },
+        loading: false,
+      };
     case Types.SEARCH_NEARBY_USERS_SUCCESS: {
       return {
         ...state,

@@ -28,10 +28,10 @@ export const Container = styled(animated.div)`
     margin: 30px 30px 0px 0px;
   }
 
-  ${(props) =>
+  ${() =>
     css`
-      background: ${errorColors[props.type].background};
-      color: ${errorColors[props.type].color};
+      background: ${errorColors.error.background};
+      color: ${errorColors.error.color};
     `}
 
   & + div {

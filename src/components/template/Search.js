@@ -17,7 +17,7 @@ const Search = () => {
 
   const search = () => {
     if (term !== '') {
-      history.push(`/search?s=${term}`);
+      history.push(`/search?term=${term}`);
     }
   };
 

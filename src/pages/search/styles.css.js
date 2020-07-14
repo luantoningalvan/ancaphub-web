@@ -17,6 +17,13 @@ export const SearchContainer = styled.div`
   }
 `;
 
+export const InnerSearchGridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+`;
+
 export const SearchSidebarContainer = styled.div`
   grid-area: sidebar;
 `;

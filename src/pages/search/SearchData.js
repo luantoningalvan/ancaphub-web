@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { searchTermRequest as searchTerm } from '../../actions/search';
+
+// Cards for entity types
 import UserCard from '../../components/users/UserCard';
+import LibraryCard from '../../components/library/LibraryCard';
+import EventCard from '../../components/events/EventCard';
 
 import {
   Container,
@@ -15,6 +19,7 @@ import {
 } from '../../components/ui';
 
 import {
+  InnerSearchGridContainer,
   SearchSidebarContainer,
   SearchContentContainer,
   SearchContainer,
@@ -25,7 +30,7 @@ function useQuery() {
 }
 
 const SearchData = () => {
-  const term = useQuery().get('s');
+  const term = useQuery().get('term');
   const dispatch = useDispatch();
   const { results, loading } = useSelector((state) => state.search);
 
@@ -60,18 +65,38 @@ const SearchData = () => {
             </h3>
             {results.users && results.users.length > 0 && (
               <>
-                <h3 style={{ marginBottom: 8 }}>
+                <h3 style={{ margin: '16px 0' }}>
                   <FormattedMessage id="common.users" />
                 </h3>
-                <div style={{ width: '100%' }}>
-                  <div>
-                    {results.users.map((user) => (
-                      <div xs={3} key={user._id}>
-                        <UserCard user={user.user} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <InnerSearchGridContainer>
+                  {results.users.map((user) => (
+                    <UserCard user={user} key={user._id} />
+                  ))}
+                </InnerSearchGridContainer>
+              </>
+            )}
+            {results.library && results.library.length > 0 && (
+              <>
+                <h3 style={{ margin: '16px 0' }}>
+                  <FormattedMessage id="common.library" />
+                </h3>
+                <InnerSearchGridContainer>
+                  {results.library.map((item) => (
+                    <LibraryCard key={item._id} item={item} />
+                  ))}
+                </InnerSearchGridContainer>
+              </>
+            )}
+            {results.events && results.events.length > 0 && (
+              <>
+                <h3 style={{ margin: '16px 0' }}>
+                  <FormattedMessage id="common.events" />
+                </h3>
+                <InnerSearchGridContainer>
+                  {results.events.map((event) => (
+                    <EventCard key={event._id} event={event} />
+                  ))}
+                </InnerSearchGridContainer>
               </>
             )}
           </SearchContentContainer>
