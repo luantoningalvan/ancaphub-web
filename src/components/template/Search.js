@@ -48,6 +48,7 @@ const Search = () => {
             >
               {(msg) => (
                 <input
+                  formMethod="get"
                   type="text"
                   placeholder={msg}
                   value={term}

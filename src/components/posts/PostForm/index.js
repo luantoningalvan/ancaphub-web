@@ -20,6 +20,15 @@ import createHashtagPlugin from 'draft-js-hashtag-plugin';
 import createMentionPlugin from 'draft-js-mention-plugin';
 import { bindActionCreators } from 'redux';
 
+// Botões da inline toolbar
+import {
+  CodeButton,
+  BoldButton,
+  ItalicButton,
+  UnderlineButton,
+  UnorderedListButton,
+} from 'draft-js-buttons';
+
 import {
   TextField,
   CardBody,
@@ -32,11 +41,15 @@ import {
 // Plugins customizados
 import basicTextStylePlugin from '../../editor/plugins/basicTextStylePlugin';
 import mentions from '../../editor/plugins/mentionPluginInfo';
+import inlineToolbar, {
+  HeadlineButton,
+} from '../../editor/plugins/inlineToolbarPlugin';
 
 // CSS do editor
 import 'draft-js/dist/Draft.css';
 import 'draft-js-hashtag-plugin/lib/plugin.css';
 import '../../../assets/mentions.css';
+import '../../../assets/inline-toolbar.css';
 
 import {
   createPostRequest,
@@ -63,6 +76,7 @@ const plugins = [
   listPlugin,
   hashtagPlugin,
   mentionPlugin,
+  inlineToolbar,
 ];
 
 function PostForm({ createPostRequest: createPost }) {
@@ -164,6 +178,9 @@ function PostForm({ createPostRequest: createPost }) {
   // Suggestions box
   const { MentionSuggestions } = mentionPlugin;
 
+  // Inline toolbar component
+  const { InlineToolbar } = inlineToolbar;
+
   // Determine whether placeholder should be displayed (to avoid overlap with lists)
   const blockType = RichUtils.getCurrentBlockType(editorState);
   const isOl = blockType === 'ordered-list-item';
@@ -193,6 +210,18 @@ function PostForm({ createPostRequest: createPost }) {
             suggestions={suggestions}
             onAddMention={onAddMention}
           />
+          <InlineToolbar>
+            {(externalProps) => (
+              <>
+                <BoldButton {...externalProps} />
+                <ItalicButton {...externalProps} />
+                <UnderlineButton {...externalProps} />
+                <HeadlineButton {...externalProps} />
+                <UnorderedListButton {...externalProps} />
+                <CodeButton {...externalProps} />
+              </>
+            )}
+          </InlineToolbar>
           {media && (
             <div className="media-preview">
               {media.type === 'image' && (

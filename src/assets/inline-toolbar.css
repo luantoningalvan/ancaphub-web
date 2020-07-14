@@ -1,0 +1,74 @@
+.draftJsToolbar__buttonWrapper__1Dmqh {
+  display: inline-block;
+}
+
+.draftJsToolbar__button__qi1gf {
+  background: rgba(22, 27, 40, 0.5);
+  color: #ccc;
+  font-size: 20px;
+  font-weight: bold;
+  border: 0;
+  padding-top: 5px;
+  vertical-align: bottom;
+  height: 34px;
+  width: 36px;
+}
+
+.draftJsToolbar__button__qi1gf svg {
+  fill: #ccc;
+}
+
+.draftJsToolbar__button__qi1gf:hover, .draftJsToolbar__button__qi1gf:focus {
+  background: #21283b;
+  outline: 0; /* reset for :focus */
+}
+
+.draftJsToolbar__active__3qcpF {
+  background: #1d2333;
+  color: white;
+}
+
+.draftJsToolbar__active__3qcpF svg {
+  fill: #bbb;
+}
+.draftJsToolbar__separator__3U7qt {
+  display: inline-block;
+  border-right: 1px solid #2f3749;
+  height: 24px;
+  margin: 0 0.5em;
+}
+.draftJsToolbar__toolbar__dNtBH {
+  left: 50%;
+  -webkit-transform: translate(-50%) scale(0);
+          transform: translate(-50%) scale(0);
+  position: absolute;
+  border: 1px solid #2f3749;
+  background: rgba(22, 27, 40, 0.5);
+  border-radius: 2px;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.draftJsToolbar__toolbar__dNtBH:after, .draftJsToolbar__toolbar__dNtBH:before {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.draftJsToolbar__toolbar__dNtBH:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-top-color: #2f3749;
+  border-width: 4px;
+  margin-left: -4px;
+}
+.draftJsToolbar__toolbar__dNtBH:before {
+  border-color: rgba(221, 221, 221, 0);
+  border-top-color: #2f3749;
+  border-width: 6px;
+  margin-left: -6px;
+}
