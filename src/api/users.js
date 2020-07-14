@@ -1,11 +1,8 @@
 import axios from './axios';
 
-export const getUsers = () =>
-  axios.get('/users', {
-    params: {
-      limit: 250,
-    },
-  });
+export const getUsers = ({ page = 1, limit = 20 }) => {
+  return axios.get('/users', { params: { page, limit } });
+};
 
 export const getSingleUser = (payload) => axios.get(`users/handle/${payload}`);
 
