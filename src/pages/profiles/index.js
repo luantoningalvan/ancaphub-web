@@ -18,6 +18,7 @@ import { Paper, Spinner, Container, Tabs, Tab } from '../../components/ui';
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
 import EditAvatar from '../../components/users/EditAvatar';
+import UserName from '../../components/users/UserName';
 
 import { getSingleUserRequest } from '../../actions/users';
 import {
@@ -143,7 +144,9 @@ const Profiles = () => {
               </div>
 
               <div className="user-name">
-                <h3>{user.name}</h3>
+                <h3>
+                  <UserName user={user} />
+                </h3>
                 <span>@{user.username}</span>
               </div>
 

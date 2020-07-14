@@ -1,9 +1,13 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+// Verified user icon
+
+import { FiCheckCircle } from 'react-icons/fi';
 
 const UserNameStyle = styled(Link)`
   font-weight: bold;
@@ -20,16 +24,26 @@ const UserNameStyle = styled(Link)`
   }
 `;
 
-const UserName = ({ user, fontSize }) => (
-  <UserNameStyle
-    title={user.isVerified && <FormattedMessage id="common.verified" />}
-    to={`/${user.username}`}
-    className={clsx({ verifiedUser: user.isVerified })}
-    fontSize={fontSize}
-  >
-    {user.name}
-  </UserNameStyle>
-);
+const UserName = ({ user, fontSize }) => {
+  const { formatMessage } = useIntl();
+
+  return (
+    <UserNameStyle
+      title={user.isVerified && formatMessage({ id: 'common.verified' })}
+      to={`/${user.username}`}
+      className={clsx({ verifiedUser: user.isVerified })}
+      fontSize={fontSize}
+    >
+      {user.name}
+      <FiCheckCircle
+        color="#edb30d"
+        width={16}
+        height={16}
+        style={{ transform: 'translateY(4px)', marginLeft: 4 }}
+      />
+    </UserNameStyle>
+  );
+};
 
 UserName.propTypes = {
   user: PropTypes.shape({
