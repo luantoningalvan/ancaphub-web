@@ -11,10 +11,22 @@ function* searchTerm(action) {
     const response = yield call(api.searchTerm, action.payload);
 
     // Count relationships
-    yield put(getUsersCount(response.data.users));
+    yield put(
+      getUsersCount(
+        response.data.users.map((user) => ({
+          user,
+        }))
+      )
+    );
 
     // Send relationships to reducer
-    yield put(getUsersRelationsips(response.data.users));
+    yield put(
+      getUsersRelationsips(
+        response.data.users.map((user) => ({
+          user,
+        }))
+      )
+    );
 
     // Store search results
     yield put(actions.searchTermSuccess(response.data));

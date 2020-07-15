@@ -8,10 +8,10 @@ export default (state = INITIAL_STATE, action) => {
   switch (type) {
     case Types.GET_USER_RELATIONSHIPS: {
       const data = payload.map((obj) => ({
-        _id: obj._id,
-        username: obj.username,
-        following: obj.following,
-        followed_by: obj.followed_by,
+        _id: obj.user._id,
+        username: obj.user.username,
+        following: obj.user.following,
+        followed_by: obj.user.followed_by,
       }));
 
       return {
