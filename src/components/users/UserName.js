@@ -26,7 +26,6 @@ const UserNameStyle = styled(Link)`
 
 const UserName = ({ user, fontSize }) => {
   const { formatMessage } = useIntl();
-
   return (
     <UserNameStyle
       title={user.isVerified && formatMessage({ id: 'common.verified' })}
@@ -35,12 +34,14 @@ const UserName = ({ user, fontSize }) => {
       fontSize={fontSize}
     >
       {user.name}
-      <FiCheckCircle
-        color="#edb30d"
-        width={16}
-        height={16}
-        style={{ transform: 'translateY(4px)', marginLeft: 4 }}
-      />
+      {user.isVerified && (
+        <FiCheckCircle
+          color="#edb30d"
+          width={16}
+          height={16}
+          style={{ transform: 'translateY(4px)', marginLeft: 4 }}
+        />
+      )}
     </UserNameStyle>
   );
 };

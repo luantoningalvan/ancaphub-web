@@ -27,6 +27,7 @@ import {
 } from 'react-icons/fi';
 
 import { useDispatch, useSelector } from 'react-redux';
+import UserName from '../users/UserName';
 import basicTextStylePlugin from '../editor/plugins/basicTextStylePlugin';
 import linkPluginOptions from '../editor/plugins/addLinkPlugin';
 import { getAllDecorators } from '../editor/utils/decorators';
@@ -155,7 +156,9 @@ const PostCard = ({ data }) => {
           />
         </div>
         <div>
-          <Link to={`/${data.user.username}`}>{data.user.name}</Link>
+          <Link to={`/${data.user.username}`}>
+            <UserName user={data.user} />
+          </Link>
           <span>
             <FormattedRelativeTime
               numeric="auto"
