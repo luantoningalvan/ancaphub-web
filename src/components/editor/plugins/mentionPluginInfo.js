@@ -1,3 +1,4 @@
+import MentionComponent from 'draft-js-mention-plugin/lib/Mention';
 import { searchMention } from '../../../api/search';
 
 export default async (handle) => {
@@ -17,4 +18,12 @@ export default async (handle) => {
   });
 
   return formattedUsers;
+};
+
+export const mentionPluginOptions = {
+  decorators: [
+    {
+      component: MentionComponent,
+    },
+  ],
 };

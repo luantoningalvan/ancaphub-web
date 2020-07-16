@@ -12,6 +12,7 @@ import { Editor, EditorState, convertFromRaw } from 'draft-js';
 // Draftjs plugins
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
+import createMentionsPlugin from 'draft-js-mention-plugin';
 
 import 'draft-js-hashtag-plugin/lib/plugin.css';
 
@@ -25,6 +26,7 @@ import {
 } from 'react-icons/fi';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { mentionPluginOptions } from '../editor/plugins/mentionPluginInfo';
 import UserName from '../users/UserName';
 import basicTextStylePlugin from '../editor/plugins/basicTextStylePlugin';
 import linkPluginOptions from '../editor/plugins/addLinkPlugin';
@@ -96,10 +98,21 @@ const PostCard = ({ data }) => {
   const handleCommentBox = () => setCommenteBoxState(!commentBoxState);
   const handleDelete = () => setDeleteDialogState(!deleteDialogState);
 
+  // Links plugin
   const linkifyPlugin = createLinkifyPlugin(linkPluginOptions);
+
+  // Hashtag plugin
   const hashtagPlugin = createHashtagPlugin();
 
-  const plugins = [linkifyPlugin, basicTextStylePlugin, hashtagPlugin];
+  // Mentions plugin
+  const mentionPlugin = createMentionsPlugin(mentionPluginOptions);
+
+  const plugins = [
+    linkifyPlugin,
+    basicTextStylePlugin,
+    hashtagPlugin,
+    mentionPlugin,
+  ];
 
   const showPostContent = () => {
     try {
