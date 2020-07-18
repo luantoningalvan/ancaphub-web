@@ -12,7 +12,6 @@ import { Editor, EditorState, convertFromRaw } from 'draft-js';
 // Draftjs plugins
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
-import createMentionsPlugin from 'draft-js-mention-plugin';
 
 import 'draft-js-hashtag-plugin/lib/plugin.css';
 
@@ -26,7 +25,6 @@ import {
 } from 'react-icons/fi';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { mentionPluginOptions } from '../editor/plugins/mentionPluginInfo';
 import UserName from '../users/UserName';
 import basicTextStylePlugin from '../editor/plugins/basicTextStylePlugin';
 import linkPluginOptions from '../editor/plugins/addLinkPlugin';
@@ -57,30 +55,25 @@ const PostContent = styled.p`
 const PostContentWrapper = styled.div`
   .DraftEditor-root {
     max-width: 640px;
-
     /* Faz com que as palavras quebrem junto com a linha */
     text-align: justify;
     word-wrap: normal;
     word-break: keep-all;
-
     & > * {
       .draftJsLinkifyPlugin__link__2ittM,
       .draftJsLinkifyPlugin__link__2ittM:visited {
         color: ${(props) => props.theme.palette.secondary};
         text-decoration: none;
       }
-
       .draftJsLinkifyPlugin__link__2ittM:hover,
       .draftJsLinkifyPlugin__link__2ittM:focus {
         color: ${(props) => props.theme.palette.secondary};
         outline: 0; /* reset for :focus */
         cursor: pointer;
       }
-
       .draftJsLinkifyPlugin__link__2ittM:active {
         color: ${(props) => props.theme.palette.secondary};
       }
-
       .draftJsHashtagPlugin__hashtag__1wMVC {
         color: ${(props) => props.theme.palette.secondary};
       }
@@ -98,23 +91,10 @@ const PostCard = ({ data }) => {
   const handleCommentBox = () => setCommenteBoxState(!commentBoxState);
   const handleDelete = () => setDeleteDialogState(!deleteDialogState);
 
-  // Links plugin
   const linkifyPlugin = createLinkifyPlugin(linkPluginOptions);
-
-  // Hashtag plugin
   const hashtagPlugin = createHashtagPlugin();
 
-  // Mentions plugin
-  const mentionPlugin = createMentionsPlugin(mentionPluginOptions);
-
-  const plugins = [
-    linkifyPlugin,
-    basicTextStylePlugin,
-    hashtagPlugin,
-    mentionPlugin,
-  ];
-
-  const { MentionSuggestions } = mentionPlugin;
+  const plugins = [linkifyPlugin, basicTextStylePlugin, hashtagPlugin];
 
   const showPostContent = () => {
     try {
@@ -133,7 +113,6 @@ const PostCard = ({ data }) => {
       return (
         <PostContentWrapper>
           <Editor editorState={editorState} readOnly plugins={plugins} />
-          <MentionSuggestions suggestions={[]} />
         </PostContentWrapper>
       );
     } catch (error) {
