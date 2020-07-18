@@ -114,6 +114,8 @@ const PostCard = ({ data }) => {
     mentionPlugin,
   ];
 
+  const { MentionSuggestions } = mentionPlugin;
+
   const showPostContent = () => {
     try {
       // Conteúdo do post que veio do banco de dados
@@ -131,6 +133,7 @@ const PostCard = ({ data }) => {
       return (
         <PostContentWrapper>
           <Editor editorState={editorState} readOnly plugins={plugins} />
+          <MentionSuggestions suggestions={[]} />
         </PostContentWrapper>
       );
     } catch (error) {

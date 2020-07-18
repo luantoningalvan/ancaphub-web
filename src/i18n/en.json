@@ -266,6 +266,7 @@
   "events.free": "Free",
   "search.filter": "Filter results",
   "search.showingResultsFor": "Showing results for {term}",
+  "search.showingResultsForWithFilter": "Showing results for {term} in {filter}",
   "nearby.resultBasis": "Results based on your last location and other users' with the location feature enabled, matching the specified search radius.",
   "nearby.noNearPeople": "No users with location enabled were found near you.",
   "nearby.enable": "Enable and get location",

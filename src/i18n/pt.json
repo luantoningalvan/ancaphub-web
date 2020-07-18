@@ -266,6 +266,7 @@
   "events.free": "Gratuito",
   "search.filter": "Filtrar resultados",
   "search.showingResultsFor": "Exibindo resultados para {term}",
+  "search.showingResultsForWithFilter": "Mostrando resultados para {term} em {filter}",
   "nearby.title": "Pessoas próximas",
   "nearby.description": "Encontre pessoas próximas a você que tenham o recurso de localização ativado.",
   "nearby.location": "Localização",
