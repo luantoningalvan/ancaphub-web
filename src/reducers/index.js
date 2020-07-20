@@ -12,8 +12,10 @@ import notifications from './notifications';
 import search from './search';
 import settings from './settings';
 import categories from './categories';
+import ads from './ads';
 
 export default combineReducers({
+  ads,
   alerts,
   users,
   usersCount,
