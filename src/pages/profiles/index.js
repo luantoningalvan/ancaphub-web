@@ -39,7 +39,6 @@ const Profiles = () => {
   const { user, loading } = useSelector((state) => state.profile);
   const auth = useSelector((state) => state.auth);
 
-  const [Page, setPage] = useState();
   const [editProfile] = useState(false);
   const [editAvatar, setEditAvatar] = useState(false);
 
@@ -50,11 +49,11 @@ const Profiles = () => {
     auth.isAuthenticated && auth.user.username === handle;
 
   const pages = {
-    undefined: <Feed user={handle} />,
-    lists: <Lists />,
-    contributions: <Contributions />,
-    followers: <Followers user={handle} />,
-    following: <Following user={handle} />,
+    undefined: Feed,
+    lists: Lists,
+    contributions: Contributions,
+    followers: Followers,
+    following: Following,
   };
 
   useEffect(() => {
@@ -62,10 +61,7 @@ const Profiles = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handle, getSingleUserRequest]);
 
-  useEffect(() => {
-    setPage(() => pages[pageParam]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pageParam]);
+  const Template = pages[pageParam];
 
   return (
     <Container>
@@ -213,7 +209,9 @@ const Profiles = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {user.site}
+                          {user.site.length > 28
+                            ? `${user.site.substring(0, 28)}..`
+                            : user.site}
                         </a>
                       </span>
                     </li>
@@ -243,7 +241,9 @@ const Profiles = () => {
               </Paper>
 
               <div className="profile-content">
-                <Suspense fallback={<Spinner size={96} />}>{Page}</Suspense>
+                <Suspense fallback={<Spinner size={96} />}>
+                  <Template user={handle} />
+                </Suspense>
               </div>
             </div>
           </ProfileContent>

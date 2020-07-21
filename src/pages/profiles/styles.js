@@ -205,7 +205,6 @@ export const ProfileInfo = styled.div`
 `;
 
 export const UserAbout = styled.div`
-  width: 100%;
   margin-bottom: 16px;
 
   > div {
@@ -231,6 +230,12 @@ export const UserAbout = styled.div`
       list-style: none;
       display: flex;
       align-items: center;
+      flex-grow: 1;
+      flex-shrink: 0;
+
+      span {
+        flex: 1;
+      }
 
       a {
         color: ${(props) => props.theme.palette.text.primary};
@@ -253,7 +258,8 @@ export const UserAbout = styled.div`
 
 export const ProfileContent = styled.div`
   margin: 16px 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
   .profile-menu {
     grid-area: profileMenu;
@@ -262,7 +268,8 @@ export const ProfileContent = styled.div`
 
   @media (min-width: 768px) {
     gap: 16px;
-    grid-template-columns: 4fr 8fr;
+    display: grid;
+    grid-template-columns: 30% 70%;
   }
 `;
 
