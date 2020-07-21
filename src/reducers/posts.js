@@ -31,7 +31,6 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
       };
     case Types.GET_MORE_POSTS_SUCCESS:
-      console.log('fODASE');
       return {
         ...state,
         items: {
