@@ -37,6 +37,20 @@ export default ({ user }) => {
     return null;
   }
 
+  const getText = (isFollowing, followedBy) => {
+    if (isFollowing) {
+      return <FormattedMessage id="common.following" />;
+    }
+    if (!isFollowing && followedBy) {
+      return <FormattedMessage id="common.followBack" />;
+    }
+    if (!isFollowing) {
+      return <FormattedMessage id="common.follow" />;
+    }
+
+    return <></>;
+  };
+
   return (
     <Button
       color="primary"
@@ -44,11 +58,7 @@ export default ({ user }) => {
       variant={following ? 'normal' : 'outlined'}
       onClick={following ? handleUnfollow : handleFollow}
     >
-      {following ? (
-        <FormattedMessage id="common.following" />
-      ) : (
-        <FormattedMessage id="common.follow" />
-      )}
+      {getText(following, state.followed_by)}
     </Button>
   );
 };

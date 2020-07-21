@@ -147,9 +147,16 @@ const Profiles = () => {
                 <h3>
                   <UserName user={user} />
                 </h3>
-                <span>@{user.username}</span>
+                <span>
+                  @{user.username}{' '}
+                  {user.followed_by && (
+                    <em>
+                      {' '}
+                      - <FormattedMessage id="common.followsYou" />
+                    </em>
+                  )}
+                </span>
               </div>
-
               <div className="user-action-buttons">
                 <FollowButton user={handle} />
                 {verifyIfIsOwnProfile && <EditProfile open={editProfile} />}

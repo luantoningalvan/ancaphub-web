@@ -17,6 +17,8 @@
   "common.following": "Following",
   "common.followers": "Followers",
   "common.follow": "Follow",
+  "common.followBack": "Follow back",
+  "common.followsYou": "Follows you",
   "common.sendMessage": "Send Message",
   "common.about": "About",
   "common.collection": "Collection",
