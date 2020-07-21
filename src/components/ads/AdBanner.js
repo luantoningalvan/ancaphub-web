@@ -1,13 +1,25 @@
-import React from 'react';
-import { Card } from '../ui';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Card, LoadContent } from '../ui';
 
-const AdBanner = ({ ad }) => {
+import { getAddRequest } from '../../actions/ads';
+
+const AdBanner = () => {
+  const dispatch = useDispatch();
+  const { ad, loading } = useSelector((state) => state.ads);
+
+  useEffect(() => {
+    dispatch(getAddRequest());
+  }, []);
+
   return (
-    <Card>
-      <a href={ad.link} target="_blank" rel="noreferrer">
-        <img src={ad.banner} alt="" style={{ width: '100%' }} />
-      </a>
-    </Card>
+    <LoadContent loading={loading}>
+      <Card style={{ marginTop: 16, overflow: 'hidden' }}>
+        <a href={ad.link} target="_blank" rel="noreferrer">
+          <img src={ad.banner} alt="" style={{ width: '100%' }} />
+        </a>
+      </Card>
+    </LoadContent>
   );
 };
 
