@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { searchTermRequest as searchTerm } from '../../actions/search';
 
 // Cards for entity types
 import UserCard from '../../components/users/UserCard';
 import LibraryCard from '../../components/library/LibraryCard';
 import EventCard from '../../components/events/EventCard';
+import AdBanner from '../../components/ads/AdBanner';
 
 import {
   Container,
@@ -15,7 +16,7 @@ import {
   CardHeader,
   Menu,
   MenuItem,
-  Spinner,
+  LoadContent,
 } from '../../components/ui';
 
 import {
@@ -23,6 +24,7 @@ import {
   SearchSidebarContainer,
   SearchContentContainer,
   SearchContainer,
+  SearchResultType,
 } from './styles.css';
 
 function useQuery() {
@@ -39,24 +41,11 @@ const SearchData = () => {
     if (searchTerm !== '') {
       dispatch(searchTerm(term));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [term, searchTerm]);
+  }, [term, dispatch]);
 
-  const { formatMessage } = useIntl();
-
-  const searchTitle = () => {
-    return type === 'all' ? (
-      <FormattedMessage id="search.showingResultsFor" values={{ term }} />
-    ) : (
-      <FormattedMessage
-        id="search.showingResultsForWithFilter"
-        values={{ term, filter: formatMessage({ id: `common.${type}` }) }}
-      />
-    );
-  };
   return (
     <Container style={{ marginTop: 16 }}>
-      {!loading ? (
+      <LoadContent loading={loading}>
         <SearchContainer>
           <SearchSidebarContainer>
             <Card style={{ width: '100%' }}>
@@ -80,26 +69,29 @@ const SearchData = () => {
                 />
               </Menu>
             </Card>
+            <AdBanner />
           </SearchSidebarContainer>
 
           <SearchContentContainer>
-            <h3 style={{ marginBottom: 16 }}>{searchTitle()}</h3>
-            {results.users.length > 0 && (type === 'all' || type === 'users') && (
-              <>
-                <h3 style={{ margin: '16px 0' }}>
-                  <FormattedMessage id="common.users" />
-                </h3>
-                <InnerSearchGridContainer>
-                  {results.users.map((user) => (
-                    <UserCard user={user} key={user._id} />
-                  ))}
-                </InnerSearchGridContainer>
-              </>
-            )}
-            {results.library.length > 0 &&
+            {results.users &&
+              results.users.length > 0 &&
+              (type === 'all' || type === 'users') && (
+                <SearchResultType>
+                  <h3>
+                    <FormattedMessage id="common.users" />
+                  </h3>
+                  <InnerSearchGridContainer>
+                    {results.users.map((user) => (
+                      <UserCard user={user} key={user._id} />
+                    ))}
+                  </InnerSearchGridContainer>
+                </SearchResultType>
+              )}
+            {results.users &&
+              results.library.length > 0 &&
               (type === 'all' || type === 'library') && (
-                <>
-                  <h3 style={{ margin: '16px 0' }}>
+                <SearchResultType>
+                  <h3>
                     <FormattedMessage id="common.library" />
                   </h3>
                   <InnerSearchGridContainer>
@@ -107,12 +99,13 @@ const SearchData = () => {
                       <LibraryCard key={item._id} item={item} />
                     ))}
                   </InnerSearchGridContainer>
-                </>
+                </SearchResultType>
               )}
-            {results.events.length > 0 &&
+            {results.users &&
+              results.events.length > 0 &&
               (type === 'all' || type === 'events') && (
-                <>
-                  <h3 style={{ margin: '16px 0' }}>
+                <SearchResultType>
+                  <h3>
                     <FormattedMessage id="common.events" />
                   </h3>
                   <InnerSearchGridContainer>
@@ -120,17 +113,11 @@ const SearchData = () => {
                       <EventCard key={event._id} event={event} />
                     ))}
                   </InnerSearchGridContainer>
-                </>
+                </SearchResultType>
               )}
           </SearchContentContainer>
         </SearchContainer>
-      ) : (
-        <div
-          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-        >
-          <Spinner size={128} />
-        </div>
-      )}
+      </LoadContent>
     </Container>
   );
 };

@@ -35,7 +35,7 @@ const UserCardWrap = styled(Paper)`
     margin-bottom: 8px;
 
     svg {
-      fill: ${(props) => props.theme.palette.secondary};
+      color: ${(props) => props.theme.palette.secondary};
     }
   }
 `;

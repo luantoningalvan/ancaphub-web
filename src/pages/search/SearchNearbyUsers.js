@@ -5,12 +5,24 @@ import { isEmpty } from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { FiCrosshair as LocateIcon } from 'react-icons/fi';
 import styled from 'styled-components';
-
+import {
+  SearchContainer,
+  SearchContentContainer,
+  SearchSidebarContainer,
+  InnerSearchGridContainer,
+} from './styles.css';
 import { searchNearbyUserRequest } from '../../actions/search';
 import { updateGeoLocationsRequest } from '../../actions/settings';
 import 'rc-slider/assets/index.css';
 import UserCard from '../../components/users/UserCard';
-import { Container, Hero, Paper, Switcher, Spinner } from '../../components/ui';
+import {
+  Container,
+  Hero,
+  Paper,
+  Switcher,
+  LoadContent,
+} from '../../components/ui';
+import AdBanner from '../../components/ads/AdBanner';
 
 export default () => {
   const [radius, setRadius] = useState(50);
@@ -63,9 +75,8 @@ export default () => {
     text-align: center;
 
     svg {
-      fill: ${(props) => props.theme.palette.text.primary};
-      height: 40px;
-      width: 40px;
+      color: ${(props) => props.theme.palette.text.primary};
+      font-size: 40px;
       margin-bottom: 16px;
     }
   `;
@@ -87,77 +98,74 @@ export default () => {
       />
 
       <div style={{ marginTop: 16 }}>
-        {!loading ? (
+        {!geoLocation ? (
+          <Paper padding>
+            <Message>
+              <LocateIcon color="" />
+              <FormattedMessage id="nearby.needToEnableDescription" />
+            </Message>
+          </Paper>
+        ) : (
           <>
-            {!geoLocation ? (
+            {isEmpty(location) || location === false ? (
               <Paper padding>
-                <Message>
-                  <LocateIcon color="" />
-                  <FormattedMessage id="nearby.needToEnableDescription" />
-                </Message>
+                <p>
+                  <FormattedMessage id="nearby.needToEnable" />
+                </p>
               </Paper>
             ) : (
-              <>
-                {isEmpty(location) || location === false ? (
-                  <Paper padding>
-                    <p>
-                      <FormattedMessage id="nearby.needToEnable" />
-                    </p>
-                  </Paper>
-                ) : (
-                  <div>
-                    <Paper padding>
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                        }}
-                      >
-                        <span>
-                          <FormattedMessage id="nearby.radius" />
-                        </span>
-                        <Slider
-                          style={{ width: '100%', margin: '0px 16px' }}
-                          value={radius}
-                          min={10}
-                          max={300}
-                          step={10}
-                          onChange={handleRadius}
-                          onAfterChange={handleSearch}
-                        />
-                        <span>
-                          {radius}
-                          Km
-                        </span>
-                      </div>
-                    </Paper>
+              <LoadContent loading={loading}>
+                <Paper padding>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <span>
+                      <FormattedMessage id="nearby.radius" />
+                    </span>
+                    <Slider
+                      style={{ width: '100%', margin: '0px 16px' }}
+                      value={radius}
+                      min={10}
+                      max={300}
+                      step={10}
+                      onChange={handleRadius}
+                      onAfterChange={handleSearch}
+                    />
+                    <span>
+                      {radius}
+                      Km
+                    </span>
+                  </div>
+                </Paper>
 
+                <SearchContainer>
+                  <SearchSidebarContainer>
+                    <AdBanner />
+                  </SearchSidebarContainer>
+                  <SearchContentContainer style={{ marginTop: 16 }}>
                     {!isEmpty(results) ? (
-                      <div spacing={2} style={{ marginTop: 8 }}>
+                      <InnerSearchGridContainer>
                         {Array.isArray(results) &&
                           results.map((user) => (
-                            <div xs={3} key={user._id}>
+                            <div key={user._id}>
                               <UserCard user={user.user} />
                             </div>
                           ))}
-                      </div>
+                      </InnerSearchGridContainer>
                     ) : (
                       <Paper padding>
                         <FormattedMessage id="common.noUsersFound" />
                       </Paper>
                     )}
-                  </div>
-                )}
-              </>
+                  </SearchContentContainer>
+                </SearchContainer>
+              </LoadContent>
             )}
           </>
-        ) : (
-          <div
-            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-          >
-            <Spinner size={128} />
-          </div>
         )}
       </div>
     </Container>

@@ -6,8 +6,6 @@ export const SearchContainer = styled.div`
   grid-template-areas: 'sidebar content';
   grid-template-rows: auto;
   gap: 16px;
-  margin-top: 8px;
-  padding: 1em;
   @media only screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
@@ -19,9 +17,13 @@ export const SearchContainer = styled.div`
 
 export const InnerSearchGridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto;
   gap: 16px;
+
+  @media only screen and (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export const SearchSidebarContainer = styled.div`
@@ -30,4 +32,13 @@ export const SearchSidebarContainer = styled.div`
 
 export const SearchContentContainer = styled.div`
   grid-area: content;
+`;
+
+export const SearchResultType = styled.div`
+  h3 {
+    margin-bottom: 16px;
+  }
+  & + div {
+    margin-bottom: 16px;
+  }
 `;
