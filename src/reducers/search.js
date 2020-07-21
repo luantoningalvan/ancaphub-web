@@ -1,7 +1,7 @@
 import { Types } from '../actions/search';
 
 const INITIAL_STATE = {
-  results: [],
+  results: {},
   loading: true,
 };
 
@@ -10,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
   switch (type) {
     case Types.SEARCH_NEARBY_USERS_REQUEST:
     case Types.SEARCH_TERM_REQUEST:
-      return { loading: true };
+      return { ...state, loading: true };
     case Types.SEARCH_TERM_SUCCESS:
       return {
         ...state,
