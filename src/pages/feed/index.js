@@ -6,7 +6,6 @@ import {
   getPostsRequest as getPostsAction,
   getMorePostsRequest,
 } from '../../actions/posts';
-import { getAddRequest } from '../../actions/ads';
 
 import { Container } from '../../components/ui';
 
@@ -21,11 +20,9 @@ const Feed = () => {
 
   React.useEffect(() => {
     dispatch(getPostsAction());
-    dispatch(getAddRequest());
   }, [dispatch]);
 
   const { items, loading } = useSelector((state) => state.posts);
-  const { ad, loading: loadingAd } = useSelector((state) => state.ads);
 
   return (
     <Container style={{ marginTop: 8 }}>
@@ -43,7 +40,7 @@ const Feed = () => {
         <div id="sidebar">
           <LastItemsWidget />
           <div style={{ marginTop: 16 }}>
-            {!loadingAd && <AdBanner ad={ad} />}
+            <AdBanner />
           </div>
         </div>
       </FeedContainer>
