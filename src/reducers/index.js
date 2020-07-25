@@ -13,6 +13,7 @@ import search from './search';
 import settings from './settings';
 import categories from './categories';
 import ads from './ads';
+import projects from './projects';
 
 export default combineReducers({
   ads,
@@ -29,4 +30,5 @@ export default combineReducers({
   search,
   settings,
   categories,
+  projects,
 });
