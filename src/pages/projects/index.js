@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 import ProjectCard from '../../components/projects/ProjectCard';
 
 import { Container, Hero, Button } from '../../components/ui';
@@ -32,9 +33,11 @@ const Projects = () => (
           />
         }
         actions={
-          <Button type="contained" color="secondary">
-            <FormattedMessage id="projects.create" />
-          </Button>
+          <Link to="/projects/new">
+            <Button type="contained" color="secondary">
+              <FormattedMessage id="projects.create" />
+            </Button>
+          </Link>
         }
       />
       <h3 style={{ margin: '20px 0 10px' }}>

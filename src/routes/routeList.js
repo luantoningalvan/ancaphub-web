@@ -1,25 +1,37 @@
 import Home from '../pages/home';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import ResetPassword from '../pages/auth/ResetPassword';
+
 import Feed from '../pages/feed';
+
 import Library from '../pages/library';
 import Contribute from '../pages/library/Contribute';
 import SingeBook from '../pages/library/SingleBook';
 import SingleArticle from '../pages/library/SingleArticle';
 import SingleVideo from '../pages/library/SingleVideo';
+
 import Groups from '../pages/groups';
-import Users from '../pages/users';
 import SingleGroup from '../pages/groups/SingleGroup';
+
+import Users from '../pages/users';
+
 import Events from '../pages/events';
 import SingleEvent from '../pages/events/SingleEvent';
+
 import Projects from '../pages/projects';
-import SingleProject from '../pages/projects/SingleProject';
+import SingleProject from '../pages/projects/Single';
+import NewProject from '../pages/projects/NewProject';
+import ManageProject from '../pages/projects/Manage';
+
 import Profile from '../pages/profiles';
 import Notifications from '../pages/notifications';
+
 import Messages from '../pages/messages';
+
 import Contributions from '../pages/account/Contributions';
 import Bookmarks from '../pages/account/Bookmarks';
 import Settings from '../pages/account/settings';
+
 import SearchData from '../pages/search/SearchData';
 import NearbyUsers from '../pages/search/SearchNearbyUsers';
 
@@ -97,6 +109,16 @@ export default [
     exact: true,
     path: '/projects',
     component: Projects,
+  },
+  {
+    exact: true,
+    path: '/projects/new',
+    component: NewProject,
+  },
+  {
+    exact: true,
+    path: '/projects/:projectId/manage/:page?',
+    component: ManageProject,
   },
   {
     exact: true,

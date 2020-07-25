@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import CalendarIcon from 'react-ionicons/lib/IosCalendar';
 
-import { Card, CardBody, CardHeader, Paper } from '../../components/ui';
+import { Card, CardBody, CardHeader, Paper } from '../../../components/ui';
 
 const Post = styled(Paper)`
   display: flex;

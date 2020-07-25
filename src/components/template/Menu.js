@@ -5,6 +5,7 @@ import {
   FiHome as NewsFeedIcon,
   FiFolder as LibraryIcon,
   FiUser as UsersIcon,
+  FiFlag as ProjectsIcon,
 } from 'react-icons/fi';
 import { AiOutlineBug as BugIcon } from 'react-icons/ai';
 
@@ -36,6 +37,12 @@ const Menu = ({ handleOpenBugReport }) => {
           icon={<LibraryIcon />}
           label="Biblioteca"
           link="/library"
+        />
+        <MenuItemLink
+          current={url.includes('/projects')}
+          icon={<ProjectsIcon />}
+          label="Projetos"
+          link="/projects"
         />
         <MenuItemLink
           current={url.includes('/users')}
