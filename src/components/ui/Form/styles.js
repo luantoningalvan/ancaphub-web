@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Tooltip } from '../Tooltip';
 
-export const Container = styled.div`
+export const TextFieldContainer = styled.div`
   background: transparent;
   border-radius: 8px;
   width: 100%;
@@ -18,7 +18,6 @@ export const Container = styled.div`
 
   input, textarea {
     flex: 1;
-    padding: 20px 0px;
     padding: 26px 16px 10px 16px;
 
     line-height: 1.25;
@@ -76,6 +75,65 @@ export const Container = styled.div`
         top: 18px;
         line-height: 1.25;
         transform: scale(0.75) translateY(-11px);
+      }
+    `}
+`;
+
+export const SelectContainer = styled(TextFieldContainer)`
+  cursor: pointer;
+
+  select {
+    display: none;
+  }
+
+  svg {
+    color: ${(props) => props.theme.palette.text.primary};
+  }
+
+  .selected-option {
+    flex: 1;
+    padding: 26px 16px 10px 16px;
+    line-height: 1.25;
+    font-size: 1rem;
+    color: ${(props) => props.theme.palette.text.primary};
+  }
+
+  .select-options {
+    position: absolute;
+    border-radius: 4px;
+    padding: 8px;
+    min-width: 100px;
+    top: 56px;
+    left: 0;
+    z-index: 100;
+
+    ${(props) => css`
+      border: 1px solid ${props.theme.palette.border};
+      background: ${props.theme.palette.paper};
+      color: ${props.theme.palette.text.primary};
+    `}
+
+    display: none;
+
+    > div {
+      padding: 8px;
+      border-radius: 4px;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  ${(props) =>
+    props.isFocused &&
+    css`
+      .select-options {
+        display: block;
+      }
+
+      > svg {
+        display: none;
       }
     `}
 `;

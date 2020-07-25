@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from '@unform/core';
-import { Container, Error } from './styles';
+import { TextFieldContainer, Error } from './styles';
 
 const TextField = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
   const { fieldName, defaultValue, error, registerField } = useField(name);
@@ -27,7 +27,11 @@ const TextField = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
   }, []);
 
   return (
-    <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
+    <TextFieldContainer
+      isFocused={isFocused}
+      isFilled={isFilled}
+      isErrored={!!error}
+    >
       {Icon && <Icon size={20} />}
       <label className="input-label" htmlFor="selec">
         {placeholder}
@@ -57,7 +61,7 @@ const TextField = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
           <FiAlertCircle color="#c53030" size="20px" />
         </Error>
       )}
-    </Container>
+    </TextFieldContainer>
   );
 };
 

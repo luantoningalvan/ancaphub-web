@@ -1,13 +1,23 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { FiAlertCircle } from 'react-icons/fi';
+import { FiAlertCircle, FiChevronDown } from 'react-icons/fi';
 import { useField } from '@unform/core';
-import { Container, Error } from './styles';
+import { SelectContainer, Error } from './styles';
 
-const TextField = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
+const Select = ({ name, icon: Icon, placeholder, options = [], ...rest }) => {
   const { fieldName, defaultValue, error, registerField } = useField(name);
   const inputRef = useRef(null);
+  const selectRef = useRef(null);
+
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(() => {
+    if (defaultValue) {
+      const label = options.find((opt) => opt.value === defaultValue);
+      return { value: defaultValue, label: label.label };
+    }
+    return { value: '', label: '' };
+  });
 
   useEffect(() => {
     registerField({
@@ -17,49 +27,73 @@ const TextField = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
     });
   }, [fieldName, registerField]);
 
-  const handleInputFocus = useCallback(() => {
-    setIsFocused(true);
+  useEffect(() => {
+    if (selectRef.current !== null) {
+      document.addEventListener('click', (e) => {
+        if (!selectRef.current.contains(e.target)) {
+          setIsFocused(false);
+        }
+      });
+    }
+  }, [inputRef]);
+
+  const handleSelectOption = useCallback(({ value, label }) => {
+    inputRef.current.value = value;
+    setSelectedValue({ value, label });
+    setIsFilled(true);
   }, []);
 
-  const handleInputBlur = useCallback(() => {
-    setIsFocused(false);
-    setIsFilled(inputRef.current !== null && !!inputRef.current.value);
-  }, []);
+  const handleInputFocus = useCallback(() => {
+    setIsFocused(!isFocused);
+  }, [isFocused]);
 
   return (
-    <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
+    <SelectContainer
+      isFocused={isFocused}
+      isFilled={isFilled}
+      isErrored={!!error}
+      onClick={handleInputFocus}
+      ref={selectRef}
+      {...rest}
+    >
       {Icon && <Icon size={20} />}
       <label className="input-label" htmlFor="select">
         {placeholder}
       </label>
-      {!multiline ? (
-        <select
-          defaultValue={defaultValue}
-          ref={inputRef}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          {...rest}
-        >
-          <option>Teste</option>
-        </select>
-      ) : (
-        <textarea
-          defaultValue={defaultValue}
-          type="text"
-          ref={inputRef}
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
-          {...rest}
-        />
-      )}
+
+      <select ref={inputRef} defaultValue={defaultValue}>
+        {options.map((option) => (
+          <option key={`s-${option.value}`} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+
+      <div className="selected-option">{selectedValue.label}&nbsp;</div>
+
+      <FiChevronDown />
+
+      <div className="select-options">
+        {options.map((option) => (
+          <div
+            role="menuitemradio"
+            aria-checked={false}
+            tabIndex={0}
+            key={option.value}
+            onClick={() => handleSelectOption(option)}
+          >
+            {option.label}
+          </div>
+        ))}
+      </div>
 
       {error && (
         <Error title={error}>
           <FiAlertCircle color="#c53030" size="20px" />
         </Error>
       )}
-    </Container>
+    </SelectContainer>
   );
 };
 
-export default TextField;
+export default Select;
