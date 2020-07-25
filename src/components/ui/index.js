@@ -21,7 +21,7 @@ import { ExpansionPanel } from './ExpansionPanel';
 import { Hero } from './Hero';
 import { ImageBox } from './ImageBox';
 import { LoadContent, Spinner } from './Loader';
-import { Menu, MenuItem } from './Menu';
+import { Menu, MenuItem, MenuTree } from './Menu';
 import { Paper } from './Paper';
 import { Scrollable } from './Scrollable';
 import { Stepper } from './Stepper';
@@ -59,6 +59,7 @@ export {
   Spinner,
   Menu,
   MenuItem,
+  MenuTree,
   Paper,
   Scrollable,
   Stepper,
