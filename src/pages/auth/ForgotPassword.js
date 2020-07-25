@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Form } from '@unform/web';
 import { FiUser } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import Input from '../../components/form/Input';
 import {
   Button,
   Container,
@@ -10,6 +9,7 @@ import {
   CardBody,
   CardHeader,
   Spinner,
+  TextField,
 } from '../../components/ui';
 import Provider from '../../components/template/Provider';
 import api from '../../api/axios';
@@ -58,7 +58,7 @@ const ForgotPassword = () => {
                         possamos lhe enviar o e-mail com o link de recuperação
                       </p>
                       <Form onSubmit={handleSubmit}>
-                        <Input
+                        <TextField
                           icon={FiUser}
                           name="identifier"
                           placeholder="E-mail ou nome de usuário"

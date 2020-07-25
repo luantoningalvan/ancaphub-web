@@ -4,10 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { FiMail, FiLock, FiUser, FiAtSign, FiGift } from 'react-icons/fi';
-import Input from '../form/Input';
+import { TextField, Button } from '../ui';
 import { createUserRequest } from '../../actions/users';
-
-import { Button } from '../ui';
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -105,7 +103,7 @@ const SignupForm = () => {
         <div className="form-row">
           <FormattedMessage id="common.name">
             {(msg) => (
-              <Input
+              <TextField
                 type="text"
                 placeholder={msg}
                 name="name"
@@ -119,7 +117,7 @@ const SignupForm = () => {
         <div className="form-row">
           <FormattedMessage id="common.username">
             {(msg) => (
-              <Input
+              <TextField
                 type="text"
                 icon={FiAtSign}
                 placeholder={msg}
@@ -133,7 +131,7 @@ const SignupForm = () => {
         <div className="form-row">
           <FormattedMessage id="common.email">
             {(msg) => (
-              <Input
+              <TextField
                 type="email"
                 placeholder={msg}
                 icon={FiMail}
@@ -146,7 +144,7 @@ const SignupForm = () => {
         <div className="form-row">
           <FormattedMessage id="common.password">
             {(msg) => (
-              <Input
+              <TextField
                 type="password"
                 placeholder={msg}
                 icon={FiLock}
@@ -159,7 +157,7 @@ const SignupForm = () => {
         <div className="form-row">
           <FormattedMessage id="components.auth.signUp.confirmPassword">
             {(msg) => (
-              <Input
+              <TextField
                 type="password"
                 placeholder={msg}
                 name="confirmPassword"
@@ -173,7 +171,12 @@ const SignupForm = () => {
         <div className="form-row">
           <FormattedMessage id="components.auth.signUp.code">
             {(msg) => (
-              <Input icon={FiGift} type="text" placeholder={msg} name="code" />
+              <TextField
+                icon={FiGift}
+                type="text"
+                placeholder={msg}
+                name="code"
+              />
             )}
           </FormattedMessage>
         </div>

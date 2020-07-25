@@ -10,9 +10,8 @@ import {
   CardBody,
   CardHeader,
   ExpansionPanel,
+  TextField,
 } from '../../../components/ui';
-
-import TextField from '../../../components/form/Input';
 
 import {
   updateEmailRequest,

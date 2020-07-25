@@ -29,6 +29,7 @@ import {
   UnorderedListButton,
 } from 'draft-js-buttons';
 
+import { Form } from '@unform/core';
 import {
   TextField,
   CardBody,
@@ -44,7 +45,6 @@ import mentions from '../../editor/plugins/mentionPluginInfo';
 import inlineToolbar, {
   HeadlineButton,
 } from '../../editor/plugins/inlineToolbarPlugin';
-
 // CSS do editor
 import 'draft-js/dist/Draft.css';
 import 'draft-js-hashtag-plugin/lib/plugin.css';
@@ -190,179 +190,185 @@ function PostForm({ createPostRequest: createPost }) {
   return (
     <div style={{ width: '100%' }}>
       <PostFormStyle>
-        <div className="text-box">
-          <Editor
-            editorState={editorState}
-            onChange={setEditorState}
-            handleKeyCommand={handleKeyCommand}
-            placeholder={
-              placeholderIsVisible ? (
-                <FormattedMessage id="components.postNewStatus.thinking" />
-              ) : (
-                ''
-              )
-            }
-            plugins={plugins}
-            spellCheck
-          />
-          <MentionSuggestions
-            onSearchChange={onSearchChange}
-            suggestions={suggestions}
-            onAddMention={onAddMention}
-          />
-          <InlineToolbar>
-            {(externalProps) => (
-              <>
-                <BoldButton {...externalProps} />
-                <ItalicButton {...externalProps} />
-                <UnderlineButton {...externalProps} />
-                <HeadlineButton {...externalProps} />
-                <UnorderedListButton {...externalProps} />
-                <CodeButton {...externalProps} />
-              </>
-            )}
-          </InlineToolbar>
-          {media && (
-            <div className="media-preview">
-              {media.type === 'image' && (
-                <div className="image-box">
-                  <IconButton
-                    icon={<CloseIcon />}
-                    onClick={handleRemoveMedia}
-                    className="close-icon"
-                  />
-                  <img src={preview} alt="preview" />
-                </div>
+        <Form onSubmit={handleSubmit}>
+          <div className="text-box">
+            <Editor
+              editorState={editorState}
+              onChange={setEditorState}
+              handleKeyCommand={handleKeyCommand}
+              placeholder={
+                placeholderIsVisible ? (
+                  <FormattedMessage id="components.postNewStatus.thinking" />
+                ) : (
+                  ''
+                )
+              }
+              plugins={plugins}
+              spellCheck
+            />
+            <MentionSuggestions
+              onSearchChange={onSearchChange}
+              suggestions={suggestions}
+              onAddMention={onAddMention}
+            />
+            <InlineToolbar>
+              {(externalProps) => (
+                <>
+                  <BoldButton {...externalProps} />
+                  <ItalicButton {...externalProps} />
+                  <UnderlineButton {...externalProps} />
+                  <HeadlineButton {...externalProps} />
+                  <UnorderedListButton {...externalProps} />
+                  <CodeButton {...externalProps} />
+                </>
               )}
-              {media.type === 'poll' && (
-                <Card>
-                  <div className="poll-box">
-                    <ul>
-                      {media.data.map((option, index) => (
-                        <li key={() => generate()} style={{ marginBottom: 8 }}>
-                          <FormattedMessage
-                            id={`components.postForm.pollOptionNumber${
-                              index >= 2 ? 'Optional' : ''
-                            }`}
-                            values={{ optionNumber: index + 1 }}
-                          >
-                            {(msg) => (
-                              <TextField
-                                fullWidth
-                                type="text"
-                                placeholder={msg}
-                                value={media.data[index]}
-                                onChange={(e) =>
-                                  handleChangePollOption(index, e)
-                                }
-                              />
-                            )}
-                          </FormattedMessage>
-                        </li>
-                      ))}
-                    </ul>
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'flex-end',
-                        minWidth: 56,
-                        padding: '16px 8px',
-                      }}
-                    >
-                      {media.data.length < 4 && (
-                        <IconButton
-                          icon={<AddIcon size="20px" />}
-                          onClick={addPollOption}
-                        />
-                      )}
-                    </div>
+            </InlineToolbar>
+            {media && (
+              <div className="media-preview">
+                {media.type === 'image' && (
+                  <div className="image-box">
+                    <IconButton
+                      icon={<CloseIcon />}
+                      onClick={handleRemoveMedia}
+                      className="close-icon"
+                    />
+                    <img src={preview} alt="preview" />
                   </div>
-                  <CardFooter
-                    label={
-                      <FormattedMessage id="components.postForm.removePoll" />
-                    }
-                    action={handleRemoveMedia}
-                  />
-                </Card>
-              )}
-              {media.type === 'embed' && (
-                <Card>
-                  <CardBody>
-                    <FormattedMessage id="components.postForm.videoUrl">
-                      {(msg) => (
-                        <TextField
-                          fullWidth
-                          placeholder={msg}
-                          value={media.data}
-                          onChange={(e) =>
-                            setMedia({
-                              type: 'embed',
-                              data: e.target.value,
-                            })
-                          }
+                )}
+                {media.type === 'poll' && (
+                  <Card>
+                    <div className="poll-box">
+                      <ul>
+                        {media.data.map((option, index) => (
+                          <li
+                            key={() => generate()}
+                            style={{ marginBottom: 8 }}
+                          >
+                            <FormattedMessage
+                              id={`components.postForm.pollOptionNumber${
+                                index >= 2 ? 'Optional' : ''
+                              }`}
+                              values={{ optionNumber: index + 1 }}
+                            >
+                              {(msg) => (
+                                <TextField
+                                  fullWidth
+                                  type="text"
+                                  placeholder={msg}
+                                  value={media.data[index]}
+                                  name={`options[${index}]`}
+                                  onChange={(e) =>
+                                    handleChangePollOption(index, e)
+                                  }
+                                />
+                              )}
+                            </FormattedMessage>
+                          </li>
+                        ))}
+                      </ul>
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'flex-end',
+                          minWidth: 56,
+                          padding: '16px 8px',
+                        }}
+                      >
+                        {media.data.length < 4 && (
+                          <IconButton
+                            icon={<AddIcon size="20px" />}
+                            onClick={addPollOption}
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <CardFooter
+                      label={
+                        <FormattedMessage id="components.postForm.removePoll" />
+                      }
+                      action={handleRemoveMedia}
+                    />
+                  </Card>
+                )}
+                {media.type === 'embed' && (
+                  <Card>
+                    <CardBody>
+                      <FormattedMessage id="components.postForm.videoUrl">
+                        {(msg) => (
+                          <TextField
+                            fullWidth
+                            placeholder={msg}
+                            value={media.data}
+                            onChange={(e) =>
+                              setMedia({
+                                type: 'embed',
+                                data: e.target.value,
+                              })
+                            }
+                          />
+                        )}
+                      </FormattedMessage>
+                      {media.data !== '' && (
+                        <ReactPlayer
+                          url={media.data}
+                          light
+                          style={{ marginTop: 8 }}
+                          width="100%"
                         />
                       )}
-                    </FormattedMessage>
-                    {media.data !== '' && (
-                      <ReactPlayer
-                        url={media.data}
-                        light
-                        style={{ marginTop: 8 }}
-                        width="100%"
-                      />
-                    )}
-                  </CardBody>
+                    </CardBody>
 
-                  <CardFooter
-                    label={
-                      <FormattedMessage id="components.postForm.removeEmbed" />
-                    }
-                    action={handleRemoveMedia}
-                  />
-                </Card>
-              )}
-            </div>
-          )}
-        </div>
-        <div className="form-actions">
-          <div className="upload-button">
-            <IconButton
-              icon={<ImageIcon />}
-              size="small"
-              onClick={() => uploadInputRef.current.click()}
-            />
-            <input
-              ref={uploadInputRef}
-              id="image-input"
-              type="file"
-              onChange={(e) => handleAddImage(e)}
-            />
+                    <CardFooter
+                      label={
+                        <FormattedMessage id="components.postForm.removeEmbed" />
+                      }
+                      action={handleRemoveMedia}
+                    />
+                  </Card>
+                )}
+              </div>
+            )}
           </div>
+          <div className="form-actions">
+            <div className="upload-button">
+              <IconButton
+                icon={<ImageIcon />}
+                size="small"
+                onClick={() => uploadInputRef.current.click()}
+              />
+              <input
+                ref={uploadInputRef}
+                id="image-input"
+                type="file"
+                onChange={(e) => handleAddImage(e)}
+              />
+            </div>
 
-          <IconButton
-            icon={<PollIcon />}
-            size="small"
-            onClick={handleAddPoll}
-          />
+            <IconButton
+              icon={<PollIcon />}
+              size="small"
+              onClick={handleAddPoll}
+            />
 
-          <IconButton
-            icon={<EmbedIcon />}
-            size="small"
-            onClick={handleAddEmbed}
-          />
+            <IconButton
+              icon={<EmbedIcon />}
+              size="small"
+              onClick={handleAddEmbed}
+            />
 
-          <Button
-            variant="contained"
-            disableElevation
-            color="secondary"
-            size="small"
-            style={{ marginLeft: 'auto' }}
-            disabled={!contentState.hasText()}
-            onClick={handleSubmit}
-          >
-            <FormattedMessage id="common.publish" />
-          </Button>
-        </div>
+            <Button
+              variant="contained"
+              disableElevation
+              color="secondary"
+              size="small"
+              style={{ marginLeft: 'auto' }}
+              disabled={!contentState.hasText()}
+              onClick={handleSubmit}
+            >
+              <FormattedMessage id="common.publish" />
+            </Button>
+          </div>
+        </Form>
       </PostFormStyle>
     </div>
   );

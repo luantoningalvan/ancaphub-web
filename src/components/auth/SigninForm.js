@@ -5,9 +5,8 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import Input from '../form/Input';
+import { TextField, Button } from '../ui';
 import { authUserRequest } from '../../actions/auth';
-import { Button } from '../ui';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -48,7 +47,7 @@ const SignInForm = () => {
         <div className="form-row">
           <FormattedMessage id="common.email">
             {(msg) => (
-              <Input
+              <TextField
                 icon={FiMail}
                 type="email"
                 placeholder={msg}
@@ -62,7 +61,7 @@ const SignInForm = () => {
         <div className="form-row">
           <FormattedMessage id="common.password">
             {(msg) => (
-              <Input
+              <TextField
                 icon={FiLock}
                 type="password"
                 placeholder={msg}

@@ -27,7 +27,7 @@ import { Scrollable } from './Scrollable';
 import { Stepper } from './Stepper';
 import { Switcher } from './Switcher';
 import { Tab, Tabs } from './Tabs';
-import { TextField } from './TextField';
+import { TextField, Select } from './Form';
 import { UploadBox } from './Upload';
 import { Toast } from './Toast';
 import { Tooltip } from './Tooltip';
@@ -66,6 +66,7 @@ export {
   Tabs,
   Tab,
   TextField,
+  Select,
   UploadBox,
   Toast,
   Tooltip,

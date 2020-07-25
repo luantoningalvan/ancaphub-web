@@ -14,9 +14,15 @@ import {
 } from 'react-icons/fi';
 
 import { updateProfileInfoRequest } from '../../actions/users';
-import Input from '../form/Input';
-
-import { IconButton, Button, Dialog, Card, CardBody, CardHeader } from '../ui';
+import {
+  TextField,
+  IconButton,
+  Button,
+  Dialog,
+  Card,
+  CardBody,
+  CardHeader,
+} from '../ui';
 
 const EditProfile = () => {
   const { formatMessage } = useIntl();
@@ -119,26 +125,36 @@ const EditProfile = () => {
             />
             <CardBody>
               <FormattedMessage id="common.name">
-                {(msg) => <Input icon={FiUser} placeholder={msg} name="name" />}
+                {(msg) => (
+                  <TextField icon={FiUser} placeholder={msg} name="name" />
+                )}
               </FormattedMessage>
               <FormattedMessage id="common.bio">
                 {(msg) => (
-                  <Input icon={FiAlignJustify} placeholder={msg} name="bio" />
+                  <TextField
+                    icon={FiAlignJustify}
+                    placeholder={msg}
+                    name="bio"
+                  />
                 )}
               </FormattedMessage>
               <FormattedMessage id="nearby.location">
                 {(msg) => (
-                  <Input icon={FiMapPin} placeholder={msg} name="currentCity" />
+                  <TextField
+                    icon={FiMapPin}
+                    placeholder={msg}
+                    name="currentCity"
+                  />
                 )}
               </FormattedMessage>
               <FormattedMessage id="common.website">
                 {(msg) => (
-                  <Input icon={FiGlobe} placeholder={msg} name="site" />
+                  <TextField icon={FiGlobe} placeholder={msg} name="site" />
                 )}
               </FormattedMessage>
               <FormattedMessage id="common.birthday">
                 {(msg) => (
-                  <Input
+                  <TextField
                     icon={FiCalendar}
                     type="date"
                     placeholder={msg}

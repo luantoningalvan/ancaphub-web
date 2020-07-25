@@ -11,7 +11,7 @@ body.modal-open{
   overflow-y: hidden;
 }
 
-body, input, button { font-family: Ubuntu; }
+body, input, textarea, button { font-family: Ubuntu; }
 
 li { list-style: none; }
 a { text-decoration: none; }

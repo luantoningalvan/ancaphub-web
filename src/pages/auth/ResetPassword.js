@@ -5,7 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import * as Yup from 'yup';
-import Input from '../../components/form/Input';
+
 import {
   Button,
   Container,
@@ -13,6 +13,7 @@ import {
   CardBody,
   CardHeader,
   Spinner,
+  TextField,
 } from '../../components/ui';
 import Provider from '../../components/template/Provider';
 import api from '../../api/axios';
@@ -106,7 +107,7 @@ const ForgotPassword = () => {
                     <Form onSubmit={handleSubmit} ref={formRef}>
                       <FormattedMessage id="common.password">
                         {(msg) => (
-                          <Input
+                          <TextField
                             type="password"
                             placeholder={msg}
                             icon={FiLock}
@@ -117,7 +118,7 @@ const ForgotPassword = () => {
                       </FormattedMessage>
                       <FormattedMessage id="components.auth.signUp.confirmPassword">
                         {(msg) => (
-                          <Input
+                          <TextField
                             type="password"
                             placeholder={msg}
                             name="password_confirm"

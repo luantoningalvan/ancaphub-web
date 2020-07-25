@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from '@unform/core';
-import { Container, Error } from '../ui/TextField/styles';
+import { Container, Error } from './styles';
 
-const Input = ({ name, icon: Icon, ...rest }) => {
+const TextField = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
   const { fieldName, defaultValue, error, registerField } = useField(name);
   const inputRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -29,14 +29,29 @@ const Input = ({ name, icon: Icon, ...rest }) => {
   return (
     <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
       {Icon && <Icon size={20} />}
-      <input
-        defaultValue={defaultValue}
-        type="text"
-        ref={inputRef}
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        {...rest}
-      />
+      <label className="input-label" htmlFor="selec">
+        {placeholder}
+      </label>
+      {!multiline ? (
+        <input
+          defaultValue={defaultValue}
+          type="text"
+          ref={inputRef}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+          {...rest}
+        />
+      ) : (
+        <textarea
+          defaultValue={defaultValue}
+          type="text"
+          ref={inputRef}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+          {...rest}
+        />
+      )}
+
       {error && (
         <Error title={error}>
           <FiAlertCircle color="#c53030" size="20px" />
@@ -46,4 +61,4 @@ const Input = ({ name, icon: Icon, ...rest }) => {
   );
 };
 
-export default Input;
+export default TextField;
