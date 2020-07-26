@@ -21,6 +21,12 @@ const TextField = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
     setIsFocused(true);
   }, []);
 
+  useEffect(() => {
+    if (defaultValue !== undefined) {
+      setIsFilled(true);
+    }
+  }, []);
+
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
     setIsFilled(inputRef.current !== null && !!inputRef.current.value);
@@ -32,7 +38,6 @@ const TextField = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
       isFilled={isFilled}
       isErrored={!!error}
     >
-      {Icon && <Icon size={20} />}
       <label className="input-label" htmlFor="selec">
         {placeholder}
       </label>

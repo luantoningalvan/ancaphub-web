@@ -29,6 +29,12 @@ const Select = ({ name, icon: Icon, placeholder, options = [], ...rest }) => {
   }, [fieldName, registerField]);
 
   useEffect(() => {
+    if (defaultValue !== undefined) {
+      setIsFilled(true);
+    }
+  }, []);
+
+  useEffect(() => {
     function clickOutside(e) {
       if (!selectRef.current.contains(e.target)) {
         setIsFocused(false);
