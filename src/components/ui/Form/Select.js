@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { FiAlertCircle, FiChevronDown } from 'react-icons/fi';
@@ -28,12 +29,14 @@ const Select = ({ name, icon: Icon, placeholder, options = [], ...rest }) => {
   }, [fieldName, registerField]);
 
   useEffect(() => {
+    function clickOutside(e) {
+      if (!selectRef.current.contains(e.target)) {
+        setIsFocused(false);
+      }
+    }
     if (selectRef.current !== null) {
-      document.addEventListener('click', (e) => {
-        if (!selectRef.current.contains(e.target)) {
-          setIsFocused(false);
-        }
-      });
+      document.addEventListener('click', clickOutside);
+      return () => document.removeEventListener('click', clickOutside);
     }
   }, [inputRef]);
 
