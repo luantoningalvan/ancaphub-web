@@ -1,15 +1,23 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: ${(props) => props.theme.palette.paper};
-  color: ${(props) => props.theme.palette.text.primary};
-  border: ${(props) =>
-    props.bordered ? `1px solid ${props.theme.palette.border}` : 'none'};
   border-radius: 10px;
+
+  ${(props) => css`
+    background: ${props.theme.palette.paper};
+    color: ${props.theme.palette.text.primary};
+    border: ${props.bordered
+      ? `1px solid ${props.theme.palette.border}`
+      : 'none'};
+
+    svg {
+      color: ${props.theme.palette.text.primary};
+    }
+  `}
 `;
 
 export const CardHeaderContainer = styled.div`

@@ -1,47 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import ArrowIcon from 'react-ionicons/lib/IosArrowDown';
+import { FiChevronDown } from 'react-icons/fi';
 
 import { Card, CardBody, CardHeader, Collapse } from '../../../components/ui';
 
 const FAQQuestion = styled.div`
-  margin-bottom: 1em;
+  & > div {
+    margin-top: 8px;
+  }
 
   svg {
     cursor: pointer;
-    transform: rotate ${(props) => (props.open ? '(180deg)' : '(0deg)')};
+    transition: transform 0.2s;
+    transform: ${(props) => (props.open ? 'rotate(180deg)' : 'rotate(0deg)')};
   }
 `;
 
-export default () => {
-  const [openQuestions, setOpenQuestions] = React.useState({
-    0: false,
-    1: false,
-  });
+const ProjectFaq = ({ project }) => {
+  const [openQuestions, setOpenQuestions] = useState(() =>
+    project.faq.map(() => false)
+  );
+
   return (
     <>
-      <FAQQuestion open={openQuestions[0]}>
-        <Card>
-          <CardHeader
-            style={{ padding: 16 }}
-            title="A plataforma será gratuita?"
-            action={{
-              type: 'icon',
-              label: ArrowIcon,
-              action: () =>
-                setOpenQuestions({ ...openQuestions, 0: !openQuestions[0] }),
-            }}
-          />
-          <Collapse expanded={openQuestions[0]}>
-            <CardBody>
-              <p>
-                Sim, será gratuita. É possível que no futuro haja um plano PRO,
-                mas este traria funções que nunca sequer foram anunciadas.
-              </p>
-            </CardBody>
-          </Collapse>
-        </Card>
-      </FAQQuestion>
+      {project.faq.map((question, index) => (
+        <FAQQuestion key={question.question} open={openQuestions[index]}>
+          <Card>
+            <CardHeader
+              title={question.question}
+              style={{ padding: '8px 16px' }}
+              action={{
+                type: 'icon',
+                label: <FiChevronDown />,
+                show: true,
+                action: () =>
+                  setOpenQuestions({
+                    ...openQuestions,
+                    [index]: !openQuestions[index],
+                  }),
+              }}
+            />
+            <Collapse expanded={openQuestions[index]}>
+              <CardBody>
+                <p>{question.answer}</p>
+              </CardBody>
+            </Collapse>
+          </Card>
+        </FAQQuestion>
+      ))}
     </>
   );
 };
+export default ProjectFaq;

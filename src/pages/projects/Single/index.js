@@ -1,14 +1,9 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { FiSettings } from 'react-icons/fi';
-import TwitterLogo from 'react-ionicons/lib/LogoTwitter';
-import FacebookLogo from 'react-ionicons/lib/LogoFacebook';
-import InstagramLogo from 'react-ionicons/lib/LogoInstagram';
-import YoutubeLogo from 'react-ionicons/lib/LogoYoutube';
-import EmailLogo from 'react-ionicons/lib/IosMail';
-import SiteLogo from 'react-ionicons/lib/IosLink';
-import ShareButton from 'react-ionicons/lib/MdShareAlt';
+import { FiSettings, FiShare2 } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+import LinksList from '../../../components/projects/LinksList';
 
 import {
   Container,
@@ -22,9 +17,11 @@ import {
   DropdownListItem,
   Tabs,
   Tab,
+  LoadContent,
 } from '../../../components/ui';
 
 import { ProjectBanner, ProjectSocialMedia } from './styles';
+import { getSingleProjectRequest } from '../../../actions/projects';
 
 const ProjectFeed = lazy(() => import('./ProjectFeed'));
 const ProjectFAQ = lazy(() => import('./ProjectFAQ'));
@@ -32,23 +29,27 @@ const ProjectAbout = lazy(() => import('./ProjectAbout'));
 const ProjectDonations = lazy(() => import('./ProjectDonations'));
 
 const SingleProject = () => {
+  const dispatch = useDispatch();
+  const { loading, project } = useSelector((state) => state.projects);
+
   const { page: projectPage, projectId } = useParams();
-  const [page, setPage] = React.useState();
+
   const pages = {
-    undefined: <ProjectFeed />,
-    faq: <ProjectFAQ />,
-    about: <ProjectAbout />,
-    donate: <ProjectDonations />,
+    undefined: ProjectFeed,
+    faq: ProjectFAQ,
+    about: ProjectAbout,
+    donate: ProjectDonations,
   };
 
-  React.useEffect(() => {
-    setPage(pages[projectPage]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [projectPage]);
+  useEffect(() => {
+    dispatch(getSingleProjectRequest(projectId));
+  }, [dispatch, projectId]);
+
+  const Template = pages[projectPage];
 
   return (
-    <>
-      <ProjectBanner cover="https://pbs.twimg.com/profile_banners/1094252234915962881/1594566074/1500x500">
+    <LoadContent loading={loading}>
+      <ProjectBanner cover={project.cover}>
         <Container>
           <div
             style={{
@@ -58,11 +59,7 @@ const SingleProject = () => {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img
-                className="icon"
-                src="https://pbs.twimg.com/profile_images/1282328964363583488/pZ3r5Pv8_400x400.jpg"
-                alt="profile pic"
-              />
+              <img className="icon" src={project.avatar} alt="profile pic" />
               <div>
                 <div
                   style={{
@@ -71,19 +68,21 @@ const SingleProject = () => {
                     marginBottom: 8,
                   }}
                 >
-                  <h2>AncapHub</h2>
+                  <h2>{project.name}</h2>
                   <Link to="/projects/1/manage">
-                    <IconButton
-                      icon={
-                        <FiSettings
-                          style={{ margin: 0 }}
-                          size={18}
-                          color="#fff"
-                        />
-                      }
-                      style={{ marginLeft: 8 }}
-                      color="primary"
-                    />
+                    {project.isAdmin && (
+                      <IconButton
+                        icon={
+                          <FiSettings
+                            style={{ margin: 0 }}
+                            size={18}
+                            color="#fff"
+                          />
+                        }
+                        style={{ marginLeft: 8 }}
+                        color="primary"
+                      />
+                    )}
                   </Link>
                 </div>
 
@@ -101,7 +100,7 @@ const SingleProject = () => {
                 <FormattedMessage id="projects.enroll" />
               </Button>
               <Dropdown
-                toggle={<IconButton icon={<ShareButton color="white" />} />}
+                toggle={<IconButton icon={<FiShare2 color="white" />} />}
               >
                 <DropdownListContainer>
                   <DropdownListItem>
@@ -124,9 +123,8 @@ const SingleProject = () => {
             gridTemplateColumns: '30% 70%',
             gap: '16px',
           }}
-          spacing={2}
         >
-          <div xs={3}>
+          <div>
             <ProjectSocialMedia
               padding
               style={{ width: '100%', position: 'sticky', top: 80 }}
@@ -135,65 +133,10 @@ const SingleProject = () => {
                 title={<FormattedMessage id="projects.usefulLinks" />}
               />
 
-              <ul>
-                <li>
-                  <TwitterLogo />
-                  <a
-                    href="http://twitter.com/ancap_hub"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Twitter
-                  </a>
-                </li>
-                <li>
-                  <FacebookLogo />
-                  <a
-                    href="http://facebook.com/ancaphub"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Facebook
-                  </a>
-                </li>
-                <li>
-                  <InstagramLogo />
-                  <a
-                    href="http://instagram.com/ancaphub"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Instagram
-                  </a>
-                </li>
-                <li>
-                  <YoutubeLogo />
-                  <a
-                    href="http://youtube.com/ancaphub"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    YouTube
-                  </a>
-                </li>
-                <li>
-                  <SiteLogo />
-                  <a
-                    href="http://ancaphub.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FormattedMessage id="common.website" />
-                  </a>
-                </li>
-                <li>
-                  <EmailLogo />
-                  <span>contato@ancaphub.com</span>
-                </li>
-              </ul>
+              <LinksList links={project.links} />
             </ProjectSocialMedia>
           </div>
-          <div xs={9}>
+          <div>
             <Paper style={{ width: '100%' }}>
               <Tabs>
                 <Tab
@@ -219,12 +162,14 @@ const SingleProject = () => {
               </Tabs>
             </Paper>
             <div style={{ width: '100%', margin: '16px 0' }}>
-              <Suspense fallback={<Spinner size={96} />}>{page}</Suspense>
+              <Suspense fallback={<Spinner size={96} />}>
+                <Template project={project} />
+              </Suspense>
             </div>
           </div>
         </div>
       </Container>
-    </>
+    </LoadContent>
   );
 };
 
