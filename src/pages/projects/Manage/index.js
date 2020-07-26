@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   FiGrid,
@@ -9,6 +9,7 @@ import {
 } from 'react-icons/fi';
 
 import { useParams, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Container,
   Paper,
@@ -23,33 +24,32 @@ import {
   SettingsContentContainer,
 } from './styles';
 
+import { getSingleProjectRequest } from '../../../actions/projects';
+
 import Generals from './Generals';
 import Posts from './Posts';
 import Sections from './Sections';
 import Roles from './Roles';
 
 const Settings = () => {
-  const { page, subpage } = useParams();
+  const { projectId, page, subpage } = useParams();
+  const BASE_URL = `/projects/${projectId}/manage`;
+
+  const dispatch = useDispatch();
+  const { project } = useSelector((state) => state.projects);
 
   const settingsMap = {
-    generals: <Generals />,
-    posts: <Posts />,
-    sections: <Sections />,
-    roles: <Roles />,
+    undefined: Generals,
+    posts: Posts,
+    sections: Sections,
+    roles: Roles,
   };
 
-  const Tab = () =>
-    // TODO: remove this nested ternary as it is very misleading
-    // eslint-disable-next-line no-nested-ternary
-    page !== null ? (
-      settingsMap[page] === undefined ? (
-        <Generals />
-      ) : (
-        settingsMap[page]
-      )
-    ) : (
-      <Generals />
-    );
+  useEffect(() => {
+    dispatch(getSingleProjectRequest(projectId));
+  }, [dispatch, projectId]);
+
+  const Template = settingsMap[page];
 
   return (
     <Container>
@@ -57,12 +57,8 @@ const Settings = () => {
         <SettingsSidebarContainer>
           <Paper>
             <div className="group-name">
-              <img
-                className="icon"
-                src="https://pbs.twimg.com/profile_images/1282328964363583488/pZ3r5Pv8_400x400.jpg"
-                alt="profile pic"
-              />
-              <h2>AncapHub</h2>
+              <img className="icon" src={project.avatar} alt="profile pic" />
+              <h2>{project.name}</h2>
             </div>
             <Menu>
               <MenuItem
@@ -72,13 +68,13 @@ const Settings = () => {
                   settingsMap[page] === undefined
                 }
                 label="Gerais"
-                link="/projects/1/manage"
+                link={BASE_URL}
                 icon={<FiSliders />}
               />
               <MenuItem
                 current={page === 'posts'}
                 label="Publicaçoes"
-                link="/projects/1/manage/posts"
+                link={`${BASE_URL}/posts`}
                 icon={<FiEdit />}
               />
               <MenuTree
@@ -89,37 +85,37 @@ const Settings = () => {
                 <MenuItem
                   nested
                   label="Sobre"
-                  link="/projects/1/manage/sections/about"
+                  link={`${BASE_URL}/sections/about`}
                   current={page === 'sections' && subpage === 'about'}
                 />
                 <MenuItem
                   label="Doações"
                   nested
-                  link="/projects/1/manage/sections/donations"
+                  link={`${BASE_URL}/sections/donations`}
                   current={page === 'sections' && subpage === 'donations'}
                 />
                 <MenuItem
                   nested
                   label="FAQ"
-                  link="/projects/1/manage/sections/faq"
+                  link={`${BASE_URL}/sections/faq`}
                   current={page === 'sections' && subpage === 'faq'}
                 />
               </MenuTree>
               <MenuItem
                 current={page === 'roles'}
                 label="Funções Administrativas"
-                link="/projects/1/manage/roles"
+                link={`${BASE_URL}/roles`}
                 icon={<FiUsers />}
               />
             </Menu>
           </Paper>
-          <Link to="/projects/1" className="back-to-project">
+          <Link to={`/projects/${projectId}`} className="back-to-project">
             <FiChevronLeft />
             Voltar para o projeto
           </Link>
         </SettingsSidebarContainer>
         <SettingsContentContainer>
-          <Tab />
+          <Template />
         </SettingsContentContainer>
       </SettingsContainer>
     </Container>

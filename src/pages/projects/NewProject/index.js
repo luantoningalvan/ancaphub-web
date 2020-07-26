@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { Form } from '@unform/web';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { createProjectRequest } from '../../../actions/projects';
 import {
   Container,
   Paper,
@@ -11,7 +13,11 @@ import {
 } from '../../../components/ui';
 
 const NewProject = () => {
-  const [step] = useState(1);
+  const dispatch = useDispatch();
+
+  const handleSubmit = useCallback((data) => {
+    dispatch(createProjectRequest(data));
+  }, []);
 
   return (
     <Container>
@@ -38,16 +44,31 @@ const NewProject = () => {
         }}
       >
         <Paper padding style={{ width: '100%', marginTop: 32 }}>
-          {step === 1 && (
-            <Form onSubmit={() => ({})}>
-              <TextField placeholder="Nome do Projeto" name="name" />
-              <Select type="select" placeholder="Categoria" name="category" />
-              <TextField multiline placeholder="Descrição" name="description" />
-              <Button fullWidth color="secondary" style={{ marginTop: 16 }}>
-                Criar Projeto
-              </Button>
-            </Form>
-          )}
+          <Form onSubmit={handleSubmit}>
+            <TextField placeholder="Nome do Projeto" name="name" />
+            <Select
+              placeholder="Categoria"
+              name="category"
+              options={[
+                {
+                  label: 'Teste 1',
+                  value: '1',
+                },
+                {
+                  label: 'Teste 2',
+                  value: '2',
+                },
+                {
+                  label: 'Teste 3',
+                  value: '3',
+                },
+              ]}
+            />
+            <TextField multiline placeholder="Descrição" name="description" />
+            <Button fullWidth color="secondary" style={{ marginTop: 16 }}>
+              Criar Projeto
+            </Button>
+          </Form>
         </Paper>
       </div>
     </Container>
