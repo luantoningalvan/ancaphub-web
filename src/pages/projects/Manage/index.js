@@ -29,7 +29,7 @@ import Sections from './Sections';
 import Roles from './Roles';
 
 const Settings = () => {
-  const { page } = useParams();
+  const { page, subpage } = useParams();
 
   const settingsMap = {
     generals: <Generals />,
@@ -87,16 +87,22 @@ const Settings = () => {
                 icon={<FiGrid />}
               >
                 <MenuItem
+                  nested
                   label="Sobre"
-                  link="/projects/1/manage/sections?section=about"
+                  link="/projects/1/manage/sections/about"
+                  current={page === 'sections' && subpage === 'about'}
                 />
                 <MenuItem
                   label="Doações"
-                  link="/projects/1/manage/sections?section=donations"
+                  nested
+                  link="/projects/1/manage/sections/donations"
+                  current={page === 'sections' && subpage === 'donations'}
                 />
                 <MenuItem
+                  nested
                   label="FAQ"
-                  link="/projects/1/manage/sections?section=faq"
+                  link="/projects/1/manage/sections/faq"
+                  current={page === 'sections' && subpage === 'faq'}
                 />
               </MenuTree>
               <MenuItem

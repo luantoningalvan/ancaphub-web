@@ -117,7 +117,7 @@ export default [
   },
   {
     exact: true,
-    path: '/projects/:projectId/manage/:page?',
+    path: '/projects/:projectId/manage/:page?/:subpage?',
     component: ManageProject,
   },
   {

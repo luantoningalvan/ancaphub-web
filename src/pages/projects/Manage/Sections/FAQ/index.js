@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Generals = () => {
-  return <></>;
+  return <h2>FAQ</h2>;
 };
 
 export default Generals;
