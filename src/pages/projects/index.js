@@ -49,8 +49,10 @@ const Projects = () => {
         </h3>
 
         <LoadContent loading={loading}>
-          {projects.lenght > 0 ? (
-            <div>
+          {projects.length > 0 ? (
+            <div
+              style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}
+            >
               {projects.map((project) => (
                 <div xs={12} md={6} lg={4} key={project._id}>
                   <ProjectCard data={project} />
