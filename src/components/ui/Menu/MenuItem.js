@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MenuItemWrap } from './styles';
 
-const MenuItem = ({ link, label, icon, current, ...rest }) => (
-  <MenuItemWrap current={current} {...rest}>
+const MenuItem = ({ link, label, icon, current, nested, ...rest }) => (
+  <MenuItemWrap current={current} nested={nested} {...rest}>
     <Link to={link}>
       {icon}
       <span>{label}</span>

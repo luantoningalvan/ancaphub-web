@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const MenuItemWrap = styled.li`
   svg {
@@ -12,17 +12,27 @@ export const MenuItemWrap = styled.li`
     flex: 1;
   }
 
-  a {
+  > a {
     display: flex;
     align-items: center;
     padding: 16px;
     background: ${(props) =>
-      props.current ? 'rgba(0,0,0,0.1)' : 'transparent'};
+      props.current && !props.nested ? 'rgba(0,0,0,0.1)' : 'transparent'};
     transition: background 0.3s;
     cursor: pointer;
-    color: ${(props) => props.theme.palette.text.primary};
+    color: ${(props) =>
+      props.nested && props.current
+        ? props.theme.palette.primary
+        : props.theme.palette.text.primary};
     &:hover {
-      background: rgba(0, 0, 0, 0.1);
+      ${(props) =>
+        !props.nested
+          ? css`
+              background: rgba(0, 0, 0, 0.1);
+            `
+          : css`
+              color: ${props.theme.palette.primary};
+            `};
     }
   }
 `;
