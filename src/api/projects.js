@@ -1,5 +1,5 @@
 import axios from './axios';
 
-export const getProjects = () => axios.get('/library');
-export const getSingleProject = (data) => axios.get(`/library/${data.itemId}`);
-export const createProject = (data) => axios.post('/library', data);
+export const getProjects = () => axios.get('/projects');
+export const getSingleProject = (data) => axios.get(`/projects/${data}`);
+export const createProject = (data) => axios.post('/projects', data);
