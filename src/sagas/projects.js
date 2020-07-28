@@ -30,6 +30,15 @@ function* createProject(action) {
   }
 }
 
+function* getProjectPosts({ payload }) {
+  try {
+    const items = yield call(api.getProjectPosts, payload);
+    yield put(actions.getProjectPostsSuccess(items.data));
+  } catch (e) {
+    yield put(actions.projectsError({ errorMessage: e.message }));
+  }
+}
+
 // Watchers
 function* watchGetProjectsRequest() {
   yield takeLatest(actions.Types.GET_PROJECTS_REQUEST, getProjects);
@@ -43,8 +52,13 @@ function* watchCreateProjectRequest() {
   yield takeLatest(actions.Types.CREATE_PROJECT_REQUEST, createProject);
 }
 
+function* watchGetProjectPostsRequest() {
+  yield takeLatest(actions.Types.GET_PROJECT_POSTS_REQUEST, getProjectPosts);
+}
+
 export default [
   fork(watchGetProjectsRequest),
   fork(watchCreateProjectRequest),
   fork(watchGetSingleProjectRequest),
+  fork(watchGetProjectPostsRequest),
 ];

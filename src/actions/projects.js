@@ -5,6 +5,8 @@ export const Types = {
   GET_PROJECTS_SUCCESS: 'projects/get_projects_success',
   GET_SINGLE_PROJECT_REQUEST: 'projects/get_single_project_request',
   GET_SINGLE_PROJECT_SUCCESS: 'projects/get_single_project_success',
+  GET_PROJECT_POSTS_REQUEST: 'projects/get_project_posts_request',
+  GET_PROJECT_POSTS_SUCCESS: 'projects/get_project_posts_success',
   PROJECTS_ERROR: 'projects/projects_error',
 };
 
@@ -35,6 +37,16 @@ export const getSingleProjectRequest = (data) => ({
 
 export const getSingleProjectSuccess = (data) => ({
   type: Types.GET_SINGLE_PROJECT_SUCCESS,
+  payload: data,
+});
+
+export const getProjectPostsRequest = (data) => ({
+  type: Types.GET_PROJECT_POSTS_REQUEST,
+  payload: data,
+});
+
+export const getProjectPostsSuccess = (data) => ({
+  type: Types.GET_PROJECT_POSTS_SUCCESS,
   payload: data,
 });
 
