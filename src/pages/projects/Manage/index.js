@@ -23,6 +23,7 @@ import {
   SettingsSidebarContainer,
   SettingsContentContainer,
 } from './styles';
+import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
 
 import { getSingleProjectRequest } from '../../../actions/projects';
 
@@ -57,7 +58,11 @@ const Settings = () => {
         <SettingsSidebarContainer>
           <Paper>
             <div className="group-name">
-              <img className="icon" src={project.avatar} alt="profile pic" />
+              <img
+                className="icon"
+                src={project.avatar || defaultProjectAvatar}
+                alt="profile pic"
+              />
               <h2>{project.name}</h2>
             </div>
             <Menu>

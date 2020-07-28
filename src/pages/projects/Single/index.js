@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { FiSettings, FiShare2 } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import LinksList from '../../../components/projects/LinksList';
-
+import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
 import {
   Container,
   CardHeader,
@@ -59,7 +59,11 @@ const SingleProject = () => {
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <img className="icon" src={project.avatar} alt="profile pic" />
+              <img
+                className="icon"
+                src={project.avatar || defaultProjectAvatar}
+                alt="profile pic"
+              />
               <div>
                 <div
                   style={{
@@ -69,7 +73,7 @@ const SingleProject = () => {
                   }}
                 >
                   <h2>{project.name}</h2>
-                  <Link to="/projects/1/manage">
+                  <Link to={`/projects/${projectId}/manage`}>
                     {project.isAdmin && (
                       <IconButton
                         icon={
