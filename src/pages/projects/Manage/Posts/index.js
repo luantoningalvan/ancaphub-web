@@ -4,12 +4,12 @@ import { useParams } from 'react-router-dom';
 import PostList from './PostList';
 import NewPost from './NewPost';
 
-const Sections = () => {
+const Sections = ({ project }) => {
   const { subpage } = useParams();
 
   const subpageMap = {
-    undefined: <PostList />,
-    new: <NewPost />,
+    undefined: <PostList project={project} />,
+    new: <NewPost project={project} />,
   };
 
   return subpageMap[subpage];

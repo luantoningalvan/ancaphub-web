@@ -16,8 +16,8 @@ import {
   Menu,
   MenuItem,
   MenuTree,
+  LoadContent,
 } from '../../../components/ui';
-
 import {
   SettingsContainer,
   SettingsSidebarContainer,
@@ -37,7 +37,7 @@ const Settings = () => {
   const BASE_URL = `/projects/${projectId}/manage`;
 
   const dispatch = useDispatch();
-  const { project } = useSelector((state) => state.projects);
+  const { project, loading } = useSelector((state) => state.projects);
 
   const settingsMap = {
     undefined: Generals,
@@ -54,75 +54,77 @@ const Settings = () => {
 
   return (
     <Container>
-      <SettingsContainer>
-        <SettingsSidebarContainer>
-          <Paper>
-            <div className="group-name">
-              <img
-                className="icon"
-                src={project.avatar || defaultProjectAvatar}
-                alt="profile pic"
-              />
-              <h2>{project.name}</h2>
-            </div>
-            <Menu>
-              <MenuItem
-                current={
-                  page === 'generals' ||
-                  page === null ||
-                  settingsMap[page] === undefined
-                }
-                label="Gerais"
-                link={BASE_URL}
-                icon={<FiSliders />}
-              />
-              <MenuItem
-                current={page === 'posts'}
-                label="Publicaçoes"
-                link={`${BASE_URL}/posts`}
-                icon={<FiEdit />}
-              />
-              <MenuTree
-                current={page === 'sections'}
-                label="Seções"
-                icon={<FiGrid />}
-              >
+      <LoadContent loading={loading}>
+        <SettingsContainer>
+          <SettingsSidebarContainer>
+            <Paper>
+              <div className="group-name">
+                <img
+                  className="icon"
+                  src={project.avatar || defaultProjectAvatar}
+                  alt="profile pic"
+                />
+                <h2>{project.name}</h2>
+              </div>
+              <Menu>
                 <MenuItem
-                  nested
-                  label="Sobre"
-                  link={`${BASE_URL}/sections/about`}
-                  current={page === 'sections' && subpage === 'about'}
+                  current={
+                    page === 'generals' ||
+                    page === null ||
+                    settingsMap[page] === undefined
+                  }
+                  label="Gerais"
+                  link={BASE_URL}
+                  icon={<FiSliders />}
                 />
                 <MenuItem
-                  label="Doações"
-                  nested
-                  link={`${BASE_URL}/sections/donations`}
-                  current={page === 'sections' && subpage === 'donations'}
+                  current={page === 'posts'}
+                  label="Publicaçoes"
+                  link={`${BASE_URL}/posts`}
+                  icon={<FiEdit />}
                 />
+                <MenuTree
+                  current={page === 'sections'}
+                  label="Seções"
+                  icon={<FiGrid />}
+                >
+                  <MenuItem
+                    nested
+                    label="Sobre"
+                    link={`${BASE_URL}/sections/about`}
+                    current={page === 'sections' && subpage === 'about'}
+                  />
+                  <MenuItem
+                    label="Doações"
+                    nested
+                    link={`${BASE_URL}/sections/donations`}
+                    current={page === 'sections' && subpage === 'donations'}
+                  />
+                  <MenuItem
+                    nested
+                    label="FAQ"
+                    link={`${BASE_URL}/sections/faq`}
+                    current={page === 'sections' && subpage === 'faq'}
+                  />
+                </MenuTree>
                 <MenuItem
-                  nested
-                  label="FAQ"
-                  link={`${BASE_URL}/sections/faq`}
-                  current={page === 'sections' && subpage === 'faq'}
+                  current={page === 'roles'}
+                  label="Funções Administrativas"
+                  link={`${BASE_URL}/roles`}
+                  icon={<FiUsers />}
                 />
-              </MenuTree>
-              <MenuItem
-                current={page === 'roles'}
-                label="Funções Administrativas"
-                link={`${BASE_URL}/roles`}
-                icon={<FiUsers />}
-              />
-            </Menu>
-          </Paper>
-          <Link to={`/projects/${projectId}`} className="back-to-project">
-            <FiChevronLeft />
-            Voltar para o projeto
-          </Link>
-        </SettingsSidebarContainer>
-        <SettingsContentContainer>
-          <Template />
-        </SettingsContentContainer>
-      </SettingsContainer>
+              </Menu>
+            </Paper>
+            <Link to={`/projects/${projectId}`} className="back-to-project">
+              <FiChevronLeft />
+              Voltar para o projeto
+            </Link>
+          </SettingsSidebarContainer>
+          <SettingsContentContainer>
+            <Template project={project} />
+          </SettingsContentContainer>
+        </SettingsContainer>
+      </LoadContent>
     </Container>
   );
 };
