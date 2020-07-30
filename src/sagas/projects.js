@@ -2,6 +2,7 @@ import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/projects';
 import * as api from '../api/projects';
+import { addAlert } from '../actions/alerts';
 
 function* getProjects() {
   try {
@@ -39,6 +40,28 @@ function* getProjectPosts({ payload }) {
   }
 }
 
+function* createProjectPost({ payload }) {
+  try {
+    const item = yield call(api.createProjectPost, {
+      data: payload.data,
+      project: payload.project,
+    });
+    yield put(
+      addAlert({
+        title: 'Suceso',
+        description: 'Publicação realizada com sucesso',
+        type: 'success',
+      })
+    );
+    yield call(
+      payload.history.push(`/projects/${payload.project}/manage/posts`)
+    );
+    yield put(actions.createProjectSuccess(item.data));
+  } catch (e) {
+    yield put(actions.projectsError({ errorMessage: e.message }));
+  }
+}
+
 // Watchers
 function* watchGetProjectsRequest() {
   yield takeLatest(actions.Types.GET_PROJECTS_REQUEST, getProjects);
@@ -56,9 +79,17 @@ function* watchGetProjectPostsRequest() {
   yield takeLatest(actions.Types.GET_PROJECT_POSTS_REQUEST, getProjectPosts);
 }
 
+function* watchCreateProjectPostRequest() {
+  yield takeLatest(
+    actions.Types.CREATE_PROJECT_POST_REQUEST,
+    createProjectPost
+  );
+}
+
 export default [
   fork(watchGetProjectsRequest),
   fork(watchCreateProjectRequest),
   fork(watchGetSingleProjectRequest),
   fork(watchGetProjectPostsRequest),
+  fork(watchCreateProjectPostRequest),
 ];

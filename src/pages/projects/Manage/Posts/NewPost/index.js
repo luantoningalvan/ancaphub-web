@@ -1,19 +1,30 @@
 import React from 'react';
 import { FiXCircle, FiPlusCircle } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { convertToRaw } from 'draft-js';
+import { useDispatch } from 'react-redux';
 import { Header } from '../styles';
 import { Button, TextField, Paper } from '../../../../../components/ui';
 import FullEditor from '../../../../../components/editor/FullEditor';
+import { createProjectPostRequest } from '../../../../../actions/projects';
 
-const NewPost = () => {
+const NewPost = ({ project }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const handleSubmit = ({ title, content }) => {
     const toRaw = JSON.stringify(convertToRaw(content.getCurrentContent()));
-    console.log({
-      title,
-      content: toRaw,
-    });
+    dispatch(
+      createProjectPostRequest({
+        history,
+        project: project._id,
+        data: {
+          title,
+          content: toRaw,
+        },
+      })
+    );
   };
 
   return (
