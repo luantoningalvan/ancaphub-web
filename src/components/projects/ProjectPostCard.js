@@ -45,36 +45,52 @@ const Post = styled(Paper)`
   }
 `;
 
-const ProjectFeed = ({ post }) => (
-  <Post>
-    <div className="post-cover">
-      <img
-        alt="cover"
-        src={
-          post.thumbnail && post.thumbnail !== ''
-            ? post.thumbnail
-            : defaultCover
-        }
-      />
-    </div>
-    <div className="post-content">
-      <div className="date">
-        <CalendarIcon />
-        <span>
-          <FormattedDate
-            // DISCLAIMER: this is a temporary solution since
-            // we still don't know why this bug is happening
-            value={addDays(parseISO(post.createdAt), 1)}
-            year="numeric"
-            month="long"
-            day="2-digit"
-          />
-        </span>
+const ProjectFeed = ({ post }) => {
+  const getExperpt = () => {
+    const { blocks } = JSON.parse(post.content);
+    const mappedBlocks = blocks.map(
+      (block) => (!block.text.trim() && '\n') || block.text
+    );
+
+    return mappedBlocks.reduce((acc, block) => {
+      let returned = acc;
+      if (block === '\n') returned += block;
+      else returned += `${block}\n`;
+      return returned;
+    }, '');
+  };
+
+  return (
+    <Post>
+      <div className="post-cover">
+        <img
+          alt="cover"
+          src={
+            post.thumbnail && post.thumbnail !== ''
+              ? post.thumbnail
+              : defaultCover
+          }
+        />
       </div>
-      <h3>{post.title}</h3>
-      <p>{post.content.substring(0, 30)}</p>
-    </div>
-  </Post>
-);
+      <div className="post-content">
+        <div className="date">
+          <CalendarIcon />
+          <span>
+            <FormattedDate
+              // DISCLAIMER: this is a temporary solution since
+              // we still don't know why this bug is happening
+              value={addDays(parseISO(post.createdAt), 1)}
+              year="numeric"
+              month="long"
+              day="2-digit"
+            />
+          </span>
+        </div>
+        <h3>{post.title}</h3>
+        <p>{getExperpt().substring(0, 29)}</p>
+      </div>
+    </Post>
+  );
+};
 
 export default ProjectFeed;
