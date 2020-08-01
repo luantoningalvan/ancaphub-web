@@ -19,6 +19,7 @@ import {
 } from './Dropdown';
 import { ExpansionPanel } from './ExpansionPanel';
 import { Hero } from './Hero';
+import { Breadcrumb } from './Breadcrumb';
 import { ImageBox } from './ImageBox';
 import { LoadContent, Spinner } from './Loader';
 import { Menu, MenuItem, MenuTree } from './Menu';
@@ -40,6 +41,7 @@ export {
   CardBody,
   CardFooter,
   Chatbox,
+  Breadcrumb,
   ChatWindow,
   ChatboxMessageList,
   ChatboxListItem,
