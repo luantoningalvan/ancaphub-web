@@ -4,8 +4,13 @@ import { Link, useHistory } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { convertToRaw } from 'draft-js';
 import { useDispatch } from 'react-redux';
-import { Header } from '../styles';
-import { Button, TextField, Paper } from '../../../../../components/ui';
+import { PageHeader } from '../../styles';
+import {
+  Button,
+  TextField,
+  Paper,
+  Breadcrumb,
+} from '../../../../../components/ui';
 import FullEditor from '../../../../../components/editor/FullEditor';
 import { createProjectPostRequest } from '../../../../../actions/projects';
 
@@ -29,9 +34,19 @@ const NewPost = ({ project }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Header>
-        <h2>Nova Publicação</h2>
-
+      <PageHeader>
+        <div className="page-title">
+          <Breadcrumb
+            list={[
+              {
+                title: 'Postagens',
+                link: `/projects/${project._id}/manage/posts`,
+              },
+              { title: 'Nova' },
+            ]}
+          />
+          <h2>Adicionar Postagem</h2>
+        </div>
         <div style={{ display: 'flex' }}>
           <Link to="../posts">
             <Button color="primary" variant="outlined">
@@ -45,7 +60,7 @@ const NewPost = ({ project }) => {
             Adicionar
           </Button>
         </div>
-      </Header>
+      </PageHeader>
       <Paper padding>
         <TextField name="title" placeholder="Título da postagem" />
         <FullEditor name="content" />

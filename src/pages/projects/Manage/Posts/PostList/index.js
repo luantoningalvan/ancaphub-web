@@ -1,17 +1,19 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { FiPlusCircle, FiEdit, FiTrash } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedDate } from 'react-intl';
 import { parseISO, addDays } from 'date-fns';
+import { Link } from 'react-router-dom';
 import {
   Button,
   IconButton,
   LoadContent,
   ConfirmationDialog,
   Paper,
+  Breadcrumb,
 } from '../../../../../components/ui';
-import { Header, Table } from '../styles';
+import { Table } from '../styles';
+import { PageHeader } from '../../styles';
 import { getProjectPostsRequest } from '../../../../../actions/projects';
 
 const PostList = ({ project }) => {
@@ -29,16 +31,19 @@ const PostList = ({ project }) => {
 
   return (
     <>
-      <Header>
-        <h2>Publicações</h2>
-
+      <PageHeader>
+        <div className="page-title">
+          <Breadcrumb list={[{ title: 'Postagens' }]} />
+          <h2>Postagens</h2>
+        </div>
         <Link to="posts/new">
           <Button color="primary">
             <FiPlusCircle />
             Nova
           </Button>
         </Link>
-      </Header>
+      </PageHeader>
+
       <LoadContent loading={loadingPosts}>
         {posts.length > 0 ? (
           <Table>
