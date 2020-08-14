@@ -1,15 +1,24 @@
 import React from 'react';
-import { Breadcrumb } from '../../../../../components/ui';
+import { Form } from '@unform/web';
+import { Breadcrumb, Button } from '../../../../../components/ui';
 import { PageHeader } from '../../styles';
+import FullEditor from '../../../../../components/editor/FullEditor';
 
 const About = () => {
   return (
-    <PageHeader>
-      <div className="page-title">
-        <Breadcrumb list={[{ title: 'Seções' }, { title: 'Sobre' }]} />
-        <h2>Sobre</h2>
-      </div>
-    </PageHeader>
+    <Form>
+      <PageHeader>
+        <div className="page-title">
+          <Breadcrumb list={[{ title: 'Seções' }, { title: 'Sobre' }]} />
+          <h2>Sobre</h2>
+        </div>
+
+        <Button type="submit" color="secondary">
+          Salvar
+        </Button>
+      </PageHeader>
+      <FullEditor name="about" />
+    </Form>
   );
 };
 

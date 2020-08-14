@@ -4,10 +4,7 @@ import defaultAvatar from '../../assets/default-profile-picture.jpg';
 import FollowButton from './FollowButton';
 
 export const User = styled.div`
-  display: flex;
   padding: 8px;
-  justify-content: space-between;
-  align-items: center;
   border-radius: 4px;
   background: ${(props) => props.theme.palette.paperDark};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
@@ -34,14 +31,15 @@ const Avatar = styled.div`
   margin-right: 10px;
 `;
 
-const MiniUserCard = ({ user }) => (
-  <User>
+const MiniUserCard = ({ user, children, ...rest }) => (
+  <User {...rest}>
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <Avatar src={user.avatar !== '' ? user.avatar : defaultAvatar} />
-      <div>
+      <div style={{ flex: 1 }}>
         <h4>{user.name}</h4>
         <span>{user.username}</span>
       </div>
+      {children}
     </div>
     <FollowButton user={user.username} />
   </User>
