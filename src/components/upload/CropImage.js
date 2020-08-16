@@ -40,6 +40,11 @@ const CropperStyle = styled.div`
     position: relative;
   }
 
+  img {
+    height: auto;
+    max-height: 100%;
+  }
+
   .slider {
     padding: 16px;
   }

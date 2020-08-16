@@ -51,7 +51,11 @@ const Projects = () => {
         <LoadContent loading={loading}>
           {projects.length > 0 ? (
             <div
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)' }}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3,1fr)',
+                gap: '16px',
+              }}
             >
               {projects.map((project) => (
                 <div xs={12} md={6} lg={4} key={project._id}>

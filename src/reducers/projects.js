@@ -25,6 +25,14 @@ function projects(state = INITIAL_STATE, action) {
         projects: payload,
         loading: false,
       };
+
+    case Types.UPDATE_PROJECT_SUCCESS:
+    case Types.UPDATE_PROJECT_AVATAR_SUCCESS:
+    case Types.REMOVE_PROJECT_AVATAR_SUCCESS:
+    case Types.UPDATE_PROJECT_COVER_SUCCESS:
+    case Types.REMOVE_PROJECT_COVER_SUCCESS:
+      return { ...state, project: { ...payload }, loading: false };
+
     case Types.GET_SINGLE_PROJECT_SUCCESS:
       return { ...state, project: { ...payload }, loading: false };
     case Types.GET_PROJECT_POSTS_SUCCESS:

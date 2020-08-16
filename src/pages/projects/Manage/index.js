@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import {
   FiGrid,
   FiSliders,
-  FiUsers,
+  // FiUsers,
   FiChevronLeft,
   FiEdit,
 } from 'react-icons/fi';
@@ -107,12 +107,14 @@ const Settings = () => {
                     current={page === 'sections' && subpage === 'faq'}
                   />
                 </MenuTree>
+                {/*
                 <MenuItem
                   current={page === 'roles'}
                   label="Funções Administrativas"
                   link={`${BASE_URL}/roles`}
                   icon={<FiUsers />}
                 />
+                 */}
               </Menu>
             </Paper>
             <Link to={`/projects/${projectId}`} className="back-to-project">

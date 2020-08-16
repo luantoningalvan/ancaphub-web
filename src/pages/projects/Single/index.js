@@ -7,7 +7,6 @@ import LinksList from '../../../components/projects/LinksList';
 import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
 import {
   Container,
-  CardHeader,
   IconButton,
   Button,
   Paper,
@@ -20,7 +19,7 @@ import {
   LoadContent,
 } from '../../../components/ui';
 
-import { ProjectBanner, ProjectSocialMedia } from './styles';
+import { ProjectBanner } from './styles';
 import { getSingleProjectRequest } from '../../../actions/projects';
 
 const ProjectFeed = lazy(() => import('./ProjectFeed'));
@@ -95,7 +94,7 @@ const SingleProject = () => {
                   href="http://ancaphub.com"
                   rel="noopener noreferrer"
                 >
-                  <FormattedMessage id="common.website" />
+                  {project.category}
                 </Link>
               </div>
             </div>
@@ -129,16 +128,11 @@ const SingleProject = () => {
           }}
         >
           <div>
-            <ProjectSocialMedia
-              padding
-              style={{ width: '100%', position: 'sticky', top: 80 }}
-            >
-              <CardHeader
-                title={<FormattedMessage id="projects.usefulLinks" />}
-              />
+            <h3>
+              <FormattedMessage id="projects.usefulLinks" />
+            </h3>
 
-              <LinksList links={project.links} />
-            </ProjectSocialMedia>
+            <LinksList links={project.links} />
           </div>
           <div>
             <Paper style={{ width: '100%' }}>

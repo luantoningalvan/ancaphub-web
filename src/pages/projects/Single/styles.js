@@ -32,26 +32,6 @@ export const ProjectBanner = styled.div`
   }
 `;
 
-export const ProjectSocialMedia = styled.div`
-  ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 8px 0px;
-  }
-  ul li {
-    padding: 8px 16px;
-  }
-  ul li a {
-    color: ${(props) => props.theme.palette.text.primary};
-  }
-  ul li svg {
-    float: left;
-    fill: ${(props) => props.theme.palette.text.primary};
-    margin-right: 8px;
-  }
-`;
-
 export const About = styled.div`
   margin: 16px 0px;
   p {

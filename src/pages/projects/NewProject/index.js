@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import { Form } from '@unform/web';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+
 import { createProjectRequest } from '../../../actions/projects';
 import {
   Container,
@@ -14,10 +15,14 @@ import {
 
 const NewProject = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const handleSubmit = useCallback((data) => {
-    dispatch(createProjectRequest(data));
-  }, []);
+  const handleSubmit = useCallback(
+    (data) => {
+      dispatch(createProjectRequest({ data, history }));
+    },
+    [dispatch, history]
+  );
 
   return (
     <Container>
