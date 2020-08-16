@@ -4,11 +4,7 @@ import { FiX as CloseIcon, FiUpload as UploadIcon } from 'react-icons/fi';
 import styled from 'styled-components';
 import Slider from 'rc-slider';
 import Cropper from 'react-easy-crop';
-import { useDispatch } from 'react-redux';
-
 import { IconButton, CardHeader, CardBody, Dialog } from '../ui';
-
-import { updateProfilePictureRequest as updateProfilePicture } from '../../actions/users';
 
 const UplaodArea = styled.label`
   height: 250px;
@@ -49,13 +45,19 @@ const CropperStyle = styled.div`
   }
 `;
 
-export default ({ open, onClose }) => {
+const EditAvatar = ({
+  open,
+  dialogTitle,
+  onClose,
+  onUpdate,
+  aspect = 1 / 1,
+  shape = 'round',
+}) => {
   const [image, setImage] = useState('');
   const [cropState, setCropState] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [cropInfo, setCropInfo] = useState({});
-  const dispatch = useDispatch();
 
   const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
     setCropInfo({ croppedArea, croppedAreaPixels });
@@ -82,7 +84,7 @@ export default ({ open, onClose }) => {
       const formData = new FormData();
       formData.append('data', JSON.stringify(cropInfo));
       formData.append('file', image.image);
-      dispatch(updateProfilePicture(formData));
+      onUpdate(formData);
       handleCrop();
       handleCancel();
     }
@@ -94,7 +96,7 @@ export default ({ open, onClose }) => {
         title={
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <IconButton icon={<CloseIcon />} onClick={handleCancel} />
-            <FormattedMessage id="components.editAvatar.heading" />
+            {dialogTitle}
           </div>
         }
         action={{
@@ -112,11 +114,11 @@ export default ({ open, onClose }) => {
               image={image.preview}
               crop={crop}
               zoom={zoom}
-              aspect={1 / 1}
+              aspect={aspect || 1 / 1}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}
-              cropShape="round"
+              cropShape={shape}
             />
           </div>
           <div className="slider">
@@ -148,3 +150,5 @@ export default ({ open, onClose }) => {
     </Dialog>
   );
 };
+
+export default EditAvatar;

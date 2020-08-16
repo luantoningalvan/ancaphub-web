@@ -17,10 +17,13 @@ import { Paper, Spinner, Container, Tabs, Tab } from '../../components/ui';
 
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
-import EditAvatar from '../../components/users/EditAvatar';
+import EditAvatar from '../../components/upload/CropImage';
 import UserName from '../../components/users/UserName';
 
-import { getSingleUserRequest } from '../../actions/users';
+import {
+  getSingleUserRequest,
+  updateProfilePictureRequest,
+} from '../../actions/users';
 import {
   ProfileHeader,
   ProfilePicture,
@@ -82,7 +85,9 @@ const Profiles = () => {
           {verifyIfIsOwnProfile && (
             <EditAvatar
               open={editAvatar}
+              dialogTitle="Alterar foto de perfil"
               onClose={() => setEditAvatar(false)}
+              onUpdate={(data) => dispatch(updateProfilePictureRequest(data))}
             />
           )}
 
