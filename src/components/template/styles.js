@@ -95,7 +95,7 @@ export const SearchContainer = styled.div`
   svg {
     width: 20px;
     height: 20px;
-    color: ${(props) => props.theme.palette.text.contrast};
+    color: ${(props) => props.theme.palette.text.primary};
   }
 
   .not-collapsed {
@@ -109,7 +109,7 @@ export const SearchContainer = styled.div`
     z-index: 100;
     display: flex;
     align-items: center;
-    color: ${(props) => props.theme.palette.text.contrast};
+    color: ${(props) => props.theme.palette.text.primary};
 
     > input {
       border: none;
@@ -117,10 +117,10 @@ export const SearchContainer = styled.div`
       padding: 16px;
       outline: none;
       flex: 1;
-      color: ${(props) => props.theme.palette.text.contrast};
+      color: ${(props) => props.theme.palette.text.primary};
 
       &::placeholder {
-        color: ${(props) => props.theme.palette.text.contrast};
+        color: ${(props) => props.theme.palette.text.primary};
         font-size: 16px;
         font-family: Ubuntu;
       }
@@ -128,11 +128,11 @@ export const SearchContainer = styled.div`
   }
 
   .mobile-search {
-    color: ${(props) => props.theme.palette.text.contrast};
+    color: ${(props) => props.theme.palette.text.primary};
 
     > button {
       border: none;
-      border-radius: 8px;
+      border-radius: 50%;
       padding: 8px;
       outline: none;
       background: transparent;
@@ -142,11 +142,15 @@ export const SearchContainer = styled.div`
       &:hover {
         background: rgba(0, 0, 0, 0.15);
       }
+
+      svg {
+        color: ${(props) => props.theme.palette.text.primary};
+      }
     }
 
     > a {
       padding: 8px;
-      color: ${(props) => props.theme.palette.text.contrast};
+      color: ${(props) => props.theme.palette.text.primary};
     }
   }
 
@@ -162,11 +166,12 @@ export const SearchContainer = styled.div`
       display: block;
       background: rgba(0, 0, 0, 0.15);
       width: 360px;
-      border-radius: 8px;
+      border-radius: 24px;
       display: flex;
       align-items: center;
-      padding: 8px;
-      color: ${(props) => props.theme.palette.text.contrast};
+      padding: 8px 16px;
+      height: 48px;
+      color: ${(props) => props.theme.palette.text.primary};
 
       input {
         flex: 1;
@@ -178,7 +183,7 @@ export const SearchContainer = styled.div`
       a,
       input,
       input::placeholder {
-        color: ${(props) => props.theme.palette.text.contrast};
+        color: ${(props) => props.theme.palette.text.primary};
         font-size: 1rem;
       }
     }
@@ -229,13 +234,13 @@ export const MenuItemLinkContainer = styled(Link)`
 
   color: ${(props) =>
     props.current
-      ? props.theme.palette.text.contrast
-      : props.theme.palette.text.secondary};
+      ? props.theme.palette.text.primary
+      : props.theme.palette.text.primary};
 
   &:hover {
     ${(props) => css`
       background: ${props.theme.palette.secondary};
-      color: ${props.theme.palette.text.contrast};
+      color: ${props.theme.palette.text.primary};
     `}
   }
 
@@ -278,7 +283,7 @@ export const MenuItemButtonContainer = styled.button`
     display: block;
   }
 
-  color: ${(props) => props.theme.palette.text.secondary};
+  color: ${(props) => props.theme.palette.text.primary};
 
   &:hover {
     background: rgba(0, 0, 0, 0.05);
@@ -319,16 +324,20 @@ export const MainContainer = styled.main`
 `;
 
 export const AppBar = styled.header`
-  background: ${(props) => props.theme.palette.secondary};
+  background: ${(props) => props.theme.palette.paper};
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 64px;
   position: fixed;
-  z-index: 99;
   top: 0;
   left: 0;
+
+  @media (min-width: 576px) {
+    z-index: 180;
+  }
 `;
 
 export const HeaderWrapper = styled.div`
@@ -353,6 +362,7 @@ export const Logo = styled.div`
       margin: 8px;
       height: 56px;
       width: 56px;
+      fill: ${(props) => props.theme.palette.text.primary};
     }
   }
 
@@ -371,7 +381,7 @@ export const Logo = styled.div`
     svg {
       height: 24px;
       width: 24px;
-      color: ${(props) => props.theme.palette.text.contrast};
+      color: ${(props) => props.theme.palette.text.primary};
     }
   }
 
@@ -392,7 +402,7 @@ export const HeaderMenuItem = styled.li`
   list-style: none;
   margin-right: 5px;
   cursor: pointer;
-  color: ${(props) => props.theme.palette.text.contrast};
+  color: ${(props) => props.theme.palette.text.primary};
 
   &:last-child {
     margin-right: 0px;
@@ -404,7 +414,7 @@ export const HeaderMenuItem = styled.li`
     position: relative;
     margin-left: 8px;
     padding: 8px;
-    border-radius: 8px;
+    border-radius: 50%;
     background: ${(props) =>
       props.current ? 'rgba(0,0,0,0.15)' : 'transparent'};
     transition: background 0.3s;

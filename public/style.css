@@ -1,17 +1,24 @@
 * {
   margin: 0;
   padding: 0;
-  outline:none;
+  outline: none;
   box-sizing: border-box;
 }
 
-body.modal-open{
-  background-color: rgb(21, 32, 43);
-  margin-right: 15px;
+body.modal-open {
   overflow-y: hidden;
 }
 
-body, input, textarea, button { font-family: Ubuntu; }
+body,
+input,
+textarea,
+button {
+  font-family: Ubuntu;
+}
 
-li { list-style: none; }
-a { text-decoration: none; }
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
