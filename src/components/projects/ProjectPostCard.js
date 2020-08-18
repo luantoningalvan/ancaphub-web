@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import CalendarIcon from 'react-ionicons/lib/IosCalendar';
+import { FiCalendar as CalendarIcon } from 'react-icons/fi';
 import { FormattedDate } from 'react-intl';
 import { parseISO, addDays } from 'date-fns';
+import { Link } from 'react-router-dom';
 import defaultCover from '../../assets/default-article-cover.jpg';
 import { Paper } from '../ui';
 
@@ -35,12 +36,22 @@ const Post = styled(Paper)`
       display: flex;
       margin-bottom: 8px;
       align-items: center;
+      color: ${(props) => props.theme.palette.text.secondary};
+      font-size: 0.8em;
       svg {
-        fill: white;
         height: 20px;
         width: 20px;
         margin-right: 8px;
       }
+    }
+
+    a h3 {
+      color: ${(props) => props.theme.palette.text.primary};
+      font-size: 1.4em;
+    }
+
+    p {
+      margin-top: 8px;
     }
   }
 `;
@@ -63,14 +74,16 @@ const ProjectFeed = ({ post }) => {
   return (
     <Post>
       <div className="post-cover">
-        <img
-          alt="cover"
-          src={
-            post.thumbnail && post.thumbnail !== ''
-              ? post.thumbnail
-              : defaultCover
-          }
-        />
+        <Link to={`/projects/${post.project}/posts/${post._id}`}>
+          <img
+            alt="cover"
+            src={
+              post.thumbnail && post.thumbnail !== ''
+                ? post.thumbnail
+                : defaultCover
+            }
+          />
+        </Link>
       </div>
       <div className="post-content">
         <div className="date">
@@ -86,7 +99,9 @@ const ProjectFeed = ({ post }) => {
             />
           </span>
         </div>
-        <h3>{post.title}</h3>
+        <Link to={`/projects/${post.project}/posts/${post._id}`}>
+          <h3>{post.title}</h3>
+        </Link>
         <p>{getExperpt().substring(0, 29)}</p>
       </div>
     </Post>
