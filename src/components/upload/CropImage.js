@@ -104,11 +104,13 @@ const EditAvatar = ({
             {dialogTitle}
           </div>
         }
-        action={{
-          show: image !== '',
-          action: handleUpload,
-          label: <FormattedMessage id="common.update" />,
-        }}
+        actions={[
+          {
+            show: image !== '',
+            action: handleUpload,
+            label: <FormattedMessage id="common.update" />,
+          },
+        ]}
         style={{ padding: 8 }}
       />
 

@@ -11,12 +11,14 @@ const ExpansionPanel = ({ title, children, ...rest }) => {
     <Card bordered {...rest}>
       <CardHeader
         title={title}
-        action={{
-          action: handleOpen,
-          label: open ? <FiChevronUp /> : <FiChevronDown />,
-          type: 'icon',
-          show: true,
-        }}
+        actions={[
+          {
+            action: handleOpen,
+            label: open ? <FiChevronUp /> : <FiChevronDown />,
+            type: 'icon',
+            show: true,
+          },
+        ]}
         onClick={handleOpen}
         style={{ cursor: 'pointer', padding: 16 }}
       />

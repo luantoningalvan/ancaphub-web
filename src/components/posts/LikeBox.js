@@ -28,12 +28,14 @@ const LikeBox = ({ open, onClose, postId }) => {
         <Card>
           <CardHeader
             title={<FormattedMessage id="common.likePlural" />}
-            action={{
-              type: 'icon',
-              show: true,
-              action: onClose,
-              label: <CloseIcon />,
-            }}
+            actions={[
+              {
+                type: 'icon',
+                show: true,
+                action: onClose,
+                label: <CloseIcon />,
+              },
+            ]}
           />
           <CardBody style={{ overflowX: 'auto' }}>
             {likes.postLikesLoading ? (

@@ -109,11 +109,13 @@ const EditProfile = () => {
         >
           <Card>
             <CardHeader
-              action={{
-                label: <FormattedMessage id="common.edit" />,
-                action: () => editFormRef.current.submitForm(),
-                show: true,
-              }}
+              actions={[
+                {
+                  label: <FormattedMessage id="common.edit" />,
+                  action: () => editFormRef.current.submitForm(),
+                  show: true,
+                },
+              ]}
               title={
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <IconButton icon={<CloseIcon />} onClick={handleClick} />
