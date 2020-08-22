@@ -98,9 +98,22 @@ const InlineStyleControls = ({ editorState, onToggle }) => {
   );
 };
 
-const FullEditor = ({ name, icon: Icon, placeholder, multiline, ...rest }) => {
+const FullEditor = ({
+  name,
+  icon: Icon,
+  placeholder,
+  multiline,
+  initialState,
+  readOnly,
+  ...rest
+}) => {
   const { fieldName, error, registerField } = useField(name);
-  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [editorState, setEditorState] = useState(() => {
+    if (!initialState) {
+      return EditorState.createEmpty();
+    }
+    return EditorState.createWithContent(initialState);
+  });
   const editor = useRef(null);
 
   useEffect(() => {
