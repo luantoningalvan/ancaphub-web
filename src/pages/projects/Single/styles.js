@@ -23,7 +23,7 @@ export const ProjectBanner = styled.div`
   }
 
   .category {
-    color: ${(props) => props.theme.palette.text.contrast};
+    color: #000;
     background: ${(props) => props.theme.palette.secondary};
     font-size: 0.8em;
     font-weight: lighter;
