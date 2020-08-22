@@ -29,7 +29,7 @@ import {
   UnorderedListButton,
 } from 'draft-js-buttons';
 
-import { Form } from '@unform/core';
+import { Form } from '@unform/web';
 import {
   TextField,
   CardBody,
@@ -205,6 +205,7 @@ function PostForm({ createPostRequest: createPost }) {
               }
               plugins={plugins}
               spellCheck
+              name="content"
             />
             <MentionSuggestions
               onSearchChange={onSearchChange}
@@ -299,6 +300,7 @@ function PostForm({ createPostRequest: createPost }) {
                             fullWidth
                             placeholder={msg}
                             value={media.data}
+                            name="url"
                             onChange={(e) =>
                               setMedia({
                                 type: 'embed',
