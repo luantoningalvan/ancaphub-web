@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiXCircle } from 'react-icons/fi';
 
 import { Card, CardBody, CardHeader, Collapse } from '../ui';
 
@@ -16,7 +16,7 @@ const FAQQuestion = styled.div`
   }
 `;
 
-const ProjectFaq = ({ question }) => {
+const ProjectFaq = ({ question, showDeleteButton, onDelete }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -25,12 +25,20 @@ const ProjectFaq = ({ question }) => {
         <CardHeader
           title={question.question}
           style={{ padding: '8px 16px' }}
-          action={{
-            type: 'icon',
-            label: <FiChevronDown />,
-            show: true,
-            action: () => setOpen(!open),
-          }}
+          actions={[
+            {
+              type: 'icon',
+              label: <FiXCircle />,
+              show: showDeleteButton,
+              action: onDelete,
+            },
+            {
+              type: 'icon',
+              label: <FiChevronDown />,
+              show: true,
+              action: () => setOpen(!open),
+            },
+          ]}
         />
         <Collapse expanded={open}>
           <CardBody>

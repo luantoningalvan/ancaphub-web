@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React from 'react';
 import styled from 'styled-components';
-import { FiCreditCard } from 'react-icons/fi';
+import { FiCreditCard, FiXCircle } from 'react-icons/fi';
 
 const DonationCard = styled.div`
   position: relative;
@@ -12,6 +12,28 @@ const DonationCard = styled.div`
   word-wrap: wrap;
   display: flex;
   align-items: center;
+  position: relative;
+
+  button {
+    position: absolute;
+    background: #d62000;
+    color: white;
+    border: none;
+    font-size: 18px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    top: -5px;
+    right: -5px;
+    border-radius: 50%;
+
+    svg {
+      height: 20px;
+    }
+  }
 
   .icon {
     svg {
@@ -37,13 +59,18 @@ const DonationCard = styled.div`
   }
 `;
 
-const ProjectDonationCard = ({ donation }) => {
+const ProjectDonationCard = ({ donation, showDeleteButton, onDelete }) => {
   const getIcon = () => {
     return <FiCreditCard />;
   };
 
   return (
     <DonationCard>
+      {showDeleteButton && (
+        <button type="button" onClick={onDelete}>
+          <FiXCircle />
+        </button>
+      )}
       <div className="icon">{getIcon(donation.type)}</div>
 
       <div>
