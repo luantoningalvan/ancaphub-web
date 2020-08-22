@@ -102,7 +102,7 @@ const ProjectFeed = ({ post }) => {
         <Link to={`/projects/${post.project}/posts/${post._id}`}>
           <h3>{post.title}</h3>
         </Link>
-        <p>{getExperpt().substring(0, 29)}</p>
+        <p>{getExperpt().substring(0, 120)}...</p>
       </div>
     </Post>
   );
