@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
 import { Paper } from '../ui';
 import defaultProjectCover from '../../assets/default-group-cover.png';
@@ -33,7 +32,7 @@ const ProjectInfo = styled.div`
 `;
 
 const ProjectCard = ({ data }) => {
-  const { _id, name, cover, peopleWatching } = data;
+  const { _id, name, cover, description } = data;
   return (
     <div style={{ width: '100%' }}>
       <Paper>
@@ -44,12 +43,7 @@ const ProjectCard = ({ data }) => {
           <h4>
             <Link to="/projects/id">{name}</Link>
           </h4>
-          <span>
-            <FormattedMessage
-              id="projects.peopleWatching"
-              values={{ people: peopleWatching }}
-            />
-          </span>
+          <span>{description}</span>
           <FollowProjectButton project={_id} />
         </ProjectInfo>
       </Paper>

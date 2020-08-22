@@ -12,6 +12,7 @@ import {
   TextField,
   Select,
 } from '../../../components/ui';
+import projectCategories from '../../../assets/project-categories';
 
 const NewProject = () => {
   const dispatch = useDispatch();
@@ -48,29 +49,31 @@ const NewProject = () => {
           margin: '16px auto',
         }}
       >
-        <Paper padding style={{ width: '100%', marginTop: 32 }}>
+        <Paper
+          padding
+          style={{ width: '100%', marginTop: 32, overflow: 'inherit' }}
+        >
           <Form onSubmit={handleSubmit}>
             <TextField placeholder="Nome do Projeto" name="name" />
             <Select
               placeholder="Categoria"
               name="category"
-              options={[
-                {
-                  label: 'Teste 1',
-                  value: '1',
-                },
-                {
-                  label: 'Teste 2',
-                  value: '2',
-                },
-                {
-                  label: 'Teste 3',
-                  value: '3',
-                },
-              ]}
+              options={Object.entries(projectCategories).map((a) => ({
+                value: a[0],
+                label: a[1],
+              }))}
             />
-            <TextField multiline placeholder="Descrição" name="description" />
-            <Button fullWidth color="secondary" style={{ marginTop: 16 }}>
+            <TextField
+              multiline
+              placeholder="Descrição curta"
+              name="description"
+            />
+            <Button
+              fullWidth
+              color="secondary"
+              style={{ marginTop: 16 }}
+              type="submit"
+            >
               Criar Projeto
             </Button>
           </Form>

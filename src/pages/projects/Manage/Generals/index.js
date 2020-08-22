@@ -25,6 +25,7 @@ import {
   removeProjectAvatarRequest,
   removeProjectCoverRequest,
 } from '../../../../actions/projects';
+import projectCategories from '../../../../assets/project-categories';
 
 const Generals = ({ project }) => {
   const [editAvatarDialogState, setEditarAvatarDialogState] = useState(false);
@@ -40,7 +41,8 @@ const Generals = ({ project }) => {
   useEffect(() => {
     if (formRef !== null) {
       const formData = formRef.current.getData();
-      setLinks(formData.links || project.links);
+
+      setLinks(formData.links || project.links || []);
     }
   }, [formRef, project]);
 
@@ -167,7 +169,10 @@ const Generals = ({ project }) => {
           <div style={{ flex: 1, marginLeft: 16 }}>
             <TextField placeholder="Nome do Projeto" name="name" />
             <Select
-              options={[{ label: 'teste', value: 'teste' }]}
+              options={Object.entries(projectCategories).map((a) => ({
+                value: a[0],
+                label: a[1],
+              }))}
               placeholder="Categoria"
               name="category"
             />
@@ -202,7 +207,8 @@ const Generals = ({ project }) => {
                         options={[
                           { label: 'Facebook', value: 'facebook' },
                           { label: 'Twitter', value: 'twitter' },
-                          { label: 'Instagram', value: 'instragram' },
+                          { label: 'Instagram', value: 'instagram' },
+                          { label: 'YouTube', value: 'youtube' },
                           { label: 'Site', value: 'site' },
                         ]}
                         style={{ margin: '0px 8px' }}

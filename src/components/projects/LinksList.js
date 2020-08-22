@@ -38,7 +38,7 @@ const LinksList = ({ links }) => {
     if (url.includes('instagram.com')) {
       return <InstagramLogo />;
     }
-    if (url.includes('yotube.com' || 'youtu.be')) {
+    if (url.includes('youtube.com' || 'youtu.be')) {
       return <YoutubeLogo />;
     }
     if (url.includes('@')) {

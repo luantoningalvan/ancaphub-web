@@ -18,6 +18,7 @@ import {
 import { ProjectBanner } from './styles';
 import { getSingleProjectRequest } from '../../../actions/projects';
 import FollowProjectButton from '../../../components/projects/FollowProjectButton';
+import projectCategories from '../../../assets/project-categories';
 
 const ProjectFeed = lazy(() => import('./ProjectFeed'));
 const ProjectFAQ = lazy(() => import('./ProjectFAQ'));
@@ -91,7 +92,7 @@ const SingleProject = () => {
                   href="http://ancaphub.com"
                   rel="noopener noreferrer"
                 >
-                  {project.category}
+                  {projectCategories[project.category]}
                 </Link>
               </div>
             </div>
