@@ -27,6 +27,8 @@ export const getSingleProjectPost = ({ projectId, postId }) =>
 export const getProjectPosts = (id) => axios.get(`/projects/${id}/posts`);
 export const createProjectPost = ({ project, data }) =>
   axios.post(`/projects/${project}/posts`, data);
+export const updateProjectPost = ({ projectId, postId, data }) =>
+  axios.put(`/projects/${projectId}/posts/${postId}`, data);
 export const removeProjectPost = ({ projectId, postId }) =>
   axios.delete(`/projects/${projectId}/posts/${postId}`);
 export const followProject = (projectId) =>

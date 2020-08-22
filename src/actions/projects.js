@@ -222,6 +222,16 @@ export const removeProjectPostSuccess = (data) => ({
   payload: data,
 });
 
+export const updateProjectPostRequest = (data) => ({
+  type: Types.UPDATE_PROJECT_POST_REQUEST,
+  payload: data,
+});
+
+export const updateProjectPostSuccess = (data) => ({
+  type: Types.UPDATE_PROJECT_POST_SUCCESS,
+  payload: data,
+});
+
 export const followProjectRequest = (data) => ({
   type: Types.FOLLOW_PROJECT_REQUEST,
   payload: data,

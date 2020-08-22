@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable consistent-return */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useField } from '@unform/core';
 import shortId from 'shortid';
 import {
@@ -14,7 +14,13 @@ import {
   MdFormatQuote,
   MdCode,
 } from 'react-icons/md';
-import { Editor, EditorState, RichUtils, getDefaultKeyBinding } from 'draft-js';
+import {
+  Editor,
+  EditorState,
+  RichUtils,
+  getDefaultKeyBinding,
+  convertFromRaw,
+} from 'draft-js';
 import {
   EditorContainer,
   EditorToolBar,
@@ -107,12 +113,14 @@ const FullEditor = ({
   readOnly,
   ...rest
 }) => {
-  const { fieldName, error, registerField } = useField(name);
+  const { fieldName, error, registerField, defaultValue } = useField(name);
   const [editorState, setEditorState] = useState(() => {
-    if (!initialState) {
+    if (!defaultValue) {
       return EditorState.createEmpty();
     }
-    return EditorState.createWithContent(initialState);
+    return EditorState.createWithContent(
+      convertFromRaw(JSON.parse(defaultValue))
+    );
   });
   const editor = useRef(null);
 
@@ -125,10 +133,14 @@ const FullEditor = ({
   }, [fieldName, registerField]);
 
   const focus = () => editor.current.focus();
-  const onChange = (state) => {
+
+  const onChange = useCallback((state) => {
     setEditorState(state);
-    editor.current.value = state;
-  };
+  }, []);
+
+  useEffect(() => {
+    editor.current.value = editorState;
+  }, [editorState]);
 
   const handleKeyCommand = (command, state) => {
     const newState = RichUtils.handleKeyCommand(state, command);

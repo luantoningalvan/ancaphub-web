@@ -48,7 +48,7 @@ export const ButtonContainer = styled.button`
               ? props.theme.palette[props.color]
               : props.theme.palette.border
           }`
-        : props.theme.palette.text.contrast};
+        : readableColor(props.theme.palette[props.color] || 'yellow')};
     margin-right: 8px;
   }
 `;

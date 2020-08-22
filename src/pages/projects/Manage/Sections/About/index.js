@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from '@unform/web';
 import { useDispatch } from 'react-redux';
-import { convertToRaw, convertFromRaw } from 'draft-js';
+import { convertToRaw } from 'draft-js';
 import { Breadcrumb, Button } from '../../../../../components/ui';
 import { PageHeader } from '../../styles';
 import FullEditor from '../../../../../components/editor/FullEditor';
@@ -22,7 +22,7 @@ const About = ({ project }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} initialData={{ about: project.about }}>
       <PageHeader>
         <div className="page-title">
           <Breadcrumb list={[{ title: 'Seções' }, { title: 'Sobre' }]} />
@@ -33,12 +33,7 @@ const About = ({ project }) => {
           Salvar
         </Button>
       </PageHeader>
-      <FullEditor
-        name="about"
-        initialState={
-          project.about !== null && convertFromRaw(JSON.parse(project.about))
-        }
-      />
+      <FullEditor name="about" />
     </Form>
   );
 };

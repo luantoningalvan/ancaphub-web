@@ -234,11 +234,27 @@ function* followProject({ payload }) {
   }
 }
 
+function* updateProjectPost({ payload }) {
+  try {
+    const result = yield call(api.updateProjectPost, payload);
+    yield put(
+      addAlert({
+        title: 'Suceso',
+        description: 'Publicação atualizada com sucesso',
+        type: 'success',
+      })
+    );
+    yield put(actions.updateProjectPostSuccess(result));
+  } catch (e) {
+    yield put(actions.projectsError({ errorMessage: e.message }));
+  }
+}
+
 // Watchers
 function* watchGetProjectsRequest() {
   yield takeLatest(actions.Types.GET_PROJECTS_REQUEST, getProjects);
 }
-function* watchFollwProjectRequest() {
+function* watchFollowProjectRequest() {
   yield takeLatest(actions.Types.FOLLOW_PROJECT_REQUEST, followProject);
 }
 
@@ -252,20 +268,6 @@ function* watchCreateProjectRequest() {
 
 function* watchGetProjectPostsRequest() {
   yield takeLatest(actions.Types.GET_PROJECT_POSTS_REQUEST, getProjectPosts);
-}
-
-function* watchGetSingleProjectPostRequest() {
-  yield takeLatest(
-    actions.Types.GET_SINGLE_PROJECT_POST_REQUEST,
-    getSingleProjectPost
-  );
-}
-
-function* watchCreateProjectPostRequest() {
-  yield takeLatest(
-    actions.Types.CREATE_PROJECT_POST_REQUEST,
-    createProjectPost
-  );
 }
 
 function* watchUpdateProjectRequest() {
@@ -329,6 +331,27 @@ function* watchUpdateProjectAboutRequest() {
   );
 }
 
+function* watchGetSingleProjectPostRequest() {
+  yield takeLatest(
+    actions.Types.GET_SINGLE_PROJECT_POST_REQUEST,
+    getSingleProjectPost
+  );
+}
+
+function* watchCreateProjectPostRequest() {
+  yield takeLatest(
+    actions.Types.CREATE_PROJECT_POST_REQUEST,
+    createProjectPost
+  );
+}
+
+function* watchUpdateProjectPostRequest() {
+  yield takeLatest(
+    actions.Types.UPDATE_PROJECT_POST_REQUEST,
+    updateProjectPost
+  );
+}
+
 function* watchRemoveProjectPostRequest() {
   yield takeLatest(
     actions.Types.REMOVE_PROJECT_POST_REQUEST,
@@ -338,21 +361,22 @@ function* watchRemoveProjectPostRequest() {
 
 export default [
   fork(watchGetProjectsRequest),
+  fork(watchGetSingleProjectRequest),
   fork(watchCreateProjectRequest),
   fork(watchUpdateProjectRequest),
   fork(watchUpdateProjectAvatarRequest),
   fork(watchRemoveProjectAvatarRequest),
   fork(watchUpdateProjectCoverRequest),
   fork(watchRemoveProjectCoverRequest),
-  fork(watchGetSingleProjectRequest),
   fork(watchUpdateProjectAboutRequest),
   fork(watchAddProjectFAQRequest),
   fork(watchRemoveProjectFAQRequest),
-  fork(watchGetSingleProjectPostRequest),
-  fork(watchRemoveProjectPostRequest),
-  fork(watchGetProjectPostsRequest),
-  fork(watchCreateProjectPostRequest),
   fork(watchAddProjectDonationRequest),
   fork(watchRemoveProjectDonationRequest),
-  fork(watchFollwProjectRequest),
+  fork(watchGetProjectPostsRequest),
+  fork(watchGetSingleProjectPostRequest),
+  fork(watchCreateProjectPostRequest),
+  fork(watchUpdateProjectPostRequest),
+  fork(watchRemoveProjectPostRequest),
+  fork(watchFollowProjectRequest),
 ];

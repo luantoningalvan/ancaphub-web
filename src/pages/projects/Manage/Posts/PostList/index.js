@@ -3,7 +3,7 @@ import { FiPlusCircle, FiEdit, FiTrash } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedDate } from 'react-intl';
 import { parseISO, addDays } from 'date-fns';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   Button,
   IconButton,
@@ -21,6 +21,7 @@ import {
 
 const PostList = ({ project }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { posts, loadingPosts } = useSelector((state) => state.projects);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
@@ -71,7 +72,14 @@ const PostList = ({ project }) => {
                   </th>
                   <th>{post.author.name}</th>
                   <th className="actions">
-                    <IconButton icon={<FiEdit />} />
+                    <IconButton
+                      icon={<FiEdit />}
+                      onClick={() =>
+                        history.push(
+                          `/projects/${project._id}/manage/posts/edit?postId=${post._id}`
+                        )
+                      }
+                    />
                     <IconButton
                       icon={<FiTrash />}
                       onClick={() => handleDeletePost(post._id)}
