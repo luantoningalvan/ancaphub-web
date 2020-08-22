@@ -74,7 +74,7 @@ const ProjectFeed = ({ post }) => {
   return (
     <Post>
       <div className="post-cover">
-        <Link to={`/projects/${post.project}/posts/${post._id}`}>
+        <Link to={`/projects/${post.project._id}/posts/${post._id}`}>
           <img
             alt="cover"
             src={
@@ -99,7 +99,7 @@ const ProjectFeed = ({ post }) => {
             />
           </span>
         </div>
-        <Link to={`/projects/${post.project}/posts/${post._id}`}>
+        <Link to={`/projects/${post.project._id}/posts/${post._id}`}>
           <h3>{post.title}</h3>
         </Link>
         <p>{getExperpt().substring(0, 120)}...</p>

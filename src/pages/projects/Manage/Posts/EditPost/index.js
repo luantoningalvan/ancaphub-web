@@ -61,7 +61,7 @@ const NewPost = ({ project }) => {
                 { title: 'Nova' },
               ]}
             />
-            <h2>Adicionar Postagem</h2>
+            <h2>Editar Postagem</h2>
           </div>
           <div style={{ display: 'flex' }}>
             <Link to="../posts">
