@@ -225,9 +225,21 @@ function* removeProjectPost({ payload }) {
   }
 }
 
+function* followProject({ payload }) {
+  try {
+    const result = yield call(api.followProject, payload);
+    yield put(actions.followProjectSuccess(result));
+  } catch (e) {
+    yield put(actions.projectsError({ errorMessage: e.message }));
+  }
+}
+
 // Watchers
 function* watchGetProjectsRequest() {
   yield takeLatest(actions.Types.GET_PROJECTS_REQUEST, getProjects);
+}
+function* watchFollwProjectRequest() {
+  yield takeLatest(actions.Types.FOLLOW_PROJECT_REQUEST, followProject);
 }
 
 function* watchGetSingleProjectRequest() {
@@ -342,4 +354,5 @@ export default [
   fork(watchCreateProjectPostRequest),
   fork(watchAddProjectDonationRequest),
   fork(watchRemoveProjectDonationRequest),
+  fork(watchFollwProjectRequest),
 ];

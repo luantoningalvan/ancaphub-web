@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
-import { Paper, Button } from '../ui';
+import { Paper } from '../ui';
 import defaultProjectCover from '../../assets/default-group-cover.png';
+import FollowProjectButton from './FollowProjectButton';
 
 const ProjectCover = styled.div`
   width: 100%;
@@ -32,7 +33,7 @@ const ProjectInfo = styled.div`
 `;
 
 const ProjectCard = ({ data }) => {
-  const { _id, name, cover, peopleWatching, hasEnrolled } = data;
+  const { _id, name, cover, peopleWatching } = data;
   return (
     <div style={{ width: '100%' }}>
       <Paper>
@@ -49,13 +50,7 @@ const ProjectCard = ({ data }) => {
               values={{ people: peopleWatching }}
             />
           </span>
-          <Button fullwidth variant="outlined" color="secondary">
-            {hasEnrolled ? (
-              <FormattedMessage id="projects.unroll" />
-            ) : (
-              <FormattedMessage id="projects.enroll" />
-            )}
-          </Button>
+          <FollowProjectButton project={_id} />
         </ProjectInfo>
       </Paper>
     </div>

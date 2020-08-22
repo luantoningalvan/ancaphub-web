@@ -17,6 +17,7 @@ import {
 
 import { ProjectBanner } from './styles';
 import { getSingleProjectRequest } from '../../../actions/projects';
+import FollowProjectButton from '../../../components/projects/FollowProjectButton';
 
 const ProjectFeed = lazy(() => import('./ProjectFeed'));
 const ProjectFAQ = lazy(() => import('./ProjectFAQ'));
@@ -94,6 +95,8 @@ const SingleProject = () => {
                 </Link>
               </div>
             </div>
+
+            <FollowProjectButton project={project._id} />
           </div>
         </Container>
       </ProjectBanner>

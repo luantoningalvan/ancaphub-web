@@ -37,6 +37,8 @@ export const Types = {
   UPDATE_PROJECT_POST_SUCCESS: 'projects/update_project_post_success',
   REMOVE_PROJECT_POST_REQUEST: 'projects/remove_project_post_request',
   REMOVE_PROJECT_POST_SUCCESS: 'projects/remove_project_post_success',
+  FOLLOW_PROJECT_REQUEST: 'projects/follow_project_request',
+  FOLLOW_PROJECT_SUCCESS: 'projects/follow_project_success',
   PROJECTS_ERROR: 'projects/projects_error',
 };
 
@@ -217,6 +219,16 @@ export const removeProjectPostRequest = (data) => ({
 
 export const removeProjectPostSuccess = (data) => ({
   type: Types.REMOVE_PROJECT_POST_SUCCESS,
+  payload: data,
+});
+
+export const followProjectRequest = (data) => ({
+  type: Types.FOLLOW_PROJECT_REQUEST,
+  payload: data,
+});
+
+export const followProjectSuccess = (data) => ({
+  type: Types.FOLLOW_PROJECT_SUCCESS,
   payload: data,
 });
 

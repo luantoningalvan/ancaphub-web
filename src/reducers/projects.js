@@ -1,4 +1,5 @@
 import { Types } from '../actions/projects';
+import arrayToObject from '../utils/arrayToObject';
 
 const INITIAL_STATE = {
   loading: true,
@@ -8,6 +9,15 @@ const INITIAL_STATE = {
   post: {},
   project: {},
   errorMessage: '',
+  relationships: {},
+};
+
+const getRelationships = (pjts) => {
+  const reducer = pjts.map((pj) => ({
+    _id: pj._id,
+    following: pj.isFollowing,
+  }));
+  return arrayToObject(reducer, '_id');
 };
 
 function projects(state = INITIAL_STATE, action) {
@@ -21,11 +31,14 @@ function projects(state = INITIAL_STATE, action) {
     case Types.GET_PROJECT_POSTS_REQUEST:
       return { ...state, loadingPosts: true };
     case Types.GET_PROJECTS_SUCCESS:
-    case Types.CREATE_PROJECT_SUCCESS:
       return {
         ...state,
         projects: payload,
         loading: false,
+        relationships: {
+          ...state.relationships,
+          ...getRelationships(payload),
+        },
       };
 
     case Types.GET_SINGLE_PROJECT_POST_SUCCESS:
@@ -45,7 +58,15 @@ function projects(state = INITIAL_STATE, action) {
     case Types.REMOVE_PROJECT_DONATION_SUCCESS:
       return { ...state, project: { ...payload }, loading: false };
     case Types.GET_SINGLE_PROJECT_SUCCESS:
-      return { ...state, project: { ...payload }, loading: false };
+      return {
+        ...state,
+        project: payload,
+        loading: false,
+        relationships: {
+          ...state.relationships,
+          ...getRelationships([payload]),
+        },
+      };
     case Types.GET_PROJECT_POSTS_SUCCESS:
       return { ...state, posts: payload, loadingPosts: false };
     case Types.REMOVE_PROJECT_POST_SUCCESS:
