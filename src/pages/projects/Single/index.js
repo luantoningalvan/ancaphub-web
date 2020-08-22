@@ -1,19 +1,15 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { FiSettings, FiShare2 } from 'react-icons/fi';
+import { FiSettings } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import LinksList from '../../../components/projects/LinksList';
 import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
 import {
   Container,
   IconButton,
-  Button,
   Paper,
   Spinner,
-  Dropdown,
-  DropdownListContainer,
-  DropdownListItem,
   Tabs,
   Tab,
   LoadContent,
@@ -97,23 +93,6 @@ const SingleProject = () => {
                   {project.category}
                 </Link>
               </div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Button color="primary" style={{ marginRight: 8 }}>
-                <FormattedMessage id="projects.enroll" />
-              </Button>
-              <Dropdown
-                toggle={<IconButton icon={<FiShare2 color="white" />} />}
-              >
-                <DropdownListContainer>
-                  <DropdownListItem>
-                    <FormattedMessage id="common.publish" />
-                  </DropdownListItem>
-                  <DropdownListItem>
-                    <FormattedMessage id="common.sendMessage" />
-                  </DropdownListItem>
-                </DropdownListContainer>
-              </Dropdown>
             </div>
           </div>
         </Container>

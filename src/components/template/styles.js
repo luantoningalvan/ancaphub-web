@@ -233,14 +233,12 @@ export const MenuItemLinkContainer = styled(Link)`
   }
 
   color: ${(props) =>
-    props.current
-      ? props.theme.palette.text.primary
-      : props.theme.palette.text.primary};
+    props.current ? '#333' : props.theme.palette.text.primary};
 
   &:hover {
     ${(props) => css`
       background: ${props.theme.palette.secondary};
-      color: ${props.theme.palette.text.primary};
+      color: #333;
     `}
   }
 
@@ -334,6 +332,7 @@ export const AppBar = styled.header`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
 
   @media (min-width: 576px) {
     z-index: 180;

@@ -3,12 +3,15 @@ import { convertFromRaw, EditorState, Editor } from 'draft-js';
 import { About } from './styles';
 
 const ProjectAbout = ({ project }) => {
-  const state = EditorState.createWithContent(
-    convertFromRaw(JSON.parse(project.about))
-  );
   return (
     <About>
-      <Editor editorState={state} />
+      {project.about !== null && (
+        <Editor
+          editorState={EditorState.createWithContent(
+            convertFromRaw(JSON.parse(project.about))
+          )}
+        />
+      )}
     </About>
   );
 };

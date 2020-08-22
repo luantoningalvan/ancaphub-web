@@ -20,6 +20,7 @@ import SingleEvent from '../pages/events/SingleEvent';
 
 import Projects from '../pages/projects';
 import SingleProject from '../pages/projects/Single';
+import SingleProjectPost from '../pages/projects/Post';
 import NewProject from '../pages/projects/NewProject';
 import ManageProject from '../pages/projects/Manage';
 
@@ -119,6 +120,11 @@ export default [
     exact: true,
     path: '/projects/:projectId/manage/:page?/:subpage?',
     component: ManageProject,
+  },
+  {
+    exact: true,
+    path: '/projects/:projectId/posts/:postId',
+    component: SingleProjectPost,
   },
   {
     exact: true,

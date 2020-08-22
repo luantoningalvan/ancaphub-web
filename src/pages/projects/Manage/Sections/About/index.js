@@ -1,12 +1,28 @@
 import React from 'react';
 import { Form } from '@unform/web';
+import { useDispatch } from 'react-redux';
+import { convertToRaw, convertFromRaw } from 'draft-js';
 import { Breadcrumb, Button } from '../../../../../components/ui';
 import { PageHeader } from '../../styles';
 import FullEditor from '../../../../../components/editor/FullEditor';
+import { updateProjectAboutRequest } from '../../../../../actions/projects';
 
-const About = () => {
+const About = ({ project }) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (data) => {
+    const toRaw = JSON.stringify(convertToRaw(data.about.getCurrentContent()));
+
+    dispatch(
+      updateProjectAboutRequest({
+        data: { about: toRaw },
+        id: project._id,
+      })
+    );
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <PageHeader>
         <div className="page-title">
           <Breadcrumb list={[{ title: 'Seções' }, { title: 'Sobre' }]} />
@@ -17,7 +33,12 @@ const About = () => {
           Salvar
         </Button>
       </PageHeader>
-      <FullEditor name="about" />
+      <FullEditor
+        name="about"
+        initialState={
+          project.about !== null && convertFromRaw(JSON.parse(project.about))
+        }
+      />
     </Form>
   );
 };

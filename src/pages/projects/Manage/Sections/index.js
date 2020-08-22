@@ -5,13 +5,13 @@ import About from './About';
 import Donations from './Donations';
 import FAQ from './FAQ';
 
-const Sections = () => {
+const Sections = ({ project }) => {
   const { subpage } = useParams();
 
   const subpageMap = {
-    about: <About />,
-    donations: <Donations />,
-    faq: <FAQ />,
+    about: <About project={project} />,
+    donations: <Donations project={project} />,
+    faq: <FAQ project={project} />,
   };
 
   return subpageMap[subpage];

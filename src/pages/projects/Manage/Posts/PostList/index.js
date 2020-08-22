@@ -14,7 +14,10 @@ import {
 } from '../../../../../components/ui';
 import { Table } from '../styles';
 import { PageHeader } from '../../styles';
-import { getProjectPostsRequest } from '../../../../../actions/projects';
+import {
+  getProjectPostsRequest,
+  removeProjectPostRequest,
+} from '../../../../../actions/projects';
 
 const PostList = ({ project }) => {
   const dispatch = useDispatch();
@@ -23,7 +26,7 @@ const PostList = ({ project }) => {
 
   useEffect(() => {
     dispatch(getProjectPostsRequest(project._id));
-  }, []);
+  }, [dispatch, project._id]);
 
   const handleDeletePost = useCallback((id) => {
     setShowDeleteDialog(id);
@@ -86,7 +89,14 @@ const PostList = ({ project }) => {
         show={showDeleteDialog}
         message="Deseja mesmo publicação essa postagem? Essa ação é definitiva!"
         onClose={() => setShowDeleteDialog(false)}
-        onConfirm={() => console.log(showDeleteDialog)}
+        onConfirm={() =>
+          dispatch(
+            removeProjectPostRequest({
+              projectId: project._id,
+              postId: showDeleteDialog,
+            })
+          )
+        }
         title="Deletar publicação"
       />
     </>
