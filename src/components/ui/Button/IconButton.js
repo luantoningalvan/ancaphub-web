@@ -2,11 +2,19 @@ import React, { forwardRef } from 'react';
 import PropTypes, { element } from 'prop-types';
 import { IconButtonContainer } from './styles';
 
-const IconButton = forwardRef(({ variant, size, icon, ...rest }, ref) => (
-  <IconButtonContainer variant={variant} size={size} {...rest} ref={ref}>
-    {icon}
-  </IconButtonContainer>
-));
+const IconButton = forwardRef(
+  ({ variant, size, icon, type = 'button', ...rest }, ref) => (
+    <IconButtonContainer
+      type={type}
+      variant={variant}
+      size={size}
+      {...rest}
+      ref={ref}
+    >
+      {icon}
+    </IconButtonContainer>
+  )
+);
 
 IconButton.displayName = 'IconButton';
 

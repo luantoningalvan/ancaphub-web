@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { readableColor } from 'polished';
 
 export const ButtonContainer = styled.button`
   background: ${(props) =>
@@ -16,7 +17,7 @@ export const ButtonContainer = styled.button`
             ? props.theme.palette[props.color]
             : props.theme.palette.border
         }`
-      : props.theme.palette.text.contrast};
+      : readableColor(props.theme.palette[props.color] || 'yellow')};
   border-radius: 4px;
   font-size: 0.875rem;
   text-align: center;
