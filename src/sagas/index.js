@@ -12,6 +12,7 @@ import NotificationsSagas from './notifications';
 import SearchSagas from './search';
 import CategoriesSagas from './categories';
 import ProjectsSagas from './projects';
+import ChatsSagas from './chats';
 
 export default function* rootSaga() {
   yield all([
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     ...SearchSagas,
     ...CategoriesSagas,
     ...ProjectsSagas,
+    ...ChatsSagas,
   ]);
 }

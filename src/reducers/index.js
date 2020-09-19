@@ -14,6 +14,7 @@ import settings from './settings';
 import categories from './categories';
 import ads from './ads';
 import projects from './projects';
+import chats from './chats';
 
 export default combineReducers({
   ads,
@@ -31,4 +32,5 @@ export default combineReducers({
   settings,
   categories,
   projects,
+  chats,
 });

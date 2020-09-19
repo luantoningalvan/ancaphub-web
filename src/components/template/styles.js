@@ -420,7 +420,7 @@ export const HeaderMenuItem = styled.li`
     display: flex;
     align-items: center;
     justify-content: center;
-
+    color: ${(props) => props.theme.palette.text.primary};
     &:hover {
       background: rgba(0, 0, 0, 0.15);
     }

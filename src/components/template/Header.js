@@ -11,6 +11,7 @@ import {
   FiBell as NotificationsIcon,
   FiSettings as SettingsIcon,
   FiMenu as MenuIcon,
+  FiMessageCircle as MessageIcon,
 } from 'react-icons/fi';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -76,6 +77,11 @@ const Header = ({ user, collapsed, setCollapsed }) => {
         <Search />
 
         <HeaderMenu>
+          <HeaderMenuItem current={url.includes('/messages')}>
+            <Link to="/messages">
+              <MessageIcon />
+            </Link>
+          </HeaderMenuItem>
           <Dropdown
             placement="bottom"
             offsetY={16}
