@@ -3,13 +3,14 @@ import styled from 'styled-components';
 export const BubbleWrap = styled.div`
   display: flex;
   justify-content: ${(props) => (props.mine ? 'flex-end' : 'flex-start')};
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
 `;
 
 export const BubbleBody = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 8px;
   background-color: ${(props) =>
     props.mine ? props.theme.palette.secondary : props.theme.palette.paperDark};
   padding: 16px;

@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { generate } from 'shortid';
 import SearchIcon from 'react-ionicons/lib/IosSearch';
+import { useDispatch } from 'react-redux';
 import { MessageSearchWrap } from './styles';
-// Components
 import ChatboxListItem from '../ChatboxListItem';
 import { Scrollable } from '../../Scrollable';
-
-// Icons
-
+import { switchChat } from '../../../../actions/chats';
 // Validation
 const UserModelPropTypes = {
   username: PropTypes.string,
@@ -36,20 +34,31 @@ const MessageSearch = () => (
   </MessageSearchWrap>
 );
 
-const ChatboxMessageList = ({ chats }) => (
-  <>
-    <Scrollable topContent={<MessageSearch />}>
-      {chats.lenght > 0 ? (
-        chats.map((chat) => (
-          <ChatboxListItem key={generate()} message={chat.messages[0]} />
-        ))
-      ) : (
-        <p>Nenhuma mensagem enviada ainda</p>
-      )}
-    </Scrollable>
-  </>
-);
+const ChatboxMessageList = ({ chats }) => {
+  const dispatch = useDispatch();
 
+  const handleSwitchChat = (chat) => {
+    dispatch(switchChat(chat));
+  };
+
+  return (
+    <>
+      <Scrollable topContent={<MessageSearch />}>
+        {chats.length > 0 ? (
+          chats.map((chat) => (
+            <ChatboxListItem
+              key={() => generate()}
+              chat={chat}
+              onClick={() => handleSwitchChat(chat)}
+            />
+          ))
+        ) : (
+          <p>Nenhuma mensagem enviada ainda</p>
+        )}
+      </Scrollable>
+    </>
+  );
+};
 ChatboxMessageList.propTypes = {
   chats: PropTypes.arrayOf(
     PropTypes.shape({

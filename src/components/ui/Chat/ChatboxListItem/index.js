@@ -1,22 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import defaultProfilePicture from '../../../../assets/default-profile-picture.jpg';
+import { useSelector } from 'react-redux';
 import { ChatboxListItemWrapper } from './styles';
+import UserAvatar from '../../../users/UserAvatar';
 
-const ChatboxListItem = ({ message }) => (
-  <ChatboxListItemWrapper>
-    <div className="block">
-      <img src={defaultProfilePicture} alt="Foto do perfil" />
-    </div>
-    <div className="block">
-      <p className="chatUserName">
-        {message.user.name}{' '}
-        <span className="messageTime">{message.createdAt}</span>
-      </p>
-      <p className="lastMessage">{message.body}</p>
-    </div>
-  </ChatboxListItemWrapper>
-);
+const ChatboxListItem = ({ chat, selected, ...rest }) => {
+  const { _id: authUserId } = useSelector((state) => state.auth.user);
+  const { currentChat } = useSelector((state) => state.chats);
+  const userInfo = chat.recipients.filter((user) => user._id !== authUserId)[0];
+
+  return (
+    <ChatboxListItemWrapper
+      selected={currentChat !== null && currentChat === chat._id}
+      {...rest}
+    >
+      <div className="block">
+        <UserAvatar user={userInfo} />
+      </div>
+      <div className="block">
+        <p className="chatUserName">
+          {userInfo.name}
+          <span className="messageTime">há 1 minuto</span>
+        </p>
+        <p className="lastMessage">
+          {chat.messages[chat.messages.length - 1].body}
+        </p>
+      </div>
+    </ChatboxListItemWrapper>
+  );
+};
 
 ChatboxListItem.propTypes = {
   message: PropTypes.shape({

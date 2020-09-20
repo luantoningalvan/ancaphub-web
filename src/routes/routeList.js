@@ -153,7 +153,7 @@ export default [
   },
   {
     exact: true,
-    path: '/messages',
+    path: '/messages/:id?',
     component: Messages,
   },
   {

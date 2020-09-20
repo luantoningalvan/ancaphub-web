@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReplyIconNormal from 'react-ionicons/lib/MdShareAlt';
 import { BubbleBody, BubbleWrap } from './styles';
+import UserAvatar from '../../../users/UserAvatar';
 
 const MessagePropTypes = PropTypes.shape({
   body: PropTypes.string,
@@ -18,6 +19,7 @@ const ReplyIcon = () => (
 // Message properties will be changed to match actual API response. This is only for prototyping
 const ChatBubble = ({ message, mine, showName, answeringTo }) => (
   <BubbleWrap mine={mine}>
+    <UserAvatar user={message.user} />
     <BubbleBody mine={mine}>
       {showName && (
         <span className="messageSenderName">{message.user.name}</span>

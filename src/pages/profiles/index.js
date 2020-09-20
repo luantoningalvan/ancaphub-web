@@ -8,12 +8,20 @@ import {
   FiCalendar as BirthIcon,
   FiMapPin as LocationIcon,
   FiEdit as EditIcon,
+  FiMessageCircle as MessageIcon,
 } from 'react-icons/fi';
 
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import defaultProfileCover from '../../assets/default-profile-cover.jpg';
 
-import { Paper, Spinner, Container, Tabs, Tab } from '../../components/ui';
+import {
+  Paper,
+  Spinner,
+  Container,
+  Tabs,
+  Tab,
+  IconButton,
+} from '../../components/ui';
 
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
@@ -162,14 +170,15 @@ const Profiles = () => {
                 <FollowButton user={handle} />
                 {verifyIfIsOwnProfile && <EditProfile open={editProfile} />}
 
-                {/* {!verifyIfIsOwnProfile && (
-                  <Button color="primary">
-                    <FormattedMessage
-                      id="common.sendMessage"
-                      description="Enviar Mensagem"
+                {!verifyIfIsOwnProfile && (
+                  <Link to={`/messages/${user._id}`}>
+                    <IconButton
+                      color="primary"
+                      variant="outlined"
+                      icon={<MessageIcon />}
                     />
-                  </Button>
-                )} */}
+                  </Link>
+                )}
               </div>
             </ProfileInfo>
           </ProfileHeader>

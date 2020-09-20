@@ -6,7 +6,7 @@ import { addAlert } from '../actions/alerts';
 
 function* getLastChats() {
   try {
-    const chats = yield call(api.getLastChatsRequest);
+    const chats = yield call(api.getLastChats);
     yield put(actions.getLastChatsSuccess(chats.data));
   } catch (e) {
     yield put(addAlert('error', e.message));

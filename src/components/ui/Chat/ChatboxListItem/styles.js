@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ChatboxListItemWrapper = styled.div`
   display: flex;
@@ -22,7 +22,6 @@ export const ChatboxListItemWrapper = styled.div`
       font-size: 0.9em;
       font-weight: bold;
       line-height: 1em;
-      margin-bottom: 0.5em;
       width: 100%;
 
       & > span.messageTime {
@@ -42,6 +41,7 @@ export const ChatboxListItemWrapper = styled.div`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-top: 8px;
     }
   }
 
@@ -49,4 +49,11 @@ export const ChatboxListItemWrapper = styled.div`
     background: ${(props) => props.theme.palette.background};
     box-shadow: inset 5px 0 0 ${(props) => props.theme.palette.secondary};
   }
+
+  ${(props) =>
+    props.selected &&
+    css`
+      background: ${props.theme.palette.background};
+      box-shadow: inset 5px 0 0 ${props.theme.palette.secondary};
+    `}
 `;

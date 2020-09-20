@@ -5,15 +5,11 @@ import ChatboxMessageList from '../ChatboxMessageList';
 import ChatWindow from '../ChatWindow';
 import { ChatboxWrapper } from './styles';
 
-const Chatbox = ({ chats, currentChat, showName, showList, showAvatar }) => (
+const Chatbox = ({ chats, showName, showList, showAvatar }) => (
   <ChatboxWrapper>
     <Paper className="paper">
       {showList && <ChatboxMessageList chats={chats} />}
-      <ChatWindow
-        chat={currentChat}
-        showName={showName}
-        showAvatar={showAvatar}
-      />
+      <ChatWindow showName={showName} showAvatar={showAvatar} />
     </Paper>
   </ChatboxWrapper>
 );
@@ -39,7 +35,6 @@ Chatbox.propTypes = {
       messages: PropTypes.arrayOf(MessagePropTypes),
     })
   ).isRequired,
-  currentChat: PropTypes.arrayOf(MessagePropTypes).isRequired,
 };
 
 export default Chatbox;

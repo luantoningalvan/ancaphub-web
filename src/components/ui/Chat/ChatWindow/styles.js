@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const EnterMessageInputWrapper = styled.div`
+export const EnterMessageInputWrapper = styled.form`
   padding: 16px;
   height: 80px;
   display: flex;

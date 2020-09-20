@@ -1,3 +1,3 @@
 import axios from './axios';
 
-export const getLastChatsRequest = () => axios.get('/chats');
+export const getLastChats = () => axios.get('/chats');
