@@ -7,7 +7,7 @@ import {
 import { FormattedMessage } from 'react-intl';
 import { Link, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
-import { IconButton } from '../ui';
+import { IconButton } from 'snake-ui';
 import { SearchContainer } from './styles';
 
 const Search = () => {
@@ -21,7 +21,7 @@ const Search = () => {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: any) => {
     if (e.key === 'Enter') {
       search();
     }
@@ -32,13 +32,13 @@ const Search = () => {
       <div className={clsx('mobile-search', !collapsed && 'not-collapsed')}>
         {collapsed ? (
           <IconButton
-            icon={<SearchIcon />}
+            icon={<SearchIcon />} // @ts-ignore
             onClick={() => setCollapsed(false)}
           />
         ) : (
           <>
             <IconButton
-              icon={<BackIcon />}
+              icon={<BackIcon />} // @ts-ignore
               onClick={() => setCollapsed(true)}
             />
 
@@ -49,7 +49,7 @@ const Search = () => {
               {(msg) => (
                 <input
                   formMethod="get"
-                  type="text"
+                  type="text" // @ts-ignore
                   placeholder={msg}
                   value={term}
                   onChange={(e) => setTerm(e.target.value)}
@@ -71,7 +71,7 @@ const Search = () => {
         <FormattedMessage id="common.search" description="Input de pesquisa">
           {(msg) => (
             <input
-              type="text"
+              type="text" // @ts-ignore
               placeholder={msg}
               value={term}
               onChange={(e) => setTerm(e.target.value)}

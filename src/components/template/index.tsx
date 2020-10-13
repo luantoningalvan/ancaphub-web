@@ -5,11 +5,11 @@ import Header from './Header';
 import Sidenav from './Sidenav';
 import Main from './Main';
 
-const Template = ({ children }) => {
-  const auth = useSelector((state) => state.auth);
+const Template: React.FC = ({ children }) => {
+  const auth = useSelector((state: any) => state.auth);
   const [collapsed, setCollapsed] = useState(true);
 
-  const handleCollapse = (value) => {
+  const handleCollapse = (value: boolean) => {
     setCollapsed(value || !collapsed);
   };
 
