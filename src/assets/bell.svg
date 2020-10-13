@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<svg
+  id="e8n1zamhvyle1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 24 24"
+  shape-rendering="geometricPrecision"
+  text-rendering="geometricPrecision"
+>
+
+  <g id="e8n1zamhvyle2">
+    <g id="e8n1zamhvyle3_tr" transform="translate(12,9.500000) rotate(10)">
+      <path
+        id="e8n1zamhvyle3"
+        d="M18,8C18,4.700000,15.300000,2,12,2C8.700000,2,6,4.700000,6,8C6,15,3,17,3,17L21,17C21,17,18,15,18,8"
+        transform="translate(-12,-9.500000)"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </g>
+  </g>
+  <g id="e8n1zamhvyle4">
+    <g id="e8n1zamhvyle5_to" transform="translate(17,21.503926)">
+      <g id="e8n1zamhvyle5_tr" transform="rotate(0)">
+        <path
+          id="e8n1zamhvyle5"
+          d="M13.700000,21C13.100000,22,11.900000,22.300000,11,21.700000C10.700000,21.500000,10.400000,21.300000,10.300000,21"
+          transform="translate(-12,-21.503926)"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </g>
+    </g>
+  </g>
+</svg>
