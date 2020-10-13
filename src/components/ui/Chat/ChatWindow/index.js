@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import io from 'socket.io-client';
 import { useSelector, useDispatch } from 'react-redux';
+import { GrEmoji } from 'react-icons/gr';
+import { IconButton, Dropdown } from 'snake-ui';
+import EmojiPicker from 'emoji-picker-react';
 import { ChatInfoWrapper, EnterMessageInputWrapper } from './styles';
 import defaultProfilePicture from '../../../../assets/default-profile-picture.jpg';
 import { Scrollable } from '../../Scrollable';
@@ -28,8 +31,21 @@ let socket;
 const ChatWindow = ({ showName, showAvatar, showHeader }) => {
   const { currentChat, messages } = useSelector((state) => state.chats);
   const dispatch = useDispatch();
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const [messageInput, setMessageInput] = useState();
+
+  useEffect(() => {
+    alert('Trocou');
+  }, [currentChat]);
   useEffect(() => {
     socket = io(ENDPOINT);
 
@@ -69,6 +85,18 @@ const ChatWindow = ({ showName, showAvatar, showHeader }) => {
                   type="text"
                   placeholder="Digite sua mensagem"
                 />
+                <IconButton
+                  icon={<GrEmoji />}
+                  style={{ width: 40, marginRight: -8 }}
+                  onClick={handleClick}
+                />
+                <Dropdown
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                  placement="top-end"
+                >
+                  <EmojiPicker style={{ margin: 200 }} />
+                </Dropdown>
               </div>
             </EnterMessageInputWrapper>
           }

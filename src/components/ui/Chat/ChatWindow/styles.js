@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
 export const EnterMessageInputWrapper = styled.form`
-  padding: 16px;
-  height: 80px;
+  padding: 8px;
+  height: 64px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   border-top: 1px solid ${(props) => props.theme.palette.border};
 
   & > div.messageInput {
@@ -14,10 +12,10 @@ export const EnterMessageInputWrapper = styled.form`
     align-items: center;
     width: 100%;
     border: 1px solid ${(props) => props.theme.palette.border};
-    border-radius: 5px;
+    border-radius: 8px;
+    padding: 0px 16px;
 
     & > i {
-      padding: 4px 4px 4px 8px;
       svg {
         fill: white;
       }
@@ -25,18 +23,17 @@ export const EnterMessageInputWrapper = styled.form`
 
     & > input {
       border: none;
-      width: 100%;
       font-family: Ubuntu;
       color: #eee;
       background: transparent;
-      height: 50px;
-      padding: 10px;
+      height: 40px;
       outline: none;
-      flex-grow: 1;
+      font-size: 14px;
+      flex: 1;
 
       &::placeholder {
         color: #eee;
-        font-size: 12px;
+        font-size: 14px;
       }
     }
   }
