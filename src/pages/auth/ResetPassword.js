@@ -60,9 +60,8 @@ const ForgotPassword = () => {
       });
 
       setLoading(true);
-      await api.post('/auth/recover-password-code', {
+      await api.post('/password/reset', {
         token,
-        user,
         password: data.password,
       });
       setLoading(false);

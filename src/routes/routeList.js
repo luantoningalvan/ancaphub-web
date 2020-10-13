@@ -52,7 +52,7 @@ export default [
   {
     isOpen: true,
     exact: true,
-    path: '/auth/reset/:user/:token',
+    path: '/auth/reset/:token',
     component: ResetPassword,
   },
   {
