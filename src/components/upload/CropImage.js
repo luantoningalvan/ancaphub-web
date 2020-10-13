@@ -88,7 +88,7 @@ const EditAvatar = ({
     if (image.image) {
       const formData = new FormData();
       formData.append('data', JSON.stringify(cropInfo));
-      formData.append('file', image.image);
+      formData.append('avatar', image.image);
       onUpdate(formData);
       handleCrop();
       handleCancel();

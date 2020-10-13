@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         items: {
-          [payload._id]: payload,
+          [payload.id]: payload,
           ...state.items,
         },
       };
@@ -27,7 +27,7 @@ export default (state = INITIAL_STATE, action) => {
     case Types.GET_USER_POSTS_SUCCESS:
       return {
         ...state,
-        items: arrayToObject(payload.items, '_id'),
+        items: arrayToObject(payload.items, 'id'),
         loading: false,
       };
     case Types.GET_MORE_POSTS_SUCCESS:
@@ -35,7 +35,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         items: {
           ...state.items,
-          ...arrayToObject(payload.items, '_id'),
+          ...arrayToObject(payload.items, 'id'),
         },
         loading: false,
       };
@@ -65,8 +65,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         items: {
           ...state.items,
-          [payload._id]: {
-            ...state.items[payload._id],
+          [payload.id]: {
+            ...state.items[payload.id],
             ...payload,
           },
         },
@@ -78,8 +78,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         items: {
           ...state.items,
-          [payload._id]: {
-            ...state.items[payload._id],
+          [payload.id]: {
+            ...state.items[payload.id],
             likes: payload.likes,
           },
         },

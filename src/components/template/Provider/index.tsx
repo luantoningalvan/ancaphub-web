@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from './styles';
 
-const themes = {
+const themes: any = {
   dark: {
     palette: {
       primary: '#1141ad',
@@ -48,8 +48,11 @@ const themes = {
   },
 };
 
-const Template = ({ children, collapsed = true }) => {
-  const { colorMode } = useSelector((state) => state.settings);
+const Template: React.FC<{ collapsed: boolean }> = ({
+  children,
+  collapsed = true,
+}) => {
+  const { colorMode } = useSelector((state: any) => state.settings);
   const theme = themes[colorMode];
 
   return (

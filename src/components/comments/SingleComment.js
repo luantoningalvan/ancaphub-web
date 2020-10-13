@@ -84,7 +84,7 @@ const SingleCommentStyle = styled.div`
     justify-content: center;
 
     svg {
-      fill: ${(props) => props.theme.palette.text.secondary};
+      color: ${(props) => props.theme.palette.text.secondary};
       height: 20px;
       width: 20px;
     }
@@ -94,38 +94,19 @@ const SingleCommentStyle = styled.div`
 const SingleComment = ({ comment, post }) => {
   const [deleteBox, setDeleteBox] = useState(false);
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth.user._id);
-
-  // const matchHandles = (content) => {
-  //   const handleExp = new RegExp(/@(\w+)/g);
-  //   const matches = content.match(handleExp);
-  //   if (matches) {
-  //     let newContent = content;
-  //     matches.forEach(() => {
-  //       newContent = reactStringReplace(newContent, handleExp, (match, i) => {
-  //         return (
-  //           <a href={`/${match}`} key={match + i}>
-  //             @{match}
-  //           </a>
-  //         );
-  //       });
-  //     });
-  //     return newContent;
-  //   }
-  //   return [content];
-  // };
+  const auth = useSelector((state) => state.auth.user.id);
 
   const handleDelete = () => {
-    dispatch(deleteCommentRequest(post, comment._id));
+    dispatch(deleteCommentRequest(post, comment.id));
     setDeleteBox(false);
   };
 
   return (
     <SingleCommentStyle>
       <div className="inner-wrap">
-        <UserAvatar user={comment.user} style={{ marginRight: 8 }} />
+        <UserAvatar user={comment.author} style={{ marginRight: 8 }} />
         <div className="comment-content">
-          <UserName user={comment.user} fontSize={1} />
+          <UserName user={comment.author} fontSize={1} />
           <p className="comment-text">{comment.content}</p>
           <ul className="date">
             <li>
@@ -144,7 +125,7 @@ const SingleComment = ({ comment, post }) => {
             </li>
           </ul>
         </div>
-        {auth && auth === comment.user._id && (
+        {auth && auth === comment.author.id && (
           <div className="actions">
             <Dropdown
               placement="left-start"

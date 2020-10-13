@@ -33,7 +33,17 @@ const DropdownListItemWrap = styled.li`
   }
 `;
 
-const DropdownListItem = ({ children, icon, action, ...props }) => (
+interface DropdownListItemProps {
+  icon: JSX.Element;
+  action?: React.ReactElement;
+}
+
+const DropdownListItem: React.FC<DropdownListItemProps> = ({
+  children,
+  icon,
+  action,
+  ...props
+}) => (
   <DropdownListItemWrap {...props}>
     {icon}
     <span>{children}</span>

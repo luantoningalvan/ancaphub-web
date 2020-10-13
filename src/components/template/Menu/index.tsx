@@ -15,7 +15,9 @@ import { MenuContainer } from './styles';
 
 import MenuItemLink from './MenuItemLink';
 
-const Menu = ({ handleOpenBugReport }) => {
+const Menu: React.FC<{ handleOpenBugReport: any }> = ({
+  handleOpenBugReport,
+}) => {
   const { url } = useRouteMatch();
 
   return (

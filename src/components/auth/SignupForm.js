@@ -3,7 +3,7 @@ import { Form } from '@unform/web';
 import { FormattedMessage, useIntl } from 'react-intl';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { FiMail, FiLock, FiUser, FiAtSign, FiGift } from 'react-icons/fi';
+import { FiMail, FiLock, FiUser, FiAtSign } from 'react-icons/fi';
 import { TextField, Button } from '../ui';
 import { createUserRequest } from '../../actions/users';
 
@@ -78,9 +78,6 @@ const SignupForm = () => {
               id: 'account.settings.validation.passwordMismatch',
             })
           ),
-        code: Yup.string()
-          .required(formatMessage({ id: 'alpha.validation.inviteRequired' }))
-          .length(20, formatMessage({ id: 'alpha.validation.inviteLength' })),
       });
       await schema.validate(data, {
         abortEarly: false,
@@ -168,18 +165,6 @@ const SignupForm = () => {
           </FormattedMessage>
         </div>
 
-        <div className="form-row">
-          <FormattedMessage id="components.auth.signUp.code">
-            {(msg) => (
-              <TextField
-                icon={FiGift}
-                type="text"
-                placeholder={msg}
-                name="code"
-              />
-            )}
-          </FormattedMessage>
-        </div>
         <div className="form-row">
           <Button type="submit" color="secondary" style={{ width: '100%' }}>
             <FormattedMessage id="common.register" />

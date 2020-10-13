@@ -14,150 +14,50 @@ import {
 } from 'react-icons/fi';
 
 import { useDispatch, useSelector } from 'react-redux';
-import styled, { css } from 'styled-components';
+import { CardBody, CardFooter } from 'snake-ui';
 import {
   Dropdown,
   DropdownListContainer,
   DropdownListItem,
   DropdownHeader,
-  CardBody,
-  CardFooter,
   Switcher,
-} from '../ui';
+} from '../../ui';
+
 import {
   AppBar,
   HeaderWrapper,
   Logo,
   HeaderMenu,
   HeaderMenuItem,
+  Bell,
 } from './styles';
 
-import Search from './Search';
+import Search from '../Search';
 
-import Notification from '../notifications';
-import { logoutRequest as logout } from '../../actions/auth';
-import { switchColorMode as changeTheme } from '../../actions/settings';
-import { ReactComponent as AncapHubLogo } from '../../assets/ancaphub.svg';
-import { ReactComponent as AnimatedBell } from '../../assets/bell.svg';
+import Notification from '../../notifications';
+import { logoutRequest as logout } from '../../../actions/auth';
+import { switchColorMode as changeTheme } from '../../../actions/settings';
+import { ReactComponent as AncapHubLogo } from '../../../assets/ancaphub.svg';
+import { ReactComponent as AnimatedBell } from '../../../assets/bell.svg';
 
-import notificationSound from '../../assets/notification.mp3';
+import notificationSound from '../../../assets/notification.mp3';
 
-const Bell = styled.div`
-  #e8n1zamhvyle3_tr {
-    transform: translate(12px, 9.5px) rotate(0deg);
-  }
-
-  #e8n1zamhvyle5_to {
-    transform: translate(12px, 21.503926px);
-  }
-
-  ${(props) =>
-    props.animated &&
-    css`
-      #e8n1zamhvyle3_tr {
-        animation: e8n1zamhvyle3_tr__tr 3000ms linear 1 normal forwards;
-      }
-
-      @keyframes e8n1zamhvyle3_tr__tr {
-        0% {
-          transform: translate(12px, 9.5px) rotate(10deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        3.333333% {
-          transform: translate(12px, 9.5px) rotate(-10deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        6.666667% {
-          transform: translate(12px, 9.5px) rotate(10deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        10% {
-          transform: translate(12px, 9.5px) rotate(-10deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        13.333333% {
-          transform: translate(12px, 9.5px) rotate(10deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        15% {
-          transform: translate(12px, 9.5px) rotate(0deg);
-        }
-        100% {
-          transform: translate(12px, 9.5px) rotate(0deg);
-        }
-      }
-      #e8n1zamhvyle5_to {
-        animation: e8n1zamhvyle5_to__to 3000ms linear 1 normal forwards;
-      }
-      @keyframes e8n1zamhvyle5_to__to {
-        0% {
-          transform: translate(17px, 21.503926px);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        3.333333% {
-          transform: translate(7px, 21.503926px);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        6.666667% {
-          transform: translate(17px, 21.503926px);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        10% {
-          transform: translate(7px, 21.503926px);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        13.333333% {
-          transform: translate(17px, 21.503926px);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        15% {
-          transform: translate(12px, 21.503926px);
-        }
-        100% {
-          transform: translate(12px, 21.503926px);
-        }
-      }
-      #e8n1zamhvyle5_tr {
-        animation: e8n1zamhvyle5_tr__tr 3000ms linear 1 normal forwards;
-      }
-      @keyframes e8n1zamhvyle5_tr__tr {
-        0% {
-          transform: rotate(0deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        3.333333% {
-          transform: rotate(5deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        6.666667% {
-          transform: rotate(0deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        10% {
-          transform: rotate(5deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        13.333333% {
-          transform: rotate(-5deg);
-          animation-timing-function: cubic-bezier(0, 0, 0.58, 1);
-        }
-        15% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(0deg);
-        }
-      }
-    `}
-`;
 const audio = new Audio(notificationSound);
 
-const Header = ({ user, collapsed, setCollapsed }) => {
+interface HeaderProps {
+  user: {
+    username: string;
+  };
+  collapsed: boolean;
+  setCollapsed(value: boolean): void;
+}
+
+const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const [animated, setAnimated] = useState(false);
 
-  const escFunction = (event) => {
+  const escFunction = (event: any) => {
     if (event.keyCode === 16) {
       audio.play();
       setAnimated(true);
@@ -171,10 +71,10 @@ const Header = ({ user, collapsed, setCollapsed }) => {
   document.addEventListener('keydown', escFunction);
 
   const { notifications, notReadCount } = useSelector(
-    (state) => state.notifications
+    (state: any) => state.notifications
   );
 
-  const { colorMode } = useSelector((state) => state.settings);
+  const { colorMode } = useSelector((state: any) => state.settings);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -237,7 +137,7 @@ const Header = ({ user, collapsed, setCollapsed }) => {
                     overflowY: 'scroll',
                   }}
                 >
-                  {notifications.map((notification) => (
+                  {notifications.map((notification: any) => (
                     <Notification
                       notification={notification}
                       key={generate()}
@@ -291,10 +191,9 @@ const Header = ({ user, collapsed, setCollapsed }) => {
                 </Link>
               </DropdownListItem>
               <DropdownListItem icon={<LogoutIcon />}>
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <Link onClick={handleLogout}>
+                <a onClick={handleLogout}>
                   <FormattedMessage id="common.logout" />
-                </Link>
+                </a>
               </DropdownListItem>
             </DropdownListContainer>
           </Dropdown>

@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         [payload.postId]: state[payload.postId].filter(
-          (value) => value._id !== payload.commentId
+          (value) => value.id !== payload.commentId
         ),
       };
     case Types.ADD_COMMENT_SUCCESS:
@@ -24,9 +24,7 @@ export default (state = INITIAL_STATE, action) => {
         [payload.postId]: [
           {
             ...payload.data,
-            content: payload.content,
             date: new Date(Date.now()).toISOString(),
-            user: payload.user,
           },
           ...state[payload.postId],
         ],

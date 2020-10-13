@@ -1,9 +1,9 @@
 import axios from './axios';
 
 export const authUser = ({ email, password }) =>
-  axios.post('/auth', {
+  axios.post('/sessions', {
     email,
     password,
   });
 
-export const loadUser = () => axios.get('/auth');
+export const loadUser = () => axios.get('/sessions');

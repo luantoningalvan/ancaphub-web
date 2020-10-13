@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case Types.GET_USERS_SUCCESS:
-      return { ...state, items: action.payload.items };
+      return { ...state, items: action.payload };
     case Types.LOAD_MORE_USERS_SUCCESS:
       return { ...state, items: [...state.items, ...action.payload.items] };
     case Types.USERS_ERROR:

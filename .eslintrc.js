@@ -1,41 +1,24 @@
 module.exports = {
+  plugins: ['prettier', 'react', '@typescript-eslint'],
   extends: [
-    'airbnb', 
-    'plugin:react/recommended',
-    'plugin:prettier/recommended',
-    'plugin:jest/recommended'
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
   ],
-  plugins: [
-    'react-hooks',
-  ],
-  env: {
-    browser: true,
-    node: true,
-    jest: true
-  },
-  parserOptions: {
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
+  rules: {
+    'prettier/prettier': 'error',
+    'ban-ts-ignore': false,
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.js', '.jsx', '.tsx'] },
+    ],
   },
   settings: {
-    react: {
-      version: 'detect',
-    }
-  },
-  rules: {
-    'react/jsx-filename-extension': 'off',
-    'react/prop-types': 'off',
-    'react/jsx-props-no-spreading': 'off',
-    // these ones are for avoiding conflicts with prettier
-    'react/jsx-wrap-multilines': 'off',
-    'react/jsx-curly-newline': 'off',
-    'react/jsx-one-expression-per-line': 'off',
-    'react-hooks/exhaustive-deps': 'warn',
-    'no-underscore-dangle': 'off',
-    // default export is javascriptism, do not require it always!
-    'import/prefer-default-export': 'off'
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        paths: ['src'],
+      },
+    },
   },
 };
