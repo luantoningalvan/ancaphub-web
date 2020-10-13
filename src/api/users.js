@@ -4,7 +4,7 @@ export const getUsers = ({ page = 1, limit = 20 }) => {
   return axios.get('/users', { params: { page, limit } });
 };
 
-export const getSingleUser = (payload) => axios.get(`users/handle/${payload}`);
+export const getSingleUser = (payload) => axios.get(`users/${payload}`);
 
 export const followUser = (payload) => axios.post(`users/${payload}/follow`);
 export const unfollowUser = (payload) =>
@@ -32,4 +32,4 @@ export const updateUserInfo = ({ name, bio, birthday, currentCity, site }) =>
     site,
   });
 
-export const updateUserAvatar = (data) => axios.post('/users/avatar', data);
+export const updateUserAvatar = (data) => axios.patch('/users/avatar', data);

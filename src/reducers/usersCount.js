@@ -8,7 +8,7 @@ export default (state = INITIAL_STATE, action) => {
     case Types.GET_USERS_COUNT: {
       // Get only id and relationships count
       const data = action.payload.map((obj) => ({
-        _id: obj._id,
+        id: obj.id,
         // ! Comes from the userObject function in the API
         followersCount: obj.followersCount,
         followingCount: obj.followingCount,
@@ -16,7 +16,7 @@ export default (state = INITIAL_STATE, action) => {
 
       return {
         ...state,
-        ...arrayToObject(data, '_id'),
+        ...arrayToObject(data, 'id'),
       };
     }
     default:
