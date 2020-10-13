@@ -8,7 +8,6 @@ import { searchTermRequest as searchTerm } from '../../actions/search';
 import UserCard from '../../components/users/UserCard';
 import LibraryCard from '../../components/library/LibraryCard';
 import EventCard from '../../components/events/EventCard';
-import AdBanner from '../../components/ads/AdBanner';
 
 import {
   Container,
@@ -69,7 +68,6 @@ const SearchData = () => {
                 />
               </Menu>
             </Card>
-            <AdBanner />
           </SearchSidebarContainer>
 
           <SearchContentContainer>

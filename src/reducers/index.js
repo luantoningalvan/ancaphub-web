@@ -12,12 +12,10 @@ import notifications from './notifications';
 import search from './search';
 import settings from './settings';
 import categories from './categories';
-import ads from './ads';
 import projects from './projects';
 import chats from './chats';
 
 export default combineReducers({
-  ads,
   alerts,
   users,
   usersCount,

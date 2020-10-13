@@ -20,7 +20,6 @@ import {
   LoadContent,
   Paper,
 } from '../../components/ui';
-import AdBanner from '../../components/ads/AdBanner';
 
 import {
   LibraryContainer,
@@ -93,7 +92,6 @@ const Library = () => {
               </LoadContent>
             </LibrarySidebarMenu>
           </Card>
-          <AdBanner />
         </LibrarySidebarContainer>
         <LibraryContentContainer>
           <Paper>

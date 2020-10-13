@@ -13,7 +13,6 @@ import PostForm from '../../components/posts/PostForm';
 import LastItemsWidget from '../../components/library/LastItemsWidget';
 import ShowPosts from '../../components/posts/ShowPosts';
 import { FeedContainer } from './styles';
-import AdBanner from '../../components/ads/AdBanner';
 
 const Feed = () => {
   const dispatch = useDispatch();
@@ -39,9 +38,7 @@ const Feed = () => {
         </div>
         <div id="sidebar">
           <LastItemsWidget />
-          <div style={{ marginTop: 16 }}>
-            <AdBanner />
-          </div>
+          <div style={{ marginTop: 16 }} />
         </div>
       </FeedContainer>
     </Container>

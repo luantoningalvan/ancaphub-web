@@ -22,7 +22,6 @@ import {
   Switcher,
   LoadContent,
 } from '../../components/ui';
-import AdBanner from '../../components/ads/AdBanner';
 
 export default () => {
   const [radius, setRadius] = useState(50);
@@ -143,9 +142,7 @@ export default () => {
                 </Paper>
 
                 <SearchContainer>
-                  <SearchSidebarContainer>
-                    <AdBanner />
-                  </SearchSidebarContainer>
+                  <SearchSidebarContainer />
                   <SearchContentContainer style={{ marginTop: 16 }}>
                     {!isEmpty(results) ? (
                       <InnerSearchGridContainer>
