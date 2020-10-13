@@ -103,9 +103,10 @@ function PostForm({ createPostRequest: createPost }) {
   }
 
   function handleSubmit() {
-    let data;
     const content = JSON.stringify(convertToRaw(contentState));
 
+    /*
+    let data;
     if (media !== null) {
       if (media.type === 'image') {
         data = new FormData();
@@ -121,9 +122,9 @@ function PostForm({ createPostRequest: createPost }) {
       }
     } else {
       data = { content };
-    }
+    } */
 
-    createPost(data);
+    createPost({ content });
     setMedia(null);
     setEditorState(EditorState.createEmpty());
   }

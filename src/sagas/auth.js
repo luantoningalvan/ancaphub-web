@@ -9,7 +9,7 @@ function* authUser(action) {
     const data = action.payload;
     const response = yield call(api.authUser, data);
     localStorage.setItem('token', response.data.token);
-    document.location.reload();
+    yield put(actions.authUserSuccess(response.data));
   } catch (e) {
     yield put(actions.authError({ errorMessage: e.message }));
     yield put(

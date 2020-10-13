@@ -60,12 +60,12 @@ const MiniLIbraryCardSyle = styled(Link)`
 const MiniLIbraryCard = ({ item }) => (
   <MiniLIbraryCardSyle
     to={`/library/${item.type}s/${item._id}`}
-    cover={item.cover ? item.cover.url : defaultCover}
+    cover={item.cover ? item.cover : defaultCover}
   >
     <div className="cover" />
     <div className="content">
       <h4 className="title">{item.title.substr(0, 49)}</h4>
-      <h5 className="author">{item.author.substr(0, 49)}</h5>
+      <h5 className="author">{item.author.name.substr(0, 49)}</h5>
     </div>
   </MiniLIbraryCardSyle>
 );

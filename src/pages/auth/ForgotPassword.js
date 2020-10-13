@@ -23,7 +23,7 @@ const ForgotPassword = () => {
   const handleSubmit = async ({ identifier }) => {
     try {
       setLoading(true);
-      await api.post('/auth/recover-password-request', { identifier });
+      await api.post('/password/forgot', { email: identifier });
       setLoading(false);
       setSended(true);
     } catch (err) {

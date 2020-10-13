@@ -133,12 +133,12 @@ const ItemCard = ({ item }) => (
   <LibraryCard type={item.type}>
     <div className="card-cover">
       <div className="card-type">{types[item.type].icon}</div>
-      <Link to={`/library/${item.type}s/${item._id}`} className="card-image">
+      <Link to={`/library/${item.type}s/${item.id}`} className="card-image">
         <img
           alt="item cover"
           src={
-            item.cover && item.cover.url
-              ? item.cover.url
+            item.cover && item.cover
+              ? item.cover
               : types[item.type].defaultCover
           }
         />
@@ -149,11 +149,11 @@ const ItemCard = ({ item }) => (
       </div>
     </div>
 
-    <Link to={`/library/${item.type}s/${item._id}`} className="link">
+    <Link to={`/library/${item.type}s/${item.id}`} className="link">
       <h2 className="card-title">{item.title}</h2>
     </Link>
 
-    <h2 className="card-author">{item.author}</h2>
+    <h2 className="card-author">{item.author.name}</h2>
   </LibraryCard>
 );
 
