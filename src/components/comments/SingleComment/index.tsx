@@ -77,6 +77,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment, post }) => {
 
             <Dropdown
               open={Boolean(commentOptions)}
+              placement="left"
               anchorEl={commentOptions}
               onClose={() => setCommentOptions(null)}
             >

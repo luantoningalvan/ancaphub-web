@@ -63,6 +63,7 @@ export const SingleCommentContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 8px;
 
     svg {
       color: ${(props) => props.theme.palette.text.secondary};

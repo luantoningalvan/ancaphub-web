@@ -112,7 +112,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
   };
 
   return (
-    <PostContainer padding>
+    <PostContainer>
       <div className="post-header">
         <div className="profile-picture">
           <img
@@ -120,7 +120,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
             src={data.user.avatar ? data.user.avatar : defaultProfilePicture}
           />
         </div>
-        <div>
+        <div style={{ flex: 1 }}>
           <Link to={`/${data.user.username}`}>
             <UserName user={data.user} />
           </Link>
@@ -137,22 +137,25 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
             />
           </span>
         </div>
-        <IconButton
-          icon={<MdMore fontSize="24px" />} //@ts-ignore
-          onClick={(e: any) => setPostMenu(e.currentTarget)}
-        />
-        <Dropdown
-          anchorEl={postMenu}
-          onClose={() => setPostMenu(null)}
-          open={Boolean(postMenu)}
-          placement="right"
-        >
-          <DropdownListContainer>
-            <DropdownListItem icon={<DeleteIcon />} onClick={handleDelete}>
-              <FormattedMessage id="common.delete" />
-            </DropdownListItem>
-          </DropdownListContainer>
-        </Dropdown>
+
+        <div>
+          <IconButton
+            icon={<MdMore fontSize="24px" />} //@ts-ignore
+            onClick={(e: any) => setPostMenu(e.currentTarget)}
+          />
+          <Dropdown
+            anchorEl={postMenu}
+            onClose={() => setPostMenu(null)}
+            open={Boolean(postMenu)}
+            placement="left"
+          >
+            <DropdownListContainer>
+              <DropdownListItem icon={<DeleteIcon />} onClick={handleDelete}>
+                <FormattedMessage id="common.delete" />
+              </DropdownListItem>
+            </DropdownListContainer>
+          </Dropdown>
+        </div>
         <ConfirmationDialog
           show={deleteDialogState}
           onClose={handleDelete}

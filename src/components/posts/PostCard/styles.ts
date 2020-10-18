@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Paper } from 'snake-ui';
+import { Paper } from '../../ui';
 
 export const PostContent = styled.p`
   word-wrap: normal;
