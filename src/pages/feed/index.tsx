@@ -21,7 +21,7 @@ const Feed = () => {
     dispatch(getPostsAction());
   }, [dispatch]);
 
-  const { items, loading } = useSelector((state) => state.posts);
+  const { items, loading } = useSelector((state: any) => state.posts);
 
   return (
     <Container style={{ marginTop: 8 }}>
@@ -29,11 +29,7 @@ const Feed = () => {
         <div id="posts">
           <PostForm />
           <div style={{ marginTop: 16, width: '100%' }}>
-            <ShowPosts
-              posts={items}
-              loading={loading}
-              getMore={getMorePostsRequest}
-            />
+            <ShowPosts posts={items} getMore={getMorePostsRequest} />
           </div>
         </div>
         <div id="sidebar">
