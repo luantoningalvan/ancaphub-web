@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import {
   FormattedRelativeTime,
@@ -8,9 +7,10 @@ import {
 } from 'react-intl';
 import { parseISO, getTime, differenceInSeconds } from 'date-fns';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
-
-// Draftjs plugins
+import { PostContent, PostContentWrapper, PostContainer } from './styles';
+// @ts-ignore
 import createLinkifyPlugin from 'draft-js-linkify-plugin';
+// @ts-ignore
 import createHashtagPlugin from 'draft-js-hashtag-plugin';
 
 import 'draft-js-hashtag-plugin/lib/plugin.css';
@@ -24,76 +24,54 @@ import {
   FiTrash as DeleteIcon,
 } from 'react-icons/fi';
 
-import { useDispatch, useSelector } from 'react-redux';
-import UserName from '../users/UserName';
-import basicTextStylePlugin from '../editor/plugins/basicTextStylePlugin';
-import linkPluginOptions from '../editor/plugins/addLinkPlugin';
-import { getAllDecorators } from '../editor/utils/decorators';
-import CommentBox from '../comments/CommentBox';
+import { useDispatch } from 'react-redux';
+import UserName from '../../users/UserName';
+import basicTextStylePlugin from '../../editor/plugins/basicTextStylePlugin';
+import linkPluginOptions from '../../editor/plugins/addLinkPlugin';
+import { getAllDecorators } from '../../editor/utils/decorators';
+import CommentBox from '../../comments/CommentBox';
 
 import {
-  IconButton,
-  DropdownListItem,
-  Dropdown,
   ImageBox,
   ConfirmationDialog,
   DropdownListContainer,
-} from '../ui';
+  DropdownListItem,
+} from '../../ui';
+import { IconButton, Dropdown } from 'snake-ui';
 
-import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
-import LikeBox from './LikeBox';
-import PostPoll from './PostPoll';
-import { PostContainer } from './styles.css';
-import { likePostRequest, deletePostRequest } from '../../actions/posts';
+import defaultProfilePicture from '../../../assets/default-profile-picture.jpg';
+import LikeBox from '../ShowPostLikes';
+import PostPoll from '../PostPoll';
+import { likePostRequest, deletePostRequest } from '../../../actions/posts';
 
-const PostContent = styled.p`
-  word-wrap: normal;
-  word-break: keep-all;
-  text-align: justify;
-`;
+interface PostCardProps {
+  data: {
+    id: string;
+    content: string;
+    user: {
+      id: string;
+      avatar: string;
+      username: string;
+    };
+    hasLiked: boolean;
+    media: any;
+    mediaType: any;
+    createdAt: string;
+    commentCount: number;
+    likeCount: number;
+  };
+}
 
-const PostContentWrapper = styled.div`
-  .DraftEditor-root {
-    max-width: 640px;
-    /* Faz com que as palavras quebrem junto com a linha */
-    text-align: justify;
-    word-wrap: normal;
-    word-break: keep-all;
-    & > * {
-      .draftJsLinkifyPlugin__link__2ittM,
-      .draftJsLinkifyPlugin__link__2ittM:visited {
-        color: ${(props) => props.theme.palette.secondary};
-        text-decoration: none;
-      }
-      .draftJsLinkifyPlugin__link__2ittM:hover,
-      .draftJsLinkifyPlugin__link__2ittM:focus {
-        color: ${(props) => props.theme.palette.secondary};
-        outline: 0; /* reset for :focus */
-        cursor: pointer;
-      }
-      .draftJsLinkifyPlugin__link__2ittM:active {
-        color: ${(props) => props.theme.palette.secondary};
-      }
-      .draftJsHashtagPlugin__hashtag__1wMVC {
-        color: ${(props) => props.theme.palette.secondary};
-      }
-    }
-  }
-`;
-
-const PostCard = ({ data }) => {
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth.user._id);
+const PostCard: React.FC<PostCardProps> = ({ data }) => {
   const [commentBoxState, setCommenteBoxState] = useState(false);
   const [likeBoxState, setLikeBoxState] = useState(false);
   const [deleteDialogState, setDeleteDialogState] = useState(false);
+  const [postMenu, setPostMenu] = useState(null);
 
-  const handleCommentBox = () => setCommenteBoxState(!commentBoxState);
-  const handleDelete = () => setDeleteDialogState(!deleteDialogState);
+  const dispatch = useDispatch();
 
   const linkifyPlugin = createLinkifyPlugin(linkPluginOptions);
   const hashtagPlugin = createHashtagPlugin();
-
   const plugins = [linkifyPlugin, basicTextStylePlugin, hashtagPlugin];
 
   const showPostContent = () => {
@@ -112,6 +90,7 @@ const PostCard = ({ data }) => {
 
       return (
         <PostContentWrapper>
+          {/* @ts-ignore */}
           <Editor editorState={editorState} readOnly plugins={plugins} />
         </PostContentWrapper>
       );
@@ -120,16 +99,20 @@ const PostCard = ({ data }) => {
     }
   };
 
-  const handleLikePost = (id) => {
+  const handleCommentBox = () => setCommenteBoxState(!commentBoxState);
+
+  const handleDelete = () => setDeleteDialogState(!deleteDialogState);
+
+  const handleLikePost = (id: string) => {
     dispatch(likePostRequest(id));
   };
 
-  const handleDeletePost = (id) => {
+  const handleDeletePost = (id: string) => {
     dispatch(deletePostRequest(id));
   };
 
   return (
-    <PostContainer>
+    <PostContainer padding>
       <div className="post-header">
         <div className="profile-picture">
           <img
@@ -154,30 +137,29 @@ const PostCard = ({ data }) => {
             />
           </span>
         </div>
-        {auth && auth === data.user._id && (
-          <div style={{ marginLeft: 'auto' }}>
-            <Dropdown
-              offsetX={15}
-              placement="left-start"
-              toggle={<IconButton icon={<MdMore fontSize="24px" />} />}
-            >
-              <DropdownListContainer>
-                <DropdownListItem icon={<DeleteIcon />} onClick={handleDelete}>
-                  <FormattedMessage id="common.delete" />
-                </DropdownListItem>
-              </DropdownListContainer>
-            </Dropdown>
-            <ConfirmationDialog
-              show={deleteDialogState}
-              onClose={handleDelete}
-              onConfirm={() => handleDeletePost(data._id)}
-              title={<FormattedMessage id="common.delete" />}
-              message={
-                <FormattedMessage id="components.postCard.confirmDelete" />
-              }
-            />
-          </div>
-        )}
+        <IconButton
+          icon={<MdMore fontSize="24px" />} //@ts-ignore
+          onClick={(e: any) => setPostMenu(e.currentTarget)}
+        />
+        <Dropdown
+          anchorEl={postMenu}
+          onClose={() => setPostMenu(null)}
+          open={Boolean(postMenu)}
+          placement="right"
+        >
+          <DropdownListContainer>
+            <DropdownListItem icon={<DeleteIcon />} onClick={handleDelete}>
+              <FormattedMessage id="common.delete" />
+            </DropdownListItem>
+          </DropdownListContainer>
+        </Dropdown>
+        <ConfirmationDialog
+          show={deleteDialogState}
+          onClose={handleDelete}
+          onConfirm={() => handleDeletePost(data.id)}
+          title={<FormattedMessage id="common.delete" />}
+          message={<FormattedMessage id="components.postCard.confirmDelete" />}
+        />
       </div>
 
       <div style={{ padding: 16 }}>
@@ -206,15 +188,15 @@ const PostCard = ({ data }) => {
             <span onClick={() => setLikeBoxState(true)} role="presentation">
               {`${data.likeCount} `}
               <FormattedPlural
-                value={`${data.likeCount} `}
+                value={data.likeCount}
                 one={
                   <FormattedMessage id="common.likeNoun">
-                    {(txt) => <>{txt.toLowerCase()}</>}
+                    {(txt: string) => <>{txt.toLowerCase()}</>}
                   </FormattedMessage>
                 }
                 other={
                   <FormattedMessage id="common.likePlural">
-                    {(txt) => <>{txt.toLowerCase()}</>}
+                    {(txt: string) => <>{txt.toLowerCase()}</>}
                   </FormattedMessage>
                 }
               />
@@ -222,15 +204,15 @@ const PostCard = ({ data }) => {
             <span role="presentation" onClick={handleCommentBox}>
               {` ${data.commentCount} `}
               <FormattedPlural
-                value={`${data.commentCount}`}
+                value={data.commentCount}
                 one={
                   <FormattedMessage id="common.comment">
-                    {(txt) => <>{txt.toLowerCase()}</>}
+                    {(txt: string) => <>{txt.toLowerCase()}</>}
                   </FormattedMessage>
                 }
                 other={
                   <FormattedMessage id="common.comments">
-                    {(txt) => <>{txt.toLowerCase()}</>}
+                    {(txt: string) => <>{txt.toLowerCase()}</>}
                   </FormattedMessage>
                 }
               />
@@ -238,7 +220,7 @@ const PostCard = ({ data }) => {
             <LikeBox
               open={likeBoxState}
               onClose={() => setLikeBoxState(false)}
-              postId={data._id}
+              postId={data.id}
             />
           </div>
         )}
@@ -248,7 +230,7 @@ const PostCard = ({ data }) => {
         <div>
           <button
             type="button"
-            onClick={() => handleLikePost(data._id)}
+            onClick={() => handleLikePost(data.id)}
             className={data.hasLiked ? 'pressed' : ''}
           >
             {data.hasLiked ? <LikeIcon /> : <LikeIcon />}

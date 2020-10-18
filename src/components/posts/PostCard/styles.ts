@@ -1,7 +1,41 @@
 import styled from 'styled-components';
-import { Paper } from '../ui';
+import { Paper } from 'snake-ui';
 
-// eslint-disable-next-line import/prefer-default-export
+export const PostContent = styled.p`
+  word-wrap: normal;
+  word-break: keep-all;
+  text-align: justify;
+`;
+
+export const PostContentWrapper = styled.div`
+  .DraftEditor-root {
+    max-width: 640px;
+    /* Faz com que as palavras quebrem junto com a linha */
+    text-align: justify;
+    word-wrap: normal;
+    word-break: keep-all;
+    & > * {
+      .draftJsLinkifyPlugin__link__2ittM,
+      .draftJsLinkifyPlugin__link__2ittM:visited {
+        color: ${(props) => props.theme.palette.secondary};
+        text-decoration: none;
+      }
+      .draftJsLinkifyPlugin__link__2ittM:hover,
+      .draftJsLinkifyPlugin__link__2ittM:focus {
+        color: ${(props) => props.theme.palette.secondary};
+        outline: 0; /* reset for :focus */
+        cursor: pointer;
+      }
+      .draftJsLinkifyPlugin__link__2ittM:active {
+        color: ${(props) => props.theme.palette.secondary};
+      }
+      .draftJsHashtagPlugin__hashtag__1wMVC {
+        color: ${(props) => props.theme.palette.secondary};
+      }
+    }
+  }
+`;
+
 export const PostContainer = styled(Paper)`
   margin-bottom: 16px;
   flex-basis: 100%;

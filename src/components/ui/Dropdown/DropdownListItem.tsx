@@ -36,6 +36,7 @@ const DropdownListItemWrap = styled.li`
 interface DropdownListItemProps {
   icon: JSX.Element;
   action?: React.ReactElement;
+  onClick?(e: any): void;
 }
 
 const DropdownListItem: React.FC<DropdownListItemProps> = ({

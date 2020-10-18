@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import PostCard from './PostCard';
-import { Spinner } from '../ui';
+import PostCard from '../PostCard';
+import { Spinner } from '../../ui';
 
-const ShowPosts = ({ posts, getMore = () => {} }) => {
+interface ShowPostsProps {
+  posts: any[];
+  getMore?(data: { page: number }): void;
+}
+
+const ShowPosts: React.FC<ShowPostsProps> = ({ posts, getMore = () => {} }) => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
 
@@ -38,7 +43,7 @@ const ShowPosts = ({ posts, getMore = () => {} }) => {
       }
     >
       {Object.values(posts).map((item) => (
-        <PostCard data={item} key={item._id} />
+        <PostCard data={item} key={item.id} />
       ))}
     </InfiniteScroll>
   );

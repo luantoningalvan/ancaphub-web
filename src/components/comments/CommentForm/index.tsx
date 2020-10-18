@@ -1,36 +1,25 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import UserAvatar from '../users/UserAvatar';
-import { addCommentRequest } from '../../actions/comments';
+import UserAvatar from '../../users/UserAvatar';
+import { addCommentRequest } from '../../../actions/comments';
+import { CommentFormContainer, CommentInput } from './styles';
 
-const CommentFormStyle = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 16px;
-`;
+interface CommentFormProps {
+  post: any;
+}
 
-const CommentInput = styled.input`
-  padding: 15px;
-  border-radius: 20px;
-  background: transparent;
-  outline: none;
-  border: 1px solid ${(props) => props.theme.palette.border};
-  flex-grow: 1;
-  color: ${(props) => props.theme.palette.text.primary};
-`;
-
-const CommentForm = ({ post }) => {
+const CommentForm: React.FC<CommentFormProps> = ({ post }) => {
   const [commentData, setCommentData] = useState({ content: '' });
+  const authUser = useSelector((state: any) => state.auth.user);
+
   const dispatch = useDispatch();
-  const authUser = useSelector((state) => state.auth.user);
-  const handleChange = (e) => {
+
+  const handleChange = (e: any) => {
     setCommentData({ content: e.target.value });
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: any) => {
     if (e.key === 'Enter') {
       if (commentData.content !== '') {
         dispatch(addCommentRequest(commentData, post));
@@ -40,14 +29,12 @@ const CommentForm = ({ post }) => {
   };
 
   return (
-    <CommentFormStyle>
+    <CommentFormContainer>
       <UserAvatar user={authUser} style={{ marginRight: 10 }} />
       <FormattedMessage id="components.commentBox.writeAComment">
-        {(txt) => (
+        {(txt: string) => (
           <CommentInput
             type="text"
-            size="small"
-            variant="filled"
             placeholder={txt}
             color="secondary"
             onKeyPress={handleKeyPress}
@@ -56,7 +43,7 @@ const CommentForm = ({ post }) => {
           />
         )}
       </FormattedMessage>
-    </CommentFormStyle>
+    </CommentFormContainer>
   );
 };
 
