@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import {
   FiMoreVertical as MoreIcon,
   FiTrash as DeleteIcon,
@@ -7,94 +6,38 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedRelativeTime, FormattedMessage } from 'react-intl';
 import { differenceInSeconds, parseISO, getTime } from 'date-fns';
-import UserAvatar from '../users/UserAvatar';
-import UserName from '../users/UserName';
-import { deleteCommentRequest } from '../../actions/comments';
-
+import UserAvatar from '../../users/UserAvatar';
+import UserName from '../../users/UserName';
+import { deleteCommentRequest } from '../../../actions/comments';
+import { IconButton, Dropdown } from 'snake-ui';
 import {
-  Dropdown,
   DropdownListContainer,
   DropdownListItem,
-  IconButton,
   ConfirmationDialog,
-} from '../ui';
+} from '../../ui';
 
-const SingleCommentStyle = styled.div`
-  .inner-wrap {
-    display: flex;
-    align-items: stretch;
-    margin-bottom: 10px;
-  }
+import { SingleCommentContainer } from './styles';
 
-  .comment-content {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+interface SingleCommentProps {
+  comment: {
+    id: string;
+    author: {
+      id: string;
+      avatar: string;
+      username: string;
+    };
+    content: string;
+    date: string;
+  };
+  post: any;
+}
 
-  .comment-text {
-    padding-top: 3px;
-    margin: 0;
-    text-align: justify;
-    font-size: 0.92em;
-    word-wrap: normal;
-    word-break: keep-all;
-    & > a {
-      color: ${(props) => props.theme.palette.secondary};
-    }
-  }
-
-  .date {
-    font-size: 0.7em;
-    margin-top: 8px;
-
-    li {
-      list-style: none;
-      display: inline-block;
-      &:after {
-        content: '·';
-        margin: 0px 5px;
-      }
-
-      &:last-child {
-        &:after {
-          content: '';
-          margin: 0;
-        }
-      }
-    }
-
-    span.time-link {
-      color: ${(props) => props.theme.palette.text.secondary};
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  .actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    svg {
-      color: ${(props) => props.theme.palette.text.secondary};
-      height: 20px;
-      width: 20px;
-    }
-  }
-`;
-
-const SingleComment = ({ comment, post }) => {
+const SingleComment: React.FC<SingleCommentProps> = ({ comment, post }) => {
   const [deleteBox, setDeleteBox] = useState(false);
+  const [commentOptions, setCommentOptions] = useState(null);
+
+  const auth = useSelector((state: any) => state.auth.user.id);
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth.user.id);
 
   const handleDelete = () => {
     dispatch(deleteCommentRequest(post, comment.id));
@@ -102,7 +45,7 @@ const SingleComment = ({ comment, post }) => {
   };
 
   return (
-    <SingleCommentStyle>
+    <SingleCommentContainer>
       <div className="inner-wrap">
         <UserAvatar user={comment.author} style={{ marginRight: 8 }} />
         <div className="comment-content">
@@ -127,9 +70,15 @@ const SingleComment = ({ comment, post }) => {
         </div>
         {auth && auth === comment.author.id && (
           <div className="actions">
+            <IconButton
+              icon={<MoreIcon />} // @ts-ignore
+              onClick={(e: any) => setCommentOptions(e.currentTarget)}
+            />
+
             <Dropdown
-              placement="left-start"
-              toggle={<IconButton icon={<MoreIcon />} />}
+              open={Boolean(commentOptions)}
+              anchorEl={commentOptions}
+              onClose={() => setCommentOptions(null)}
             >
               <DropdownListContainer>
                 <DropdownListItem
@@ -152,7 +101,7 @@ const SingleComment = ({ comment, post }) => {
           </div>
         )}
       </div>
-    </SingleCommentStyle>
+    </SingleCommentContainer>
   );
 };
 
