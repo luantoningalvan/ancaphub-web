@@ -9,10 +9,14 @@ import { getUsersRelationsips } from '../actions/relationships';
 
 function* getUsers() {
   try {
-    const result = yield call(api.getUsers, { page: 1 });
-    yield put(getUsersCount(result.data));
-    yield put(getUsersRelationsips(result.data));
-    yield put(actions.getUsersSuccess({ items: result.data }));
+    const users = yield call(api.getUsers, { page: 1 });
+    const parsedUsers = users.data.map((user) => ({
+      user: user,
+    }));
+
+    yield put(getUsersCount(parsedUsers));
+    yield put(getUsersRelationsips(parsedUsers));
+    yield put(actions.getUsersSuccess(parsedUsers));
   } catch (e) {
     yield put(alerts.addAlert('error', e.message));
   }
@@ -43,9 +47,13 @@ function* getSingleUser(action) {
 function* getUserFollowers(action) {
   try {
     const users = yield call(() => api.getUserFollowers(action.payload));
-    yield put(getUsersCount(users.data));
-    yield put(getUsersRelationsips(users.data));
-    yield put(actions.getUserFollowersSuccess(users.data));
+    const parsedUsers = users.data.map((user) => ({
+      user: user,
+    }));
+
+    yield put(getUsersCount(parsedUsers));
+    yield put(getUsersRelationsips(parsedUsers));
+    yield put(actions.getUserFollowersSuccess(parsedUsers));
   } catch (e) {
     yield put(alerts.addAlert('error', e.message));
   }
@@ -54,9 +62,13 @@ function* getUserFollowers(action) {
 function* getUserFollowing(action) {
   try {
     const users = yield call(() => api.getUserFollowing(action.payload));
-    yield put(getUsersCount(users.data));
-    yield put(getUsersRelationsips(users.data));
-    yield put(actions.getUserFollowingSuccess(users.data));
+    const parsedUsers = users.data.map((user) => ({
+      user: user,
+    }));
+
+    yield put(getUsersCount(parsedUsers));
+    yield put(getUsersRelationsips(parsedUsers));
+    yield put(actions.getUserFollowingSuccess(parsedUsers));
   } catch (e) {
     yield put(alerts.addAlert('error', e.message));
   }

@@ -6,13 +6,13 @@ export const getUsers = ({ page = 1, limit = 20 }) => {
 
 export const getSingleUser = (payload) => axios.get(`users/${payload}`);
 
-export const followUser = (payload) => axios.post(`users/${payload}/follow`);
+export const followUser = (payload) => axios.post(`relationships/${payload}`);
 export const unfollowUser = (payload) =>
-  axios.post(`users/${payload}/unfollow`);
+  axios.delete(`relationships/${payload}`);
 export const getUserFollowers = (payload) =>
-  axios.get(`users/${payload}/followers`);
+  axios.get(`relationships/${payload}/followers`);
 export const getUserFollowing = (payload) =>
-  axios.get(`users/${payload}/following`);
+  axios.get(`relationships/${payload}/following`);
 
 export const createUser = ({ name, username, email, password, code }) =>
   axios.post('/users', {

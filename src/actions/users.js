@@ -24,9 +24,9 @@ export const getUsersRequest = (data) => ({
   payload: data,
 });
 
-export const getUsersSuccess = ({ items }) => ({
+export const getUsersSuccess = (data) => ({
   type: Types.GET_USERS_SUCCESS,
-  payload: { items },
+  payload: data,
 });
 
 export const loadMoreUsersRequest = (data) => ({

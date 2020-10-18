@@ -7,7 +7,6 @@ import SettingsSagas from './settings';
 import CommentSagas from './comments';
 import LibrarySagas from './library';
 import RelationshipsSagas from './relationships';
-import NotificationsSagas from './notifications';
 import SearchSagas from './search';
 import CategoriesSagas from './categories';
 import ProjectsSagas from './projects';
@@ -22,7 +21,6 @@ export default function* rootSaga() {
     ...CommentSagas,
     ...LibrarySagas,
     ...RelationshipsSagas,
-    ...NotificationsSagas,
     ...SearchSagas,
     ...CategoriesSagas,
     ...ProjectsSagas,
