@@ -3,30 +3,35 @@ import { FiX as CloseIcon } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
-import { getPostLikesRequest } from '../../actions/posts';
-import UserList from '../users/UserList';
+import { getPostLikesRequest } from '../../../actions/posts';
+import UserList from '../../users/UserList';
+import { Modal, Card, CardHeader, CardBody, CircularLoader } from 'snake-ui';
 
-import { Dialog, Card, CardHeader, CardBody, Spinner } from '../ui';
+interface ShowPostLikesProps {
+  open: boolean;
+  onClose(): void;
+  postId: string;
+}
 
-const LikeBox = ({ open, onClose, postId }) => {
+const ShowPostLikes: React.FC<ShowPostLikesProps> = ({
+  open,
+  onClose,
+  postId,
+}) => {
   const dispatch = useDispatch();
-  const likes = useSelector((state) => state.posts);
+  const likes = useSelector((state: any) => state.posts);
 
   useEffect(() => {
     if (open) {
       dispatch(getPostLikesRequest(postId));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (
-    <Dialog
-      show={open}
-      style={{ width: '100%', maxWidth: 350, maxHeight: '90vh' }}
-    >
+    <Modal open={open} onClose={onClose}>
       {open && (
         <Card>
-          <CardHeader
+          <CardHeader // @ts-ignore
             title={<FormattedMessage id="common.likePlural" />}
             actions={[
               {
@@ -37,6 +42,7 @@ const LikeBox = ({ open, onClose, postId }) => {
               },
             ]}
           />
+          {/* @ts-ignore */}
           <CardBody style={{ overflowX: 'auto' }}>
             {likes.postLikesLoading ? (
               <div
@@ -48,7 +54,7 @@ const LikeBox = ({ open, onClose, postId }) => {
                   justifyContent: 'center',
                 }}
               >
-                <Spinner size={48} />
+                <CircularLoader size={48} />
               </div>
             ) : (
               <UserList users={likes.items[postId].likes} />
@@ -56,8 +62,8 @@ const LikeBox = ({ open, onClose, postId }) => {
           </CardBody>
         </Card>
       )}
-    </Dialog>
+    </Modal>
   );
 };
 
-export default memo(LikeBox);
+export default memo(ShowPostLikes);
