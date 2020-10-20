@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import Notification from '../../components/notifications';
 
-import { Container, Hero, Paper, Spinner } from '../../components/ui';
+import { Container, Hero, Paper, CircularLoader } from 'snake-ui';
 
 import {
   getNotificationsRequest,
@@ -14,13 +14,12 @@ import {
 const Notifications = () => {
   const dispatch = useDispatch();
   const { notifications, loadingNotifications } = useSelector(
-    (state) => state.notifications
+    (state: any) => state.notifications
   );
 
   useEffect(() => {
     dispatch(getNotificationsRequest());
     dispatch(markAllAsReadRequest());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -32,6 +31,7 @@ const Notifications = () => {
             description="Título da página de notificações"
           />
         }
+        actions
       />
 
       <div style={{ marginTop: 16 }}>
@@ -40,7 +40,7 @@ const Notifications = () => {
             {!isEmpty(notifications) ? (
               <Paper>
                 <ul style={{ padding: '8px 0px' }}>
-                  {notifications.map((notification) => (
+                  {notifications.map((notification: any) => (
                     <Notification
                       notification={notification}
                       key={notification.id}
@@ -63,7 +63,7 @@ const Notifications = () => {
               alignItems: 'center',
             }}
           >
-            <Spinner />
+            <CircularLoader size={72} />
           </Paper>
         )}
       </div>
