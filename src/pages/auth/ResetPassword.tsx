@@ -6,28 +6,28 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import * as Yup from 'yup';
 
+import { TextField } from '../../components/ui';
 import {
   Button,
   Container,
   Card,
   CardBody,
   CardHeader,
-  Spinner,
-  TextField,
-} from '../../components/ui';
+  CircularLoader,
+} from 'snake-ui';
 import Provider from '../../components/template/Provider';
 import api from '../../api/axios';
 import { ReactComponent as AncapHubLogo } from '../../assets/ancaphub.svg';
 
 const ForgotPassword = () => {
-  const { user, token } = useParams();
+  const { token }: { user: string; token: string } = useParams();
   const [loading, setLoading] = useState(false);
   const [sended, setSended] = useState(false);
-  const [error, setError] = useState(null);
-  const formRef = useRef(null);
+  const [error, setError] = useState<string | null>(null);
+  const formRef = useRef<any>(null);
   const { formatMessage } = useIntl();
 
-  async function handleSubmit(data) {
+  async function handleSubmit(data: any) {
     try {
       const schema = Yup.object().shape({
         password: Yup.string()
@@ -49,7 +49,7 @@ const ForgotPassword = () => {
             })
           )
           .oneOf(
-            [Yup.ref('password'), null],
+            [Yup.ref('password')],
             formatMessage({
               id: 'account.settings.validation.passwordMismatch',
             })
@@ -67,12 +67,12 @@ const ForgotPassword = () => {
       setLoading(false);
       setSended(true);
     } catch (err) {
-      const validationErrors = {};
+      const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((yupError) => {
           validationErrors[yupError.path] = yupError.message;
         });
-        formRef.current.setErrors(validationErrors);
+        formRef?.current?.setErrors(validationErrors);
         return;
       }
 
@@ -150,7 +150,7 @@ const ForgotPassword = () => {
                 </>
               ) : (
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <Spinner />
+                  <CircularLoader size={72} />
                 </div>
               )}
             </CardBody>
