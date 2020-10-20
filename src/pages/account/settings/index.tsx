@@ -8,13 +8,13 @@ import {
 } from 'react-icons/fi';
 
 import { useLocation } from 'react-router-dom';
-import { Container, Paper, Hero, Menu, MenuItem } from '../../../components/ui';
-
+import { Menu, MenuItem } from '../../../components/ui';
+import { Container, Paper, Hero } from 'snake-ui';
 import {
   SettingsContainer,
   SettingsSidebarContainer,
   SettingsContentContainer,
-} from './styles.css';
+} from './styles';
 
 import Notifications from './Notifications';
 import Privacy from './Privacy';
@@ -25,19 +25,17 @@ function useQuery() {
 }
 
 const Settings = () => {
-  const query = useQuery().get('tab');
+  const query: string | null = useQuery().get('tab');
 
-  const settingsMap = {
+  const settingsMap: { [key: string]: any } = {
     notifications: <Notifications />,
     privacy: <Privacy />,
     access_and_security: <AccessAndSecurity />,
   };
 
   const Tab = () =>
-    // TODO: remove this nested ternary as it is very misleading
-    // eslint-disable-next-line no-nested-ternary
     query !== null ? (
-      settingsMap[query] === undefined ? (
+      settingsMap[query] === null ? (
         <AccessAndSecurity />
       ) : (
         settingsMap[query]
@@ -55,6 +53,7 @@ const Settings = () => {
             description="Título da página de configurações"
           />
         }
+        actions
       />
       <SettingsContainer>
         <SettingsSidebarContainer>

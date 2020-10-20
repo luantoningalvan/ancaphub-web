@@ -4,30 +4,24 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  ExpansionPanel,
-  TextField,
-} from '../../../components/ui';
+import { ExpansionPanel, TextField } from '../../../../components/ui';
+import { Button, Card, CardBody, CardHeader } from 'snake-ui';
 
 import {
   updateEmailRequest,
   updateUsernameRequest,
   updatePasswordRequest,
-} from '../../../actions/settings';
+} from '../../../../actions/settings';
 
 const AccessAndSecurity = () => {
   const { formatMessage } = useIntl();
-  const emailFormRef = useRef(null);
-  const usernameFormRef = useRef(null);
-  const passwordFormRef = useRef(null);
+  const emailFormRef = useRef<any>(null);
+  const usernameFormRef = useRef<any>(null);
+  const passwordFormRef = useRef<any>(null);
   const dispatch = useDispatch();
-  const currentData = useSelector((state) => state.auth.user);
+  const currentData = useSelector((state: any) => state.auth.user);
 
-  const handleUsernameSubmit = async (data) => {
+  const handleUsernameSubmit = async (data: any) => {
     try {
       const schema = Yup.object().shape({
         username: Yup.string()
@@ -47,7 +41,7 @@ const AccessAndSecurity = () => {
       });
       dispatch(updateUsernameRequest(data));
     } catch (err) {
-      const validationErrors = {};
+      const validationErrors: { [key: string]: any } = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
           validationErrors[error.path] = error.message;
@@ -57,7 +51,7 @@ const AccessAndSecurity = () => {
     }
   };
 
-  const handleEmailSubmit = async (data) => {
+  const handleEmailSubmit = async (data: any) => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
@@ -69,7 +63,7 @@ const AccessAndSecurity = () => {
       });
       dispatch(updateEmailRequest(data));
     } catch (err) {
-      const validationErrors = {};
+      const validationErrors: { [key: string]: any } = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
           validationErrors[error.path] = error.message;
@@ -79,7 +73,7 @@ const AccessAndSecurity = () => {
     }
   };
 
-  const handlePasswordSubmit = async (data) => {
+  const handlePasswordSubmit = async (data: any) => {
     try {
       const schema = Yup.object().shape({
         current_password: Yup.string().required(
@@ -98,7 +92,7 @@ const AccessAndSecurity = () => {
             formatMessage({ id: 'settings.validation.confirmPasswordRequired' })
           )
           .oneOf(
-            [Yup.ref('new_password'), null],
+            [Yup.ref('new_password')],
             formatMessage({ id: 'settings.validation.passwordMismatch' })
           ),
       });
@@ -107,7 +101,7 @@ const AccessAndSecurity = () => {
       });
       dispatch(updatePasswordRequest(data));
     } catch (err) {
-      const validationErrors = {};
+      const validationErrors: { [key: string]: any } = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
           validationErrors[error.path] = error.message;
@@ -193,7 +187,7 @@ const AccessAndSecurity = () => {
             ref={passwordFormRef}
           >
             <FormattedMessage id="common.password">
-              {(msg) => (
+              {(msg: string) => (
                 <FormattedMessage
                   id="common.newFemale"
                   values={{ what: msg.toLowerCase() }}

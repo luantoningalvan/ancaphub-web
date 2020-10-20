@@ -1,48 +1,13 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
-import ApprovedIcon from 'react-ionicons/lib/IosCheckmarkCircle';
-import PendingIcon from 'react-ionicons/lib/IosBulb';
-import ReprovedIcon from 'react-ionicons/lib/IosAlert';
-import PointsIcon from 'react-ionicons/lib/IosStar';
-
-import { Container, Hero, Button } from '../../components/ui';
-
-const InfoList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-top: 16px;
-`;
-
-const InfoCard = styled.li`
-  background: ${(props) => props.theme.palette.primary};
-  width: 100%;
-  padding: 16px;
-  list-style: none;
-  border-radius: 8px;
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  svg {
-    height: 80px;
-    width: 80px;
-    fill: rgba(0, 0, 0, 0.2);
-  }
-
-  h3 {
-    font-weight: lighter;
-    margin-top: 5px;
-  }
-  span {
-    display: block;
-    font-size: 2em;
-    font-weight: bold;
-    line-height: 100%;
-  }
-`;
+import {
+  FiCheckCircle as ApprovedIcon,
+  FiAlertTriangle as ReprovedIcon,
+  FiAward as PointsIcon,
+  FiZap as PendingIcon,
+} from 'react-icons/fi';
+import { Container, Hero, Button } from 'snake-ui';
+import { InfoCard, InfoList } from './styles';
 
 const Contributions = () => (
   <Container>

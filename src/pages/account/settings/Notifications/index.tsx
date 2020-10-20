@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Card, CardBody } from '../../../components/ui';
+import { Card, CardBody } from 'snake-ui';
 
 const Notifications = () => (
   <Card>

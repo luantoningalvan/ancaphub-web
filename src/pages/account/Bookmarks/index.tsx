@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Container, Hero } from '../../components/ui';
+import { Container, Hero } from 'snake-ui';
 
 const Bookmarks = () => (
   <Container>
@@ -12,6 +12,7 @@ const Bookmarks = () => (
           description="Título da página de salvos"
         />
       }
+      actions
     />
   </Container>
 );
