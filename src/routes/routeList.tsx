@@ -5,10 +5,10 @@ import ResetPassword from '../pages/auth/ResetPassword';
 import Feed from '../pages/feed';
 
 import Library from '../pages/library';
-import Contribute from '../pages/library/Contribute';
-import SingeBook from '../pages/library/SingleBook';
-import SingleArticle from '../pages/library/SingleArticle';
-import SingleVideo from '../pages/library/SingleVideo';
+import Contribute from '../pages/library/contributions/SendNewContribution';
+import SingeBook from '../pages/library/books/SingleBook';
+import SingleArticle from '../pages/library/articles/SingleArticle';
+import SingleVideo from '../pages/library/videos/SingleVideo';
 
 import Groups from '../pages/groups';
 import SingleGroup from '../pages/groups/SingleGroup';
