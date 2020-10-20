@@ -1,101 +1,21 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import ArticleIcon from 'react-ionicons/lib/IosPaper';
-import BookIcon from 'react-ionicons/lib/IosBook';
-import VideoIcon from 'react-ionicons/lib/IosPlay';
-import styled from 'styled-components';
-import LibraryCard from '../../components/library/LibraryCard';
-
 import {
-  Button,
-  Container,
-  Paper,
-  TextField,
-  Stepper,
-} from '../../components/ui';
+  FiPlay as VideoIcon,
+  FiBook as BookIcon,
+  FiFileText as ArticleIcon,
+} from 'react-icons/fi';
+import LibraryCard from '../../../../components/library/LibraryCard';
 
-const UploadBox = styled.div`
-  height: 100px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px dashed ${(props) => props.theme.palette.text.secondary};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  text-align: center;
-  cursor: pointer;
-
-  input {
-    display: none;
-  }
-
-  svg {
-    fill: ${(props) => props.theme.palette.text.secondary};
-    height: 40px;
-    width: 40px;
-    margin-bottom: 16px;
-  }
-`;
-
-const Contribute = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 40px;
-
-  h3 {
-    font-size: 1.5em;
-    color: ${(props) => props.theme.palette.text.primary};
-    margin-bottom: 32px;
-  }
-
-  ul {
-    display: flex;
-
-    li {
-      list-style: none;
-      border: 1px solid ${(props) => props.theme.palette.border};
-      margin: 16px;
-      border-radius: 8px;
-      overflow: hidden;
-      button {
-        padding: 48px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        background: transparent;
-        color: ${(props) => props.theme.palette.text.secondary};
-        border: none;
-        cursor: pointer;
-
-        &:hover {
-          background: rgba(0, 0, 0, 0.1);
-        }
-
-        h4 {
-          font-weight: normal;
-          margin-top: 8px;
-        }
-
-        svg {
-          fill: ${(props) => props.theme.palette.text.primary};
-          height: 64px;
-          width: 64px;
-        }
-      }
-    }
-  }
-`;
+import { TextField } from '../../../../components/ui';
+import { Button, Container, Grid, Paper, Stepper } from 'snake-ui';
+import { Contribute, UploadBox } from './styles';
 
 export default () => {
   const [form, setForm] = useState('');
   const [step, setStep] = useState(1);
 
-  const handleForm = (formAttr) => {
+  const handleForm = (formAttr: any) => {
     setForm(formAttr);
     setStep(2);
   };
@@ -128,7 +48,11 @@ export default () => {
   return (
     <Container>
       <div style={{ margin: '32px 0px' }}>
-        <Stepper steps={steps} currentStep={step} setStepAction={setStep} />
+        <Stepper // @ts-ignore
+          steps={steps.map((step) => ({ label: step.label }))}
+          currentStep={step}
+          setStepAction={setStep}
+        />
       </div>
 
       <Contribute>
@@ -178,17 +102,27 @@ export default () => {
             <Paper padding style={{ width: '100%' }}>
               <FormattedMessage id="common.title">
                 {(msg) => (
-                  <TextField placeholder={msg} style={{ marginBottom: 8 }} />
+                  <TextField
+                    name="title"
+                    placeholder={msg}
+                    style={{ marginBottom: 8 }}
+                  />
                 )}
               </FormattedMessage>
               <FormattedMessage id="common.author">
                 {(msg) => (
-                  <TextField placeholder={msg} style={{ marginBottom: 8 }} />
+                  <TextField
+                    name="author"
+                    placeholder={msg}
+                    style={{ marginBottom: 8 }}
+                  />
                 )}
               </FormattedMessage>
               <FormattedMessage id="common.description">
                 {(msg) => (
                   <TextField
+                    name="description"
+                    multiline
                     placeholder={msg}
                     style={{ marginBottom: 8, paddingBottom: 80 }}
                   />
@@ -196,7 +130,11 @@ export default () => {
               </FormattedMessage>
               <FormattedMessage id="common.categories">
                 {(msg) => (
-                  <TextField placeholder={msg} style={{ marginBottom: 8 }} />
+                  <TextField
+                    name="category"
+                    placeholder={msg}
+                    style={{ marginBottom: 8 }}
+                  />
                 )}
               </FormattedMessage>
 
@@ -219,47 +157,39 @@ export default () => {
         )}
 
         {step === 3 && (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column',
-            }}
-          >
-            <div spacing={4} style={{ width: '600px' }}>
-              <div xs={7}>
-                <Paper padding style={{ width: '100%' }}>
-                  <UploadBox>
-                    <FormattedMessage id="library.contribute.noneSelected" />
-                  </UploadBox>
-                  <Button
-                    color="primary"
-                    onClick={() => setStep(3)}
-                    style={{ marginTop: 16 }}
-                  >
-                    <FormattedMessage id="common.next" />
-                  </Button>
-                </Paper>
-              </div>
-              <div xs={5}>
-                <h3
-                  style={{
-                    fontSize: '0.9em',
-                    fontWeight: 'normal',
-                    marginBottom: '16px',
-                  }}
+          <Grid spacing={4} style={{ width: '600px' }}>
+            <Grid xs={7}>
+              <Paper padding style={{ width: '100%' }}>
+                <UploadBox>
+                  <FormattedMessage id="library.contribute.noneSelected" />
+                </UploadBox>
+                <Button
+                  color="primary"
+                  onClick={() => setStep(3)}
+                  style={{ marginTop: 16 }}
                 >
-                  <FormattedMessage id="common.preview" />
-                </h3>
-                <LibraryCard
-                  item={{
-                    type: form,
-                    title: <FormattedMessage id="common.untitled" />,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
+                  <FormattedMessage id="common.next" />
+                </Button>
+              </Paper>
+            </Grid>
+            <Grid xs={5}>
+              <h3
+                style={{
+                  fontSize: '0.9em',
+                  fontWeight: 'normal',
+                  marginBottom: '16px',
+                }}
+              >
+                <FormattedMessage id="common.preview" />
+              </h3>
+              <LibraryCard
+                item={{
+                  type: form,
+                  title: <FormattedMessage id="common.untitled" />,
+                }}
+              />
+            </Grid>
+          </Grid>
         )}
       </Contribute>
     </Container>

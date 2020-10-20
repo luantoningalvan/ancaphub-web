@@ -2,62 +2,21 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import parse from 'html-react-parser';
-
-// Ícones
 import { FiPlus, FiMinus } from 'react-icons/fi';
-
-import defaultThumbnail from '../../assets/default-book-cover.jpg';
-import Categories from '../../components/categories/ShowCategories';
-
-import { Container, Paper } from '../../components/ui';
-
-import { getSingleItemRequest as getSingleItem } from '../../actions/library';
-
-const Banner = styled.div`
-  background: url(${(props) => (props.cover ? props.cover : defaultThumbnail)})
-    rgba(0, 0, 0, 0.8);
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  background-blend-mode: overlay;
-  padding: 96px 0px;
-  text-align: center;
-
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-`;
-
-const Title = styled.h2`
-  font-weight: bold;
-  color: ${(props) => props.theme.palette.text.contrast};
-  font-size: 2.125rem;
-  margin-bottom: 5px;
-`;
-
-const Author = styled.h3`
-  font-weight: lighter;
-  color: ${(props) => props.theme.palette.text.contrast};
-  font-size: 1.25rem;
-`;
-
-const TextControls = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-bottom: 16px;
-`;
-
-const TextControlButton = styled.span`
-  cursor: pointer;
-`;
+import Categories from '../../../../components/categories/ShowCategories';
+import { Container, Paper } from 'snake-ui';
+import { getSingleItemRequest as getSingleItem } from '../../../../actions/library';
+import {
+  Author,
+  Banner,
+  TextControlButton,
+  TextControls,
+  Title,
+} from './styles';
 
 const SingleArticle = () => {
-  const { id } = useParams();
+  const { id }: { id: string } = useParams();
   const dispatch = useDispatch();
   const [fontSize, setFontSize] = React.useState(16);
 
@@ -65,7 +24,7 @@ const SingleArticle = () => {
     dispatch(getSingleItem({ itemId: id }));
   }, [dispatch, id]);
 
-  const { singleItem } = useSelector((state) => state.library);
+  const { singleItem } = useSelector((state: any) => state.library);
 
   function handleGrowText() {
     if (fontSize + 2 <= 20) {
@@ -81,7 +40,7 @@ const SingleArticle = () => {
 
   if (!singleItem) {
     return (
-      <Container mt={2}>
+      <Container>
         <FormattedMessage id="common.unavailable" />
       </Container>
     );
