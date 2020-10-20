@@ -1941,6 +1941,11 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
+"@types/lodash@^4.14.162":
+  version "4.14.162"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.162.tgz#65d78c397e0d883f44afbf1f7ba9867022411470"
+  integrity sha512-alvcho1kRUnnD1Gcl4J+hK0eencvzq9rmzvFPRmP5rPHx9VVsJj6bKLTATPVf9ktgv4ujzh7T+XWKp+jhuODig==
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -1980,6 +1985,14 @@
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
+
+"@types/react-big-calendar@^0.24.7":
+  version "0.24.7"
+  resolved "https://registry.yarnpkg.com/@types/react-big-calendar/-/react-big-calendar-0.24.7.tgz#3dde97c91ba3a8b04a20b7f3125815c7bb9ab5b4"
+  integrity sha512-EQomoWHj9ST0h7jOjy9PCOqxh7H4MHWzn3PsyTGqx1bpMcgq23LAQ95777ltngiAsove2J3u3ODoif9PkzQdaA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
 
 "@types/react-dom@^16.9.8":
   version "16.9.8"
@@ -2076,6 +2089,11 @@
   integrity sha512-b0BYzFUzBpOhPjpl1wtAHU994jBeKF4TKVlT7ssFv44T617XNcPdRoG4AzHLVshLzlrF7i3lTelH7UbuNYV58Q==
   dependencies:
     "@types/yargs-parser" "*"
+
+"@types/yup@^0.29.8":
+  version "0.29.8"
+  resolved "https://registry.yarnpkg.com/@types/yup/-/yup-0.29.8.tgz#83db15735987db9fe5a38772a0fb9500e3c5bf39"
+  integrity sha512-MBSp62AjB1KrSOI3gX9GekddXU5YYQAVA93+aSl78biBqoSzxg876aQY2KJK5Gnfbpqq7O2cadVX5kPAtBqIXw==
 
 "@typescript-eslint/eslint-plugin@^2.10.0":
   version "2.34.0"
@@ -9992,13 +10010,6 @@ polished@^3.6.5:
   dependencies:
     "@babel/runtime" "^7.9.2"
 
-polished@^3.6.6:
-  version "3.6.7"
-  resolved "https://registry.yarnpkg.com/polished/-/polished-3.6.7.tgz#44cbd0047f3187d83db0c479ef0c7d5583af5fb6"
-  integrity sha512-b4OViUOihwV0icb9PHmWbR+vPqaSzSAEbgLskvb7ANPATVXGiYv/TQFHQo65S53WU9i5EQ1I03YDOJW7K0bmYg==
-  dependencies:
-    "@babel/runtime" "^7.9.2"
-
 popper.js@^1.14.4, popper.js@^1.15.0:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
@@ -12310,12 +12321,10 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-snake-ui@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/snake-ui/-/snake-ui-1.0.3.tgz#a2a98b1a3ebb30d7a8d6b18ae94fe562a30ca8b1"
-  integrity sha512-hJp+1t4RtHx/vOBBoEydSyLr9a/ZqkhlrQlpn8K9uNg8qVvyNy8TxcZd/5vc1nfC1EHl+i3NZsuoDUyKik8YKw==
-  dependencies:
-    polished "^3.6.6"
+snake-ui@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/snake-ui/-/snake-ui-1.0.5.tgz#d16fa1fb85cece083c2704541c4434711f6e65a8"
+  integrity sha512-JhJaypxrANOBt1yMPA9LpR7860OC0iu7pKKf3rU8UfUsDkciqrpECE/QlTFWlzieX6PnuICDwPl8aGi6mf080g==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
