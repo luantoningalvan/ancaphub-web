@@ -2,29 +2,22 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { searchTermRequest as searchTerm } from '../../actions/search';
+import { searchTermRequest as searchTerm } from '../../../actions/search';
 
 // Cards for entity types
-import UserCard from '../../components/users/UserCard';
-import LibraryCard from '../../components/library/LibraryCard';
-import EventCard from '../../components/events/EventCard';
+import UserCard from '../../../components/users/UserCard';
+import LibraryCard from '../../../components/library/LibraryCard';
+import EventCard from '../../../components/events/EventCard';
 
-import {
-  Container,
-  Card,
-  CardHeader,
-  Menu,
-  MenuItem,
-  LoadContent,
-} from '../../components/ui';
-
+import { Menu, MenuItem, LoadContent } from '../../../components/ui';
+import { Container, Card, CardHeader } from 'snake-ui';
 import {
   InnerSearchGridContainer,
   SearchSidebarContainer,
   SearchContentContainer,
   SearchContainer,
   SearchResultType,
-} from './styles.css';
+} from './styles';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -34,10 +27,10 @@ const SearchData = () => {
   const term = useQuery().get('term');
   const type = useQuery().get('type');
   const dispatch = useDispatch();
-  const { results, loading } = useSelector((state) => state.search);
+  const { results, loading } = useSelector((state: any) => state.search);
 
   useEffect(() => {
-    if (searchTerm !== '') {
+    if (term !== '') {
       dispatch(searchTerm(term));
     }
   }, [term, dispatch]);
@@ -79,7 +72,7 @@ const SearchData = () => {
                     <FormattedMessage id="common.users" />
                   </h3>
                   <InnerSearchGridContainer>
-                    {results.users.map((user) => (
+                    {results.users.map((user: any) => (
                       <UserCard user={user} key={user._id} />
                     ))}
                   </InnerSearchGridContainer>
@@ -93,7 +86,7 @@ const SearchData = () => {
                     <FormattedMessage id="common.library" />
                   </h3>
                   <InnerSearchGridContainer>
-                    {results.library.map((item) => (
+                    {results.library.map((item: any) => (
                       <LibraryCard key={item._id} item={item} />
                     ))}
                   </InnerSearchGridContainer>
@@ -107,7 +100,7 @@ const SearchData = () => {
                     <FormattedMessage id="common.events" />
                   </h3>
                   <InnerSearchGridContainer>
-                    {results.events.map((event) => (
+                    {results.events.map((event: any) => (
                       <EventCard key={event._id} event={event} />
                     ))}
                   </InnerSearchGridContainer>
