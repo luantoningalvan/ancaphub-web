@@ -2,16 +2,16 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Spinner, Container, Hero } from '../../components/ui';
+import { Container, Hero, CircularLoader } from 'snake-ui';
 
-import { UserCardGrid } from './styles.css';
+import { UserCardGrid } from './styles';
 
 import { getUsersRequest, loadMoreUsersRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
 
 const Users = () => {
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.users);
+  const { items } = useSelector((state: any) => state.users);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Users = () => {
 
   return (
     <Container>
-      <Hero title={<FormattedMessage id="common.users" />} />
+      <Hero title={<FormattedMessage id="common.users" />} actions />
       <div style={{ marginTop: 16 }}>
         <InfiniteScroll
           dataLength={items.length} // This is important field to render the next data
@@ -41,7 +41,7 @@ const Users = () => {
                 padding: 16,
               }}
             >
-              <Spinner />
+              <CircularLoader size={72} />
             </div>
           }
           endMessage={
@@ -51,7 +51,7 @@ const Users = () => {
           }
         >
           <UserCardGrid>
-            {items.map((user) => (
+            {items.map((user: any) => (
               <UserCard user={user.user} key={user._id} />
             ))}
           </UserCardGrid>
