@@ -2,16 +2,17 @@ import React, { useEffect, memo } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useSelector, useDispatch } from 'react-redux';
 import { generate } from 'shortid';
-import { getUserFollowersRequest } from '../../actions/users';
-import UserCard from '../../components/users/UserCard';
+import { getUserFollowersRequest } from '../../../actions/users';
+import UserCard from '../../../components/users/UserCard';
 
-import { UserCardGrid } from './styles';
+import { Grid, Paper } from 'snake-ui';
+import { LoadContent } from '../../../components/ui';
 
-import { Paper, LoadContent } from '../../components/ui';
-
-const Feed = ({ user }) => {
+const Feed = ({ user }: any) => {
   const dispatch = useDispatch();
-  const { loadingFollowers, followers } = useSelector((state) => state.profile);
+  const { loadingFollowers, followers } = useSelector(
+    (state: any) => state.profile
+  );
 
   useEffect(() => {
     dispatch(getUserFollowersRequest(user));
@@ -24,11 +25,13 @@ const Feed = ({ user }) => {
           <FormattedMessage id="profile.followers.noFollowers" />
         </Paper>
       ) : (
-        <UserCardGrid>
-          {followers.map((follower) => (
-            <UserCard user={follower.user} key={generate()} />
+        <Grid container spacing={2}>
+          {followers.map((follower: any) => (
+            <Grid item xs={4}>
+              <UserCard user={follower.user} key={generate()} />
+            </Grid>
           ))}
-        </UserCardGrid>
+        </Grid>
       )}
     </LoadContent>
   );

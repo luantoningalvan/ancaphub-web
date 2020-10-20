@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { lazy, ReactNode, Suspense, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
@@ -16,12 +16,12 @@ import defaultProfileCover from '../../assets/default-profile-cover.jpg';
 
 import {
   Paper,
-  Spinner,
+  CircularLoader,
   Container,
   Tabs,
   Tab,
   IconButton,
-} from '../../components/ui';
+} from 'snake-ui';
 
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
@@ -47,19 +47,22 @@ const Followers = lazy(() => import('./Followers'));
 const Following = lazy(() => import('./Following'));
 
 const Profiles = () => {
-  const { user, loading } = useSelector((state) => state.profile);
-  const auth = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state: any) => state.profile);
+  const auth = useSelector((state: any) => state.auth);
 
   const [editProfile] = useState(false);
   const [editAvatar, setEditAvatar] = useState(false);
 
-  const { handle, page: pageParam } = useParams();
+  const {
+    handle,
+    page: pageParam,
+  }: { handle: string; page: string } = useParams();
   const dispatch = useDispatch();
 
   const verifyIfIsOwnProfile =
     auth.isAuthenticated && auth.user.username === handle;
 
-  const pages = {
+  const pages: { [key: string]: React.ReactNode } = {
     undefined: Feed,
     lists: Lists,
     contributions: Contributions,
@@ -72,7 +75,7 @@ const Profiles = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handle, getSingleUserRequest]);
 
-  const Template = pages[pageParam];
+  const Template: React.ReactNode = pages[pageParam];
 
   return (
     <Container>
@@ -86,7 +89,7 @@ const Profiles = () => {
             alignItems: 'center',
           }}
         >
-          <Spinner size={128} />
+          <CircularLoader size={128} />
         </div>
       ) : (
         <>
@@ -95,7 +98,9 @@ const Profiles = () => {
               open={editAvatar}
               dialogTitle="Alterar foto de perfil"
               onClose={() => setEditAvatar(false)}
-              onUpdate={(data) => dispatch(updateProfilePictureRequest(data))}
+              onUpdate={(data: any) =>
+                dispatch(updateProfilePictureRequest(data))
+              }
             />
           )}
 
@@ -103,7 +108,7 @@ const Profiles = () => {
             <div className="profile-cover">
               <img src={defaultProfileCover} alt="default cover pic" />
             </div>
-            <ProfilePicture isOwn={verifyIfIsOwnProfile}>
+            <ProfilePicture>
               <div className="avatar">
                 <img
                   alt="user avatar"
@@ -172,11 +177,7 @@ const Profiles = () => {
 
                 {!verifyIfIsOwnProfile && (
                   <Link to={`/messages/${user._id}`}>
-                    <IconButton
-                      color="primary"
-                      variant="outlined"
-                      icon={<MessageIcon />}
-                    />
+                    <IconButton color="primary" icon={<MessageIcon />} />
                   </Link>
                 )}
               </div>
@@ -237,17 +238,17 @@ const Profiles = () => {
               <Paper className="profile-menu">
                 <Tabs>
                   <Tab
-                    current={pageParam === undefined}
+                    current={pageParam === undefined} // @ts-ignore
                     label={<FormattedMessage id="common.feed" />}
                     link={`/${handle}`}
                   />
                   <Tab
-                    current={pageParam === 'following'}
+                    current={pageParam === 'following'} // @ts-ignore
                     label={<FormattedMessage id="common.following" />}
                     link={`/${handle}/following`}
                   />
                   <Tab
-                    current={pageParam === 'followers'}
+                    current={pageParam === 'followers'} // @ts-ignore
                     label={<FormattedMessage id="common.followers" />}
                     link={`/${handle}/followers`}
                   />
@@ -255,7 +256,8 @@ const Profiles = () => {
               </Paper>
 
               <div className="profile-content">
-                <Suspense fallback={<Spinner size={96} />}>
+                <Suspense fallback={<CircularLoader size={96} />}>
+                  {/* @ts-ignore */}
                   <Template user={handle} />
                 </Suspense>
               </div>

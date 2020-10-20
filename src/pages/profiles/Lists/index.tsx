@@ -1,5 +1,6 @@
 import React from 'react';
-import ListCard from '../../components/lists/ListCard';
+import { Grid } from 'snake-ui';
+import ListCard from '../../../components/lists/ListCard';
 
 const Lists = () => {
   const lists = [
@@ -22,13 +23,13 @@ const Lists = () => {
   ];
 
   return (
-    <div spacing={2}>
+    <Grid spacing={2}>
       {lists.map((list) => (
-        <div sm={6} lg={4} key={list.title}>
+        <Grid sm={6} lg={4} key={list.title}>
           <ListCard list={list} />
-        </div>
+        </Grid>
       ))}
-    </div>
+    </Grid>
   );
 };
 
