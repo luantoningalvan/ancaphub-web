@@ -5,14 +5,17 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { TextField, Button } from '../ui';
+import { TextField } from '../ui';
+import { Button } from 'snake-ui';
+import { FormHandles } from '@unform/core';
+
 import { authUserRequest } from '../../actions/auth';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
-  const signupFormRef = useRef(null);
+  const signupFormRef = useRef<FormHandles | null>(null);
   const { formatMessage } = useIntl();
-  async function handleSubmit(data) {
+  async function handleSubmit(data: any) {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
@@ -22,28 +25,28 @@ const SignInForm = () => {
           .required(
             formatMessage({ id: 'account.settings.validation.emailRequired' })
           ),
-        password: Yup.string().required({
-          id: 'account.settings.validation.passwordRequired',
-        }),
+        password: Yup.string().required(
+          formatMessage({ id: 'account.settings.validation.passwordRequired' })
+        ),
       });
       await schema.validate(data, {
         abortEarly: false,
       });
       dispatch(authUserRequest(data));
     } catch (err) {
-      const validationErrors = {};
+      const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
           validationErrors[error.path] = error.message;
         });
-        signupFormRef.current.setErrors(validationErrors);
+        signupFormRef?.current?.setErrors(validationErrors);
       }
     }
   }
 
   return (
     <Form onSubmit={handleSubmit} ref={signupFormRef}>
-      <div spacing={1}>
+      <div>
         <div className="form-row">
           <FormattedMessage id="common.email">
             {(msg) => (

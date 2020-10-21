@@ -375,7 +375,6 @@ const PostForm: React.FC = () => {
 
             <Button
               variant="contained"
-              disableElevation
               color="secondary"
               size="small"
               style={{ marginLeft: 'auto' }}

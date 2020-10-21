@@ -2,10 +2,10 @@ import React from 'react';
 import { useTransition } from 'react-spring';
 import { useSelector } from 'react-redux';
 import { Container } from './styles';
-import { Toast } from '../ui';
+import { Toast } from 'snake-ui';
 
 const ToastContainer = () => {
-  const messages = useSelector((state) => state.alerts);
+  const messages = useSelector((state: any) => state.alerts);
 
   const messagesWithTransitions = useTransition(
     messages,
