@@ -11,7 +11,7 @@ import SingleArticle from '../pages/library/articles/SingleArticle';
 import SingleVideo from '../pages/library/videos/SingleVideo';
 
 import Groups from '../pages/groups';
-import SingleGroup from '../pages/groups/SingleGroup';
+import SingleGroup from '../pages/groups/Single';
 
 import Users from '../pages/users';
 

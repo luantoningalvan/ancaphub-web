@@ -9,10 +9,10 @@ import { useSelector } from 'react-redux';
 import Template from '../components/template';
 
 import routeList from './routeList';
-import LoadScreen from '../pages/LoadingPage';
+import LoadScreen from '../pages/loading';
 
 const Routes = () => {
-  const { isAuthenticated, loading } = useSelector((state) => state.auth);
+  const { isAuthenticated, loading } = useSelector((state: any) => state.auth);
 
   return (
     <>
@@ -24,7 +24,7 @@ const Routes = () => {
                 key={route.path}
                 path={route.path}
                 exact={route.exact}
-                component={(props) => {
+                component={(props: any) => {
                   if (!route.isOpen) {
                     if (!isAuthenticated) {
                       return <Redirect to="/" />;
