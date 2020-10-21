@@ -1,8 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import UserCard from '../../components/users/UserCard';
 
-import { Paper, LoadContent } from '../../components/ui';
+import UserCard from '../../../../components/users/UserCard';
+import { LoadContent } from '../../../../components/ui';
+
+import { Paper, Grid } from 'snake-ui';
 
 const users = [
   {
@@ -106,13 +108,13 @@ const Members = () => (
         />
       </Paper>
     ) : (
-      <div spacing={2} style={{ marginTop: 8 }}>
-        {users.map((user) => (
-          <div xs={3} key={user._id}>
+      <Grid container spacing={2} style={{ marginTop: 8 }}>
+        {users.map((user: any) => (
+          <Grid item xs={3} key={user.id}>
             <UserCard user={user.user} />
-          </div>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     )}
   </LoadContent>
 );

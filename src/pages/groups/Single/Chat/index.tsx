@@ -1,27 +1,16 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
-import { ChatWindow, ChatBubble, Paper, Tabs, Tab } from '../../components/ui';
+import { ChatWindow, ChatBubble } from '../../../../components/ui';
+import { Paper, Tabs, Tab, Grid } from 'snake-ui';
+import { Textarea } from './styles';
 
-const Textarea = styled.textarea`
-  background: transparent;
-  border: 1px solid
-    ${(props) => (!props.hasError ? props.theme.palette.border : '#f93c3c')};
-  padding: 16px;
-  border-radius: 8px;
-  outline: none;
-  color: white;
-  width: 100%;
-  height: calc(100vh - 244px);
-`;
-
-// Just for prototyping and design purpose. Components will be properly edited later
 const chat = {
   messages: [
     {
       user: {
         name: 'Zé Pequeté',
+        username: 'zepqt',
       },
       body: 'Lorem ipsum dolor sit amet.',
       createdAt: '2h',
@@ -30,6 +19,7 @@ const chat = {
     {
       user: {
         name: 'Você',
+        username: 'eu',
       },
       body: 'Consectetur adipiscing elit :P',
       createdAt: '1h',
@@ -38,6 +28,7 @@ const chat = {
     {
       user: {
         name: 'Zé Pequeté',
+        username: 'zepqt',
       },
       body: 'Tô chegando com os refri, rapaziada',
       createdAt: 'agora',
@@ -50,8 +41,8 @@ const GroupChat = () => {
   const [sideTab, setSideTab] = useState('notes');
 
   return (
-    <div>
-      <div xs={9}>
+    <Grid container>
+      <Grid xs={9}>
         <div
           style={{
             height: 'calc( 100vh - 128px)',
@@ -61,8 +52,8 @@ const GroupChat = () => {
         >
           <ChatWindow chat={chat} />
         </div>
-      </div>
-      <div xs={3} style={{ padding: '16px 0px 16px 16px' }}>
+      </Grid>
+      <Grid xs={3} style={{ padding: '16px 0px 16px 16px' }}>
         <Paper style={{ width: '100%' }}>
           <Tabs
             style={{
@@ -73,12 +64,12 @@ const GroupChat = () => {
           >
             <Tab
               onClick={() => setSideTab('notes')}
-              current={sideTab === 'notes'}
+              current={sideTab === 'notes'} // @ts-ignore
               label={<FormattedMessage id="groups.board.notes" />}
             />
             <Tab
               onClick={() => setSideTab('fixed')}
-              current={sideTab === 'fixed'}
+              current={sideTab === 'fixed'} // @ts-ignore
               label={<FormattedMessage id="groups.board.fixed" />}
             />
           </Tabs>
@@ -109,8 +100,8 @@ const GroupChat = () => {
             )}
           </div>
         </Paper>
-      </div>
-    </div>
+      </Grid>
+    </Grid>
   );
 };
 

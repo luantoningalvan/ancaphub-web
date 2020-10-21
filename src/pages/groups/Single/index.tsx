@@ -2,15 +2,15 @@ import React, { Suspense, lazy } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import SettingIcon from 'react-ionicons/lib/IosSettings';
+import { FiSettings as SettingIcon } from 'react-icons/fi';
 
-import { Container, Tabs, Tab, Spinner } from '../../components/ui';
+import { Container, Tabs, Tab, CircularLoader } from 'snake-ui';
 
-const GroupBoard = lazy(() => import('./GroupBoard'));
-const GroupChat = lazy(() => import('./GroupChat'));
-const GroupFiles = lazy(() => import('./GroupFiles'));
-const GroupMembers = lazy(() => import('./GroupMembers'));
-const GroupManage = lazy(() => import('./GroupManage'));
+const GroupBoard = lazy(() => import('./Board'));
+const GroupChat = lazy(() => import('./Chat'));
+const GroupFiles = lazy(() => import('./Files'));
+const GroupMembers = lazy(() => import('./Members'));
+const GroupManage = lazy(() => import('./Manage'));
 
 const GroupHeader = styled.div`
   height: 64px;
@@ -33,10 +33,15 @@ const GroupHeader = styled.div`
 `;
 
 const SingleGroup = () => {
-  const [Page, setPage] = React.useState();
-  const { id: groupId, page: groupPage } = useParams();
+  const [Page, setPage] = React.useState<React.ReactNode | undefined>(
+    undefined
+  );
+  const {
+    id: groupId,
+    page: groupPage,
+  }: { id: string; page: string } = useParams();
 
-  const pages = {
+  const pages: { [key: string]: React.ReactNode } = {
     undefined: <GroupBoard />,
     chat: <GroupChat />,
     files: <GroupFiles />,
@@ -46,7 +51,6 @@ const SingleGroup = () => {
 
   React.useEffect(() => {
     setPage(pages[groupPage]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupPage]);
 
   return (
@@ -59,27 +63,27 @@ const SingleGroup = () => {
             <Tabs style={{ height: 64 }}>
               <Tab
                 current={groupPage === undefined}
-                link={`/groups/${groupId}`}
+                link={`/groups/${groupId}`} //@ts-ignore
                 label={<FormattedMessage id="groups.board" />}
               />
               <Tab
                 current={groupPage === 'chat'}
-                link={`/groups/${groupId}/chat`}
+                link={`/groups/${groupId}/chat`} //@ts-ignore
                 label={<FormattedMessage id="groups.chat" />}
               />
               <Tab
                 current={groupPage === 'files'}
-                link={`/groups/${groupId}/files`}
+                link={`/groups/${groupId}/files`} //@ts-ignore
                 label={<FormattedMessage id="groups.files" />}
               />
               <Tab
                 current={groupPage === 'members'}
-                link={`/groups/${groupId}/members`}
+                link={`/groups/${groupId}/members`} //@ts-ignore
                 label={<FormattedMessage id="groups.members" />}
               />
               <Tab
                 current={groupPage === 'manage'}
-                link={`/groups/${groupId}/manage`}
+                link={`/groups/${groupId}/manage`} //@ts-ignore
                 label={<SettingIcon />}
               />
             </Tabs>
@@ -87,7 +91,7 @@ const SingleGroup = () => {
         </Container>
       </GroupHeader>
       <Container>
-        <Suspense fallback={<Spinner size={96} />}>{Page}</Suspense>
+        <Suspense fallback={<CircularLoader size={96} />}>{Page}</Suspense>
       </Container>
     </>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import GroupCard from '../../components/groups/GroupCard';
 
-import { Container, Hero, Button } from '../../components/ui';
+import { Container, Hero, Button, Grid } from 'snake-ui';
 
 const groups = [
   {
@@ -60,13 +60,13 @@ const Groups = () => (
       <FormattedMessage id="groups.explore" />
     </h3>
 
-    <div spacing={2}>
+    <Grid container spacing={2}>
       {groups.map((group) => (
-        <div xs={12} md={6} lg={4} key={group._id}>
+        <Grid item xs={12} md={6} lg={4} key={group._id}>
           <GroupCard data={group} />
-        </div>
+        </Grid>
       ))}
-    </div>
+    </Grid>
   </Container>
 );
 

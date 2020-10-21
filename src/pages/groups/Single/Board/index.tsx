@@ -2,58 +2,13 @@
 import React, { useState } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { FormattedMessage } from 'react-intl';
-import SearchIcon from 'react-ionicons/lib/IosSearch';
-import styled from 'styled-components';
+import { FiSearch as SearchIcon } from 'react-icons/fi';
 import { uniqueId } from 'lodash';
+import { Button, Card, CardHeader, CardBody, Grid } from 'snake-ui';
 
-import {
-  Button,
-  Dropdown,
-  Paper,
-  Card,
-  CardHeader,
-  CardBody,
-} from '../../components/ui';
-
-import MiniLibraryCard from '../../components/library/MiniLibraryCard';
-import MiniUserCard from '../../components/users/MiniUserCard';
-
-const Toolbar = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  margin-bottom: 16px;
-`;
-
-const Fodase = styled(Paper)`
-  width: 100%;
-  padding: 16px;
-  height: calc(100vh - 160px);
-
-  > .search {
-    width: 100%;
-    height: 48px;
-    border-radius: 4px;
-    border: 1px solid ${(props) => props.theme.palette.border};
-    display: flex;
-    padding: 16px;
-    justify-content: space-between;
-    margin-bottom: 16px;
-
-    input {
-      border: none;
-      background: transparent;
-      height: 100%;
-      color: ${(props) => props.theme.palette.text.primary};
-    }
-
-    svg {
-      width: 20px;
-      height: 100%;
-      fill: ${(props) => props.theme.palette.text.primary};
-    }
-  }
-`;
+import MiniLibraryCard from '../../../../components/library/MiniLibraryCard';
+import MiniUserCard from '../../../../components/users/MiniUserCard';
+import { Sidebar, Toolbar } from './styles';
 
 const columnsFromBackend = {
   [uniqueId()]: {
@@ -87,7 +42,7 @@ const masterItems = [
   },
 ];
 
-const onDragEnd = (result, columns, setColumns) => {
+const onDragEnd = (result: any, columns: any, setColumns: any) => {
   if (!result.destination) return;
   const { source, destination } = result;
 
@@ -156,20 +111,12 @@ const GroupBoard = () => {
       <DragDropContext
         onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
       >
-        <div
-          spacing={2}
-          style={{
-            marginTop: 8,
-            display: 'grid',
-            gap: '16px',
-            gridTemplateColumns: '3fr 10fr',
-          }}
-        >
-          <div xs={4}>
-            <Fodase>
+        <Grid spacing={2} container>
+          <Grid item xs={4}>
+            <Sidebar>
               <div className="search">
                 <FormattedMessage id="groups.board.searchComponent">
-                  {(msg) => <input type="text" placeholder={msg} />}
+                  {(msg: string) => <input type="text" placeholder={msg} />}
                 </FormattedMessage>
                 <SearchIcon />
               </div>
@@ -219,11 +166,11 @@ const GroupBoard = () => {
                   )}
                 </Droppable>
               </div>
-            </Fodase>
-          </div>
-          <div style={{ width: 726 }}>
+            </Sidebar>
+          </Grid>
+          <Grid item>
             <Toolbar>
-              <Dropdown toggle={<Button color="primary">Leituras</Button>} />
+              <Button color="primary">Leituras</Button>
             </Toolbar>
 
             <div
@@ -260,7 +207,7 @@ const GroupBoard = () => {
                               width: 250,
                             }}
                           >
-                            {column.items.map((item, index) => (
+                            {column.items.map((item: any, index: number) => (
                               <Draggable
                                 key={item.id}
                                 draggableId={item.id}
@@ -298,8 +245,8 @@ const GroupBoard = () => {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </DragDropContext>
     </div>
   );
