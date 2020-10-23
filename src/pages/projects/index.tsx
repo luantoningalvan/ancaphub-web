@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProjectCard from '../../components/projects/ProjectCard';
 import { getProjectsRequest } from '../../actions/projects';
 import { LoadContent } from '../../components/ui';
-import { Button, Hero, Paper, Container } from 'snake-ui';
+import { Button, Hero, Paper, Container, Grid } from 'snake-ui';
+
 const Projects = () => {
-  const { projects, loading } = useSelector((state) => state.projects);
+  const { projects, loading } = useSelector((state: any) => state.projects);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const Projects = () => {
           }
           actions={
             <Link to="/projects/new">
-              <Button type="contained" color="secondary">
+              <Button variant="contained" color="secondary">
                 <FormattedMessage id="projects.create" />
               </Button>
             </Link>
@@ -44,19 +45,13 @@ const Projects = () => {
 
         <LoadContent loading={loading}>
           {projects.length > 0 ? (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3,1fr)',
-                gap: '16px',
-              }}
-            >
-              {projects.map((project) => (
-                <div xs={12} md={6} lg={4} key={project._id}>
+            <Grid container>
+              {projects.map((project: any) => (
+                <Grid xs={12} md={6} lg={4} key={project._id}>
                   <ProjectCard data={project} />
-                </div>
+                </Grid>
               ))}
-            </div>
+            </Grid>
           ) : (
             <Paper padding>Nenhum projeto encontrado</Paper>
           )}

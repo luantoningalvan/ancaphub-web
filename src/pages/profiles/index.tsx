@@ -173,7 +173,7 @@ const Profiles = () => {
               </div>
               <div className="user-action-buttons">
                 <FollowButton user={handle} />
-                {verifyIfIsOwnProfile && <EditProfile open={editProfile} />}
+                {verifyIfIsOwnProfile && <EditProfile />}
 
                 {!verifyIfIsOwnProfile && (
                   <Link to={`/messages/${user._id}`}>

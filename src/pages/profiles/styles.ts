@@ -20,7 +20,7 @@ export const ProfileHeader = styled.div`
   }
 `;
 
-export const ProfilePicture = styled.div`
+export const ProfilePicture = styled.div<{ isOwn?: boolean }>`
   margin-top: -100px;
   display: flex;
   justify-content: center;

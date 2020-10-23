@@ -1,6 +1,6 @@
 import React from 'react';
 import ThemeProvider from '../../components/template/Provider';
-import { ReactComponent as Logo } from '../assets/ancaphub.svg';
+import { ReactComponent as Logo } from '../../assets/ancaphub.svg';
 import { CircularLoader } from 'snake-ui';
 import { LoadScreenWrap } from './styles';
 

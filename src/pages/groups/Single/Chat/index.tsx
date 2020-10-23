@@ -50,7 +50,7 @@ const GroupChat = () => {
             borderLeft: '1px solid #2f3749',
           }}
         >
-          <ChatWindow chat={chat} />
+          {/**<ChatWindow chat={chat} /> */}
         </div>
       </Grid>
       <Grid xs={3} style={{ padding: '16px 0px 16px 16px' }}>
