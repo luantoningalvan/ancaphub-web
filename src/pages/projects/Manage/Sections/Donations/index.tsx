@@ -1,15 +1,9 @@
 import React from 'react';
+import { SubmitHandler } from '@unform/core';
 import { Form } from '@unform/web';
 import { useDispatch } from 'react-redux';
-import {
-  Breadcrumb,
-  TextField,
-  Select,
-  Card,
-  CardHeader,
-  CardBody,
-  Button,
-} from '../../../../../components/ui';
+import { TextField, Select } from '../../../../../components/ui';
+import { Card, CardHeader, CardBody, Button, Breadcrumbs } from 'snake-ui';
 import { PageHeader } from '../../styles';
 import DonationCard from '../../../../../components/projects/ProjectDonationCard';
 import {
@@ -17,16 +11,16 @@ import {
   addProjectDonationRequest,
 } from '../../../../../actions/projects';
 
-const Donations = ({ project }) => {
+const Donations: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = (donationId) => {
+  const handleDelete = (donationId: string) => {
     dispatch(
       removeProjectDonationRequest({ projectId: project._id, donationId })
     );
   };
 
-  const handleSubmit = (data, { reset }) => {
+  const handleSubmit: SubmitHandler = (data, { reset }) => {
     dispatch(addProjectDonationRequest({ data, id: project._id }));
     reset();
   };
@@ -35,7 +29,7 @@ const Donations = ({ project }) => {
     <>
       <PageHeader>
         <div className="page-title">
-          <Breadcrumb list={[{ title: 'Seções' }, { title: 'Doações' }]} />
+          <Breadcrumbs list={[{ title: 'Seções' }, { title: 'Doações' }]} />
           <h2>Doações</h2>
         </div>
       </PageHeader>
@@ -46,7 +40,7 @@ const Donations = ({ project }) => {
           gap: '16px',
         }}
       >
-        {project.donation_methods.map((donation) => (
+        {project.donation_methods.map((donation: any) => (
           <DonationCard
             donation={donation}
             key={donation._id}
@@ -56,7 +50,7 @@ const Donations = ({ project }) => {
         ))}
       </div>
 
-      <Card padding style={{ marginTop: 16 }}>
+      <Card style={{ marginTop: 16, padding: 8 }}>
         <CardHeader title="Adicionar novo método" />
         <CardBody>
           <Form onSubmit={handleSubmit}>

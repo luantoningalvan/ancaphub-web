@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react';
 import { FiXCircle, FiEdit } from 'react-icons/fi';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
+import { SubmitHandler } from '@unform/core';
 import { Form } from '@unform/web';
 import { convertToRaw } from 'draft-js';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageHeader } from '../../styles';
-import {
-  Button,
-  TextField,
-  Paper,
-  Breadcrumb,
-  LoadContent,
-} from '../../../../../components/ui';
+import { Button, Paper, Breadcrumbs } from 'snake-ui';
+import { TextField, LoadContent } from '../../../../../components/ui';
+
 import FullEditor from '../../../../../components/editor/FullEditor';
 import {
   updateProjectPostRequest,
   getSingleProjectPostRequest,
 } from '../../../../../actions/projects';
 
-const NewPost = ({ project }) => {
+const NewPost = ({ project }: any) => {
   const dispatch = useDispatch();
-  const { loadingPosts, post } = useSelector((state) => state.projects);
+  const history = useHistory();
+
+  const { loadingPosts, post } = useSelector((state: any) => state.projects);
 
   function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -32,7 +31,7 @@ const NewPost = ({ project }) => {
     dispatch(getSingleProjectPostRequest({ postId, projectId: project._id }));
   }, [dispatch, postId, project]);
 
-  const handleSubmit = ({ title, content }) => {
+  const handleSubmit: SubmitHandler = ({ title, content }) => {
     const toRaw = JSON.stringify(convertToRaw(content.getCurrentContent()));
 
     dispatch(
@@ -52,11 +51,12 @@ const NewPost = ({ project }) => {
       <Form onSubmit={handleSubmit} initialData={post}>
         <PageHeader>
           <div className="page-title">
-            <Breadcrumb
+            <Breadcrumbs
               list={[
                 {
                   title: 'Postagens',
-                  link: `/projects/${project._id}/manage/posts`,
+                  onClick: () =>
+                    history.push(`/projects/${project._id}/manage/posts`),
                 },
                 { title: 'Nova' },
               ]}
@@ -79,6 +79,7 @@ const NewPost = ({ project }) => {
         </PageHeader>
         <Paper padding>
           <TextField name="title" placeholder="Título da postagem" />
+          {/* @ts-ignore */}
           <FullEditor name="content" />
         </Paper>
       </Form>

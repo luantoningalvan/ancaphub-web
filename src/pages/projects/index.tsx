@@ -4,14 +4,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectCard from '../../components/projects/ProjectCard';
 import { getProjectsRequest } from '../../actions/projects';
-import {
-  Container,
-  Hero,
-  Button,
-  LoadContent,
-  Paper,
-} from '../../components/ui';
-
+import { LoadContent } from '../../components/ui';
+import { Button, Hero, Paper, Container } from 'snake-ui';
 const Projects = () => {
   const { projects, loading } = useSelector((state) => state.projects);
   const dispatch = useDispatch();

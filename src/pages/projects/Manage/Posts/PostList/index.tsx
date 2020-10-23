@@ -4,14 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormattedDate } from 'react-intl';
 import { parseISO, addDays } from 'date-fns';
 import { Link, useHistory } from 'react-router-dom';
-import {
-  Button,
-  IconButton,
-  LoadContent,
-  ConfirmationDialog,
-  Paper,
-  Breadcrumb,
-} from '../../../../../components/ui';
+import { LoadContent, ConfirmationDialog } from '../../../../../components/ui';
+import { Button, Paper, IconButton, Breadcrumbs } from 'snake-ui';
 import { Table } from '../styles';
 import { PageHeader } from '../../styles';
 import {
@@ -19,10 +13,10 @@ import {
   removeProjectPostRequest,
 } from '../../../../../actions/projects';
 
-const PostList = ({ project }) => {
+const PostList: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { posts, loadingPosts } = useSelector((state) => state.projects);
+  const { posts, loadingPosts } = useSelector((state: any) => state.projects);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   useEffect(() => {
@@ -37,7 +31,7 @@ const PostList = ({ project }) => {
     <>
       <PageHeader>
         <div className="page-title">
-          <Breadcrumb list={[{ title: 'Postagens' }]} />
+          <Breadcrumbs list={[{ title: 'Postagens' }]} />
           <h2>Postagens</h2>
         </div>
         <Link to="posts/new">
@@ -59,7 +53,7 @@ const PostList = ({ project }) => {
             </thead>
 
             <tbody>
-              {posts.map((post) => (
+              {posts.map((post: any) => (
                 <tr key={post._id}>
                   <th>{post.title}</th>
                   <th>

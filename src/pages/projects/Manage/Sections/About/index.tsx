@@ -1,16 +1,17 @@
 import React from 'react';
 import { Form } from '@unform/web';
+import { SubmitHandler } from '@unform/core';
 import { useDispatch } from 'react-redux';
 import { convertToRaw } from 'draft-js';
-import { Breadcrumb, Button } from '../../../../../components/ui';
+import { Button, Breadcrumbs } from 'snake-ui';
 import { PageHeader } from '../../styles';
 import FullEditor from '../../../../../components/editor/FullEditor';
 import { updateProjectAboutRequest } from '../../../../../actions/projects';
 
-const About = ({ project }) => {
+const About: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();
 
-  const handleSubmit = (data) => {
+  const handleSubmit: SubmitHandler = (data) => {
     const toRaw = JSON.stringify(convertToRaw(data.about.getCurrentContent()));
 
     dispatch(
@@ -25,7 +26,7 @@ const About = ({ project }) => {
     <Form onSubmit={handleSubmit} initialData={{ about: project.about }}>
       <PageHeader>
         <div className="page-title">
-          <Breadcrumb list={[{ title: 'Seções' }, { title: 'Sobre' }]} />
+          <Breadcrumbs list={[{ title: 'Seções' }, { title: 'Sobre' }]} />
           <h2>Sobre</h2>
         </div>
 
@@ -33,6 +34,7 @@ const About = ({ project }) => {
           Salvar
         </Button>
       </PageHeader>
+      {/* @ts-ignore */}
       <FullEditor name="about" />
     </Form>
   );

@@ -5,33 +5,36 @@ import { FiSettings } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import LinksList from '../../../components/projects/LinksList';
 import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
+import { LoadContent } from '../../../components/ui';
 import {
   Container,
   IconButton,
   Paper,
-  Spinner,
+  CircularLoader,
   Tabs,
   Tab,
-  LoadContent,
-} from '../../../components/ui';
+} from 'snake-ui';
 
 import { ProjectBanner } from './styles';
 import { getSingleProjectRequest } from '../../../actions/projects';
 import FollowProjectButton from '../../../components/projects/FollowProjectButton';
 import projectCategories from '../../../assets/project-categories';
 
-const ProjectFeed = lazy(() => import('./ProjectFeed'));
-const ProjectFAQ = lazy(() => import('./ProjectFAQ'));
-const ProjectAbout = lazy(() => import('./ProjectAbout'));
-const ProjectDonations = lazy(() => import('./ProjectDonations'));
+const ProjectFeed = lazy(() => import('./Feed'));
+const ProjectFAQ = lazy(() => import('./FAQ'));
+const ProjectAbout = lazy(() => import('./About'));
+const ProjectDonations = lazy(() => import('./Donations'));
 
 const SingleProject = () => {
   const dispatch = useDispatch();
-  const { loading, project } = useSelector((state) => state.projects);
+  const { loading, project } = useSelector((state: any) => state.projects);
 
-  const { page: projectPage, projectId } = useParams();
+  const {
+    page: projectPage,
+    projectId,
+  }: { projectId: string; page: string } = useParams();
 
-  const pages = {
+  const pages: { [key: string]: React.ReactNode } = {
     undefined: ProjectFeed,
     faq: ProjectFAQ,
     about: ProjectAbout,
@@ -42,7 +45,7 @@ const SingleProject = () => {
     dispatch(getSingleProjectRequest(projectId));
   }, [dispatch, projectId]);
 
-  const Template = pages[projectPage];
+  const Template: any = pages[projectPage];
 
   return (
     <LoadContent loading={loading}>
@@ -89,7 +92,7 @@ const SingleProject = () => {
 
                 <Link
                   className="category"
-                  href="http://ancaphub.com"
+                  to="http://ancaphub.com"
                   rel="noopener noreferrer"
                 >
                   {projectCategories[project.category]}
@@ -121,29 +124,29 @@ const SingleProject = () => {
             <Paper style={{ width: '100%' }}>
               <Tabs>
                 <Tab
-                  current={projectPage === undefined}
+                  current={projectPage === undefined} //@ts-ignore
                   label={<FormattedMessage id="projects.news" />}
                   link={`/projects/${projectId}`}
                 />
                 <Tab
-                  current={projectPage === 'faq'}
+                  current={projectPage === 'faq'} //@ts-ignore
                   label={<FormattedMessage id="projects.faq" />}
                   link={`/projects/${projectId}/faq`}
                 />
                 <Tab
-                  current={projectPage === 'about'}
+                  current={projectPage === 'about'} //@ts-ignore
                   label={<FormattedMessage id="projects.about" />}
                   link={`/projects/${projectId}/about`}
                 />
                 <Tab
-                  current={projectPage === 'donate'}
+                  current={projectPage === 'donate'} //@ts-ignore
                   label={<FormattedMessage id="projects.donate" />}
                   link={`/projects/${projectId}/donate`}
                 />
               </Tabs>
             </Paper>
             <div style={{ width: '100%', margin: '16px 0' }}>
-              <Suspense fallback={<Spinner size={96} />}>
+              <Suspense fallback={<CircularLoader size={96} />}>
                 <Template project={project} />
               </Suspense>
             </div>

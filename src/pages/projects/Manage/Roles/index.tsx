@@ -1,17 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { FiXCircle } from 'react-icons/fi';
-import { Breadcrumb, IconButton } from '../../../../components/ui';
+import { IconButton, Breadcrumbs } from 'snake-ui';
 import { PageHeader } from '../styles';
 import MiniUserCard from '../../../../components/users/MiniUserCard';
 
 const Roles = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state: any) => state.auth);
   return (
     <>
       <PageHeader>
         <div className="page-title">
-          <Breadcrumb list={[{ title: 'Funções Administrativas' }]} />
+          <Breadcrumbs list={[{ title: 'Funções Administrativas' }]} />
           <h2>Funções Administrativas</h2>
         </div>
       </PageHeader>

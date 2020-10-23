@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
 import { FiXCircle, FiPlusCircle } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
+import { SubmitHandler } from '@unform/core';
 import { Form } from '@unform/web';
 import { convertToRaw } from 'draft-js';
 import { useDispatch } from 'react-redux';
 import { PageHeader } from '../../styles';
-import {
-  Button,
-  TextField,
-  Paper,
-  Breadcrumb,
-} from '../../../../../components/ui';
+import { TextField } from '../../../../../components/ui';
+import { Button, Paper, Breadcrumbs } from 'snake-ui';
 import FullEditor from '../../../../../components/editor/FullEditor';
 import { createProjectPostRequest } from '../../../../../actions/projects';
 import Dropzone from '../../../../../components/upload/Dropzone';
 
-const NewPost = ({ project }) => {
+const NewPost: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState<any>(null);
 
-  const onUpload = (files) => {
+  const onUpload = (files: any) => {
     setImage(files[0]);
   };
 
-  const handleSubmit = ({ title, content }) => {
+  const handleSubmit: SubmitHandler = ({ title, content }) => {
     const toRaw = JSON.stringify(convertToRaw(content.getCurrentContent()));
 
     const formData = new FormData();
@@ -46,11 +43,12 @@ const NewPost = ({ project }) => {
     <Form onSubmit={handleSubmit}>
       <PageHeader>
         <div className="page-title">
-          <Breadcrumb
+          <Breadcrumbs
             list={[
               {
                 title: 'Postagens',
-                link: `/projects/${project._id}/manage/posts`,
+                onClick: () =>
+                  history.push(`/projects/${project._id}/manage/posts`),
               },
               { title: 'Nova' },
             ]}
@@ -73,6 +71,7 @@ const NewPost = ({ project }) => {
       </PageHeader>
       <Paper padding>
         <TextField name="title" placeholder="Título da postagem" />
+        {/* @ts-ignore */}
         <FullEditor name="content" />
       </Paper>
 

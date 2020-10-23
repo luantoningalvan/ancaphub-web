@@ -1,16 +1,11 @@
 /* eslint-disable import/no-named-default */
 import React, { useState, useRef, useEffect } from 'react';
 import { Form } from '@unform/web';
-import { Scope } from '@unform/core';
+import { Scope, FormHandles } from '@unform/core';
 import { useDispatch } from 'react-redux';
 import { FiDelete } from 'react-icons/fi';
-import {
-  TextField,
-  Button,
-  Breadcrumb,
-  Select,
-  IconButton,
-} from '../../../../components/ui';
+import { IconButton, Button, Breadcrumbs } from 'snake-ui';
+import { TextField, Select } from '../../../../components/ui';
 import { PageHeader } from '../styles';
 import { EditAvatarContainer, EditCoverContainer } from './styles';
 import {
@@ -27,27 +22,36 @@ import {
 } from '../../../../actions/projects';
 import projectCategories from '../../../../assets/project-categories';
 
-const Generals = ({ project }) => {
+interface GeneralProps {
+  project: {
+    id: string;
+    cover?: string;
+    avatar?: string;
+    type: string;
+    links: any;
+  };
+}
+const Generals: React.FC<GeneralProps> = ({ project }) => {
   const [editAvatarDialogState, setEditarAvatarDialogState] = useState(false);
   const [editCoverDialogState, setEditarCoverDialogState] = useState(false);
-  const [links, setLinks] = useState([]);
-  const formRef = useRef(null);
+  const [links, setLinks] = useState<{ type: string; url: string }[]>([]);
+  const formRef = useRef<FormHandles | null>(null);
   const dispatch = useDispatch();
 
-  const handleSubmit = (data) => {
-    dispatch(updateProjectRequest({ data, id: project._id }));
+  const handleSubmit = (data: any) => {
+    dispatch(updateProjectRequest({ data, id: project.id }));
   };
 
   useEffect(() => {
     if (formRef !== null) {
-      const formData = formRef.current.getData();
+      const formData: any = formRef?.current?.getData();
 
-      setLinks(formData.links || project.links || []);
+      setLinks(formData?.links || project.links || []);
     }
   }, [formRef, project]);
 
   const addSocialLink = () => setLinks([...links, { type: '', url: '' }]);
-  const removeSocialLink = (index) =>
+  const removeSocialLink = (index: number) =>
     setLinks(links.filter((_, i) => index !== i));
 
   return (
@@ -56,8 +60,8 @@ const Generals = ({ project }) => {
         open={editAvatarDialogState}
         onClose={() => setEditarAvatarDialogState(false)}
         dialogTitle="Editar avatar do projeto"
-        onUpdate={(data) =>
-          dispatch(updateProjectAvatarRequest({ id: project._id, data }))
+        onUpdate={(data: any) =>
+          dispatch(updateProjectAvatarRequest({ id: project.id, data }))
         }
       />
 
@@ -67,15 +71,15 @@ const Generals = ({ project }) => {
         dialogTitle="Editar capa do projeto"
         shape="rect"
         aspect={3 / 1}
-        onUpdate={(data) =>
-          dispatch(updateProjectCoverRequest({ id: project._id, data }))
+        onUpdate={(data: any) =>
+          dispatch(updateProjectCoverRequest({ id: project.id, data }))
         }
       />
 
       <Form onSubmit={handleSubmit} initialData={project} ref={formRef}>
         <PageHeader>
           <div className="page-title">
-            <Breadcrumb list={[{ title: 'Gerais' }]} />
+            <Breadcrumbs list={[{ title: 'Gerais' }]} />
             <h2>Gerais</h2>
           </div>
 
@@ -108,7 +112,7 @@ const Generals = ({ project }) => {
                 </Button>
                 <Button
                   onClick={() =>
-                    dispatch(removeProjectCoverRequest(project._id))
+                    dispatch(removeProjectCoverRequest(project.id))
                   }
                   style={{ background: '#d62000' }}
                   type="button"
@@ -147,7 +151,7 @@ const Generals = ({ project }) => {
                   </Button>
                   <Button
                     onClick={() =>
-                      dispatch(removeProjectAvatarRequest(project._id))
+                      dispatch(removeProjectAvatarRequest(project.id))
                     }
                     type="button"
                     style={{ background: '#d62000' }}

@@ -1,10 +1,10 @@
 import React from 'react';
-import ProjectFAQCard from '../../../components/projects/ProjectFAQCard';
+import ProjectFAQCard from '../../../../components/projects/ProjectFAQCard';
 
-const ProjectFaq = ({ project }) => {
+const ProjectFaq = ({ project }: any) => {
   return (
     <>
-      {project.faq.map((question) => (
+      {project.faq.map((question: any) => (
         <ProjectFAQCard question={question} key={question._id} />
       ))}
     </>

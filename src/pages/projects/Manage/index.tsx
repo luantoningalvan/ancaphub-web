@@ -10,14 +10,8 @@ import {
 
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Container,
-  Paper,
-  Menu,
-  MenuItem,
-  MenuTree,
-  LoadContent,
-} from '../../../components/ui';
+import { Menu, MenuItem, MenuTree, LoadContent } from '../../../components/ui';
+import { Container, Paper } from 'snake-ui';
 import {
   SettingsContainer,
   SettingsSidebarContainer,
@@ -33,13 +27,17 @@ import Sections from './Sections';
 import Roles from './Roles';
 
 const Settings = () => {
-  const { projectId, page, subpage } = useParams();
+  const {
+    projectId,
+    page,
+    subpage,
+  }: { projectId: string; page: string; subpage: string } = useParams();
   const BASE_URL = `/projects/${projectId}/manage`;
 
   const dispatch = useDispatch();
-  const { project, loading } = useSelector((state) => state.projects);
+  const { project, loading } = useSelector((state: any) => state.projects);
 
-  const settingsMap = {
+  const settingsMap: { [key: string]: React.ReactNode } = {
     undefined: Generals,
     posts: Posts,
     sections: Sections,
@@ -50,7 +48,7 @@ const Settings = () => {
     dispatch(getSingleProjectRequest(projectId));
   }, [dispatch, projectId]);
 
-  const Template = settingsMap[page];
+  const Template: any = settingsMap[page];
 
   return (
     <Container>

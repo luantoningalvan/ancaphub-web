@@ -1,14 +1,9 @@
 import React from 'react';
 import { Form } from '@unform/web';
+import { SubmitHandler } from '@unform/core';
 import { useDispatch } from 'react-redux';
-import {
-  Breadcrumb,
-  Card,
-  CardHeader,
-  CardBody,
-  TextField,
-  Button,
-} from '../../../../../components/ui';
+import { TextField } from '../../../../../components/ui';
+import { Button, Card, CardHeader, CardBody, Breadcrumbs } from 'snake-ui';
 import { PageHeader } from '../../styles';
 import ProjectFAQCard from '../../../../../components/projects/ProjectFAQCard';
 import {
@@ -16,14 +11,14 @@ import {
   addProjectFAQRequest,
 } from '../../../../../actions/projects';
 
-const FAQ = ({ project }) => {
+const FAQ: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();
 
-  const handleDelete = (faqId) => {
+  const handleDelete = (faqId: string) => {
     dispatch(removeProjectFAQRequest({ projectId: project._id, faqId }));
   };
 
-  const handleSubmit = (data, { reset }) => {
+  const handleSubmit: SubmitHandler = (data, { reset }) => {
     dispatch(addProjectFAQRequest({ data, id: project._id }));
     reset();
   };
@@ -32,12 +27,12 @@ const FAQ = ({ project }) => {
     <>
       <PageHeader>
         <div className="page-title">
-          <Breadcrumb list={[{ title: 'Seções' }, { title: 'FAQ' }]} />
+          <Breadcrumbs list={[{ title: 'Seções' }, { title: 'FAQ' }]} />
           <h2>FAQ</h2>
         </div>
       </PageHeader>
 
-      {project.faq.map((question) => (
+      {project.faq.map((question: any) => (
         <ProjectFAQCard
           question={question}
           key={question._id}
