@@ -1,21 +1,21 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { Button } from '../ui';
+import { Button } from 'snake-ui';
 import {
   followUserRequest,
   unfollowUserRequest,
-} from '../../actions/relationships';
+} from '../../../actions/relationships';
 
-export default ({ user }) => {
+const FollowButton: React.FC<{ user: any }> = ({ user }) => {
   const dispatch = useDispatch();
-  const state = useSelector((relState) => relState.relationships[user]);
+  const state = useSelector((relState: any) => relState.relationships[user]);
   const relationship = state || {};
-  const auth = useSelector((authState) => authState.auth);
+  const auth = useSelector((authState: any) => authState.auth);
   const verifyIfIsOwnProfile =
     auth.isAuthenticated && auth.user.username === user;
 
-  const [following, setFollowing] = React.useState(null);
+  const [following, setFollowing] = React.useState<boolean>(false);
 
   const handleFollow = () => {
     dispatch(followUserRequest(user));
@@ -37,7 +37,7 @@ export default ({ user }) => {
     return null;
   }
 
-  const getText = (isFollowing) => {
+  const getText = (isFollowing: boolean) => {
     if (isFollowing) {
       return <FormattedMessage id="common.following" />;
     }
@@ -55,10 +55,12 @@ export default ({ user }) => {
     <Button
       color="primary"
       size="small"
-      variant={following ? 'normal' : 'outlined'}
+      variant={following ? 'contained' : 'outlined'}
       onClick={following ? handleUnfollow : handleFollow}
     >
       {getText(following)}
     </Button>
   );
 };
+
+export default FollowButton;

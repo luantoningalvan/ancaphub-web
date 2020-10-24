@@ -1,7 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import defaultAvatar from '../../assets/default-profile-picture.jpg';
-import FollowButton from './FollowButton';
 
 export const User = styled.div`
   padding: 8px;
@@ -21,7 +18,8 @@ export const User = styled.div`
     font-weight: lighter;
   }
 `;
-const Avatar = styled.div`
+
+export const Avatar = styled.div<{ src?: string }>`
   height: 42px;
   width: 42px;
   overflow: hidden;
@@ -30,19 +28,3 @@ const Avatar = styled.div`
   background-size: cover;
   margin-right: 10px;
 `;
-
-const MiniUserCard = ({ user, children, ...rest }) => (
-  <User {...rest}>
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <Avatar src={user.avatar !== '' ? user.avatar : defaultAvatar} />
-      <div style={{ flex: 1 }}>
-        <h4>{user.name}</h4>
-        <span>{user.username}</span>
-      </div>
-      {children}
-    </div>
-    <FollowButton user={user.username} />
-  </User>
-);
-
-export default MiniUserCard;

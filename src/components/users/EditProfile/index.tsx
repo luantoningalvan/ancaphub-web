@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import {
   FiEdit as EditIcon,
@@ -13,26 +14,26 @@ import {
   FiX as CloseIcon,
 } from 'react-icons/fi';
 
-import { updateProfileInfoRequest } from '../../actions/users';
+import { updateProfileInfoRequest } from '../../../actions/users';
+import { TextField } from '../..';
 import {
-  TextField,
   IconButton,
   Button,
-  Dialog,
+  Modal,
   Card,
   CardBody,
   CardHeader,
-} from '../ui';
+} from 'snake-ui';
 
 const EditProfile = () => {
   const { formatMessage } = useIntl();
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.profile.user);
+  const data = useSelector((state: any) => state.profile.user);
   const handleClick = () => setOpen(!open);
-  const editFormRef = useRef(null);
+  const editFormRef = useRef<FormHandles | null>(null);
 
-  async function handleSubmit(validatedData) {
+  async function handleSubmit(validatedData: any) {
     try {
       const schema = Yup.object().shape({
         name: Yup.string()
@@ -69,12 +70,12 @@ const EditProfile = () => {
       });
       dispatch(updateProfileInfoRequest(validatedData));
     } catch (err) {
-      const validationErrors = {};
+      const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
           validationErrors[error.path] = error.message;
         });
-        editFormRef.current.setErrors(validationErrors);
+        editFormRef?.current?.setErrors(validationErrors);
       }
     }
   }
@@ -88,9 +89,9 @@ const EditProfile = () => {
         </span>
       </Button>
 
-      <Dialog
+      <Modal
         onClose={handleClick}
-        show={open}
+        open={open}
         style={{ width: '100%', maxWidth: 420 }}
       >
         <Form
@@ -112,7 +113,7 @@ const EditProfile = () => {
               actions={[
                 {
                   label: <FormattedMessage id="common.edit" />,
-                  action: () => editFormRef.current.submitForm(),
+                  action: () => editFormRef?.current?.submitForm(),
                   show: true,
                 },
               ]}
@@ -167,7 +168,7 @@ const EditProfile = () => {
             </CardBody>
           </Card>
         </Form>
-      </Dialog>
+      </Modal>
     </>
   );
 };
