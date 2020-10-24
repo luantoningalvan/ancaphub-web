@@ -1,11 +1,7 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import LocationIcon from 'react-ionicons/lib/IosPinOutline';
-import { Button, Paper } from '../ui';
+import { Paper } from 'snake-ui';
 
-const Event = styled(Paper)`
+export const Event = styled(Paper)`
   position: relative;
   .event-cover {
     height: 120px;
@@ -65,32 +61,3 @@ const Event = styled(Paper)`
     }
   }
 `;
-
-const EventCard = ({ event }) => (
-  <Event>
-    <div className="event-cover">
-      <Link to={`/events/${event._id}`}>
-        <img src={event.cover} alt="event cover" />
-      </Link>
-    </div>
-
-    <div className="event-date">
-      <span className="month">ABR</span>
-      <span className="day">20</span>
-    </div>
-
-    <div className="event-content">
-      <h4>{event.title}</h4>
-
-      <div className="event-location">
-        <LocationIcon />
-        <span>{event.location}</span>
-      </div>
-      <Button color="primary" fullwidth>
-        <FormattedMessage id="events.interested" />
-      </Button>
-    </div>
-  </Event>
-);
-
-export default EventCard;
