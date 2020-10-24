@@ -1,9 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
-import ListIcon from 'react-ionicons/lib/IosList';
-import { Paper } from '../ui';
 
-const ListCardWrap = styled.div`
+export const ListCardWrap = styled.div`
   width: 100%;
   .list-cover {
     width: 100%;
@@ -42,18 +39,3 @@ const ListCardWrap = styled.div`
     color: ${(props) => props.theme.palette.text.primary};
   }
 `;
-
-const ListCard = ({ list }) => (
-  <ListCardWrap>
-    <Paper className="list-cover">
-      <img src={list.cover} alt="list cover" />
-      <span>
-        {list.itemsCount}
-        <ListIcon />
-      </span>
-    </Paper>
-    <h4>{list.title}</h4>
-  </ListCardWrap>
-);
-
-export default ListCard;
