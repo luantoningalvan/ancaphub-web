@@ -16,12 +16,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { CardBody, CardFooter } from 'snake-ui';
 import {
-  Dropdown,
   DropdownListContainer,
   DropdownListItem,
   DropdownHeader,
-  Switcher,
 } from '../../ui';
+import { Dropdown, Switcher } from 'snake-ui';
 
 import {
   AppBar,
@@ -56,6 +55,8 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
   const { url } = useRouteMatch();
   const dispatch = useDispatch();
   const [animated, setAnimated] = useState(false);
+  const [notificationsAnchor, setNotificationsAnchor] = useState<any>(null);
+  const [optionsAnchor, setOptionsAnchor] = useState<any>(null);
 
   const escFunction = (event: any) => {
     if (event.keyCode === 16) {
@@ -110,20 +111,22 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
               <MessageIcon />
             </Link>
           </HeaderMenuItem>
+          <HeaderMenuItem
+            current={url.includes('/notifications')}
+            onClick={(e) => setNotificationsAnchor(e.currentTarget)}
+          >
+            <div>
+              <Bell animated={animated}>
+                <AnimatedBell />
+              </Bell>
+              {notReadCount > 0 && <span className="badge" />}
+            </div>
+          </HeaderMenuItem>
           <Dropdown
             placement="bottom"
-            offsetY={16}
-            offsetX="-8vw"
-            toggle={
-              <HeaderMenuItem current={url.includes('/notifications')}>
-                <div>
-                  <Bell animated={animated}>
-                    <AnimatedBell />
-                  </Bell>
-                  {notReadCount > 0 && <span className="badge" />}
-                </div>
-              </HeaderMenuItem>
-            }
+            open={Boolean(notificationsAnchor)}
+            onClose={() => setNotificationsAnchor(null)}
+            anchorEl={notificationsAnchor}
           >
             <DropdownHeader>
               <FormattedMessage id="common.notifications" />
@@ -155,17 +158,16 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
               </CardBody>
             )}
           </Dropdown>
+          <HeaderMenuItem onClick={(e) => setOptionsAnchor(e.currentTarget)}>
+            <div>
+              <ArrowDownIcon />
+            </div>
+          </HeaderMenuItem>
           <Dropdown
-            offsetY={16}
-            offsetX="-4vw"
             placement="bottom"
-            toggle={
-              <HeaderMenuItem>
-                <div>
-                  <ArrowDownIcon />
-                </div>
-              </HeaderMenuItem>
-            }
+            open={Boolean(optionsAnchor)}
+            onClose={() => setOptionsAnchor(null)}
+            anchorEl={optionsAnchor}
           >
             <DropdownListContainer>
               <DropdownListItem icon={<ProfileIcon />}>
@@ -178,7 +180,7 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
                 icon={<ContrastIcon />}
                 action={
                   <Switcher
-                    value={colorMode === 'dark'}
+                    initialValue={colorMode === 'dark'}
                     onChange={() => handleChangeTheme()}
                   />
                 }

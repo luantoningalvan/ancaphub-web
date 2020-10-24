@@ -48,7 +48,7 @@ const themes: any = {
   },
 };
 
-const Template: React.FC<{ collapsed: boolean }> = ({
+const Template: React.FC<{ collapsed?: boolean }> = ({
   children,
   collapsed = true,
 }) => {
