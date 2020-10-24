@@ -5,8 +5,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { FiMail, FiLock, FiUser, FiAtSign } from 'react-icons/fi';
-import { TextField } from '../ui';
-import { createUserRequest } from '../../actions/users';
+import { TextField } from '../../';
+import { createUserRequest } from '../../../actions/users';
 import { Button } from 'snake-ui';
 
 const SignupForm = () => {

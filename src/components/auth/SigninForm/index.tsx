@@ -5,11 +5,11 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { TextField } from '../ui';
+import { TextField } from '../../';
 import { Button } from 'snake-ui';
 import { FormHandles } from '@unform/core';
 
-import { authUserRequest } from '../../actions/auth';
+import { authUserRequest } from '../../../actions/auth';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
