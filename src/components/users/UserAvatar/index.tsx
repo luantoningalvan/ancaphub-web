@@ -14,12 +14,7 @@ interface UserAvatarProps {
   style?: React.CSSProperties;
 }
 
-const UserAvatar: React.FC<UserAvatarProps> = ({
-  user,
-  style,
-  size,
-  ...props
-}) => (
+const UserAvatar: React.FC<UserAvatarProps> = ({ user, size, ...props }) => (
   <Avatar size={size || 35} {...props}>
     <Link to={`/${user.username}`}>
       <img
