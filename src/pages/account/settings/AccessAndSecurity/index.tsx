@@ -4,8 +4,8 @@ import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ExpansionPanel, TextField } from '../../../../components/ui';
-import { Button, Card, CardBody, CardHeader } from 'snake-ui';
+import { TextField } from '../../../../components';
+import { Button, Card, CardBody, CardHeader, Accordion } from 'snake-ui';
 
 import {
   updateEmailRequest,
@@ -118,7 +118,7 @@ const AccessAndSecurity = () => {
       />
 
       <CardBody>
-        <ExpansionPanel title={<FormattedMessage id="common.username" />}>
+        <Accordion title={<FormattedMessage id="common.username" />}>
           <Form
             style={{
               display: 'flex',
@@ -143,11 +143,9 @@ const AccessAndSecurity = () => {
               <FormattedMessage id="common.change" />
             </Button>
           </Form>
-        </ExpansionPanel>
-        <ExpansionPanel
-          title={<FormattedMessage id="common.email" />}
-          style={{ marginTop: 8 }}
-        >
+        </Accordion>
+        <div style={{ marginTop: 8 }}></div>
+        <Accordion title={<FormattedMessage id="common.email" />}>
           <Form
             style={{
               display: 'flex',
@@ -172,11 +170,9 @@ const AccessAndSecurity = () => {
               <FormattedMessage id="common.change" />
             </Button>
           </Form>
-        </ExpansionPanel>
-        <ExpansionPanel
-          title={<FormattedMessage id="common.password" />}
-          style={{ marginTop: 8 }}
-        >
+        </Accordion>
+        <div style={{ marginTop: 8 }}></div>
+        <Accordion title={<FormattedMessage id="common.password" />}>
           <Form
             style={{
               display: 'flex',
@@ -226,7 +222,7 @@ const AccessAndSecurity = () => {
               <FormattedMessage id="common.change" />
             </Button>
           </Form>
-        </ExpansionPanel>
+        </Accordion>
       </CardBody>
     </Card>
   );

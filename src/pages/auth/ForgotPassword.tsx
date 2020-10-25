@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form } from '@unform/web';
 import { FiUser } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { TextField } from '../../components/ui';
+import { TextField } from '../../components';
 import {
   Button,
   Container,

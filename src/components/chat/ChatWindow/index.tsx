@@ -5,7 +5,7 @@ import { GrEmoji } from 'react-icons/gr';
 import { IconButton, Dropdown } from 'snake-ui';
 import EmojiPicker from 'emoji-picker-react';
 import { ChatInfoWrapper, EnterMessageInputWrapper } from './styles';
-import defaultProfilePicture from '../../../../assets/default-profile-picture.jpg';
+import defaultProfilePicture from '../../../assets/default-profile-picture.jpg';
 import { Scrollable } from 'snake-ui';
 import ChatBubble from '../ChatBubble';
 import { newMessageArrieved } from '../../../actions/chats';

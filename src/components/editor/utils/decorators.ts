@@ -1,3 +1,4 @@
+/* @ts-ignore */
 import MultiDecorator from 'draft-js-plugins-editor/lib/Editor/MultiDecorator';
 import { CompositeDecorator } from 'draft-js';
 
@@ -7,9 +8,9 @@ import { CompositeDecorator } from 'draft-js';
  * @link https://github.com/draft-js-plugins/draft-js-plugins/issues/401
  */
 export function getDecorators(plugins = []) {
-  let decorators = [];
+  let decorators: any = [];
 
-  plugins.forEach((listedPlugin) => {
+  plugins.forEach((listedPlugin: any) => {
     if (
       listedPlugin.decorators !== null &&
       listedPlugin.decorators !== undefined

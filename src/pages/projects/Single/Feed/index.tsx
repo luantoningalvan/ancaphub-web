@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectPostCard from '../../../../components/projects/ProjectPostCard';
 import { getProjectPostsRequest } from '../../../../actions/projects';
-import { LoadContent } from '../../../../components/ui';
+import { LoadContent } from '../../../../components';
 
 const ProjectFeed = ({ project }: any) => {
   const { posts, loadingPosts } = useSelector((state: any) => state.projects);

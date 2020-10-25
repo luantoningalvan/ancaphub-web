@@ -9,11 +9,7 @@ import {
 
 import FileIcon, { defaultStyles } from 'react-file-icon';
 import { FileExplorer, Toolbar } from './styles';
-import {
-  DropdownListContainer,
-  DropdownListItem,
-} from '../../../../components/ui';
-import { Paper, IconButton, Dropdown } from 'snake-ui';
+import { Paper, IconButton, Menu } from 'snake-ui';
 
 const filelist = [
   {
@@ -90,21 +86,16 @@ const GroupFiles = () => {
                     icon={<DropdownIcon />}
                     onClick={(e: any) => setAnchorEl(e.currentTarget)}
                   />
-                  <Dropdown
+                  <Menu
                     open={Boolean(anchorEl)}
                     placement="left"
                     anchorEl={anchorEl}
                     onClose={() => setAnchorEl(null)}
-                  >
-                    <DropdownListContainer>
-                      <DropdownListItem>
-                        <FormattedMessage id="common.download" />
-                      </DropdownListItem>
-                      <DropdownListItem>
-                        <FormattedMessage id="common.delete" />
-                      </DropdownListItem>
-                    </DropdownListContainer>
-                  </Dropdown>
+                    options={[
+                      { label: <FormattedMessage id="common.download" /> },
+                      { label: <FormattedMessage id="common.delete" /> },
+                    ]}
+                  />
                 </td>
               </tr>
             ))}

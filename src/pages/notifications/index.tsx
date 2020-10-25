@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import Notification from '../../components/notifications';
+import { NotificationsItem } from '../../components';
 
 import { Container, Hero, Paper, CircularLoader } from 'snake-ui';
 
@@ -41,7 +41,7 @@ const Notifications = () => {
               <Paper>
                 <ul style={{ padding: '8px 0px' }}>
                   {notifications.map((notification: any) => (
-                    <Notification
+                    <NotificationsItem
                       notification={notification}
                       key={notification.id}
                     />

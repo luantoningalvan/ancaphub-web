@@ -1,4 +1,4 @@
-import React, { lazy, ReactNode, Suspense, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage, FormattedDate } from 'react-intl';
@@ -39,6 +39,7 @@ import {
   UserAbout,
   ProfileContent,
 } from './styles';
+import { useHistory } from 'react-router-dom';
 
 const Feed = lazy(() => import('./Feed'));
 const Lists = lazy(() => import('./Lists'));
@@ -49,8 +50,7 @@ const Following = lazy(() => import('./Following'));
 const Profiles = () => {
   const { user, loading } = useSelector((state: any) => state.profile);
   const auth = useSelector((state: any) => state.auth);
-
-  const [editProfile] = useState(false);
+  const { push } = useHistory();
   const [editAvatar, setEditAvatar] = useState(false);
 
   const {
@@ -72,7 +72,6 @@ const Profiles = () => {
 
   useEffect(() => {
     dispatch(getSingleUserRequest(handle));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handle, getSingleUserRequest]);
 
   const Template: React.ReactNode = pages[pageParam];
@@ -240,17 +239,17 @@ const Profiles = () => {
                   <Tab
                     current={pageParam === undefined} // @ts-ignore
                     label={<FormattedMessage id="common.feed" />}
-                    link={`/${handle}`}
+                    onClick={() => push(`/${handle}`)}
                   />
                   <Tab
                     current={pageParam === 'following'} // @ts-ignore
                     label={<FormattedMessage id="common.following" />}
-                    link={`/${handle}/following`}
+                    onClick={() => push(`/${handle}/following`)}
                   />
                   <Tab
                     current={pageParam === 'followers'} // @ts-ignore
                     label={<FormattedMessage id="common.followers" />}
-                    link={`/${handle}/followers`}
+                    onClick={() => push(`/${handle}/followers`)}
                   />
                 </Tabs>
               </Paper>

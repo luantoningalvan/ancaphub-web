@@ -1,11 +1,11 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FiSettings } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import LinksList from '../../../components/projects/LinksList';
 import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
-import { LoadContent } from '../../../components/ui';
+import { LoadContent } from '../../../components';
 import {
   Container,
   IconButton,
@@ -28,6 +28,7 @@ const ProjectDonations = lazy(() => import('./Donations'));
 const SingleProject = () => {
   const dispatch = useDispatch();
   const { loading, project } = useSelector((state: any) => state.projects);
+  const { push } = useHistory();
 
   const {
     page: projectPage,
@@ -126,22 +127,22 @@ const SingleProject = () => {
                 <Tab
                   current={projectPage === undefined} //@ts-ignore
                   label={<FormattedMessage id="projects.news" />}
-                  link={`/projects/${projectId}`}
+                  onClick={() => push(`/projects/${projectId}`)}
                 />
                 <Tab
                   current={projectPage === 'faq'} //@ts-ignore
                   label={<FormattedMessage id="projects.faq" />}
-                  link={`/projects/${projectId}/faq`}
+                  onClick={() => push(`/projects/${projectId}/faq`)}
                 />
                 <Tab
                   current={projectPage === 'about'} //@ts-ignore
                   label={<FormattedMessage id="projects.about" />}
-                  link={`/projects/${projectId}/about`}
+                  onClick={() => push(`/projects/${projectId}/about`)}
                 />
                 <Tab
                   current={projectPage === 'donate'} //@ts-ignore
                   label={<FormattedMessage id="projects.donate" />}
-                  link={`/projects/${projectId}/donate`}
+                  onClick={() => push(`/projects/${projectId}/donate`)}
                 />
               </Tabs>
             </Paper>

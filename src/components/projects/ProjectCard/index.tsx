@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Paper } from 'snake-ui';
-import defaultProjectCover from '../../assets/default-group-cover.png';
+import defaultProjectCover from '../../../assets/default-group-cover.png';
 import FollowProjectButton from '../FollowProjectButton';
 import { ProjectCover, ProjectInfo } from './styles';
 

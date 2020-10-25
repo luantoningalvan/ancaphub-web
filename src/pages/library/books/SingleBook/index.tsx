@@ -2,14 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { FiDownload as DownloadIcon } from 'react-icons/fi';
 import { getSingleItemRequest } from '../../../../actions/library';
-import {
-  LoadContent,
-  DropdownListContainer,
-  DropdownListItem,
-} from '../../../../components/ui';
-import { Paper, Container, Button, Dropdown } from 'snake-ui';
+import { LoadContent } from '../../../../components';
+import { Paper, Container, Button, Menu } from 'snake-ui';
 
 import defaultThumbnail from '../../../../assets/default-book-cover.jpg';
 import Categories from '../../../../components/categories/ShowCategories';
@@ -62,26 +57,20 @@ function SingleBook() {
                   >
                     <FormattedMessage id="common.download" />
                   </Button>
-                  <Dropdown
+                  <Menu
                     placement="top"
                     anchorEl={downloadAnchor}
                     onClose={() => setDownloadAnchor(null)}
                     open={Boolean(downloadAnchor)}
-                  >
-                    <DropdownListContainer>
-                      {singleItem.files &&
-                        singleItem.files.map((file: any) => (
-                          <DropdownListItem
-                            icon={<DownloadIcon />}
-                            key={file.originalname}
-                          >
-                            <a href={file.url} target="_blanck">
-                              {file.originalname}
-                            </a>
-                          </DropdownListItem>
-                        ))}
-                    </DropdownListContainer>
-                  </Dropdown>
+                    options={
+                      singleItem.files
+                        ? singleItem.files.map((file: any) => ({
+                            label: file.originalname,
+                            onClick: () => window.open(file.url, '_blank'),
+                          }))
+                        : []
+                    }
+                  />
                 </div>
               </Paper>
             </div>

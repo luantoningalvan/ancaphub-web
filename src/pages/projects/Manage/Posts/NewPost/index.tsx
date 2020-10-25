@@ -6,11 +6,10 @@ import { Form } from '@unform/web';
 import { convertToRaw } from 'draft-js';
 import { useDispatch } from 'react-redux';
 import { PageHeader } from '../../styles';
-import { TextField } from '../../../../../components/ui';
+import { TextField, Dropzone } from '../../../../../components';
 import { Button, Paper, Breadcrumbs } from 'snake-ui';
 import FullEditor from '../../../../../components/editor/FullEditor';
 import { createProjectPostRequest } from '../../../../../actions/projects';
-import Dropzone from '../../../../../components/upload/Dropzone';
 
 const NewPost: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();

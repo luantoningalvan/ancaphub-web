@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { searchTermRequest as searchTerm } from '../../../actions/search';
-
-// Cards for entity types
 import UserCard from '../../../components/users/UserCard';
 import LibraryCard from '../../../components/library/LibraryCard';
 import EventCard from '../../../components/events/EventCard';
 
-import { Menu, MenuItem, LoadContent } from '../../../components/ui';
-import { Container, Card, CardHeader } from 'snake-ui';
+import { LoadContent } from '../../../components';
+import { Container, Card, CardHeader, List, ListItem } from 'snake-ui';
 import {
   InnerSearchGridContainer,
   SearchSidebarContainer,
@@ -26,7 +24,10 @@ function useQuery() {
 const SearchData = () => {
   const term = useQuery().get('term');
   const type = useQuery().get('type');
+
   const dispatch = useDispatch();
+  const { push } = useHistory();
+
   const { results, loading } = useSelector((state: any) => state.search);
 
   useEffect(() => {
@@ -42,24 +43,24 @@ const SearchData = () => {
           <SearchSidebarContainer>
             <Card style={{ width: '100%' }}>
               <CardHeader title={<FormattedMessage id="search.filter" />} />
-              <Menu>
-                <MenuItem
+              <List>
+                <ListItem
                   label={<FormattedMessage id="common.all" />}
-                  link={`search?term=${term}&type=all`}
+                  onClick={() => push(`search?term=${term}&type=all`)}
                 />
-                <MenuItem
-                  link={`search?term=${term}&type=library`}
+                <ListItem
+                  onClick={() => push(`search?term=${term}&type=library`)}
                   label={<FormattedMessage id="common.library" />}
                 />
-                <MenuItem
-                  link={`search?term=${term}&type=users`}
+                <ListItem
+                  onClick={() => push(`search?term=${term}&type=users`)}
                   label={<FormattedMessage id="common.users" />}
                 />
-                <MenuItem
-                  link={`search?term=${term}&type=events`}
+                <ListItem
+                  onClick={() => push(`search?term=${term}&type=events`)}
                   label={<FormattedMessage id="common.events" />}
                 />
-              </Menu>
+              </List>
             </Card>
           </SearchSidebarContainer>
 

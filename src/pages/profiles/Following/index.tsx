@@ -6,7 +6,7 @@ import { getUserFollowingRequest } from '../../../actions/users';
 import UserCard from '../../../components/users/UserCard';
 
 import { Paper, Grid } from 'snake-ui';
-import { LoadContent } from '../../../components/ui';
+import { LoadContent } from '../../../components';
 
 const Feed = ({ user }: any) => {
   const dispatch = useDispatch();

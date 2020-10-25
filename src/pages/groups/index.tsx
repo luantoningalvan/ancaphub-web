@@ -10,28 +10,28 @@ const groups = [
     cover: '',
     membersCounts: 200,
     hasEnrolled: false,
-    _id: '1',
+    id: '1',
   },
   {
     name: 'Grupo 2',
     cover: '',
     membersCounts: 300,
     hasEnrolled: false,
-    _id: '2',
+    id: '2',
   },
   {
     name: 'Grupo 3',
     cover: '',
     membersCounts: 400,
     hasEnrolled: false,
-    _id: '3',
+    id: '3',
   },
   {
     name: 'Grupo 4',
     cover: '',
     membersCounts: 500,
     hasEnrolled: false,
-    _id: '4',
+    id: '4',
   },
 ];
 
@@ -62,7 +62,7 @@ const Groups = () => (
 
     <Grid container spacing={2}>
       {groups.map((group) => (
-        <Grid item xs={12} md={6} lg={4} key={group._id}>
+        <Grid item xs={12} md={6} lg={4} key={group.id}>
           <GroupCard data={group} />
         </Grid>
       ))}

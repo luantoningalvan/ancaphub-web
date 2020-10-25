@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Menu } from '../../components/ui';
+import { List } from 'snake-ui';
 
 export const LibraryContainer = styled.div`
   display: grid;
@@ -44,7 +44,7 @@ export const LibraryCardGrid = styled.div`
   }
 `;
 
-export const LibrarySidebarMenu = styled(Menu)`
+export const LibrarySidebarMenu = styled(List)`
   max-height: 208px;
   @media only screen and (max-width: 768px) {
     overflow-y: hidden;

@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { createProjectRequest } from '../../../actions/projects';
-import { TextField, Select } from '../../../components/ui';
+import { TextField, Select } from '../../../components';
 import { Container, Paper, Hero, Button } from 'snake-ui';
 import projectCategories from '../../../assets/project-categories';
 

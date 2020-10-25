@@ -7,7 +7,7 @@ import {
 } from 'react-icons/fi';
 import LibraryCard from '../../../../components/library/LibraryCard';
 
-import { TextField } from '../../../../components/ui';
+import { TextField } from '../../../../components';
 import { Button, Container, Grid, Paper, Stepper } from 'snake-ui';
 import { Contribute, UploadBox } from './styles';
 

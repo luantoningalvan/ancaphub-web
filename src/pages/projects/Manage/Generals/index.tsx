@@ -5,7 +5,7 @@ import { Scope, FormHandles } from '@unform/core';
 import { useDispatch } from 'react-redux';
 import { FiDelete } from 'react-icons/fi';
 import { IconButton, Button, Breadcrumbs } from 'snake-ui';
-import { TextField, Select } from '../../../../components/ui';
+import { TextField, Select } from '../../../../components';
 import { PageHeader } from '../styles';
 import { EditAvatarContainer, EditCoverContainer } from './styles';
 import {

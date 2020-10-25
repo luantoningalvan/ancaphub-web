@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectCard from '../../components/projects/ProjectCard';
 import { getProjectsRequest } from '../../actions/projects';
-import { LoadContent } from '../../components/ui';
+import { LoadContent } from '../../components';
 import { Button, Hero, Paper, Container, Grid } from 'snake-ui';
 
 const Projects = () => {

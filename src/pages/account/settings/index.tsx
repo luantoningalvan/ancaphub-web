@@ -7,9 +7,8 @@ import {
   FiLock as PrivacyIcon,
 } from 'react-icons/fi';
 
-import { useLocation } from 'react-router-dom';
-import { Menu, MenuItem } from '../../../components/ui';
-import { Container, Paper, Hero } from 'snake-ui';
+import { useHistory, useLocation } from 'react-router-dom';
+import { Container, Paper, Hero, List, ListItem } from 'snake-ui';
 import {
   SettingsContainer,
   SettingsSidebarContainer,
@@ -26,7 +25,7 @@ function useQuery() {
 
 const Settings = () => {
   const query: string | null = useQuery().get('tab');
-
+  const { push } = useHistory();
   const settingsMap: { [key: string]: any } = {
     notifications: <Notifications />,
     privacy: <Privacy />,
@@ -58,30 +57,30 @@ const Settings = () => {
       <SettingsContainer>
         <SettingsSidebarContainer>
           <Paper>
-            <Menu>
-              <MenuItem
+            <List>
+              <ListItem
                 current={
                   query === 'access_and_security' ||
                   query === null ||
                   settingsMap[query] === undefined
                 }
                 label={<FormattedMessage id="common.account" />}
-                link="/settings?tab=access_and_security"
+                onClick={() => push('/settings?tab=access_and_security')}
                 icon={<AccountIcon />}
               />
-              <MenuItem
+              <ListItem
                 current={query === 'notifications'}
                 label={<FormattedMessage id="common.notifications" />}
-                link="/settings?tab=notifications"
+                onClick={() => push('/settings?tab=notifications')}
                 icon={<NotificationsIcon />}
               />
-              <MenuItem
+              <ListItem
                 current={query === 'privacy'}
                 label={<FormattedMessage id="common.privacy" />}
-                link="/settings?tab=privacy"
+                onClick={() => push('/settings?tab=privacy')}
                 icon={<PrivacyIcon />}
               />
-            </Menu>
+            </List>
           </Paper>
         </SettingsSidebarContainer>
         <SettingsContentContainer>

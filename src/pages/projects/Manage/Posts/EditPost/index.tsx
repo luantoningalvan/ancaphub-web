@@ -7,7 +7,7 @@ import { convertToRaw } from 'draft-js';
 import { useDispatch, useSelector } from 'react-redux';
 import { PageHeader } from '../../styles';
 import { Button, Paper, Breadcrumbs } from 'snake-ui';
-import { TextField, LoadContent } from '../../../../../components/ui';
+import { TextField, LoadContent } from '../../../../../components';
 
 import FullEditor from '../../../../../components/editor/FullEditor';
 import {

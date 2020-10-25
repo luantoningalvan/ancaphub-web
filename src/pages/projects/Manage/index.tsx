@@ -8,10 +8,10 @@ import {
   FiEdit,
 } from 'react-icons/fi';
 
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Menu, MenuItem, MenuTree, LoadContent } from '../../../components/ui';
-import { Container, Paper } from 'snake-ui';
+import { LoadContent } from '../../../components';
+import { Container, Paper, List, ListItem } from 'snake-ui';
 import {
   SettingsContainer,
   SettingsSidebarContainer,
@@ -35,6 +35,8 @@ const Settings = () => {
   const BASE_URL = `/projects/${projectId}/manage`;
 
   const dispatch = useDispatch();
+  const { push } = useHistory();
+
   const { project, loading } = useSelector((state: any) => state.projects);
 
   const settingsMap: { [key: string]: React.ReactNode } = {
@@ -64,56 +66,46 @@ const Settings = () => {
                 />
                 <h2>{project.name}</h2>
               </div>
-              <Menu>
-                <MenuItem
+              <List>
+                <ListItem
                   current={
                     page === 'generals' ||
                     page === null ||
                     settingsMap[page] === undefined
                   }
                   label="Gerais"
-                  link={BASE_URL}
+                  onClick={() => push(BASE_URL)}
                   icon={<FiSliders />}
                 />
-                <MenuItem
+                <ListItem
                   current={page === 'posts'}
                   label="Publicaçoes"
-                  link={`${BASE_URL}/posts`}
+                  onClick={() => push(`${BASE_URL}/posts`)}
                   icon={<FiEdit />}
                 />
-                <MenuTree
+                <ListItem
                   current={page === 'sections'}
                   label="Seções"
                   icon={<FiGrid />}
-                >
-                  <MenuItem
-                    nested
-                    label="Sobre"
-                    link={`${BASE_URL}/sections/about`}
-                    current={page === 'sections' && subpage === 'about'}
-                  />
-                  <MenuItem
-                    label="Doações"
-                    nested
-                    link={`${BASE_URL}/sections/donations`}
-                    current={page === 'sections' && subpage === 'donations'}
-                  />
-                  <MenuItem
-                    nested
-                    label="FAQ"
-                    link={`${BASE_URL}/sections/faq`}
-                    current={page === 'sections' && subpage === 'faq'}
-                  />
-                </MenuTree>
-                {/*
-                <MenuItem
-                  current={page === 'roles'}
-                  label="Funções Administrativas"
-                  link={`${BASE_URL}/roles`}
-                  icon={<FiUsers />}
+                  options={[
+                    {
+                      label: 'Sobre',
+                      onClick: () => push(`${BASE_URL}/sections/about`),
+                      current: page === 'sections' && subpage === 'about',
+                    },
+                    {
+                      label: 'Doações',
+                      onClick: () => push(`${BASE_URL}/sections/donations`),
+                      current: page === 'sections' && subpage === 'donations',
+                    },
+                    {
+                      label: 'FAQ',
+                      onClick: () => push(`${BASE_URL}/sections/faq`),
+                      current: page === 'sections' && subpage === 'faq',
+                    },
+                  ]}
                 />
-                 */}
-              </Menu>
+              </List>
             </Paper>
             <Link to={`/projects/${projectId}`} className="back-to-project">
               <FiChevronLeft />

@@ -15,7 +15,7 @@ import { searchNearbyUserRequest } from '../../../actions/search';
 import { updateGeoLocationsRequest } from '../../../actions/settings';
 import 'rc-slider/assets/index.css';
 import UserCard from '../../../components/users/UserCard';
-import { LoadContent } from '../../../components/ui';
+import { LoadContent } from '../../../components';
 import { Container, Hero, Paper, Switcher } from 'snake-ui';
 
 export default () => {

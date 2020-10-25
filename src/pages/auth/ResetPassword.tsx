@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import * as Yup from 'yup';
 
-import { TextField } from '../../components/ui';
+import { TextField } from '../../components';
 import {
   Button,
   Container,

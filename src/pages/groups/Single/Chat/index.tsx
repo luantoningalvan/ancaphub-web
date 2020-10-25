@@ -1,41 +1,9 @@
 import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { ChatWindow, ChatBubble } from '../../../../components/ui';
+import { ChatBubble } from '../../../../components';
 import { Paper, Tabs, Tab, Grid } from 'snake-ui';
 import { Textarea } from './styles';
-
-const chat = {
-  messages: [
-    {
-      user: {
-        name: 'Zé Pequeté',
-        username: 'zepqt',
-      },
-      body: 'Lorem ipsum dolor sit amet.',
-      createdAt: '2h',
-      sentByUser: false,
-    },
-    {
-      user: {
-        name: 'Você',
-        username: 'eu',
-      },
-      body: 'Consectetur adipiscing elit :P',
-      createdAt: '1h',
-      sentByUser: true,
-    },
-    {
-      user: {
-        name: 'Zé Pequeté',
-        username: 'zepqt',
-      },
-      body: 'Tô chegando com os refri, rapaziada',
-      createdAt: 'agora',
-      sentByUser: false,
-    },
-  ],
-};
 
 const GroupChat = () => {
   const [sideTab, setSideTab] = useState('notes');

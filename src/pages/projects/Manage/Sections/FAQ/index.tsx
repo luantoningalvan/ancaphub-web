@@ -2,7 +2,7 @@ import React from 'react';
 import { Form } from '@unform/web';
 import { SubmitHandler } from '@unform/core';
 import { useDispatch } from 'react-redux';
-import { TextField } from '../../../../../components/ui';
+import { TextField } from '../../../../../components';
 import { Button, Card, CardHeader, CardBody, Breadcrumbs } from 'snake-ui';
 import { PageHeader } from '../../styles';
 import ProjectFAQCard from '../../../../../components/projects/ProjectFAQCard';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import defaultGroupCover from '../../assets/default-group-cover.png';
+import defaultGroupCover from '../../../assets/default-group-cover.png';
 import { Button, Paper } from 'snake-ui';
 import { GroupCover, GroupInfo } from './styles';
 

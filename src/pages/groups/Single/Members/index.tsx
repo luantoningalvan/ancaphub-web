@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import UserCard from '../../../../components/users/UserCard';
-import { LoadContent } from '../../../../components/ui';
+import { LoadContent } from '../../../../components';
 
 import { Paper, Grid } from 'snake-ui';
 

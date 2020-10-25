@@ -3,7 +3,7 @@ import { FiCalendar as CalendarIcon } from 'react-icons/fi';
 import { FormattedDate } from 'react-intl';
 import { parseISO, addDays } from 'date-fns';
 import { Link } from 'react-router-dom';
-import defaultCover from '../../assets/default-article-cover.jpg';
+import defaultCover from '../../../assets/default-article-cover.jpg';
 import { Post } from './styles';
 
 const ProjectFeed = ({ post }: any) => {

@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import defaultBookCover from '../../assets/default-book-cover.jpg';
-import defaultArticleCover from '../../assets/default-article-cover.jpg';
-import defaultVideoCover from '../../assets/default-video-cover.jpg';
+import defaultBookCover from '../../../assets/default-book-cover.jpg';
+import defaultArticleCover from '../../../assets/default-article-cover.jpg';
+import defaultVideoCover from '../../../assets/default-video-cover.jpg';
 import { LibraryCard } from './styles';
+
+import {
+  FiBook as BookIcon,
+  FiVideo as VideoIcon,
+  FiFile as ArticleIcon,
+  FiBookmark as BookmarkButton,
+} from 'react-icons/fi';
 
 type LibraryItemType = {
   icon: JSX.Element;
@@ -28,13 +35,6 @@ export const types: { [key: string]: LibraryItemType } = {
     size: 130,
   },
 };
-
-import {
-  FiBook as BookIcon,
-  FiVideo as VideoIcon,
-  FiFile as ArticleIcon,
-  FiBookmark as BookmarkButton,
-} from 'react-icons/fi';
 
 const ItemCard = ({ item }: any) => (
   <LibraryCard type={item.type}>

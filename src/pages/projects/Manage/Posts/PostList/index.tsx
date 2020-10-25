@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormattedDate } from 'react-intl';
 import { parseISO, addDays } from 'date-fns';
 import { Link, useHistory } from 'react-router-dom';
-import { LoadContent, ConfirmationDialog } from '../../../../../components/ui';
+import { LoadContent, ConfirmationDialog } from '../../../../../components';
 import { Button, Paper, IconButton, Breadcrumbs } from 'snake-ui';
 import { Table } from '../styles';
 import { PageHeader } from '../../styles';

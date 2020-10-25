@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultCover from '../../assets/default-book-cover.jpg';
+import defaultCover from '../../../assets/default-book-cover.jpg';
 import { MiniLIbraryCardSyle } from './styles';
 
 const MiniLIbraryCard = ({ item }: any) => (

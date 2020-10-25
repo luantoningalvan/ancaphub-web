@@ -1,9 +1,8 @@
 import React, { Suspense, lazy } from 'react';
-import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { FiSettings as SettingIcon } from 'react-icons/fi';
-
+import { GroupHeader } from './styles';
 import { Container, Tabs, Tab, CircularLoader } from 'snake-ui';
 
 const GroupBoard = lazy(() => import('./Board'));
@@ -11,26 +10,6 @@ const GroupChat = lazy(() => import('./Chat'));
 const GroupFiles = lazy(() => import('./Files'));
 const GroupMembers = lazy(() => import('./Members'));
 const GroupManage = lazy(() => import('./Manage'));
-
-const GroupHeader = styled.div`
-  height: 64px;
-  width: 100%;
-  background: ${(props) => props.theme.palette.paperDark};
-  border-bottom: 1px solid ${(props) => props.theme.palette.border};
-
-  h2 {
-    color: ${(props) => props.theme.palette.text.primary};
-    font-size: 1.3em;
-  }
-
-  .group-header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 64px;
-    width: 100%;
-  }
-`;
 
 const SingleGroup = () => {
   const [Page, setPage] = React.useState<React.ReactNode | undefined>(
@@ -49,6 +28,8 @@ const SingleGroup = () => {
     manage: <GroupManage />,
   };
 
+  const { push } = useHistory();
+
   React.useEffect(() => {
     setPage(pages[groupPage]);
   }, [groupPage]);
@@ -63,27 +44,27 @@ const SingleGroup = () => {
             <Tabs style={{ height: 64 }}>
               <Tab
                 current={groupPage === undefined}
-                link={`/groups/${groupId}`} //@ts-ignore
+                onClick={() => push(`/groups/${groupId}`)}
                 label={<FormattedMessage id="groups.board" />}
               />
               <Tab
                 current={groupPage === 'chat'}
-                link={`/groups/${groupId}/chat`} //@ts-ignore
+                onClick={() => push(`/groups/${groupId}/chat`)}
                 label={<FormattedMessage id="groups.chat" />}
               />
               <Tab
                 current={groupPage === 'files'}
-                link={`/groups/${groupId}/files`} //@ts-ignore
+                onClick={() => push(`/groups/${groupId}/files`)}
                 label={<FormattedMessage id="groups.files" />}
               />
               <Tab
                 current={groupPage === 'members'}
-                link={`/groups/${groupId}/members`} //@ts-ignore
+                onClick={() => push(`/groups/${groupId}/members`)}
                 label={<FormattedMessage id="groups.members" />}
               />
               <Tab
                 current={groupPage === 'manage'}
-                link={`/groups/${groupId}/manage`} //@ts-ignore
+                onClick={() => push(`/groups/${groupId}/manage`)}
                 label={<SettingIcon />}
               />
             </Tabs>

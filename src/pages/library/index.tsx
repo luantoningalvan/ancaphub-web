@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { generate } from 'shortid';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 import LibraryCard from '../../components/library/LibraryCard';
@@ -9,7 +9,7 @@ import LibraryCard from '../../components/library/LibraryCard';
 import { loadCategoriesRequest } from '../../actions/categories';
 import { getItemsRequest } from '../../actions/library';
 
-import { MenuItem, LoadContent } from '../../components/ui';
+import { LoadContent } from '../../components';
 import {
   Container,
   Hero,
@@ -19,6 +19,7 @@ import {
   Tabs,
   Paper,
   Grid,
+  ListItem,
 } from 'snake-ui';
 
 import {
@@ -29,7 +30,6 @@ import {
 } from './styles';
 
 const Library = () => {
-  // eslint-disable-next-line no-unused-vars
   const [type, setType] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const { items: categories, loading: loadingCategories } = useSelector(
@@ -38,6 +38,7 @@ const Library = () => {
   const { items, loading } = useSelector((state: any) => state.library);
   const dispatch = useDispatch();
   const { type: typeParam }: { type: string } = useParams();
+  const { push } = useHistory();
 
   useEffect(() => {
     dispatch(loadCategoriesRequest());
@@ -76,13 +77,13 @@ const Library = () => {
 
             <LibrarySidebarMenu>
               <LoadContent loading={loadingCategories}>
-                <MenuItem
+                <ListItem
                   label={<FormattedMessage id="common.all" />}
                   current={selectedCategory === ''}
                   onClick={() => setSelectedCategory('')}
                 />
                 {categories.map((category: any) => (
-                  <MenuItem
+                  <ListItem
                     key={category.name}
                     label={category.name}
                     current={selectedCategory === category._id}
@@ -99,22 +100,22 @@ const Library = () => {
               <Tab // @ts-ignore
                 label={<FormattedMessage id="common.all" />}
                 current={typeParam === undefined}
-                link="/library"
+                onClick={() => push('/library')}
               />
               <Tab // @ts-ignore
                 label={<FormattedMessage id="library.articles" />}
                 current={typeParam === 'articles'}
-                link="/library/articles"
+                onClick={() => push('/library/articles')}
               />
               <Tab // @ts-ignore
                 label={<FormattedMessage id="library.books" />}
                 current={typeParam === 'books'}
-                link="/library/books"
+                onClick={() => push('/library/books')}
               />
               <Tab // @ts-ignore
                 label={<FormattedMessage id="library.videos" />}
                 current={typeParam === 'videos'}
-                link="/library/videos"
+                onClick={() => push('/library/videos')}
               />
             </Tabs>
           </Paper>

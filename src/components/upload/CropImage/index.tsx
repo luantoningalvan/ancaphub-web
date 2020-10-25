@@ -11,8 +11,8 @@ interface EditAvatarProps {
   dialogTitle: string;
   onClose(): void;
   onUpdate(data: any): void;
-  aspect: any;
-  shape: 'round' | 'rect';
+  aspect?: any;
+  shape?: 'round' | 'rect';
 }
 
 const EditAvatar: React.FC<EditAvatarProps> = ({
