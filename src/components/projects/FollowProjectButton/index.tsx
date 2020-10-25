@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiBell } from 'react-icons/fi';
-import { Button } from '../ui';
-import { followProjectRequest } from '../../actions/projects';
+import { Button } from 'snake-ui';
+import { followProjectRequest } from '../../../actions/projects';
 
-const FollowProjectButton = ({ project }) => {
+const FollowProjectButton = ({ project }: any) => {
   const dispatch = useDispatch();
   const relationship = useSelector(
-    (state) => state.projects.relationships[project]
+    (state: any) => state.projects.relationships[project]
   );
-  const [following, setFollowing] = useState(null);
+  const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     if (relationship && relationship.following) {
@@ -30,7 +30,7 @@ const FollowProjectButton = ({ project }) => {
   return (
     <Button
       color="primary"
-      variant={following ? 'normal' : 'outlined'}
+      variant={following ? 'contained' : 'outlined'}
       onClick={following ? handleUnfollow : handleFollow}
     >
       <FiBell />

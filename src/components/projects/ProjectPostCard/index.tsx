@@ -1,69 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
 import { FiCalendar as CalendarIcon } from 'react-icons/fi';
 import { FormattedDate } from 'react-intl';
 import { parseISO, addDays } from 'date-fns';
 import { Link } from 'react-router-dom';
 import defaultCover from '../../assets/default-article-cover.jpg';
-import { Paper } from '../ui';
+import { Post } from './styles';
 
-const Post = styled(Paper)`
-  display: flex;
-  height: 150px;
-  margin-bottom: 16px;
-
-  .post-cover {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 40%;
-    overflow: hidden;
-    cursor: pointer;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .post-content {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 60%;
-    padding: 16px;
-
-    .date {
-      display: flex;
-      margin-bottom: 8px;
-      align-items: center;
-      color: ${(props) => props.theme.palette.text.secondary};
-      font-size: 0.8em;
-      svg {
-        height: 20px;
-        width: 20px;
-        margin-right: 8px;
-      }
-    }
-
-    a h3 {
-      color: ${(props) => props.theme.palette.text.primary};
-      font-size: 1.4em;
-    }
-
-    p {
-      margin-top: 8px;
-    }
-  }
-`;
-
-const ProjectFeed = ({ post }) => {
+const ProjectFeed = ({ post }: any) => {
   const getExperpt = () => {
     const { blocks } = JSON.parse(post.content);
     const mappedBlocks = blocks.map(
-      (block) => (!block.text.trim() && '\n') || block.text
+      (block: any) => (!block.text.trim() && '\n') || block.text
     );
 
-    return mappedBlocks.reduce((acc, block) => {
+    return mappedBlocks.reduce((acc: any, block: any) => {
       let returned = acc;
       if (block === '\n') returned += block;
       else returned += `${block}\n`;

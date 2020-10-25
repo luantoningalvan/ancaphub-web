@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { FiChevronDown, FiXCircle } from 'react-icons/fi';
 
-import { Card, CardBody, CardHeader, Collapse } from '../ui';
+import { Card, CardBody, CardHeader, Collapse } from 'snake-ui';
+import { FAQQuestion } from './styles';
 
-const FAQQuestion = styled.div`
-  & > div {
-    margin-top: 8px;
-  }
+interface ProjectFaqProps {
+  question: {
+    question: string;
+    answer: string;
+  };
+  showDeleteButton?: boolean;
+  onDelete?(): void;
+}
 
-  svg {
-    cursor: pointer;
-    transition: transform 0.2s;
-    transform: ${(props) => (props.open ? 'rotate(180deg)' : 'rotate(0deg)')};
-  }
-`;
-
-const ProjectFaq = ({ question, showDeleteButton, onDelete }) => {
+const ProjectFaq: React.FC<ProjectFaqProps> = ({
+  question,
+  showDeleteButton,
+  onDelete,
+}) => {
   const [open, setOpen] = useState(false);
 
   return (
