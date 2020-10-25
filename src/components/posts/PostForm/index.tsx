@@ -29,7 +29,7 @@ import {
 } from 'draft-js-buttons';
 
 import { Form } from '@unform/web';
-import { TextField } from '../../ui';
+import { TextField } from '../..';
 
 import { Card, CardBody, CardFooter, IconButton, Button } from 'snake-ui';
 
@@ -375,7 +375,6 @@ const PostForm: React.FC = () => {
 
             <Button
               variant="contained"
-              disableElevation
               color="secondary"
               size="small"
               style={{ marginLeft: 'auto' }}

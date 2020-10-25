@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Paper } from 'snake-ui';
 
 export const PostContent = styled.p`
   word-wrap: normal;
@@ -36,11 +35,12 @@ export const PostContentWrapper = styled.div`
   }
 `;
 
-export const PostContainer = styled(Paper)`
+export const PostContainer = styled.div`
   margin-bottom: 16px;
   flex-basis: 100%;
   word-break: break-all;
-
+  border-radius: 8px;
+  background: ${(props) => props.theme.palette.paper};
   .profile-picture {
     height: 44px;
     width: 44px;

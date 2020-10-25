@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Collapse } from '../../ui';
+import { Collapse } from 'snake-ui';
 import CommentForm from '../CommentForm';
 import Comment from '../SingleComment';
 

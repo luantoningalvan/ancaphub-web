@@ -7,7 +7,7 @@ import {
   getMorePostsRequest,
 } from '../../actions/posts';
 
-import { Container } from '../../components/ui';
+import { Container } from 'snake-ui';
 
 import PostForm from '../../components/posts/PostForm';
 import LastItemsWidget from '../../components/library/LastItemsWidget';
@@ -24,7 +24,7 @@ const Feed = () => {
   const { items, loading } = useSelector((state: any) => state.posts);
 
   return (
-    <Container style={{ marginTop: 8 }}>
+    <Container>
       <FeedContainer>
         <div id="posts">
           <PostForm />

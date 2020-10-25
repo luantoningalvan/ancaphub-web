@@ -9,12 +9,8 @@ import { differenceInSeconds, parseISO, getTime } from 'date-fns';
 import UserAvatar from '../../users/UserAvatar';
 import UserName from '../../users/UserName';
 import { deleteCommentRequest } from '../../../actions/comments';
-import { IconButton, Dropdown } from 'snake-ui';
-import {
-  DropdownListContainer,
-  DropdownListItem,
-  ConfirmationDialog,
-} from '../../ui';
+import { IconButton, Menu } from 'snake-ui';
+import { ConfirmationDialog } from '../..';
 
 import { SingleCommentContainer } from './styles';
 
@@ -75,20 +71,19 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment, post }) => {
               onClick={(e: any) => setCommentOptions(e.currentTarget)}
             />
 
-            <Dropdown
+            <Menu
               open={Boolean(commentOptions)}
+              placement="left"
               anchorEl={commentOptions}
               onClose={() => setCommentOptions(null)}
-            >
-              <DropdownListContainer>
-                <DropdownListItem
-                  icon={<DeleteIcon />}
-                  onClick={() => setDeleteBox(true)}
-                >
-                  <FormattedMessage id="common.delete" />
-                </DropdownListItem>
-              </DropdownListContainer>
-            </Dropdown>
+              options={[
+                {
+                  // @ts-ignore
+                  label: <FormattedMessage id="common.delete" />,
+                  onClick: () => setDeleteBox(true),
+                },
+              ]}
+            />
             <ConfirmationDialog
               show={deleteBox}
               onClose={() => setDeleteBox(false)}

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { Paper } from '../../ui';
 
-export default styled(Paper)`
+export default styled.div`
+  border-radius: 8px;
+  background: ${(props) => props.theme.palette.paper};
+  overflow: hidden;
   .form-actions {
     display: flex;
     justify-content: flex-start;

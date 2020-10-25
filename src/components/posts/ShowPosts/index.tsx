@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import PostCard from '../PostCard';
-import { Spinner } from '../../ui';
+import { CircularLoader } from 'snake-ui';
 
 interface ShowPostsProps {
   posts: any[];
@@ -33,7 +33,7 @@ const ShowPosts: React.FC<ShowPostsProps> = ({ posts, getMore = () => {} }) => {
             padding: 16,
           }}
         >
-          <Spinner />
+          <CircularLoader size={72} />
         </div>
       }
       endMessage={
