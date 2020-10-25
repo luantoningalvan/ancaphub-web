@@ -14,7 +14,7 @@ import i18nEn from './i18n/en.json';
 import i18nFr from './i18n/fr.json';
 
 // messages by language
-const messages = {
+const messages: { [key: string]: any } = {
   pt: i18nPt,
   es: i18nEs,
   en: i18nEn,
