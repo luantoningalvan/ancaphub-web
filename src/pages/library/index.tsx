@@ -128,7 +128,7 @@ const Library = () => {
               ) : (
                 <Grid container spacing={2}>
                   {items.map((item: any) => (
-                    <Grid xs={12} key={generate()}>
+                    <Grid item xs={12} md={6} lg={4} key={generate()}>
                       <LibraryCard item={item} />
                     </Grid>
                   ))}

@@ -22,6 +22,7 @@ import {
   FiThumbsUp as LikeIcon,
   FiMessageSquare as CommentIcon,
   FiTrash as DeleteIcon,
+  FiTrash,
 } from 'react-icons/fi';
 
 import { useDispatch } from 'react-redux';
@@ -147,6 +148,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
               {
                 label: <FormattedMessage id="common.delete" />,
                 onClick: handleDelete,
+                icon: <FiTrash />,
               },
             ]}
           />

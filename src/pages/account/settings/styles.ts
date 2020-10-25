@@ -6,7 +6,7 @@ export const SettingsContainer = styled.div`
   grid-template-areas: 'sidebar content';
   grid-template-rows: auto;
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 16px;
   @media only screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;

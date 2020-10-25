@@ -111,12 +111,12 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
             </div>
           </HeaderMenuItem>
           <Dropdown
-            placement="bottom"
+            placement="bottom-end"
             open={Boolean(notificationsAnchor)}
             onClose={() => setNotificationsAnchor(null)}
             anchorEl={notificationsAnchor}
           >
-            <h3>
+            <h3 style={{ padding: '16px 16px 0px 16px' }}>
               <FormattedMessage id="common.notifications" />
             </h3>
             {notifications.length > 0 ? (
@@ -152,7 +152,7 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
             </div>
           </HeaderMenuItem>
           <Menu
-            placement="bottom"
+            placement="bottom-end"
             open={Boolean(optionsAnchor)}
             onClose={() => setOptionsAnchor(null)}
             anchorEl={optionsAnchor}

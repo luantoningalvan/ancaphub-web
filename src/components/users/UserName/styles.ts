@@ -10,7 +10,7 @@ export const UserNameStyle = styled(Link)<Props>`
   font-weight: bold;
   color: inherit;
   text-decoration: none;
-  font-size: ${(props) => props.fontSize || 15}em;
+  font-size: ${(props) => props.fontSize || 15}px;
 
   ${(props) =>
     props.isVerified &&

@@ -20,7 +20,13 @@ const ToastContainer = () => {
   return (
     <Container>
       {messagesWithTransitions.map(({ item, key, props }) => (
-        <Toast key={key} style={props} message={item} />
+        <Toast
+          key={key}
+          style={props}
+          message={item}
+          duration={3000}
+          showCloseButton
+        />
       ))}
     </Container>
   );

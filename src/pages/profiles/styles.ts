@@ -269,19 +269,6 @@ export const ProfileContent = styled.div`
   @media (min-width: 768px) {
     gap: 16px;
     display: grid;
-    grid-template-columns: 30% 70%;
-  }
-`;
-
-// This can be moved to other place to avoid the duplicate
-// Adding here too to have the changes done faster
-export const UserCardGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto;
-  gap: 16px;
-  margin-bottom: 1em;
-  @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 3fr 7fr;
   }
 `;

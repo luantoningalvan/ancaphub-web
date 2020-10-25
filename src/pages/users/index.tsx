@@ -2,9 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { Container, Hero, CircularLoader } from 'snake-ui';
-
-import { UserCardGrid } from './styles';
+import { Container, Hero, CircularLoader, Grid } from 'snake-ui';
 
 import { getUsersRequest, loadMoreUsersRequest } from '../../actions/users';
 import UserCard from '../../components/users/UserCard';
@@ -50,11 +48,13 @@ const Users = () => {
             </p>
           }
         >
-          <UserCardGrid>
+          <Grid container spacing={2}>
             {items.map((user: any) => (
-              <UserCard user={user.user} key={user._id} />
+              <Grid item xs={6} md={4} lg={3} key={user.id}>
+                <UserCard user={user.user} />
+              </Grid>
             ))}
-          </UserCardGrid>
+          </Grid>
         </InfiniteScroll>
       </div>
     </Container>

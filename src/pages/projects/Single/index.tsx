@@ -13,6 +13,7 @@ import {
   CircularLoader,
   Tabs,
   Tab,
+  Grid,
 } from 'snake-ui';
 
 import { ProjectBanner } from './styles';
@@ -105,25 +106,18 @@ const SingleProject = () => {
           </div>
         </Container>
       </ProjectBanner>
-      <Container>
-        <div
-          style={{
-            marginTop: 16,
-            display: 'grid',
-            gridTemplateColumns: '30% 70%',
-            gap: '16px',
-          }}
-        >
-          <div>
+      <Container style={{ marginTop: 16 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6} lg={4}>
             <h3>
               <FormattedMessage id="projects.usefulLinks" />
             </h3>
 
             <LinksList links={project.links} />
-          </div>
-          <div>
+          </Grid>
+          <Grid item xs={12} md={6} lg={8}>
             <Paper style={{ width: '100%' }}>
-              <Tabs>
+              <Tabs style={{ height: 48, padding: '0px 8px' }}>
                 <Tab
                   current={projectPage === undefined} //@ts-ignore
                   label={<FormattedMessage id="projects.news" />}
@@ -151,8 +145,8 @@ const SingleProject = () => {
                 <Template project={project} />
               </Suspense>
             </div>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </Container>
     </LoadContent>
   );
