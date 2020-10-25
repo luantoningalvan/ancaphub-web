@@ -9,7 +9,7 @@ import { TextField } from '../../';
 import { Button } from 'snake-ui';
 import { FormHandles } from '@unform/core';
 
-import { authUserRequest } from '../../../actions/auth';
+import { authUserRequest } from '../../../redux/actions/auth';
 
 const SignInForm = () => {
   const dispatch = useDispatch();

@@ -9,7 +9,7 @@ import ProjectFAQCard from '../../../../../components/projects/ProjectFAQCard';
 import {
   removeProjectFAQRequest,
   addProjectFAQRequest,
-} from '../../../../../actions/projects';
+} from '../../../../../redux/actions/projects';
 
 const FAQ: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();

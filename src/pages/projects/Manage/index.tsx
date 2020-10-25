@@ -19,7 +19,7 @@ import {
 } from './styles';
 import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
 
-import { getSingleProjectRequest } from '../../../actions/projects';
+import { getSingleProjectRequest } from '../../../redux/actions/projects';
 
 import Generals from './Generals';
 import Posts from './Posts';

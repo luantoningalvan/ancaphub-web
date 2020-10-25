@@ -1,7 +1,7 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 import * as actions from '../actions/auth';
 import { addAlert } from '../actions/alerts';
-import * as api from '../api/auth';
+import * as api from '../../api/auth';
 
 function* authUser(action) {
   try {

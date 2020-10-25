@@ -8,7 +8,7 @@ import {
 } from 'redux-saga/effects';
 
 import * as actions from '../actions/posts';
-import * as api from '../api/posts';
+import * as api from '../../api/posts';
 import { getUsersCount } from '../actions/users';
 import { getUsersRelationsips } from '../actions/relationships';
 

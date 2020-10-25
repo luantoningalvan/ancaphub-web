@@ -5,7 +5,7 @@ import { Button } from 'snake-ui';
 import {
   followUserRequest,
   unfollowUserRequest,
-} from '../../../actions/relationships';
+} from '../../../redux/actions/relationships';
 
 const FollowButton: React.FC<{ user: any }> = ({ user }) => {
   const dispatch = useDispatch();

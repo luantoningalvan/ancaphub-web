@@ -9,7 +9,7 @@ import DonationCard from '../../../../../components/projects/ProjectDonationCard
 import {
   removeProjectDonationRequest,
   addProjectDonationRequest,
-} from '../../../../../actions/projects';
+} from '../../../../../redux/actions/projects';
 
 const Donations: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();

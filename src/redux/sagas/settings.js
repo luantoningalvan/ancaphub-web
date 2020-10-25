@@ -1,7 +1,7 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/settings';
-import * as api from '../api/settings';
+import * as api from '../../api/settings';
 import { addAlert } from '../actions/alerts';
 
 function* updateUsername(action) {

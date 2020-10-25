@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import Categories from '../../../../components/categories/ShowCategories';
 import { Container, Paper } from 'snake-ui';
-import { getSingleItemRequest as getSingleItem } from '../../../../actions/library';
+import { getSingleItemRequest as getSingleItem } from '../../../../redux/actions/library';
 import {
   Author,
   Banner,

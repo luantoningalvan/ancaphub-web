@@ -9,7 +9,7 @@ import { PageHeader } from '../../styles';
 import { TextField, Dropzone } from '../../../../../components';
 import { Button, Paper, Breadcrumbs } from 'snake-ui';
 import FullEditor from '../../../../../components/editor/FullEditor';
-import { createProjectPostRequest } from '../../../../../actions/projects';
+import { createProjectPostRequest } from '../../../../../redux/actions/projects';
 
 const NewPost: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();

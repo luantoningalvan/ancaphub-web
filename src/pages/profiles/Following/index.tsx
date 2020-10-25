@@ -2,7 +2,7 @@ import React, { useEffect, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { generate } from 'shortid';
-import { getUserFollowingRequest } from '../../../actions/users';
+import { getUserFollowingRequest } from '../../../redux/actions/users';
 import UserCard from '../../../components/users/UserCard';
 
 import { Paper, Grid } from 'snake-ui';

@@ -14,7 +14,7 @@ import {
   FiX as CloseIcon,
 } from 'react-icons/fi';
 
-import { updateProfileInfoRequest } from '../../../actions/users';
+import { updateProfileInfoRequest } from '../../../redux/actions/users';
 import { TextField } from '../..';
 import {
   IconButton,

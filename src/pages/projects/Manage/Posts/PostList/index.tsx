@@ -11,7 +11,7 @@ import { PageHeader } from '../../styles';
 import {
   getProjectPostsRequest,
   removeProjectPostRequest,
-} from '../../../../../actions/projects';
+} from '../../../../../redux/actions/projects';
 
 const PostList: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();

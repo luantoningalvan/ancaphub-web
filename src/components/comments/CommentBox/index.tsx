@@ -4,7 +4,7 @@ import { Collapse } from 'snake-ui';
 import CommentForm from '../CommentForm';
 import Comment from '../SingleComment';
 
-import { loadCommentsRequest } from '../../../actions/comments';
+import { loadCommentsRequest } from '../../../redux/actions/comments';
 
 interface CommentBoxProps {
   post: any;

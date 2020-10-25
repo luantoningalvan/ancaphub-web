@@ -1,5 +1,5 @@
 import { Types } from '../actions/posts';
-import arrayToObject from '../utils/arrayToObject';
+import arrayToObject from '../../utils/arrayToObject';
 
 const INITIAL_STATE = {
   items: [],

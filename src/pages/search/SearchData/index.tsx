@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import { searchTermRequest as searchTerm } from '../../../actions/search';
+import { searchTermRequest as searchTerm } from '../../../redux/actions/search';
 import UserCard from '../../../components/users/UserCard';
 import LibraryCard from '../../../components/library/LibraryCard';
 import EventCard from '../../../components/events/EventCard';

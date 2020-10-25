@@ -19,7 +19,7 @@ import {
   updateProjectCoverRequest,
   removeProjectAvatarRequest,
   removeProjectCoverRequest,
-} from '../../../../actions/projects';
+} from '../../../../redux/actions/projects';
 import projectCategories from '../../../../assets/project-categories';
 
 interface GeneralProps {

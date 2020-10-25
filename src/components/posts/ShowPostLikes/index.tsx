@@ -3,7 +3,7 @@ import { FiX as CloseIcon } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
-import { getPostLikesRequest } from '../../../actions/posts';
+import { getPostLikesRequest } from '../../../redux/actions/posts';
 import UserList from '../../users/UserList';
 import { Modal, Card, CardHeader, CardBody, CircularLoader } from 'snake-ui';
 

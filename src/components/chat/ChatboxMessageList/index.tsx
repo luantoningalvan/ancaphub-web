@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { MessageSearchWrap } from './styles';
 import ChatboxListItem from '../ChatboxListItem';
 import { Scrollable } from 'snake-ui';
-import { switchChat } from '../../../actions/chats';
+import { switchChat } from '../../../redux/actions/chats';
 
 type Chat = {
   user: {

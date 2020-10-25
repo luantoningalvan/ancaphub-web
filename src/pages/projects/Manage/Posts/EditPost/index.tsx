@@ -13,7 +13,7 @@ import FullEditor from '../../../../../components/editor/FullEditor';
 import {
   updateProjectPostRequest,
   getSingleProjectPostRequest,
-} from '../../../../../actions/projects';
+} from '../../../../../redux/actions/projects';
 
 const NewPost = ({ project }: any) => {
   const dispatch = useDispatch();

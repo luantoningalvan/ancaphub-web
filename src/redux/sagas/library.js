@@ -1,7 +1,7 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/library';
-import * as api from '../api/library';
+import * as api from '../../api/library';
 
 function* createItem(action) {
   try {

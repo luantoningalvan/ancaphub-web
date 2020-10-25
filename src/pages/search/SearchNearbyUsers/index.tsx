@@ -11,8 +11,8 @@ import {
   InnerSearchGridContainer,
   Message,
 } from './styles';
-import { searchNearbyUserRequest } from '../../../actions/search';
-import { updateGeoLocationsRequest } from '../../../actions/settings';
+import { searchNearbyUserRequest } from '../../../redux/actions/search';
+import { updateGeoLocationsRequest } from '../../../redux/actions/settings';
 import 'rc-slider/assets/index.css';
 import UserCard from '../../../components/users/UserCard';
 import { LoadContent } from '../../../components';

@@ -13,7 +13,7 @@ import {
 } from './styles';
 import { Container } from 'snake-ui';
 
-import { getSingleItemRequest as getSingleItem } from '../../../../actions/library';
+import { getSingleItemRequest as getSingleItem } from '../../../../redux/actions/library';
 
 const SingleVideo = () => {
   const { id }: { id: string } = useParams();

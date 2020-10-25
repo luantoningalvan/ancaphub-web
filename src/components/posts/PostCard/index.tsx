@@ -38,7 +38,10 @@ import { IconButton, Menu } from 'snake-ui';
 import defaultProfilePicture from '../../../assets/default-profile-picture.jpg';
 import LikeBox from '../ShowPostLikes';
 import PostPoll from '../PostPoll';
-import { likePostRequest, deletePostRequest } from '../../../actions/posts';
+import {
+  likePostRequest,
+  deletePostRequest,
+} from '../../../redux/actions/posts';
 
 interface PostCardProps {
   data: {

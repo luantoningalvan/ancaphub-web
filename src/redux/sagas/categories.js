@@ -1,7 +1,7 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/categories';
-import * as api from '../api/categories';
+import * as api from '../../api/categories';
 import { addAlert } from '../actions/alerts';
 
 function* getCategories() {

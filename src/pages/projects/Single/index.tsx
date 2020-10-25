@@ -17,7 +17,7 @@ import {
 } from 'snake-ui';
 
 import { ProjectBanner } from './styles';
-import { getSingleProjectRequest } from '../../../actions/projects';
+import { getSingleProjectRequest } from '../../../redux/actions/projects';
 import FollowProjectButton from '../../../components/projects/FollowProjectButton';
 import projectCategories from '../../../assets/project-categories';
 

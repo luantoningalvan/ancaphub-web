@@ -2,7 +2,7 @@ import { select, takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/comments';
 import { addAlert } from '../actions/alerts';
-import * as api from '../api/comments';
+import * as api from '../../api/comments';
 
 function* loadComments({ payload }) {
   try {

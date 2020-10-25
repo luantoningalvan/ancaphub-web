@@ -8,7 +8,7 @@ import { FormattedRelativeTime, FormattedMessage } from 'react-intl';
 import { differenceInSeconds, parseISO, getTime } from 'date-fns';
 import UserAvatar from '../../users/UserAvatar';
 import UserName from '../../users/UserName';
-import { deleteCommentRequest } from '../../../actions/comments';
+import { deleteCommentRequest } from '../../../redux/actions/comments';
 import { IconButton, Menu } from 'snake-ui';
 import { ConfirmationDialog } from '../..';
 

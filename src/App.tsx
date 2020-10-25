@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import Routes from './routes';
 import setAuthToken from './utils/setAuthToken';
-import store from './store';
-import { loadUserRequest } from './actions/auth';
+import store from './redux/store';
+import { loadUserRequest } from './redux/actions/auth';
 import AlertContainer from './components/alerts/AlertContainer';
 
 // i18n JSON base translation files

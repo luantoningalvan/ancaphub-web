@@ -1,7 +1,7 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/search';
-import * as api from '../api/search';
+import * as api from '../../api/search';
 import { addAlert } from '../actions/alerts';
 import { getUsersCount } from '../actions/users';
 import { getUsersRelationsips } from '../actions/relationships';

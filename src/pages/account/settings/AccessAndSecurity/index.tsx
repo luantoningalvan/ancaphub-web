@@ -11,7 +11,7 @@ import {
   updateEmailRequest,
   updateUsernameRequest,
   updatePasswordRequest,
-} from '../../../../actions/settings';
+} from '../../../../redux/actions/settings';
 
 const AccessAndSecurity = () => {
   const { formatMessage } = useIntl();

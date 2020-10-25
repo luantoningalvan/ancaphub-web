@@ -6,7 +6,7 @@ import { convertToRaw } from 'draft-js';
 import { Button, Breadcrumbs } from 'snake-ui';
 import { PageHeader } from '../../styles';
 import FullEditor from '../../../../../components/editor/FullEditor';
-import { updateProjectAboutRequest } from '../../../../../actions/projects';
+import { updateProjectAboutRequest } from '../../../../../redux/actions/projects';
 
 const About: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();

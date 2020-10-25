@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getPostsRequest as getPostsAction,
   getMorePostsRequest,
-} from '../../actions/posts';
+} from '../../redux/actions/posts';
 
 import { Container } from 'snake-ui';
 

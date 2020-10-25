@@ -1,7 +1,7 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/projects';
-import * as api from '../api/projects';
+import * as api from '../../api/projects';
 import { addAlert } from '../actions/alerts';
 
 function* getProjects() {

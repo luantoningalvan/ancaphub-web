@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import { LoadContent } from '../../';
 import { Card, CardFooter, CardHeader, CardBody } from 'snake-ui';
 
-import { getRecentItemsRequest } from '../../../actions/library';
+import { getRecentItemsRequest } from '../../../redux/actions/library';
 import MiniLibraryCard from '../MiniLibraryCard';
 
 const LastItems = styled.div`

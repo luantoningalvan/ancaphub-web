@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectCard from '../../components/projects/ProjectCard';
-import { getProjectsRequest } from '../../actions/projects';
+import { getProjectsRequest } from '../../redux/actions/projects';
 import { LoadContent } from '../../components';
 import { Button, Hero, Paper, Container, Grid } from 'snake-ui';
 

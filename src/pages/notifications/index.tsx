@@ -9,7 +9,7 @@ import { Container, Hero, Paper, CircularLoader } from 'snake-ui';
 import {
   getNotificationsRequest,
   markAllAsReadRequest,
-} from '../../actions/notifications';
+} from '../../redux/actions/notifications';
 
 const Notifications = () => {
   const dispatch = useDispatch();

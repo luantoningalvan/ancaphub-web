@@ -6,7 +6,7 @@ import { FiCalendar as CalendarIcon } from 'react-icons/fi';
 import { FormattedDate } from 'react-intl';
 import { parseISO, addDays } from 'date-fns';
 import { LoadContent } from '../../../components';
-import { getSingleProjectPostRequest } from '../../../actions/projects';
+import { getSingleProjectPostRequest } from '../../../redux/actions/projects';
 import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
 import { PostContainer } from './styles';
 

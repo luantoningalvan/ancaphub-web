@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Container, Hero, CircularLoader, Grid } from 'snake-ui';
 
-import { getUsersRequest, loadMoreUsersRequest } from '../../actions/users';
+import {
+  getUsersRequest,
+  loadMoreUsersRequest,
+} from '../../redux/actions/users';
 import UserCard from '../../components/users/UserCard';
 
 const Users = () => {

@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { FiMail, FiLock, FiUser, FiAtSign } from 'react-icons/fi';
 import { TextField } from '../../';
-import { createUserRequest } from '../../../actions/users';
+import { createUserRequest } from '../../../redux/actions/users';
 import { Button } from 'snake-ui';
 
 const SignupForm = () => {

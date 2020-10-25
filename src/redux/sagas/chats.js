@@ -1,7 +1,7 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/chats';
-import * as api from '../api/chats';
+import * as api from '../../api/chats';
 import { addAlert } from '../actions/alerts';
 
 function* getLastChats() {

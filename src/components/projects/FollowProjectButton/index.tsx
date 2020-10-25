@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiBell } from 'react-icons/fi';
 import { Button } from 'snake-ui';
-import { followProjectRequest } from '../../../actions/projects';
+import { followProjectRequest } from '../../../redux/actions/projects';
 
 const FollowProjectButton = ({ project }: any) => {
   const dispatch = useDispatch();

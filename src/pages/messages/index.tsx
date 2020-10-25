@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from 'snake-ui';
 import { Chatbox } from '../../components';
-import { getLastChatsRequest } from '../../actions/chats';
+import { getLastChatsRequest } from '../../redux/actions/chats';
 
 const Messages = () => {
   const { chats } = useSelector((state: any) => state.chats);

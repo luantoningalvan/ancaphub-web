@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getSingleItemRequest } from '../../../../actions/library';
+import { getSingleItemRequest } from '../../../../redux/actions/library';
 import { LoadContent } from '../../../../components';
 import { Paper, Container, Button, Menu } from 'snake-ui';
 

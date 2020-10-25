@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
 import LibraryCard from '../../components/library/LibraryCard';
 
-import { loadCategoriesRequest } from '../../actions/categories';
-import { getItemsRequest } from '../../actions/library';
+import { loadCategoriesRequest } from '../../redux/actions/categories';
+import { getItemsRequest } from '../../redux/actions/library';
 
 import { LoadContent } from '../../components';
 import {

@@ -8,7 +8,7 @@ import { ChatInfoWrapper, EnterMessageInputWrapper } from './styles';
 import defaultProfilePicture from '../../../assets/default-profile-picture.jpg';
 import { Scrollable } from 'snake-ui';
 import ChatBubble from '../ChatBubble';
-import { newMessageArrieved } from '../../../actions/chats';
+import { newMessageArrieved } from '../../../redux/actions/chats';
 
 const ENDPOINT = 'localhost:3333';
 

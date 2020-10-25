@@ -27,8 +27,8 @@ import {
 import Search from '../Search';
 
 import { NotificationsItem } from '../../';
-import { logoutRequest as logout } from '../../../actions/auth';
-import { switchColorMode as changeTheme } from '../../../actions/settings';
+import { logoutRequest as logout } from '../../../redux/actions/auth';
+import { switchColorMode as changeTheme } from '../../../redux/actions/settings';
 import { ReactComponent as AncapHubLogo } from '../../../assets/ancaphub.svg';
 import { ReactComponent as AnimatedBell } from '../../../assets/bell.svg';
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import UserAvatar from '../../users/UserAvatar';
-import { addCommentRequest } from '../../../actions/comments';
+import { addCommentRequest } from '../../../redux/actions/comments';
 import { CommentFormContainer, CommentInput } from './styles';
 
 interface CommentFormProps {

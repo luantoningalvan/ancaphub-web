@@ -31,7 +31,7 @@ import UserName from '../../components/users/UserName';
 import {
   getSingleUserRequest,
   updateProfilePictureRequest,
-} from '../../actions/users';
+} from '../../redux/actions/users';
 import {
   ProfileHeader,
   ProfilePicture,

@@ -2,7 +2,7 @@ import { takeEvery, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/relationships';
 import * as alerts from '../actions/alerts';
-import * as api from '../api/users';
+import * as api from '../../api/users';
 
 function* followUser({ payload }) {
   try {

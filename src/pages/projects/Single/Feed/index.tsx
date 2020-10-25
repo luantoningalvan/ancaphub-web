@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectPostCard from '../../../../components/projects/ProjectPostCard';
-import { getProjectPostsRequest } from '../../../../actions/projects';
+import { getProjectPostsRequest } from '../../../../redux/actions/projects';
 import { LoadContent } from '../../../../components';
 
 const ProjectFeed = ({ project }: any) => {
