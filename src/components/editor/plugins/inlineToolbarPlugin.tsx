@@ -13,7 +13,7 @@ import { ReactComponent as HeadingIcon } from '../../../assets/headingButton.svg
 const inlineToolbar = createinlineToolbarPlugin();
 
 // Headlines picker
-const HeadlinePicker = (props) => {
+const HeadlinePicker = (props: any) => {
   const onWindowClick = () => props.onOverrideContent(undefined);
 
   React.useEffect(() => {
@@ -36,8 +36,8 @@ const HeadlinePicker = (props) => {
   );
 };
 
-export const HeadlineButton = (props) => {
-  const onMouseDown = (event) => event.preventDefault();
+export const HeadlineButton = (props: any) => {
+  const onMouseDown = (event: any) => event.preventDefault();
 
   const onClick = () => {
     props.onOverrideContent(HeadlinePicker);

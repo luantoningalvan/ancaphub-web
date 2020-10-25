@@ -26,7 +26,7 @@ export const EditorToolBar = styled.div`
   }
 `;
 
-export const ToggleButton = styled.button`
+export const ToggleButton = styled.button<{ active?: boolean }>`
   border: none;
   border-radius: 2px;
   background: transparent;

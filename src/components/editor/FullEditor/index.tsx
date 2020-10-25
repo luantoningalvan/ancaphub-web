@@ -20,6 +20,7 @@ import {
   RichUtils,
   getDefaultKeyBinding,
   convertFromRaw,
+  EditorProps,
 } from 'draft-js';
 import {
   EditorContainer,
@@ -29,7 +30,7 @@ import {
 } from './styles';
 import 'draft-js/dist/Draft.css';
 
-function getBlockStyle(block) {
+function getBlockStyle(block: any) {
   switch (block.getType()) {
     case 'blockquote':
       return 'RichEditor-blockquote';
@@ -38,7 +39,14 @@ function getBlockStyle(block) {
   }
 }
 
-const StyleButton = ({ style, label, active, onToggle }) => {
+type StyleButtonProps = {
+  style: string;
+  label: string | JSX.Element;
+  active: boolean;
+  onToggle(style: string): void;
+};
+
+const StyleButton = ({ style, label, active, onToggle }: StyleButtonProps) => {
   return (
     <ToggleButton
       className="RichEditor-styleButton"
@@ -57,7 +65,7 @@ const BLOCK_TYPES = [
   { label: <MdCode />, style: 'code-block' },
 ];
 
-const BlockStyleControls = (props) => {
+const BlockStyleControls = (props: any) => {
   const { editorState } = props;
   const selection = editorState.getSelection();
   const blockType = editorState
@@ -86,7 +94,7 @@ const INLINE_STYLES = [
   { label: <MdFormatUnderlined />, style: 'UNDERLINE' },
 ];
 
-const InlineStyleControls = ({ editorState, onToggle }) => {
+const InlineStyleControls = ({ editorState, onToggle }: any) => {
   const currentStyle = editorState.getCurrentInlineStyle();
 
   return (
@@ -104,15 +112,26 @@ const InlineStyleControls = ({ editorState, onToggle }) => {
   );
 };
 
-const FullEditor = ({
-  name,
-  icon: Icon,
-  placeholder,
-  multiline,
-  initialState,
-  readOnly,
-  ...rest
-}) => {
+interface FullEditorProps {
+  name: string;
+  icon?: JSX.Element;
+  placeholder?: string;
+  multiline?: boolean;
+  initialState?: any;
+  readOnly?: boolean;
+}
+
+const FullEditor: React.FC<FullEditorProps> = (props) => {
+  const {
+    name,
+    icon: Icon,
+    placeholder,
+    multiline,
+    initialState,
+    readOnly,
+    ...rest
+  } = props;
+
   const { fieldName, error, registerField, defaultValue } = useField(name);
   const [editorState, setEditorState] = useState(() => {
     if (!defaultValue) {
@@ -122,7 +141,7 @@ const FullEditor = ({
       convertFromRaw(JSON.parse(defaultValue))
     );
   });
-  const editor = useRef(null);
+  const editor = useRef<Editor | null>(null);
 
   useEffect(() => {
     registerField({
@@ -132,17 +151,18 @@ const FullEditor = ({
     });
   }, [fieldName, registerField]);
 
-  const focus = () => editor.current.focus();
+  const focus = () => editor?.current?.focus();
 
   const onChange = useCallback((state) => {
     setEditorState(state);
   }, []);
 
   useEffect(() => {
+    // @ts-ignore
     editor.current.value = editorState;
   }, [editorState]);
 
-  const handleKeyCommand = (command, state) => {
+  const handleKeyCommand = (command: any, state: EditorState) => {
     const newState = RichUtils.handleKeyCommand(state, command);
     if (newState) {
       onChange(newState);
@@ -151,8 +171,8 @@ const FullEditor = ({
     return false;
   };
 
-  const mapKeyToEditorCommand = (e) => {
-    if (e.keyCode === 9 /* TAB */) {
+  const mapKeyToEditorCommand = (e: React.KeyboardEvent) => {
+    if (e.key === '9') {
       const newEditorState = RichUtils.onTab(e, editorState, 4);
       if (newEditorState !== editorState) {
         onChange(newEditorState);
@@ -162,11 +182,11 @@ const FullEditor = ({
     return getDefaultKeyBinding(e);
   };
 
-  const toggleBlockType = (blockType) => {
+  const toggleBlockType = (blockType: string) => {
     onChange(RichUtils.toggleBlockType(editorState, blockType));
   };
 
-  const toggleInlineStyle = (inlineStyle) => {
+  const toggleInlineStyle = (inlineStyle: string) => {
     onChange(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
 
@@ -180,7 +200,7 @@ const FullEditor = ({
 
   return (
     <div className="RichEditor-root">
-      <EditorContainer isErrored={!!error} {...rest}>
+      <EditorContainer {...rest}>
         <EditorToolBar>
           <BlockStyleControls
             editorState={editorState}
@@ -193,6 +213,7 @@ const FullEditor = ({
         </EditorToolBar>
         <EditorContent>
           <div className={className} onClick={focus}>
+            {/* @ts-ignore */}
             <Editor
               blockStyleFn={getBlockStyle}
               editorState={editorState}

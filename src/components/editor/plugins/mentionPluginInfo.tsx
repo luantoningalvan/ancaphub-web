@@ -1,12 +1,13 @@
+/* @ts-ignore */
 import MentionComponent from 'draft-js-mention-plugin/lib/Mention';
 import { searchMention } from '../../../api/search';
 
-export default async (handle) => {
+export default async (handle: any) => {
   const response = await searchMention(handle);
 
-  const formattedUsers = [];
+  const formattedUsers: any = [];
 
-  response.data.data.forEach((item) => {
+  response.data.data.forEach((item: any) => {
     formattedUsers.push({
       name: item.name,
       avatar:

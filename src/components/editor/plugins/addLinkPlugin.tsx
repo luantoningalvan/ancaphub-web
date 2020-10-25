@@ -1,8 +1,11 @@
 import React from 'react';
-// import { KeyBindingUtil } from 'draft-js';
 
-export const linkStrategy = (contentBlock, callback, contentState) => {
-  contentBlock.findEntityRanges((character) => {
+export const linkStrategy = (
+  contentBlock: any,
+  callback: any,
+  contentState: any
+) => {
+  contentBlock.findEntityRanges((character: any) => {
     const entityKey = character.getEntity();
     return (
       entityKey !== null &&
@@ -11,7 +14,7 @@ export const linkStrategy = (contentBlock, callback, contentState) => {
   }, callback);
 };
 
-export const Link = ({ children, ...props }) => {
+export const Link = ({ children, ...props }: any) => {
   const { contentState, entityKey } = props;
   const { url } = contentState.getEntity(entityKey).getData();
   return (
