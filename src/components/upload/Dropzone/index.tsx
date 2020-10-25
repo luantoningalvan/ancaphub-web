@@ -3,8 +3,8 @@ import React, { useRef, useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import { DropContainer, UploadMessage } from './styles';
 
-const Upload = ({ onUpload, file, ...rest }) => {
-  const imageRef = useRef(null);
+const Upload = ({ onUpload, file, ...rest }: any) => {
+  const imageRef: any = useRef(null);
 
   useEffect(() => {
     if (imageRef.current !== null) {
@@ -22,7 +22,7 @@ const Upload = ({ onUpload, file, ...rest }) => {
     }
   }, [file]);
 
-  function renderDragMessage(isDragActive, isDragRejest) {
+  function renderDragMessage(isDragActive: any, isDragRejest: any) {
     if (!isDragActive) {
       return <UploadMessage>Selecione ou arraste a imagem aqui.</UploadMessage>;
     }
@@ -46,6 +46,7 @@ const Upload = ({ onUpload, file, ...rest }) => {
               {...getRootProps()}
               isDragActive={isDragActive}
               isDragReject={isDragReject}
+              className="dropzone"
             >
               <input {...getInputProps()} data-testid="upload" />
               {renderDragMessage(isDragActive, isDragReject)}

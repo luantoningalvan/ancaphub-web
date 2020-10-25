@@ -1,56 +1,21 @@
 import React, { useState, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { FiX as CloseIcon, FiUpload as UploadIcon } from 'react-icons/fi';
-import styled from 'styled-components';
 import Slider from 'rc-slider';
 import Cropper from 'react-easy-crop';
-import { IconButton, CardHeader, CardBody, Dialog } from '../ui';
+import { IconButton, CardHeader, CardBody, Modal } from 'snake-ui';
+import { CropperStyle, UplaodArea } from './styles';
 
-const UplaodArea = styled.label`
-  height: 250px;
-  width: 300px;
-  border-radius: 8px;
-  border: 2px dashed ${(props) => props.theme.palette.text.secondary};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  text-align: center;
-  cursor: pointer;
+interface EditAvatarProps {
+  open: boolean;
+  dialogTitle: string;
+  onClose(): void;
+  onUpdate(data: any): void;
+  aspect: any;
+  shape: 'round' | 'rect';
+}
 
-  input {
-    display: none;
-  }
-
-  svg {
-    height: 40px;
-    width: 40px;
-    margin-bottom: 16px;
-  }
-`;
-
-const CropperStyle = styled.div`
-  width: 450px;
-
-  .crop-content {
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  img {
-    height: auto;
-    max-height: 100%;
-  }
-
-  .slider {
-    padding: 16px;
-  }
-`;
-
-const EditAvatar = ({
+const EditAvatar: React.FC<EditAvatarProps> = ({
   open,
   dialogTitle,
   onClose,
@@ -58,7 +23,7 @@ const EditAvatar = ({
   aspect = 1 / 1,
   shape = 'round',
 }) => {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState<any>('');
   const [cropState, setCropState] = useState(false);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -72,7 +37,7 @@ const EditAvatar = ({
     setCropState(!cropState);
   };
 
-  const handleSelectImage = (e) => {
+  const handleSelectImage = (e: any) => {
     setImage({
       image: e.target.files[0],
       preview: URL.createObjectURL(e.target.files[0]),
@@ -86,7 +51,7 @@ const EditAvatar = ({
 
   const handleUpload = async () => {
     if (image.image) {
-      const formData = new FormData();
+      const formData: any = new FormData();
       formData.append('data', JSON.stringify(cropInfo));
       formData.append('avatar', image.image);
       onUpdate(formData);
@@ -96,7 +61,7 @@ const EditAvatar = ({
   };
 
   return (
-    <Dialog show={open}>
+    <Modal open={open} onClose={onClose}>
       <CardHeader
         title={
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -129,6 +94,7 @@ const EditAvatar = ({
             />
           </div>
           <div className="slider">
+            {/* @ts-ignore */}
             <Slider
               value={zoom}
               min={1}
@@ -136,7 +102,7 @@ const EditAvatar = ({
               color="secondary"
               step={0.1}
               aria-labelledby="Zoom"
-              onChange={(value) => setZoom(value)}
+              onChange={(value: any) => setZoom(value)}
             />
           </div>
         </CropperStyle>
@@ -154,7 +120,7 @@ const EditAvatar = ({
           </UplaodArea>
         </CardBody>
       )}
-    </Dialog>
+    </Modal>
   );
 };
 
