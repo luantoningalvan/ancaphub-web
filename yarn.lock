@@ -1986,6 +1986,13 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
+"@types/react-beautiful-dnd@^13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-beautiful-dnd/-/react-beautiful-dnd-13.0.0.tgz#e60d3d965312fcf1516894af92dc3e9249587db4"
+  integrity sha512-by80tJ8aTTDXT256Gl+RfLRtFjYbUWOnZuEigJgNsJrSEGxvFe5eY6k3g4VIvf0M/6+xoLgfYWoWonlOo6Wqdg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-big-calendar@^0.24.7":
   version "0.24.7"
   resolved "https://registry.yarnpkg.com/@types/react-big-calendar/-/react-big-calendar-0.24.7.tgz#3dde97c91ba3a8b04a20b7f3125815c7bb9ab5b4"
@@ -1998,6 +2005,13 @@
   version "16.9.8"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"
   integrity sha512-ykkPQ+5nFknnlU6lDd947WbQ6TE3NNzbQAkInC2EKY1qeYdTKp7onFusmYZb+ityzx2YviqT6BXSu+LyWWJwcA==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-file-icon@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-file-icon/-/react-file-icon-1.0.0.tgz#a5dcd822af3a0b8d2dcff2ea173939460132528a"
+  integrity sha512-OWsUtRcs0sg1Ifr+a/rI3cmFT3Fa/YysrupuLxbyl8RZ5+9kv9Tst51hNzRBY20NnbXjCxRqZocBJ/6vZ68Gfw==
   dependencies:
     "@types/react" "*"
 
@@ -2055,6 +2069,11 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/shortid/-/shortid-0.0.29.tgz#8093ee0416a6e2bf2aa6338109114b3fbffa0e9b"
   integrity sha1-gJPuBBam4r8qpjOBCRFLP7/6Dps=
+
+"@types/socket.io-client@^1.4.34":
+  version "1.4.34"
+  resolved "https://registry.yarnpkg.com/@types/socket.io-client/-/socket.io-client-1.4.34.tgz#8ca5f5732a9ad92b79aba71083cda5e5821e3ed9"
+  integrity sha512-Lzia5OTQFJZJ5R4HsEEldywiiqT9+W2rDbyHJiiTGqOcju89sCsQ8aUXDljY6Ls33wKZZGC0bfMhr/VpOyjtXg==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -12321,10 +12340,10 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-snake-ui@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/snake-ui/-/snake-ui-1.0.5.tgz#d16fa1fb85cece083c2704541c4434711f6e65a8"
-  integrity sha512-JhJaypxrANOBt1yMPA9LpR7860OC0iu7pKKf3rU8UfUsDkciqrpECE/QlTFWlzieX6PnuICDwPl8aGi6mf080g==
+snake-ui@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/snake-ui/-/snake-ui-1.0.8.tgz#11ad456ec7098e67b8bd7614d8d003c70fc7587b"
+  integrity sha512-0ZuK0LAuzDJdQnx34M33Qxw+HR8IKqSH/0HhIuP+VtCNimpLVGK4mp1sPUZ/96CaPdjsMPUCuFYblenkD0Za/A==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
