@@ -1,9 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import defaultCover from '../../assets/default-book-cover.jpg';
 
-const MiniLIbraryCardSyle = styled(Link)`
+export const MiniLIbraryCardSyle = styled(Link)<{ cover: string }>`
   display: flex;
   border-radius: 4px;
   background: ${(props) => props.theme.palette.paperDark};
@@ -56,18 +54,3 @@ const MiniLIbraryCardSyle = styled(Link)`
     background-position: center;
   }
 `;
-
-const MiniLIbraryCard = ({ item }) => (
-  <MiniLIbraryCardSyle
-    to={`/library/${item.type}s/${item._id}`}
-    cover={item.cover ? item.cover : defaultCover}
-  >
-    <div className="cover" />
-    <div className="content">
-      <h4 className="title">{item.title.substr(0, 49)}</h4>
-      <h5 className="author">{item.author.name.substr(0, 49)}</h5>
-    </div>
-  </MiniLIbraryCardSyle>
-);
-
-export default MiniLIbraryCard;
