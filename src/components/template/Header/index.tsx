@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { generate } from 'shortid';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
 import {
   FiUser as ProfileIcon,
-  FiSun as ContrastIcon,
   FiPower as LogoutIcon,
   FiChevronDown as ArrowDownIcon,
   FiSettings as SettingsIcon,
@@ -14,13 +13,7 @@ import {
 } from 'react-icons/fi';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { CardBody, CardFooter } from 'snake-ui';
-import {
-  DropdownListContainer,
-  DropdownListItem,
-  DropdownHeader,
-} from '../../ui';
-import { Dropdown, Switcher } from 'snake-ui';
+import { Dropdown, CardBody, CardFooter, Menu } from 'snake-ui';
 
 import {
   AppBar,
@@ -33,7 +26,7 @@ import {
 
 import Search from '../Search';
 
-import Notification from '../../notifications';
+import { NotificationsItem } from '../../';
 import { logoutRequest as logout } from '../../../actions/auth';
 import { switchColorMode as changeTheme } from '../../../actions/settings';
 import { ReactComponent as AncapHubLogo } from '../../../assets/ancaphub.svg';
@@ -53,6 +46,8 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
   const { url } = useRouteMatch();
+  const { push } = useHistory();
+
   const dispatch = useDispatch();
   const [animated, setAnimated] = useState(false);
   const [notificationsAnchor, setNotificationsAnchor] = useState<any>(null);
@@ -75,15 +70,8 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
     (state: any) => state.notifications
   );
 
-  const { colorMode } = useSelector((state: any) => state.settings);
-
   const handleLogout = () => {
     dispatch(logout());
-  };
-
-  const handleChangeTheme = () => {
-    if (colorMode === 'dark') dispatch(changeTheme('light'));
-    if (colorMode === 'light') dispatch(changeTheme('dark'));
   };
 
   return (
@@ -128,9 +116,9 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
             onClose={() => setNotificationsAnchor(null)}
             anchorEl={notificationsAnchor}
           >
-            <DropdownHeader>
+            <h3>
               <FormattedMessage id="common.notifications" />
-            </DropdownHeader>
+            </h3>
             {notifications.length > 0 ? (
               <>
                 <ul
@@ -141,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
                   }}
                 >
                   {notifications.map((notification: any) => (
-                    <Notification
+                    <NotificationsItem
                       notification={notification}
                       key={generate()}
                     />
@@ -163,42 +151,29 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
               <ArrowDownIcon />
             </div>
           </HeaderMenuItem>
-          <Dropdown
+          <Menu
             placement="bottom"
             open={Boolean(optionsAnchor)}
             onClose={() => setOptionsAnchor(null)}
             anchorEl={optionsAnchor}
-          >
-            <DropdownListContainer>
-              <DropdownListItem icon={<ProfileIcon />}>
-                <Link to={`/${user.username}`}>
-                  <FormattedMessage id="common.profile" />
-                </Link>
-              </DropdownListItem>
-
-              <DropdownListItem
-                icon={<ContrastIcon />}
-                action={
-                  <Switcher
-                    initialValue={colorMode === 'dark'}
-                    onChange={() => handleChangeTheme()}
-                  />
-                }
-              >
-                <FormattedMessage id="common.darkMode" />
-              </DropdownListItem>
-              <DropdownListItem icon={<SettingsIcon />}>
-                <Link to="/settings">
-                  <FormattedMessage id="common.settings" />
-                </Link>
-              </DropdownListItem>
-              <DropdownListItem icon={<LogoutIcon />}>
-                <a onClick={handleLogout}>
-                  <FormattedMessage id="common.logout" />
-                </a>
-              </DropdownListItem>
-            </DropdownListContainer>
-          </Dropdown>
+            options={[
+              {
+                label: <FormattedMessage id="common.profile" />,
+                onClick: () => push(`/${user.username}`),
+                icon: <ProfileIcon />,
+              },
+              {
+                label: <FormattedMessage id="common.settings" />,
+                onClick: () => push(`/settings`),
+                icon: <SettingsIcon />,
+              },
+              {
+                label: <FormattedMessage id="common.logout" />,
+                onClick: handleLogout,
+                icon: <LogoutIcon />,
+              },
+            ]}
+          />
         </HeaderMenu>
       </AppBar>
       <HeaderWrapper />

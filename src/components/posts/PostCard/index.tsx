@@ -31,13 +31,8 @@ import linkPluginOptions from '../../editor/plugins/addLinkPlugin';
 import { getAllDecorators } from '../../editor/utils/decorators';
 import CommentBox from '../../comments/CommentBox';
 
-import {
-  ImageBox,
-  ConfirmationDialog,
-  DropdownListContainer,
-  DropdownListItem,
-} from '../../ui';
-import { IconButton, Dropdown } from 'snake-ui';
+import { ImageBox, ConfirmationDialog } from '../..';
+import { IconButton, Menu } from 'snake-ui';
 
 import defaultProfilePicture from '../../../assets/default-profile-picture.jpg';
 import LikeBox from '../ShowPostLikes';
@@ -72,7 +67,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
 
   const linkifyPlugin = createLinkifyPlugin(linkPluginOptions);
   const hashtagPlugin = createHashtagPlugin();
-  const plugins = [linkifyPlugin, basicTextStylePlugin, hashtagPlugin];
+  const plugins: any = [linkifyPlugin, basicTextStylePlugin, hashtagPlugin];
 
   const showPostContent = () => {
     try {
@@ -143,18 +138,18 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
             icon={<MdMore fontSize="24px" />} //@ts-ignore
             onClick={(e: any) => setPostMenu(e.currentTarget)}
           />
-          <Dropdown
+          <Menu
             anchorEl={postMenu}
             onClose={() => setPostMenu(null)}
             open={Boolean(postMenu)}
             placement="left"
-          >
-            <DropdownListContainer>
-              <DropdownListItem icon={<DeleteIcon />} onClick={handleDelete}>
-                <FormattedMessage id="common.delete" />
-              </DropdownListItem>
-            </DropdownListContainer>
-          </Dropdown>
+            options={[
+              {
+                label: <FormattedMessage id="common.delete" />,
+                onClick: handleDelete,
+              },
+            ]}
+          />
         </div>
         <ConfirmationDialog
           show={deleteDialogState}
