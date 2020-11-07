@@ -13,7 +13,7 @@ interface ConfirmationDialogProps {
 
 const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   show,
-  title,
+  title = '',
   message,
   onClose,
   onConfirm,
@@ -24,28 +24,20 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   };
 
   return (
-    <Modal open={show} onClose={onClose}>
-      <div className="dialog-header">
-        <h4>{title}</h4>
-        <IconButton onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      </div>
-
-      <div className="dialog-message">
+    <Modal open={show} onClose={onClose} title={title as string} showCloseIcon>
+      <div style={{ padding: '0 16px 8px 16px' }}>
         <p>{message}</p>
       </div>
 
-      <div className="dialog-actions">
-        <Button
-          onClick={onClose}
-          size="small"
-          color="primary"
-          variant="outlined"
-        >
+      <div style={{ padding: 16, display: 'flex', justifyContent: 'flex-end' }}>
+        <Button onClick={onClose} color="neutral">
           <FormattedMessage id="common.cancel" />
         </Button>
-        <Button onClick={handleConfirm} size="small" color="secondary">
+        <Button
+          onClick={handleConfirm}
+          color="secondary"
+          style={{ marginLeft: 8 }}
+        >
           <FormattedMessage id="common.delete" />
         </Button>
       </div>
