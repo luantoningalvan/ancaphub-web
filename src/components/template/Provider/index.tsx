@@ -9,6 +9,7 @@ const themes: any = {
       primary: '#1141ad',
       secondary: '#e0b30d',
       background: '#161b28',
+      neutral: '#3f485d',
       alert: {
         info: '#0099cc',
         success: '#007e33',
