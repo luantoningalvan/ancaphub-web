@@ -50,10 +50,6 @@ const ItemCard = ({ item }: any) => (
           }
         />
       </Link>
-
-      <div className="card-buttons">
-        <BookmarkButton />
-      </div>
     </div>
 
     <Link to={`/library/${item.type}s/${item.id}`} className="link">

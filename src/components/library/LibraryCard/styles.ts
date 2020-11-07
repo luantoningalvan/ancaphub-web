@@ -12,7 +12,7 @@ export const LibraryCard = styled.div<{ type: string }>`
     align-items: center;
     justify-content: center;
     position: relative;
-    transition: opacity 0.4s ease;
+    overflow: hidden;
 
     .card-buttons,
     .card-image {
@@ -29,37 +29,18 @@ export const LibraryCard = styled.div<{ type: string }>`
       border-radius: 8px;
       height: ${(props) => types[props.type].size}px;
       overflow: hidden;
+      transition: all 0.25s ease-out;
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
-
-      &:before {
-        content: '';
-        transition: all 0.4s;
-      }
     }
 
     &:hover {
-      > .card-buttons {
-        display: block;
-      }
-
       .card-image {
-        &:before {
-          width: 100%;
-          height: ${(props) => types[props.type].size}px;
-          background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0.3) 0%,
-            rgba(0, 0, 0, 1) 100%
-          );
-          content: '';
-          position: absolute;
-          border-radius: 8px;
-        }
+        transform: scale(1.1);
       }
     }
   }
