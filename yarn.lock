@@ -12256,10 +12256,10 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
-snake-ui@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/snake-ui/-/snake-ui-1.0.8.tgz#11ad456ec7098e67b8bd7614d8d003c70fc7587b"
-  integrity sha512-0ZuK0LAuzDJdQnx34M33Qxw+HR8IKqSH/0HhIuP+VtCNimpLVGK4mp1sPUZ/96CaPdjsMPUCuFYblenkD0Za/A==
+snake-ui@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/snake-ui/-/snake-ui-1.0.10.tgz#69afe14269f55c1964c326baa43cd7468a42592e"
+  integrity sha512-KE/yN3TlIr0ED+XOO60oV7mGrytm1FwWcG1DOGKEz5Xbt5EDJcemMEv/yKLKqzR37lZ8qMpkOBvbuYQpaurwjw==
 
 snapdragon-node@^2.0.1:
   version "2.1.1"
