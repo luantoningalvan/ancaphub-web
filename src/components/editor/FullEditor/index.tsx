@@ -13,6 +13,7 @@ import {
   MdFormatListNumbered,
   MdFormatQuote,
   MdCode,
+  MdFullscreen,
 } from 'react-icons/md';
 import {
   Editor,
@@ -20,7 +21,6 @@ import {
   RichUtils,
   getDefaultKeyBinding,
   convertFromRaw,
-  EditorProps,
 } from 'draft-js';
 import {
   EditorContainer,
@@ -29,6 +29,7 @@ import {
   EditorContent,
 } from './styles';
 import 'draft-js/dist/Draft.css';
+import { IconButton } from 'snake-ui';
 
 function getBlockStyle(block: any) {
   switch (block.getType()) {
@@ -141,6 +142,8 @@ const FullEditor: React.FC<FullEditorProps> = (props) => {
       convertFromRaw(JSON.parse(defaultValue))
     );
   });
+  const [fullScreen, setFullScreen] = useState(false);
+
   const editor = useRef<Editor | null>(null);
 
   useEffect(() => {
@@ -200,15 +203,21 @@ const FullEditor: React.FC<FullEditorProps> = (props) => {
 
   return (
     <div className="RichEditor-root">
-      <EditorContainer {...rest}>
+      <EditorContainer fullScreen={fullScreen} {...rest}>
         <EditorToolBar>
-          <BlockStyleControls
-            editorState={editorState}
-            onToggle={toggleBlockType}
-          />
-          <InlineStyleControls
-            editorState={editorState}
-            onToggle={toggleInlineStyle}
+          <div>
+            <BlockStyleControls
+              editorState={editorState}
+              onToggle={toggleBlockType}
+            />
+            <InlineStyleControls
+              editorState={editorState}
+              onToggle={toggleInlineStyle}
+            />
+          </div>
+          <IconButton
+            icon={<MdFullscreen />}
+            onClick={() => setFullScreen(!fullScreen)}
           />
         </EditorToolBar>
         <EditorContent>

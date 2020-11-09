@@ -1,23 +1,38 @@
 import styled, { css } from 'styled-components';
 
-export const EditorContainer = styled.div`
+export const EditorContainer = styled.div<{ fullScreen?: boolean }>`
   ${(props) => css`
     border: 1px solid ${props.theme.palette.border};
+    background: ${props.theme.palette.paper};
   `};
+
   border-radius: 8px;
+  min-height: 200px;
+
+  ${(props) =>
+    props.fullScreen &&
+    css`
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 200;
+    `}
 `;
 
 export const EditorToolBar = styled.div`
   padding: 8px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   border-radius: 8px 8px 0 0;
 
-  ${(props) => css`
-    background: ${props.theme.palette.paper};
-    border-bottom: 1px solid ${props.theme.palette.border};
-  `};
+  > div {
+    display: flex;
+  }
+
+  border-bottom: 1px solid ${(props) => props.theme.palette.border};
 
   .RichEditor-controls {
     & + .RichEditor-controls {
@@ -54,7 +69,4 @@ export const ToggleButton = styled.button<{ active?: boolean }>`
 export const EditorContent = styled.div`
   padding: 16px;
   border-radius: 0 0 8px 8px;
-  ${(props) => css`
-    background: ${props.theme.palette.paper};
-  `};
 `;
