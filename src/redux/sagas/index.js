@@ -11,6 +11,7 @@ import SearchSagas from './search';
 import CategoriesSagas from './categories';
 import ProjectsSagas from './projects';
 import ChatsSagas from './chats';
+import AuthorsSagas from './authors';
 
 export default function* rootSaga() {
   yield all([
@@ -25,5 +26,6 @@ export default function* rootSaga() {
     ...CategoriesSagas,
     ...ProjectsSagas,
     ...ChatsSagas,
+    ...AuthorsSagas,
   ]);
 }

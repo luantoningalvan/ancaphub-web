@@ -14,6 +14,7 @@ import settings from './settings';
 import categories from './categories';
 import projects from './projects';
 import chats from './chats';
+import authors from './authors';
 
 export default combineReducers({
   alerts,
@@ -31,4 +32,5 @@ export default combineReducers({
   categories,
   projects,
   chats,
+  authors,
 });

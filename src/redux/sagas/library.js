@@ -15,9 +15,12 @@ function* createItem(action) {
 function* getItems({ payload }) {
   try {
     const filter = {
-      ...(payload.category &&
+      ...(payload &&
+        payload.category &&
         payload.category !== '' && { category: payload.category }),
-      ...(payload.type && payload.type !== '' && { type: payload.type }),
+      ...(payload &&
+        payload.type &&
+        payload.type !== '' && { type: payload.type }),
     };
 
     const items = yield call(api.getLibraryItems, filter);
