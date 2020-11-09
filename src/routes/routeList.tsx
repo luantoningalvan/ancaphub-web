@@ -10,6 +10,9 @@ import SingeBook from '../pages/library/books/SingleBook';
 import SingleArticle from '../pages/library/articles/SingleArticle';
 import SingleVideo from '../pages/library/videos/SingleVideo';
 
+import Authors from '../pages/authors';
+import SingleAuthor from '../pages/authors/Single';
+
 import Groups from '../pages/groups';
 import SingleGroup from '../pages/groups/Single';
 
@@ -135,6 +138,15 @@ export default [
     exact: true,
     path: '/contributions',
     component: Contributions,
+  },
+  {
+    exact: true,
+    path: '/authors',
+    component: Authors,
+  },
+  {
+    path: '/authors/:id',
+    component: SingleAuthor,
   },
   {
     exact: true,
