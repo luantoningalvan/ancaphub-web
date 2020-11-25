@@ -45,7 +45,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment, post }) => {
       <div className="inner-wrap">
         <UserAvatar user={comment.author} style={{ marginRight: 8 }} />
         <div className="comment-content">
-          <UserName user={comment.author} fontSize={1} />
+          <UserName user={comment.author} fontSize={16} />
           <p className="comment-text">{comment.content}</p>
           <ul className="date">
             <li>
