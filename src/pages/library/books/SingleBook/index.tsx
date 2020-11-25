@@ -33,9 +33,7 @@ function SingleBook() {
     <LoadContent loading={loading}>
       <Banner
         cover={
-          singleItem && singleItem.cover
-            ? singleItem.cover.url
-            : defaultThumbnail
+          singleItem && singleItem.cover ? singleItem.cover : defaultThumbnail
         }
       />
       <BookDisplayContainer>
@@ -46,7 +44,7 @@ function SingleBook() {
                 <BookCover
                   src={
                     singleItem && singleItem.cover
-                      ? singleItem.cover.url
+                      ? singleItem.cover
                       : defaultThumbnail
                   }
                 />
