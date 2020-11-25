@@ -54,7 +54,6 @@ const FollowButton: React.FC<{ user: any }> = ({ user }) => {
   return (
     <Button
       color="primary"
-      size="small"
       variant={following ? 'contained' : 'outlined'}
       onClick={following ? handleUnfollow : handleFollow}
     >
