@@ -7,6 +7,7 @@ import { isEmpty } from 'lodash';
 import LibraryCard from '../../components/library/LibraryCard';
 
 import { loadCategoriesRequest } from '../../redux/actions/categories';
+import { getAuthorsRequest } from '../../redux/actions/authors';
 import { getItemsRequest } from '../../redux/actions/library';
 
 import { LoadContent } from '../../components';
@@ -20,7 +21,10 @@ import {
   Paper,
   Grid,
   ListItem,
+  Button,
+  CardFooter,
 } from 'snake-ui';
+import { FiPlusCircle } from 'react-icons/fi';
 
 import {
   LibraryContainer,
@@ -32,16 +36,25 @@ import {
 const Library = () => {
   const [type, setType] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const { items: categories, loading: loadingCategories } = useSelector(
+  const [selectedAuthor, setSelectedAuthor] = useState('');
+
+  const { items: categories, loading: categoriesLoading } = useSelector(
     (state: any) => state.categories
   );
-  const { items, loading } = useSelector((state: any) => state.library);
+  const { items: libraryItems, loading: libraryLoading } = useSelector(
+    (state: any) => state.library
+  );
+  const { items: authors, loading: authorsLoading } = useSelector(
+    (state: any) => state.authors
+  );
+
   const dispatch = useDispatch();
   const { type: typeParam }: { type: string } = useParams();
   const { push } = useHistory();
 
   useEffect(() => {
     dispatch(loadCategoriesRequest());
+    dispatch(getAuthorsRequest());
   }, [dispatch]);
 
   useEffect(() => {
@@ -64,7 +77,12 @@ const Library = () => {
       <Hero
         title={<FormattedMessage id="common.library" />}
         description={<FormattedMessage id="home.features.0" />}
-        actions
+        actions={
+          <Button onClick={() => push('/library/contribute')}>
+            <FiPlusCircle />
+            Contribuir
+          </Button>
+        }
       />
 
       <LibraryContainer>
@@ -76,7 +94,7 @@ const Library = () => {
             />
 
             <LibrarySidebarMenu>
-              <LoadContent loading={loadingCategories}>
+              <LoadContent loading={categoriesLoading}>
                 <ListItem
                   label={<FormattedMessage id="common.all" />}
                   current={selectedCategory === ''}
@@ -86,33 +104,56 @@ const Library = () => {
                   <ListItem
                     key={category.name}
                     label={category.name}
-                    current={selectedCategory === category._id}
-                    onClick={() => setSelectedCategory(category._id)}
+                    current={selectedCategory === category.id}
+                    onClick={() => setSelectedCategory(category.id)}
                   />
                 ))}
               </LoadContent>
             </LibrarySidebarMenu>
+
+            <CardFooter label="Ver Todas" />
+          </Card>
+          <Card style={{ marginTop: 16 }}>
+            <CardHeader title="Autores" style={{ paddingBottom: 8 }} />
+            <LibrarySidebarMenu>
+              <LoadContent loading={authorsLoading}>
+                <ListItem
+                  label={<FormattedMessage id="common.all" />}
+                  current={selectedAuthor === ''}
+                  onClick={() => setSelectedAuthor('')}
+                />
+                {authors.map((author: any) => (
+                  <ListItem
+                    key={author.id}
+                    label={author.name}
+                    current={selectedAuthor === author.id}
+                    onClick={() => setSelectedAuthor(author.id)}
+                  />
+                ))}
+              </LoadContent>
+            </LibrarySidebarMenu>
+            <CardFooter label="Ver Todos" action={() => push('/authors')} />
           </Card>
         </LibrarySidebarContainer>
         <LibraryContentContainer>
           <Paper>
             <Tabs style={{ height: 48, padding: '0px 8px' }}>
-              <Tab // @ts-ignore
+              <Tab
                 label={<FormattedMessage id="common.all" />}
                 current={typeParam === undefined}
                 onClick={() => push('/library')}
               />
-              <Tab // @ts-ignore
+              <Tab
                 label={<FormattedMessage id="library.articles" />}
                 current={typeParam === 'articles'}
                 onClick={() => push('/library/articles')}
               />
-              <Tab // @ts-ignore
+              <Tab
                 label={<FormattedMessage id="library.books" />}
                 current={typeParam === 'books'}
                 onClick={() => push('/library/books')}
               />
-              <Tab // @ts-ignore
+              <Tab
                 label={<FormattedMessage id="library.videos" />}
                 current={typeParam === 'videos'}
                 onClick={() => push('/library/videos')}
@@ -120,14 +161,14 @@ const Library = () => {
             </Tabs>
           </Paper>
           <div style={{ marginTop: 16 }}>
-            <LoadContent loading={loading}>
-              {isEmpty(items) ? (
+            <LoadContent loading={libraryLoading}>
+              {isEmpty(libraryItems) ? (
                 <Paper padding>
                   <FormattedMessage id="library.noneFound" />
                 </Paper>
               ) : (
                 <Grid container spacing={2}>
-                  {items.map((item: any) => (
+                  {libraryItems.map((item: any) => (
                     <Grid item xs={12} md={6} lg={4} key={generate()}>
                       <LibraryCard item={item} />
                     </Grid>
