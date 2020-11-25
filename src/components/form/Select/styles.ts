@@ -7,7 +7,16 @@ interface TextFieldContainerProps {
   isFilled?: boolean;
 }
 
-export const TextFieldContainer = styled.div<TextFieldContainerProps>`
+export const SelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  select {
+    display: none;
+  }
+`;
+
+export const SelectField = styled.div<TextFieldContainerProps>`
   background: transparent;
   border-radius: 8px;
   width: 100%;
@@ -87,63 +96,48 @@ export const TextFieldContainer = styled.div<TextFieldContainerProps>`
     `}
 `;
 
-export const SelectContainer = styled(TextFieldContainer)`
+export const SelectOptionList = styled.div`
+  border-radius: 4px;
+  min-width: 100px;
+  padding: 8px;
+`;
+
+export const SelectOption = styled.div`
+  flex: 1;
+  padding: 26px 16px 10px 16px;
+  line-height: 1.25;
+  font-size: 1rem;
+  color: ${(props) => props.theme.palette.text.primary};
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+`;
+
+SelectOption.defaultProps = {
+  role: 'menuitemradio',
+  'aria-checked': false,
+  tabIndex: 0,
+};
+
+export const AddOptionButton = styled.button`
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-top: 1px solid ${(props) => props.theme.palette.border};
+  padding: 16px 0px;
+  color: ${(props) => props.theme.palette.text.primary};
   cursor: pointer;
-
-  select {
-    display: none;
-  }
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   svg {
-    color: ${(props) => props.theme.palette.text.primary};
+    margin-right: 8px;
   }
-
-  .selected-option {
-    flex: 1;
-    padding: 26px 16px 10px 16px;
-    line-height: 1.25;
-    font-size: 1rem;
-    color: ${(props) => props.theme.palette.text.primary};
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
   }
-
-  .select-options {
-    position: absolute;
-    border-radius: 4px;
-    padding: 8px;
-    min-width: 100px;
-    top: 56px;
-    left: 0;
-    z-index: 100;
-
-    ${(props) => css`
-      border: 1px solid ${props.theme.palette.border};
-      background: ${props.theme.palette.paper};
-      color: ${props.theme.palette.text.primary};
-    `}
-
-    display: none;
-
-    > div {
-      padding: 8px;
-      border-radius: 4px;
-
-      &:hover {
-        background: rgba(0, 0, 0, 0.1);
-      }
-    }
-  }
-
-  ${(props) =>
-    props.isFocused &&
-    css`
-      .select-options {
-        display: block;
-      }
-
-      > svg {
-        display: none;
-      }
-    `}
 `;
 
 export const Error = styled(Tooltip)`

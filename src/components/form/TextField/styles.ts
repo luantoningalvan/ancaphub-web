@@ -12,7 +12,6 @@ export const TextFieldContainer = styled.div<TextFieldContainerProps>`
   border-radius: 8px;
   width: 100%;
   display: flex;
-  align-items: center;
   border: 1px solid ${(props) => props.theme.palette.border};
   color: ${(props) => props.theme.palette.text.primary};
   position: relative;
@@ -53,6 +52,8 @@ export const TextFieldContainer = styled.div<TextFieldContainerProps>`
     font-weight: normal;
     left: 16px;
     transition: transform 0.2s;
+    top: 23px;
+    line-height: 20px;
   }
 
   ${(props) =>

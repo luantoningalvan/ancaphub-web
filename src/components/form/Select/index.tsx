@@ -1,9 +1,17 @@
 /* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { FiAlertCircle, FiChevronDown } from 'react-icons/fi';
+import { FiAlertCircle, FiChevronDown, FiPlusCircle } from 'react-icons/fi';
 import { useField } from '@unform/core';
-import { SelectContainer, Error } from './styles';
+import {
+  SelectContainer,
+  SelectField,
+  SelectOptionList,
+  SelectOption,
+  AddOptionButton,
+  Error,
+} from './styles';
+import { Dropdown } from 'snake-ui';
 
 interface SelectProps {
   name: string;
@@ -13,6 +21,7 @@ interface SelectProps {
     label: string;
     value: string;
   }[];
+  onAddButtonClick?(): void;
   style?: React.CSSProperties;
 }
 
@@ -21,6 +30,7 @@ const Select: React.FC<SelectProps> = ({
   icon: Icon,
   placeholder,
   options = [],
+  onAddButtonClick,
   ...rest
 }) => {
   const { fieldName, defaultValue, error, registerField } = useField(name);
@@ -29,6 +39,8 @@ const Select: React.FC<SelectProps> = ({
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
   const [selectedValue, setSelectedValue] = useState(() => {
     if (defaultValue) {
       const label = options.find((opt) => opt.value === defaultValue); // @ts-ignore
@@ -51,74 +63,83 @@ const Select: React.FC<SelectProps> = ({
     }
   }, []);
 
-  useEffect(() => {
-    function clickOutside(e: any) {
-      if (!selectRef.current.contains(e.target)) {
-        setIsFocused(false);
-      }
-    }
-    if (selectRef.current !== null) {
-      document.addEventListener('click', clickOutside);
-      return () => document.removeEventListener('click', clickOutside);
-    }
-  }, [inputRef]);
-
   const handleSelectOption = useCallback(({ value, label }) => {
     inputRef.current.value = value;
     setSelectedValue({ value, label });
     setIsFilled(true);
+    setAnchorEl(null);
   }, []);
 
-  const handleInputFocus = useCallback(() => {
-    setIsFocused(!isFocused);
-  }, [isFocused]);
+  const handleClick = useCallback((e) => {
+    setAnchorEl(e.currentTarget);
+  }, []);
 
   return (
-    <SelectContainer
-      isFocused={isFocused}
-      isFilled={isFilled}
-      isErrored={!!error}
-      onClick={handleInputFocus}
-      ref={selectRef}
-      {...rest}
-    >
-      {/* @ts-ignore */}
-      {Icon && <Icon size={20} />}
-      <label className="input-label" htmlFor="select">
-        {placeholder}
-      </label>
+    <SelectContainer ref={selectRef} {...rest}>
+      <SelectField
+        isFocused={Boolean(anchorEl)}
+        isFilled={isFilled}
+        isErrored={!!error}
+        onClick={handleClick}
+      >
+        <label className="input-label" htmlFor="selec">
+          {placeholder}
+        </label>
+        <input value={selectedValue.label} />
 
-      <select ref={inputRef} defaultValue={defaultValue}>
-        {options.map((option) => (
-          <option key={`s-${option.value}`} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+        <select ref={inputRef} defaultValue={defaultValue}>
+          {options.map((option) => (
+            <option key={`s-${option.value}`} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
 
-      <div className="selected-option">{selectedValue.label}&nbsp;</div>
+        <FiChevronDown size={20} />
 
-      <FiChevronDown />
+        {error && (
+          <Error title={error}>
+            <FiAlertCircle color="#c53030" size={20} />
+          </Error>
+        )}
+      </SelectField>
 
-      <div className="select-options">
-        {options.map((option) => (
-          <div
-            role="menuitemradio"
-            aria-checked={false}
-            tabIndex={0}
-            key={option.value}
-            onClick={() => handleSelectOption(option)}
-          >
-            {option.label}
-          </div>
-        ))}
-      </div>
-
-      {error && (
-        <Error title={error}>
-          <FiAlertCircle color="#c53030" size="20px" />
-        </Error>
-      )}
+      <Dropdown
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        onClose={() => setAnchorEl(null)}
+        placement="bottom-start"
+      >
+        <div style={{ width: selectRef?.current?.clientWidth }}>
+          {options.length > 0 ? (
+            <SelectOptionList>
+              {options.map((option) => (
+                <SelectOption
+                  key={option.value}
+                  onClick={() => handleSelectOption(option)}
+                >
+                  {option.label}
+                </SelectOption>
+              ))}
+            </SelectOptionList>
+          ) : (
+            <div style={{ padding: 16 }}>Nenhuma opção encontrada</div>
+          )}
+          {onAddButtonClick && (
+            <AddOptionButton
+              type="button"
+              onClick={() => {
+                onAddButtonClick();
+                setAnchorEl(null);
+              }}
+            >
+              {' '}
+              <FiPlusCircle size={18} />
+              Adicionar
+            </AddOptionButton>
+          )}
+        </div>
+      </Dropdown>
     </SelectContainer>
   );
 };

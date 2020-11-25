@@ -8,6 +8,7 @@ interface TextFieldProps {
   placeholder?: string | React.ReactNode;
   multiline?: boolean;
   defaultValue?: string;
+  rows?: number;
   [key: string]: any;
 }
 
