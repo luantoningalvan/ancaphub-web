@@ -1,35 +1,10 @@
 import styled from 'styled-components';
 
-export const UploadBox = styled.div`
-  height: 100px;
-  width: 100%;
-  border-radius: 8px;
-  border: 1px dashed ${(props) => props.theme.palette.text.secondary};
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  text-align: center;
-  cursor: pointer;
-
-  input {
-    display: none;
-  }
-
-  svg {
-    fill: ${(props) => props.theme.palette.text.secondary};
-    height: 40px;
-    width: 40px;
-    margin-bottom: 16px;
-  }
-`;
-
 export const Contribute = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 16px;
 
   h3 {
     font-size: 1.5em;
@@ -54,9 +29,9 @@ export const Contribute = styled.div`
         justify-content: center;
         text-decoration: none;
         background: transparent;
-        color: ${(props) => props.theme.palette.text.secondary};
         border: none;
         cursor: pointer;
+        color: ${(props) => props.theme.palette.text.primary};
 
         &:hover {
           background: rgba(0, 0, 0, 0.1);
@@ -64,13 +39,14 @@ export const Contribute = styled.div`
 
         h4 {
           font-weight: normal;
-          margin-top: 8px;
+          margin-top: 16px;
+          font-size: 1rem;
         }
 
         svg {
-          fill: ${(props) => props.theme.palette.text.primary};
           height: 64px;
           width: 64px;
+          stroke-width: 0.75px;
         }
       }
     }

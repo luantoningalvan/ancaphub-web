@@ -1,197 +1,181 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useContext, createContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 import {
-  FiPlay as VideoIcon,
+  FiPlayCircle as VideoIcon,
   FiBook as BookIcon,
   FiFileText as ArticleIcon,
 } from 'react-icons/fi';
-import LibraryCard from '../../../../components/library/LibraryCard';
 
-import { TextField } from '../../../../components';
-import { Button, Container, Grid, Paper, Stepper } from 'snake-ui';
-import { Contribute, UploadBox } from './styles';
+import { Button, Container, Grid, Paper, Hero, Card, CardBody } from 'snake-ui';
+import { Contribute } from './styles';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
+import { useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
+
+import CreateAuthor from '../../../../components/authors/CreateAuthor';
+import BookForm from './forms/BookForm';
+import ArticleForm from './forms/ArticleForm';
+import VideoForm from './forms/VideoForm';
+import { convertToRaw } from 'draft-js';
+
+import { Dropzone } from 'components';
+import { useDispatch } from 'react-redux';
+import { createItemRequest } from '../../../../redux/actions/library';
+
+const forms = {
+  book: <BookForm />,
+  article: <ArticleForm />,
+  video: <VideoForm />,
+};
+
+export const CreateAuthorDialog = createContext<any>({});
 
 export default () => {
-  const [form, setForm] = useState('');
+  const [form, setForm] = useState<'book' | 'article' | 'video' | undefined>();
   const [step, setStep] = useState(1);
+  const [createAuthor, setCreateAuthor] = useState(false);
+
+  const formRef = useRef<FormHandles>(null);
+
+  const { goBack } = useHistory();
+  const dispatch = useDispatch();
 
   const handleForm = (formAttr: any) => {
     setForm(formAttr);
     setStep(2);
   };
 
-  const steps = [
-    {
-      label: <FormattedMessage id="library.contribute.type" />,
-      description: <FormattedMessage id="library.contribute.typeDescription" />,
-    },
-    {
-      label: <FormattedMessage id="library.contribute.content" />,
-      description: (
-        <FormattedMessage id="library.contribute.contentDescription" />
-      ),
-    },
-    {
-      label: <FormattedMessage id="library.contribute.exhibition" />,
-      description: (
-        <FormattedMessage id="library.contribute.exhibitionDescription" />
-      ),
-    },
-    {
-      label: <FormattedMessage id="library.contribute.confirm" />,
-      description: (
-        <FormattedMessage id="library.contribute.confirmDescription" />
-      ),
-    },
-  ];
+  async function handleSubmit(data: any) {
+    try {
+      const schema = Yup.object().shape({
+        author_id: Yup.string().required('É necessário escolher um autor'),
+        title: Yup.string().required('É necessário fornecer um título'),
+        content: Yup.mixed().test(
+          'editor-is-empty',
+          'O conteúdo do artigo não pode estar vazio',
+          function () {
+            return data.content.getCurrentContent().hasText();
+          }
+        ),
+      });
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+      console.log(data);
+
+      dispatch(
+        createItemRequest({
+          ...data,
+          type: form,
+          content: JSON.stringify(
+            convertToRaw(data.content.getCurrentContent())
+          ),
+          cover: '',
+        })
+      );
+    } catch (err) {
+      const validationErrors: any = {};
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach((error) => {
+          validationErrors[error.path] = error.message;
+        });
+        formRef?.current?.setErrors(validationErrors);
+      }
+    }
+  }
 
   return (
     <Container>
-      <div style={{ margin: '32px 0px' }}>
-        <Stepper // @ts-ignore
-          steps={steps.map((step) => ({ label: step.label }))}
-          currentStep={step}
-          setStepAction={setStep}
+      <CreateAuthorDialog.Provider
+        value={{ open: createAuthor, toggleDialog: setCreateAuthor }}
+      >
+        <CreateAuthor
+          open={createAuthor}
+          onClose={() => setCreateAuthor(false)}
         />
-      </div>
-
-      <Contribute>
-        <h3>{steps[step - 1].description}</h3>
-
-        {step === 1 && (
-          <Paper padding>
-            <ul>
-              <li>
-                <button type="button" onClick={() => handleForm('article')}>
-                  <ArticleIcon />
-                  <h4>
-                    <FormattedMessage id="common.article" />
-                  </h4>
-                </button>
-              </li>
-
-              <li>
-                <button type="button" onClick={() => handleForm('book')}>
-                  <BookIcon />
-                  <h4>
-                    <FormattedMessage id="common.book" />
-                  </h4>
-                </button>
-              </li>
-
-              <li>
-                <button type="button" onClick={() => handleForm('video')}>
-                  <VideoIcon />
-                  <h4>
-                    <FormattedMessage id="common.video" />
-                  </h4>
-                </button>
-              </li>
-            </ul>
-          </Paper>
-        )}
-
-        {step === 2 && (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column',
-            }}
-          >
-            <Paper padding style={{ width: '100%' }}>
-              <FormattedMessage id="common.title">
-                {(msg) => (
-                  <TextField
-                    name="title"
-                    placeholder={msg}
-                    style={{ marginBottom: 8 }}
-                  />
-                )}
-              </FormattedMessage>
-              <FormattedMessage id="common.author">
-                {(msg) => (
-                  <TextField
-                    name="author"
-                    placeholder={msg}
-                    style={{ marginBottom: 8 }}
-                  />
-                )}
-              </FormattedMessage>
-              <FormattedMessage id="common.description">
-                {(msg) => (
-                  <TextField
-                    name="description"
-                    multiline
-                    placeholder={msg}
-                    style={{ marginBottom: 8, paddingBottom: 80 }}
-                  />
-                )}
-              </FormattedMessage>
-              <FormattedMessage id="common.categories">
-                {(msg) => (
-                  <TextField
-                    name="category"
-                    placeholder={msg}
-                    style={{ marginBottom: 8 }}
-                  />
-                )}
-              </FormattedMessage>
-
-              <h3 style={{ fontSize: '1em', margin: '16px 0px' }}>
-                <FormattedMessage id="library.contribute.downloadOptions" />
-              </h3>
-              <UploadBox>
-                <FormattedMessage id="library.contribute.noneSelected" />
-              </UploadBox>
-            </Paper>
-
-            <Button
-              color="primary"
-              onClick={() => setStep(3)}
-              style={{ margin: '16px 0px' }}
-            >
-              <FormattedMessage id="common.next" />
-            </Button>
-          </div>
-        )}
-
-        {step === 3 && (
-          <Grid spacing={4} style={{ width: '600px' }}>
-            <Grid xs={7}>
-              <Paper padding style={{ width: '100%' }}>
-                <UploadBox>
-                  <FormattedMessage id="library.contribute.noneSelected" />
-                </UploadBox>
-                <Button
-                  color="primary"
-                  onClick={() => setStep(3)}
-                  style={{ marginTop: 16 }}
-                >
-                  <FormattedMessage id="common.next" />
+        <Form onSubmit={handleSubmit} ref={formRef}>
+          <Hero
+            title="Enviar contribuição"
+            description="Conheça as regras e o processo de aprovação antes de enviar sua contribuição"
+            actions={
+              <>
+                <Button color="neutral" onClick={() => goBack()} type="button">
+                  Cancelar
                 </Button>
-              </Paper>
-            </Grid>
-            <Grid xs={5}>
-              <h3
-                style={{
-                  fontSize: '0.9em',
-                  fontWeight: 'normal',
-                  marginBottom: '16px',
-                }}
-              >
-                <FormattedMessage id="common.preview" />
-              </h3>
-              <LibraryCard
-                item={{
-                  type: form,
-                  title: <FormattedMessage id="common.untitled" />,
-                }}
-              />
-            </Grid>
-          </Grid>
-        )}
-      </Contribute>
+                <Button disabled={step === 1} style={{ marginLeft: 8 }}>
+                  Enviar
+                </Button>
+              </>
+            }
+          />
+          <Contribute>
+            {step === 1 && (
+              <>
+                <h3 style={{ marginTop: 32 }}>Selecione o tipo de material</h3>
+
+                <Paper padding style={{ minWidth: 500 }}>
+                  <ul>
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => handleForm('article')}
+                      >
+                        <ArticleIcon />
+                        <h4>
+                          <FormattedMessage id="common.article" />
+                        </h4>
+                      </button>
+                    </li>
+
+                    <li>
+                      <button type="button" onClick={() => handleForm('book')}>
+                        <BookIcon />
+                        <h4>
+                          <FormattedMessage id="common.book" />
+                        </h4>
+                      </button>
+                    </li>
+
+                    <li>
+                      <button type="button" onClick={() => handleForm('video')}>
+                        <VideoIcon />
+                        <h4>
+                          <FormattedMessage id="common.video" />
+                        </h4>
+                      </button>
+                    </li>
+                  </ul>
+                </Paper>
+              </>
+            )}
+
+            {step === 2 && form !== undefined && (
+              <Grid container spacing={2}>
+                <Grid item xs={8}>
+                  <Paper padding>{forms[form]}</Paper>
+                </Grid>
+                <Grid item xs={4}>
+                  <Card>
+                    <h3
+                      style={{
+                        margin: 0,
+                        padding: '16px 16px 0px 16px',
+                        fontSize: '1rem',
+                      }}
+                    >
+                      Capa
+                    </h3>
+                    <CardBody>
+                      <Dropzone />
+                    </CardBody>
+                  </Card>
+                </Grid>
+              </Grid>
+            )}
+          </Contribute>
+        </Form>
+      </CreateAuthorDialog.Provider>
     </Container>
   );
 };
