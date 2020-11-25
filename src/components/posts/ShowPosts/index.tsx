@@ -24,6 +24,7 @@ const ShowPosts: React.FC<ShowPostsProps> = ({ posts, getMore = () => {} }) => {
       next={handleDispatch}
       hasMore
       scrollThreshold="80%"
+      hasChildren
       loader={
         <div
           style={{
