@@ -100,7 +100,10 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
 
   const handleCommentBox = () => setCommenteBoxState(!commentBoxState);
 
-  const handleDelete = () => setDeleteDialogState(!deleteDialogState);
+  const handleDelete = () => {
+    setPostMenu(null);
+    setDeleteDialogState(!deleteDialogState);
+  };
 
   const handleLikePost = (id: string) => {
     dispatch(likePostRequest(id));
