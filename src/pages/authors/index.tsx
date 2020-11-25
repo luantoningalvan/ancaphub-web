@@ -10,7 +10,7 @@ const AuthorsIndex: React.FC = () => {
 
   useEffect(() => {
     dispatch(getAuthorsRequest());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>
