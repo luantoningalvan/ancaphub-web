@@ -36,7 +36,7 @@ const Upload = ({ onUpload, file, ...rest }: any) => {
 
   return (
     <div {...rest}>
-      {file === null ? (
+      {file === undefined ? (
         <Dropzone
           accept="image/png, image/jpeg"
           onDropAccepted={(files) => onUpload(files)}
