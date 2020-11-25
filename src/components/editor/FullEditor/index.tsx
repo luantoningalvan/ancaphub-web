@@ -203,7 +203,7 @@ const FullEditor: React.FC<FullEditorProps> = (props) => {
 
   return (
     <div className="RichEditor-root">
-      <EditorContainer fullScreen={fullScreen} {...rest}>
+      <EditorContainer fullScreen={fullScreen} isErrored={!!error} {...rest}>
         <EditorToolBar>
           <div>
             <BlockStyleControls

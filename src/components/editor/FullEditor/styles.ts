@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 
-export const EditorContainer = styled.div<{ fullScreen?: boolean }>`
+type EditorContainerProps = {
+  isErrored: boolean;
+  fullScreen?: boolean;
+};
+
+export const EditorContainer = styled.div<EditorContainerProps>`
   ${(props) => css`
     border: 1px solid ${props.theme.palette.border};
     background: ${props.theme.palette.paper};
@@ -18,6 +23,12 @@ export const EditorContainer = styled.div<{ fullScreen?: boolean }>`
       top: 0;
       left: 0;
       z-index: 200;
+    `}
+
+  ${(props) =>
+    props.isErrored &&
+    css`
+      border: 1px solid #c53030;
     `}
 `;
 
