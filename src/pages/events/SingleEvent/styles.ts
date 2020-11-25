@@ -1,9 +1,32 @@
 import styled from 'styled-components';
+import { Paper } from 'snake-ui';
 
-export const Event = styled.div`
+export const EventContainer = styled.div`
   margin-top: 16px;
+`;
 
-  .event-header {
+export const EventInfo = styled(Paper)`
+    width: 100%;
+    padding: 16px;
+
+    p {
+      padding: 8px;
+      font-size: 1em;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+    }
+    li svg {
+      height: 26px;
+      width: 26px;
+      margin-right: 16px;
+    }
+`;
+
+export const EventHeader = styled.div`
     border-radius: 8px;
     height: 320px;
     width: 100%;
@@ -88,30 +111,7 @@ export const Event = styled.div`
         width: 28px;
         margin-left: -6px;
         margin-right: 2px;
-        fill: ${(props) => props.theme.palette.primary};
+        color: ${(props) => props.theme.palette.primary};
       }
     }
-  }
-
-  .info-card {
-    width: 100%;
-    padding: 16px;
-
-    p {
-      padding: 8px;
-      font-size: 1em;
-    }
-
-    li {
-      display: flex;
-      align-items: center;
-      padding: 8px;
-    }
-    li svg {
-      fill: white;
-      height: 26px;
-      width: 26px;
-      margin-right: 8px;
-    }
-  }
 `;
