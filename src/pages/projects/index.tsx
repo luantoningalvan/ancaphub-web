@@ -45,7 +45,7 @@ const Projects = () => {
 
         <LoadContent loading={loading}>
           {projects.length > 0 ? (
-            <Grid container>
+            <Grid container spacing={2}>
               {projects.map((project: any) => (
                 <Grid xs={12} md={6} lg={4} key={project._id}>
                   <ProjectCard data={project} />
