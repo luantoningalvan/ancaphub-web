@@ -14,14 +14,7 @@ import {
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import defaultProfileCover from '../../assets/default-profile-cover.jpg';
 import { LoadContent } from '../../components';
-import {
-  Paper,
-  CircularLoader,
-  Container,
-  Tabs,
-  Tab,
-  IconButton,
-} from 'snake-ui';
+import { Paper, CircularLoader, Container, Tabs, Tab, Button } from 'snake-ui';
 
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
@@ -158,14 +151,13 @@ const Profiles = () => {
               </span>
             </div>
             <div className="user-action-buttons">
+              {!verifyIfIsOwnProfile && (
+                <Button color="neutral">
+                  <MessageIcon /> Mensagem
+                </Button>
+              )}
               <FollowButton user={handle} />
               {verifyIfIsOwnProfile && <EditProfile />}
-
-              {!verifyIfIsOwnProfile && (
-                <Link to={`/messages/${user._id}`}>
-                  <IconButton color="primary" icon={<MessageIcon />} />
-                </Link>
-              )}
             </div>
           </ProfileInfo>
         </ProfileHeader>
