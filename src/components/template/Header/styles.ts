@@ -11,7 +11,7 @@ export const AppBar = styled.header`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 100;
 
   @media (min-width: 576px) {
     z-index: 180;
