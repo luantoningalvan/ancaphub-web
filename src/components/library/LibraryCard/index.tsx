@@ -9,7 +9,6 @@ import {
   FiBook as BookIcon,
   FiVideo as VideoIcon,
   FiFile as ArticleIcon,
-  FiBookmark as BookmarkButton,
 } from 'react-icons/fi';
 
 type LibraryItemType = {
@@ -55,8 +54,9 @@ const ItemCard = ({ item }: any) => (
     <Link to={`/library/${item.type}s/${item.id}`} className="link">
       <h2 className="card-title">{item.title}</h2>
     </Link>
-
-    <h2 className="card-author">{item.author.name}</h2>
+    <Link to={`/authors/${item.author.username}`} className="link">
+      <h2 className="card-author">{item.author.name}</h2>
+    </Link>
   </LibraryCard>
 );
 
