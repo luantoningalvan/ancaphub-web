@@ -22,6 +22,7 @@ import {
   FiThumbsUp as LikeIcon,
   FiMessageSquare as CommentIcon,
   FiTrash as DeleteIcon,
+  FiShare2 as ShareIcon,
   FiTrash,
 } from 'react-icons/fi';
 
@@ -154,7 +155,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
               {
                 label: <FormattedMessage id="common.delete" />,
                 onClick: handleDelete,
-                icon: <FiTrash />,
+                icon: <DeleteIcon />,
               },
             ]}
           />
@@ -245,6 +246,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
             </span>
           </button>
         </div>
+
         <div>
           <button type="button" onClick={handleCommentBox}>
             <CommentIcon />
@@ -253,14 +255,12 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
             </span>
           </button>
         </div>
-        {/*
         <div>
           <button disabled>
             <ShareIcon />
-            <span><FormattedMessage id="common.share" /></span>
+            <span>Repassar</span>
           </button>
         </div>
-*/}
       </div>
       <CommentBox expanded={commentBoxState} post={data.id} />
     </PostContainer>
