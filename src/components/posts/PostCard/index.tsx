@@ -55,7 +55,7 @@ interface PostCardProps {
     hasLiked: boolean;
     media: any;
     mediaType: any;
-    createdAt: string;
+    created_at: string;
     commentCount: number;
     likeCount: number;
   };
@@ -132,7 +132,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
               value={
                 -differenceInSeconds(
                   Date.now(),
-                  getTime(parseISO(data.createdAt))
+                  getTime(parseISO(data.created_at))
                 )
               }
               updateIntervalInSeconds={30}

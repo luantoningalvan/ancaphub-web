@@ -42,7 +42,7 @@ const ProjectFeed = ({ post }: any) => {
             <FormattedDate
               // DISCLAIMER: this is a temporary solution since
               // we still don't know why this bug is happening
-              value={addDays(parseISO(post.createdAt), 1)}
+              value={addDays(parseISO(post.created_at), 1)}
               year="numeric"
               month="long"
               day="2-digit"

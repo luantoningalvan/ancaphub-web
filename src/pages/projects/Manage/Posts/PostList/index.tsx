@@ -58,7 +58,7 @@ const PostList: React.FC<{ project: any }> = ({ project }) => {
                   <th>{post.title}</th>
                   <th>
                     <FormattedDate
-                      value={addDays(parseISO(post.createdAt), 1)}
+                      value={addDays(parseISO(post.created_at), 1)}
                       year="numeric"
                       month="long"
                       day="2-digit"

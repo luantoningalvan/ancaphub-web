@@ -25,7 +25,7 @@ type User = {
 type Message = {
   user: User;
   body: string;
-  createdAt?: string;
+  created_at?: string;
   sentByUser: any;
   answeringTo?: any;
 };

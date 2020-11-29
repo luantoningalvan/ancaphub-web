@@ -50,7 +50,7 @@ const GroupChat = () => {
                   message={{
                     user: { name: 'Marcelo' },
                     body: 'Precisamos lembrar de escre..',
-                    createdAt: '25 de março',
+                    created_at: '25 de março',
                   }}
                 />
                 <br />
@@ -59,7 +59,7 @@ const GroupChat = () => {
                   message={{
                     user: { name: 'Marcelo' },
                     body: 'A questão que a gente estava dis..',
-                    createdAt: '12 de abril',
+                    created_at: '12 de abril',
                   }}
                 />
               </>

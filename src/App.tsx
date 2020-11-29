@@ -35,7 +35,11 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <IntlProvider locale={language} messages={messages[language]}>
+      <IntlProvider
+        locale={language}
+        timeZone="America/Sao_Paulo"
+        messages={messages[language]}
+      >
         <Routes />
         <AlertContainer />
       </IntlProvider>

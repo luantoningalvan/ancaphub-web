@@ -17,7 +17,7 @@ type Chat = {
     isVerified: boolean;
   };
   body: string;
-  createdAt: string;
+  created_at: string;
 };
 
 interface ChatboxMessageListProps {

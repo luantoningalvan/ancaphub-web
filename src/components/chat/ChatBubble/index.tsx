@@ -42,7 +42,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({
       )}
       <div className="messageContent">
         <span className="messageBody">{message.body}</span>
-        <span className="messageTime">{message.createdAt}</span>
+        <span className="messageTime">{message.created_at}</span>
       </div>
     </BubbleBody>
   </BubbleWrap>

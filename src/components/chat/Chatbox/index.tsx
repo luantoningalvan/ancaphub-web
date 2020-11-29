@@ -15,7 +15,7 @@ interface ChatboxProps {
       isVerified: boolean;
     };
     body: string;
-    createdAt: string;
+    created_at: string;
   }[];
   showName?: boolean;
   showList?: boolean;

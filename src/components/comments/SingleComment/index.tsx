@@ -7,7 +7,7 @@ import {
 } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormattedRelativeTime, FormattedMessage } from 'react-intl';
-import { differenceInSeconds, parseISO, getTime } from 'date-fns';
+import { differenceInSeconds, parseISO, getTime, addHours } from 'date-fns';
 import UserAvatar from '../../users/UserAvatar';
 import UserName from '../../users/UserName';
 import {
@@ -30,7 +30,7 @@ interface SingleCommentProps {
       username: string;
     };
     content: string;
-    date: string;
+    created_at: string;
   };
   post: any;
 }
@@ -72,7 +72,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment, post }) => {
                       value={
                         -differenceInSeconds(
                           Date.now(),
-                          getTime(parseISO(comment.date))
+                          getTime(addHours(parseISO(comment.created_at), -3))
                         )
                       }
                       updateIntervalInSeconds={30}
@@ -86,6 +86,7 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment, post }) => {
               onSubmit={handleEdit}
               initialData={{ content: comment.content }}
               onKeyDown={(e) => e.key === 'Escape' && setEditMode(false)}
+              style={{ width: '100%' }}
             >
               <div
                 style={{
@@ -94,7 +95,11 @@ const SingleComment: React.FC<SingleCommentProps> = ({ comment, post }) => {
                   alignItems: 'flex-start',
                 }}
               >
-                <Naked name="content" placeholder="" />
+                <Naked
+                  name="content"
+                  placeholder=""
+                  style={{ width: '100%' }}
+                />
                 <a
                   onClick={() => setEditMode(false)}
                   href="#"
