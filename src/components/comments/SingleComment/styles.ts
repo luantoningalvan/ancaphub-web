@@ -21,7 +21,7 @@ export const SingleCommentContainer = styled.div`
     padding-top: 3px;
     margin: 0;
     text-align: justify;
-    font-size: 0.92em;
+    font-size: 1rem;
     word-wrap: normal;
     word-break: keep-all;
     & > a {

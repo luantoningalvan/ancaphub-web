@@ -7,6 +7,8 @@ export const Types = {
   DELETE_COMMENT_SUCCESS: 'comments/delete_comment_success',
   LIKE_COMMENT_REQUEST: 'comments/like_comment_request',
   LIKE_COMMENT_SUCCESS: 'comments/like_comment_success',
+  UPDATE_COMMENT_REQUEST: 'comments/update_comment_request',
+  UPDATE_COMMENT_SUCCESS: 'comments/update_comment_success',
 };
 
 export const loadCommentsRequest = (post) => ({
@@ -26,6 +28,16 @@ export const addCommentRequest = (comment, postId) => ({
 
 export const addCommentSuccess = (data) => ({
   type: Types.ADD_COMMENT_SUCCESS,
+  payload: data,
+});
+
+export const editCommentRequest = (data) => ({
+  type: Types.UPDATE_COMMENT_REQUEST,
+  payload: data,
+});
+
+export const editCommentSuccess = (data) => ({
+  type: Types.UPDATE_COMMENT_SUCCESS,
   payload: data,
 });
 

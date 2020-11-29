@@ -1,7 +1,7 @@
 import { Types as SettingsTypes } from '../actions/settings';
 
 const INITIAL_STATE = {
-  colorMode: localStorage.getItem('color_mode') || 'dark',
+  colorMode: 'dark',
 };
 
 function settings(state = INITIAL_STATE, action) {

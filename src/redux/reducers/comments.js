@@ -29,6 +29,14 @@ export default (state = INITIAL_STATE, action) => {
           ...state[payload.postId],
         ],
       };
+    case Types.UPDATE_COMMENT_SUCCESS: {
+      return {
+        ...state,
+        [payload.post_id]: state[payload.post_id].map((comment) =>
+          comment.id === payload.id ? payload : comment
+        ),
+      };
+    }
     default:
       return state;
   }

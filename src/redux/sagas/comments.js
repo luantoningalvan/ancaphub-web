@@ -32,6 +32,16 @@ function* addComment({ payload }) {
   }
 }
 
+function* updateComment({ payload }) {
+  try {
+    const comment = yield call(api.editComment, payload);
+
+    yield put(actions.editCommentSuccess(comment.data));
+  } catch (e) {
+    yield put(addAlert('error', e.message));
+  }
+}
+
 function* deleteComment({ payload }) {
   try {
     yield call(api.deleteComment, payload);
@@ -49,6 +59,10 @@ function* watchAddComment() {
   yield takeLatest(actions.Types.ADD_COMMENT_REQUEST, addComment);
 }
 
+function* watchUpdateComment() {
+  yield takeLatest(actions.Types.UPDATE_COMMENT_REQUEST, updateComment);
+}
+
 function* watchDeleteComment() {
   yield takeLatest(actions.Types.DELETE_COMMENT_REQUEST, deleteComment);
 }
@@ -56,5 +70,6 @@ function* watchDeleteComment() {
 export default [
   fork(watchLoadComments),
   fork(watchAddComment),
+  fork(watchUpdateComment),
   fork(watchDeleteComment),
 ];
