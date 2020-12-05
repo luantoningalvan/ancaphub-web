@@ -4,7 +4,7 @@ const UploadBox = styled.div`
   height: 100px;
   width: 100%;
   border-radius: 8px;
-  border: 1px dashed ${(props) => props.theme.palette.text.secondary};
+  border: 1px dashed ${(props) => props.theme.palette.border};
   display: flex;
   flex-direction: column;
   align-items: center;
