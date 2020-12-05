@@ -14,6 +14,8 @@ export const Types = {
   LIKE_POST_SUCCESS: 'posts/like_post_success',
   DELETE_POST_REQUEST: 'posts/delete_post_request',
   DELETE_POST_SUCCESS: 'posts/delete_post_success',
+  SHARE_POST_REQUEST: 'posts/share_post_request',
+  SHARE_POST_SUCCESS: 'posts/share_post_success',
   VOTE_POST_POLL_REQUEST: 'posts/vote_post_poll_request',
   VOTE_POST_POLL_SUCCESS: 'posts/vote_post_poll_success',
   GET_POST_LIKE_REQUEST: 'posts/get_post_like_request',
@@ -28,6 +30,16 @@ export const createPostRequest = (data) => ({
 
 export const createPostSuccess = (data) => ({
   type: Types.CREATE_POST_SUCCESS,
+  payload: data,
+});
+
+export const sharePostRequest = (data) => ({
+  type: Types.SHARE_POST_REQUEST,
+  payload: data,
+});
+
+export const sharePostSuccess = (data) => ({
+  type: Types.SHARE_POST_SUCCESS,
   payload: data,
 });
 
