@@ -23,7 +23,6 @@ import {
   FiMessageSquare as CommentIcon,
   FiTrash as DeleteIcon,
   FiShare2 as ShareIcon,
-  FiTrash,
 } from 'react-icons/fi';
 
 import { useDispatch } from 'react-redux';
@@ -42,6 +41,7 @@ import PostPoll from '../PostPoll';
 import {
   likePostRequest,
   deletePostRequest,
+  sharePostRequest,
 } from '../../../redux/actions/posts';
 
 interface PostCardProps {
@@ -54,6 +54,7 @@ interface PostCardProps {
       username: string;
     };
     hasLiked: boolean;
+    hasShared: boolean;
     media: any;
     mediaType: any;
     created_at: string;
@@ -67,7 +68,6 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
   const [likeBoxState, setLikeBoxState] = useState(false);
   const [deleteDialogState, setDeleteDialogState] = useState(false);
   const [postMenu, setPostMenu] = useState(null);
-
   const dispatch = useDispatch();
 
   const linkifyPlugin = createLinkifyPlugin(linkPluginOptions);
@@ -110,160 +110,186 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
     dispatch(likePostRequest(id));
   };
 
+  const handleSharePost = (id: string) => {
+    dispatch(sharePostRequest(id));
+  };
+
   const handleDeletePost = (id: string) => {
     dispatch(deletePostRequest(id));
   };
 
   return (
-    <PostContainer>
-      <div className="post-header">
-        <div className="profile-picture">
-          <img
-            alt="user avatar"
-            src={data.user.avatar ? data.user.avatar : defaultProfilePicture}
-          />
-        </div>
-        <div style={{ flex: 1 }}>
-          <Link to={`/${data.user.username}`}>
-            <UserName user={data.user} />
-          </Link>
+    <>
+      {data.hasShared && (
+        <span
+          style={{
+            color: '#2699bd',
+            display: 'flex',
+            alignItems: 'center',
+            margin: '8px 0px',
+          }}
+        >
+          <ShareIcon style={{ marginRight: 8 }} />
           <span>
-            <FormattedRelativeTime
-              numeric="auto"
-              value={
-                -differenceInSeconds(
-                  Date.now(),
-                  getTime(parseISO(data.created_at))
-                )
-              }
-              updateIntervalInSeconds={30}
-            />
+            <b>Você</b> repassou esta postagem
           </span>
-        </div>
-
-        <div>
-          <IconButton
-            icon={<MdMore fontSize="24px" />} //@ts-ignore
-            onClick={(e: any) => setPostMenu(e.currentTarget)}
-          />
-          <Menu
-            anchorEl={postMenu}
-            onClose={() => setPostMenu(null)}
-            open={Boolean(postMenu)}
-            placement="left"
-            options={[
-              {
-                label: <FormattedMessage id="common.delete" />,
-                onClick: handleDelete,
-                icon: <DeleteIcon />,
-              },
-            ]}
-          />
-        </div>
-        <ConfirmationDialog
-          show={deleteDialogState}
-          onClose={handleDelete}
-          onConfirm={() => handleDeletePost(data.id)}
-          title={<FormattedMessage id="common.delete" />}
-          message={<FormattedMessage id="components.postCard.confirmDelete" />}
-        />
-      </div>
-
-      <div style={{ padding: 16 }}>
-        {/* Show post content  */}
-        {showPostContent()}
-        {/* If post has embed media type */}
-        {(data.media && data.media.mediaType) === 'embed' && (
-          <ReactPlayer
-            url={data.media.data}
-            light
-            style={{ marginTop: 16 }}
-            width="100%"
-          />
-        )}
-
-        {data.media && data.media.mediaType === 'image' && (
-          <ImageBox src={data.media.data} />
-        )}
-
-        {data.media && data.media.mediaType === 'poll' && (
-          <PostPoll post={data} />
-        )}
-
-        {(data.likeCount > 0 || data.commentCount > 0) && (
-          <div className="post-counts">
-            <span onClick={() => setLikeBoxState(true)} role="presentation">
-              {`${data.likeCount} `}
-              <FormattedPlural
-                value={data.likeCount}
-                one={
-                  <FormattedMessage id="common.likeNoun">
-                    {(txt: string) => <>{txt.toLowerCase()}</>}
-                  </FormattedMessage>
-                }
-                other={
-                  <FormattedMessage id="common.likePlural">
-                    {(txt: string) => <>{txt.toLowerCase()}</>}
-                  </FormattedMessage>
-                }
-              />
-            </span>
-            <span role="presentation" onClick={handleCommentBox}>
-              {` ${data.commentCount} `}
-              <FormattedPlural
-                value={data.commentCount}
-                one={
-                  <FormattedMessage id="common.comment">
-                    {(txt: string) => <>{txt.toLowerCase()}</>}
-                  </FormattedMessage>
-                }
-                other={
-                  <FormattedMessage id="common.comments">
-                    {(txt: string) => <>{txt.toLowerCase()}</>}
-                  </FormattedMessage>
-                }
-              />
-            </span>
-            <LikeBox
-              open={likeBoxState}
-              onClose={() => setLikeBoxState(false)}
-              postId={data.id}
+        </span>
+      )}
+      <PostContainer>
+        <div className="post-header">
+          <div className="profile-picture">
+            <img
+              alt="user avatar"
+              src={data.user.avatar ? data.user.avatar : defaultProfilePicture}
             />
           </div>
-        )}
-      </div>
-
-      <div className="post-actions">
-        <div>
-          <button
-            type="button"
-            onClick={() => handleLikePost(data.id)}
-            className={data.hasLiked ? 'pressed' : ''}
-          >
-            {data.hasLiked ? <LikeIcon /> : <LikeIcon />}
+          <div style={{ flex: 1 }}>
+            <Link to={`/${data.user.username}`}>
+              <UserName user={data.user} />
+            </Link>
             <span>
-              <FormattedMessage id="common.like" />
+              <FormattedRelativeTime
+                numeric="auto"
+                value={
+                  -differenceInSeconds(
+                    Date.now(),
+                    getTime(parseISO(data.created_at))
+                  )
+                }
+                updateIntervalInSeconds={30}
+              />
             </span>
-          </button>
+          </div>
+
+          <div>
+            <IconButton
+              icon={<MdMore fontSize="24px" />} //@ts-ignore
+              onClick={(e: any) => setPostMenu(e.currentTarget)}
+            />
+            <Menu
+              anchorEl={postMenu}
+              onClose={() => setPostMenu(null)}
+              open={Boolean(postMenu)}
+              placement="left"
+              options={[
+                {
+                  label: <FormattedMessage id="common.delete" />,
+                  onClick: handleDelete,
+                  icon: <DeleteIcon />,
+                },
+              ]}
+            />
+          </div>
+          <ConfirmationDialog
+            show={deleteDialogState}
+            onClose={handleDelete}
+            onConfirm={() => handleDeletePost(data.id)}
+            title={<FormattedMessage id="common.delete" />}
+            message={
+              <FormattedMessage id="components.postCard.confirmDelete" />
+            }
+          />
         </div>
 
-        <div>
-          <button type="button" onClick={handleCommentBox}>
-            <CommentIcon />
-            <span>
-              <FormattedMessage id="common.commentVerb" />
-            </span>
-          </button>
+        <div style={{ padding: 16 }}>
+          {/* Show post content  */}
+          {showPostContent()}
+          {/* If post has embed media type */}
+          {(data.media && data.media.mediaType) === 'embed' && (
+            <ReactPlayer
+              url={data.media.data}
+              light
+              style={{ marginTop: 16 }}
+              width="100%"
+            />
+          )}
+
+          {data.media && data.media.mediaType === 'image' && (
+            <ImageBox src={data.media.data} />
+          )}
+
+          {data.media && data.media.mediaType === 'poll' && (
+            <PostPoll post={data} />
+          )}
+
+          {(data.likeCount > 0 || data.commentCount > 0) && (
+            <div className="post-counts">
+              <span onClick={() => setLikeBoxState(true)} role="presentation">
+                {`${data.likeCount} `}
+                <FormattedPlural
+                  value={data.likeCount}
+                  one={
+                    <FormattedMessage id="common.likeNoun">
+                      {(txt: string) => <>{txt.toLowerCase()}</>}
+                    </FormattedMessage>
+                  }
+                  other={
+                    <FormattedMessage id="common.likePlural">
+                      {(txt: string) => <>{txt.toLowerCase()}</>}
+                    </FormattedMessage>
+                  }
+                />
+              </span>
+              <span role="presentation" onClick={handleCommentBox}>
+                {` ${data.commentCount} `}
+                <FormattedPlural
+                  value={data.commentCount}
+                  one={
+                    <FormattedMessage id="common.comment">
+                      {(txt: string) => <>{txt.toLowerCase()}</>}
+                    </FormattedMessage>
+                  }
+                  other={
+                    <FormattedMessage id="common.comments">
+                      {(txt: string) => <>{txt.toLowerCase()}</>}
+                    </FormattedMessage>
+                  }
+                />
+              </span>
+              <LikeBox
+                open={likeBoxState}
+                onClose={() => setLikeBoxState(false)}
+                postId={data.id}
+              />
+            </div>
+          )}
         </div>
-        <div>
-          <button disabled>
-            <ShareIcon />
-            <span>Repassar</span>
-          </button>
+
+        <div className="post-actions">
+          <div>
+            <button
+              type="button"
+              onClick={() => handleLikePost(data.id)}
+              className={data.hasLiked ? 'pressed' : ''}
+            >
+              {data.hasLiked ? <LikeIcon /> : <LikeIcon />}
+              <span>
+                <FormattedMessage id="common.like" />
+              </span>
+            </button>
+          </div>
+
+          <div>
+            <button type="button" onClick={handleCommentBox}>
+              <CommentIcon />
+              <span>
+                <FormattedMessage id="common.commentVerb" />
+              </span>
+            </button>
+          </div>
+          <div>
+            <button
+              onClick={() => handleSharePost(data.id)}
+              className={data.hasShared ? 'pressed' : ''}
+            >
+              <ShareIcon />
+              <span>Repassar</span>
+            </button>
+          </div>
         </div>
-      </div>
-      <CommentBox expanded={commentBoxState} post={data.id} />
-    </PostContainer>
+        <CommentBox expanded={commentBoxState} post={data.id} />
+      </PostContainer>
+    </>
   );
 };
 
