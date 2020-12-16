@@ -30,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
     case Types.LOAD_USER_SUCCESS:
       return {
         ...state,
-        user: payload,
+        user: payload.user,
         isAuthenticated: true,
         loading: false,
       };
