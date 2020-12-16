@@ -97,7 +97,7 @@ const SingleProject = () => {
                   to="http://ancaphub.com"
                   rel="noopener noreferrer"
                 >
-                  {projectCategories[project.category]}
+                  {project.category}
                 </Link>
               </div>
             </div>

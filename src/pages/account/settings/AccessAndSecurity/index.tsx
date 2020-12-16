@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TextField } from '../../../../components';
-import { Button, Card, CardBody, CardHeader, Accordion } from 'snake-ui';
+import { Button, Card, CardBody, CardHeader, Accordion, Grid } from 'snake-ui';
 
 import {
   updateEmailRequest,
@@ -118,111 +118,129 @@ const AccessAndSecurity = () => {
       />
 
       <CardBody>
-        <Accordion title={<FormattedMessage id="common.username" />}>
-          <Form
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-            }}
-            onSubmit={handleUsernameSubmit}
-            ref={usernameFormRef}
-            initialData={{ username: currentData.username }}
-          >
-            <FormattedMessage id="account.settings.insertNewUsername">
-              {(msg) => (
-                <TextField
-                  fullWidth
-                  placeholder={msg}
-                  name="username"
-                  type="text"
-                />
-              )}
-            </FormattedMessage>
-            <Button type="submit" color="secondary" style={{ marginTop: 16 }}>
-              <FormattedMessage id="common.change" />
-            </Button>
-          </Form>
-        </Accordion>
-        <div style={{ marginTop: 8 }}></div>
-        <Accordion title={<FormattedMessage id="common.email" />}>
-          <Form
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-            }}
-            onSubmit={handleEmailSubmit}
-            ref={emailFormRef}
-            initialData={{ email: currentData.email }}
-          >
-            <FormattedMessage id="account.settings.insertNewEmail">
-              {(msg) => (
-                <TextField
-                  fullWidth
-                  placeholder={msg}
-                  name="email"
-                  type="email"
-                />
-              )}
-            </FormattedMessage>
-            <Button type="submit" color="secondary" style={{ marginTop: 16 }}>
-              <FormattedMessage id="common.change" />
-            </Button>
-          </Form>
-        </Accordion>
-        <div style={{ marginTop: 8 }}></div>
-        <Accordion title={<FormattedMessage id="common.password" />}>
-          <Form
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-            }}
-            onSubmit={handlePasswordSubmit}
-            ref={passwordFormRef}
-          >
-            <FormattedMessage id="common.password">
-              {(msg: string) => (
-                <FormattedMessage
-                  id="common.newFemale"
-                  values={{ what: msg.toLowerCase() }}
-                >
-                  {(_msg) => (
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Accordion title={<FormattedMessage id="common.username" />}>
+              <Form
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                }}
+                onSubmit={handleUsernameSubmit}
+                ref={usernameFormRef}
+                initialData={{ username: currentData.username }}
+              >
+                <FormattedMessage id="account.settings.insertNewUsername">
+                  {(msg) => (
                     <TextField
-                      placeholder={_msg}
-                      name="new_password"
-                      type="password"
+                      fullWidth
+                      placeholder={msg}
+                      name="username"
+                      type="text"
                     />
                   )}
                 </FormattedMessage>
-              )}
-            </FormattedMessage>
-            <FormattedMessage id="account.settings.confirmNewPassword">
-              {(msg) => (
-                <TextField
-                  placeholder={msg}
-                  name="confirm_new_password"
-                  type="password"
-                  style={{ marginTop: 8 }}
-                />
-              )}
-            </FormattedMessage>
-            <FormattedMessage id="account.settings.typeCurrentPassword">
-              {(msg) => (
-                <TextField
-                  placeholder={msg}
-                  name="current_password"
-                  type="password"
-                  style={{ marginTop: 8 }}
-                />
-              )}
-            </FormattedMessage>
-            <Button type="submit" color="secondary" style={{ marginTop: 16 }}>
-              <FormattedMessage id="common.change" />
-            </Button>
-          </Form>
-        </Accordion>
+                <Button
+                  type="submit"
+                  color="secondary"
+                  style={{ marginTop: 16 }}
+                >
+                  <FormattedMessage id="common.change" />
+                </Button>
+              </Form>
+            </Accordion>
+          </Grid>
+          <Grid item xs={12}>
+            <Accordion title={<FormattedMessage id="common.email" />}>
+              <Form
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                }}
+                onSubmit={handleEmailSubmit}
+                ref={emailFormRef}
+                initialData={{ email: currentData.email }}
+              >
+                <FormattedMessage id="account.settings.insertNewEmail">
+                  {(msg) => (
+                    <TextField
+                      fullWidth
+                      placeholder={msg}
+                      name="email"
+                      type="email"
+                    />
+                  )}
+                </FormattedMessage>
+                <Button
+                  type="submit"
+                  color="secondary"
+                  style={{ marginTop: 16 }}
+                >
+                  <FormattedMessage id="common.change" />
+                </Button>
+              </Form>
+            </Accordion>
+          </Grid>
+          <Grid item xs={12}>
+            <Accordion title={<FormattedMessage id="common.password" />}>
+              <Form
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                }}
+                onSubmit={handlePasswordSubmit}
+                ref={passwordFormRef}
+              >
+                <FormattedMessage id="common.password">
+                  {(msg: string) => (
+                    <FormattedMessage
+                      id="common.newFemale"
+                      values={{ what: msg.toLowerCase() }}
+                    >
+                      {(_msg) => (
+                        <TextField
+                          placeholder={_msg}
+                          name="new_password"
+                          type="password"
+                        />
+                      )}
+                    </FormattedMessage>
+                  )}
+                </FormattedMessage>
+                <FormattedMessage id="account.settings.confirmNewPassword">
+                  {(msg) => (
+                    <TextField
+                      placeholder={msg}
+                      name="confirm_new_password"
+                      type="password"
+                      style={{ marginTop: 8 }}
+                    />
+                  )}
+                </FormattedMessage>
+                <FormattedMessage id="account.settings.typeCurrentPassword">
+                  {(msg) => (
+                    <TextField
+                      placeholder={msg}
+                      name="current_password"
+                      type="password"
+                      style={{ marginTop: 8 }}
+                    />
+                  )}
+                </FormattedMessage>
+                <Button
+                  type="submit"
+                  color="secondary"
+                  style={{ marginTop: 16 }}
+                >
+                  <FormattedMessage id="common.change" />
+                </Button>
+              </Form>
+            </Accordion>
+          </Grid>
+        </Grid>
       </CardBody>
     </Card>
   );

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { createProjectRequest } from '../../../redux/actions/projects';
 import { TextField, Select } from '../../../components';
-import { Container, Paper, Hero, Button } from 'snake-ui';
+import { Container, Paper, Hero, Button, Grid } from 'snake-ui';
 import projectCategories from '../../../assets/project-categories';
 
 const NewProject = () => {
@@ -48,28 +48,33 @@ const NewProject = () => {
           style={{ width: '100%', marginTop: 32, overflow: 'inherit' }}
         >
           <Form onSubmit={handleSubmit}>
-            <TextField placeholder="Nome do Projeto" name="name" />
-            <Select
-              placeholder="Categoria"
-              name="category"
-              options={Object.entries(projectCategories).map((a) => ({
-                value: a[0],
-                label: a[1],
-              }))}
-            />
-            <TextField
-              multiline
-              placeholder="Descrição curta"
-              name="description"
-            />
-            <Button
-              fullWidth
-              color="secondary"
-              style={{ marginTop: 16 }}
-              type="submit"
-            >
-              Criar Projeto
-            </Button>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField placeholder="Nome do Projeto" name="name" />
+              </Grid>
+              <Grid item xs={12}>
+                <Select
+                  placeholder="Categoria"
+                  name="category"
+                  options={Object.entries(projectCategories).map((a) => ({
+                    value: a[0],
+                    label: a[1],
+                  }))}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  multiline
+                  placeholder="Descrição curta"
+                  name="description"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button fullWidth color="secondary" type="submit">
+                  Criar Projeto
+                </Button>
+              </Grid>
+            </Grid>
           </Form>
         </Paper>
       </div>
