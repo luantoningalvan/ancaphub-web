@@ -10,7 +10,7 @@ function* updateUsername(action) {
     yield put(actions.updateUsernameSuccess(response.data));
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Username atualizado com sucesso',
         type: 'success',
       })
@@ -26,7 +26,7 @@ function* updateEmail(action) {
     yield put(actions.updateEmailSuccess(response.data));
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'E-mail atualizado com sucesso',
         type: 'success',
       })
@@ -42,7 +42,7 @@ function* updatePassword(action) {
     yield put(actions.updatePasswordSuccess(response.data));
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Senha atualizada com sucesso',
         type: 'success',
       })
