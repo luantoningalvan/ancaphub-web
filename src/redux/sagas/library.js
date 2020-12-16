@@ -2,11 +2,20 @@ import { takeLatest, call, fork, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/library';
 import * as api from '../../api/library';
+import { addAlert } from '../actions/alerts';
 
 function* createItem(action) {
   try {
     const item = yield call(api.createLibraryItem, action.payload);
     yield put(actions.createItemSuccess(item.data));
+    yield put(
+      addAlert({
+        title: 'Sucesso',
+        description: 'Sua publicação foi enviada para análise',
+        type: 'success',
+      })
+    );
+    action.callback && action.callback();
   } catch (e) {
     yield put(actions.libraryError({ errorMessage: e.message }));
   }
@@ -15,12 +24,11 @@ function* createItem(action) {
 function* getItems({ payload }) {
   try {
     const filter = {
-      ...(payload &&
-        payload.category &&
-        payload.category !== '' && { category: payload.category }),
-      ...(payload &&
-        payload.type &&
-        payload.type !== '' && { type: payload.type }),
+      ...(payload?.category &&
+        payload.category !== '' && { category_id: payload.category }),
+      ...(payload?.author &&
+        payload.author !== '' && { author_id: payload.author }),
+      ...(payload?.type && payload.type !== '' && { type: payload.type }),
     };
 
     const items = yield call(api.getLibraryItems, filter);

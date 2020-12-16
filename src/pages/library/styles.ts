@@ -45,7 +45,6 @@ export const LibraryCardGrid = styled.div`
 `;
 
 export const LibrarySidebarMenu = styled(List)`
-  max-height: 208px;
   @media only screen and (max-width: 768px) {
     overflow-y: hidden;
     overflow-x: auto;

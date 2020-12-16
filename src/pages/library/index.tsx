@@ -68,9 +68,13 @@ const Library = () => {
       videos: 'video',
     };
     dispatch(
-      getItemsRequest({ type: types[type], category: selectedCategory })
+      getItemsRequest({
+        type: types[type],
+        category: selectedCategory,
+        author: selectedAuthor,
+      })
     );
-  }, [type, selectedCategory, dispatch]);
+  }, [type, selectedCategory, selectedAuthor, dispatch]);
 
   return (
     <Container>
