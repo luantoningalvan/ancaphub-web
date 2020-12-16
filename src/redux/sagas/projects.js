@@ -29,12 +29,12 @@ function* createProject({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Projeto criado com sucesso',
         type: 'success',
       })
     );
-    yield call(payload.history.push(`/projects/${item.data._id}`));
+    yield call(payload.history.push(`/projects/${item.data.id}`));
   } catch (e) {
     yield put(actions.projectsError({ errorMessage: e.message }));
   }
@@ -44,6 +44,13 @@ function* updateProject({ payload }) {
   try {
     const item = yield call(api.updateProject, payload);
     yield put(actions.updateProjectSuccess(item.data));
+    yield put(
+      addAlert({
+        title: 'Sucesso',
+        description: 'Projeto atualizado com sucesso',
+        type: 'success',
+      })
+    );
   } catch (e) {
     yield put(actions.projectsError({ errorMessage: e.response.data.message }));
   }
@@ -91,7 +98,7 @@ function* updateProjectAbout({ payload }) {
     yield put(actions.updateProjectAboutSuccess(item.data));
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Seção sobre atualizada com sucesso',
         type: 'success',
       })
@@ -108,7 +115,7 @@ function* addProjectFAQ({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Questão criada com sucesso',
         type: 'success',
       })
@@ -125,7 +132,7 @@ function* removeProjectFAQ({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Questão removida com sucesso',
         type: 'success',
       })
@@ -142,7 +149,7 @@ function* addProjectDonation({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Forma de doação criada com sucesso',
         type: 'success',
       })
@@ -159,7 +166,7 @@ function* removeProjectDonation({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Forma de doação removida com sucesso',
         type: 'success',
       })
@@ -195,7 +202,7 @@ function* createProjectPost({ payload }) {
     });
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Publicação realizada com sucesso',
         type: 'success',
       })
@@ -214,7 +221,7 @@ function* removeProjectPost({ payload }) {
     yield call(api.removeProjectPost, payload);
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Publicação removida com sucesso',
         type: 'success',
       })
@@ -239,7 +246,7 @@ function* updateProjectPost({ payload }) {
     const result = yield call(api.updateProjectPost, payload);
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Publicação atualizada com sucesso',
         type: 'success',
       })

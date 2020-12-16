@@ -14,10 +14,10 @@ const INITIAL_STATE = {
 
 const getRelationships = (pjts) => {
   const reducer = pjts.map((pj) => ({
-    _id: pj._id,
+    id: pj.id,
     following: pj.isFollowing,
   }));
-  return arrayToObject(reducer, '_id');
+  return arrayToObject(reducer, 'id');
 };
 
 function projects(state = INITIAL_STATE, action) {
@@ -72,7 +72,7 @@ function projects(state = INITIAL_STATE, action) {
     case Types.REMOVE_PROJECT_POST_SUCCESS:
       return {
         ...state,
-        posts: state.posts.filter((post) => post._id !== payload),
+        posts: state.posts.filter((post) => post.id !== payload),
         loadingPosts: false,
       };
     case Types.PROJECTS_ERROR:
