@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import parse from 'html-react-parser';
 import { FiPlus, FiMinus } from 'react-icons/fi';
 import Categories from '../../../../components/categories/ShowCategories';
@@ -14,6 +14,7 @@ import {
   TextControls,
   Title,
 } from './styles';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 const SingleArticle = () => {
   const { id }: { id: string } = useParams();
@@ -49,32 +50,31 @@ const SingleArticle = () => {
   return (
     singleItem && (
       <>
-        <Banner cover={singleItem.cover && singleItem.cover.url}>
+        <Banner cover={singleItem.cover && singleItem.cover_url}>
           <Container>
             <Categories categories={singleItem.categories} />
-            <Title>{singleItem && singleItem.title}</Title>
-            <Author>{singleItem && singleItem.title}</Author>
+            <Title>{singleItem?.title}</Title>
+            <Author>
+              <Link to={`/authors/${singleItem?.author?.username}`}>
+                {singleItem?.author?.name}
+              </Link>
+            </Author>
           </Container>
         </Banner>
 
-        <div style={{ marginTop: -20 }}>
-          <Container>
-            <TextControls>
-              <h5>
-                <FormattedMessage id="common.fontSize" />
-              </h5>
-              <TextControlButton onClick={() => handleGrowText()}>
-                <FiPlus />
-              </TextControlButton>
-              <TextControlButton onClick={() => handleShrinkText()}>
-                <FiMinus />
-              </TextControlButton>
-            </TextControls>
-            <Paper padding style={{ fontSize }}>
-              {parse(`${singleItem && singleItem.content}`)}
-            </Paper>
-          </Container>
-        </div>
+        <Container style={{ marginTop: -20 }}>
+          <Paper padding style={{ fontSize }}>
+            {singleItem.content && (
+              <Editor
+                readOnly
+                onChange={() => {}}
+                editorState={EditorState.createWithContent(
+                  convertFromRaw(JSON.parse(singleItem.content))
+                )}
+              />
+            )}
+          </Paper>
+        </Container>
       </>
     )
   );

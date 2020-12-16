@@ -8,13 +8,15 @@ export const Banner = styled.div<{ cover?: string }>`
   background-position: center;
   width: 100%;
   background-blend-mode: overlay;
-  padding: 96px 0px;
+  height: 300px;
   text-align: center;
 
-  div {
+  .snake-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    height: 100%;
   }
 `;
 
@@ -26,9 +28,11 @@ export const Title = styled.h2`
 `;
 
 export const Author = styled.h3`
-  font-weight: lighter;
-  color: ${(props) => props.theme.palette.text.contrast};
-  font-size: 1.25rem;
+  a {
+    font-weight: lighter;
+    color: ${(props) => props.theme.palette.text.contrast};
+    font-size: 1.25rem;
+  }
 `;
 
 export const TextControls = styled.div`
