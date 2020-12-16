@@ -7,7 +7,7 @@ export { default as Chatbox } from './chat/Chatbox';
 export { default as ChatboxListItem } from './chat/ChatboxListItem';
 export { default as ChatboxMessageList } from './chat/ChatboxMessageList';
 export { default as LoadContent } from './loaders/LoadContent';
-export { default as Dropzone } from './upload/Dropzone';
+export { default as Dropzone } from './form/Dropzone';
 export { default as UploadBox } from './upload/UploadBox';
 export { default as ConfirmationDialog } from './dialogs/ConfirmationDialog';
 export { default as ImageBox } from './dialogs/ImageBox';
