@@ -25,13 +25,13 @@ export const SelectField = styled.div<TextFieldContainerProps>`
   border: 1px solid ${(props) => props.theme.palette.border};
   color: ${(props) => props.theme.palette.text.primary};
   position: relative;
+  height: 56px;
 
   & + div {
     margin-top: 16px;
   }
 
-  input,
-  textarea {
+  input {
     flex: 1;
     padding: 26px 16px 10px 16px;
 
@@ -77,7 +77,7 @@ export const SelectField = styled.div<TextFieldContainerProps>`
       border-color: ${props.theme.palette.secondary};
 
       .input-label {
-        top: 18px;
+        top: 20px;
         line-height: 1.25;
         transform: scale(0.75) translateY(-11px);
       }
@@ -89,7 +89,7 @@ export const SelectField = styled.div<TextFieldContainerProps>`
       color: ${props.theme.palette.secondary};
 
       .input-label {
-        top: 18px;
+        top: 20px;
         line-height: 1.25;
         transform: scale(0.75) translateY(-11px);
       }
@@ -99,12 +99,11 @@ export const SelectField = styled.div<TextFieldContainerProps>`
 export const SelectOptionList = styled.div`
   border-radius: 4px;
   min-width: 100px;
-  padding: 8px;
 `;
 
 export const SelectOption = styled.div`
   flex: 1;
-  padding: 26px 16px 10px 16px;
+  padding: 8px 16px;
   line-height: 1.25;
   font-size: 1rem;
   color: ${(props) => props.theme.palette.text.primary};
@@ -132,6 +131,7 @@ export const AddOptionButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 8px;
   svg {
     margin-right: 8px;
   }

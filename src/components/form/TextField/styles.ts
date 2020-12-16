@@ -16,10 +16,6 @@ export const TextFieldContainer = styled.div<TextFieldContainerProps>`
   color: ${(props) => props.theme.palette.text.primary};
   position: relative;
 
-  & + div {
-    margin-top: 16px;
-  }
-
   input,
   textarea {
     flex: 1;
@@ -33,6 +29,10 @@ export const TextFieldContainer = styled.div<TextFieldContainerProps>`
     &::placeholder {
       color: ${(props) => props.theme.palette.text.secondary};
     }
+  }
+
+  input {
+    height: 56px;
   }
 
   svg {
@@ -52,7 +52,7 @@ export const TextFieldContainer = styled.div<TextFieldContainerProps>`
     font-weight: normal;
     left: 16px;
     transition: transform 0.2s;
-    top: 23px;
+    top: 20px;
     line-height: 20px;
   }
 
