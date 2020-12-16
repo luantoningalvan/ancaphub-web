@@ -1,40 +1,26 @@
-import React, { useContext } from 'react';
-import { TextField, Select } from '../../../../../components';
+import React from 'react';
+import { TextField } from '../../../../../components';
+import SelectAuthor from '../../../../../components/authors/SelectAuthor';
 import { FormattedMessage } from 'react-intl';
 import FullEditor from 'components/editor/FullEditor';
-import { useSelector } from 'react-redux';
-import { CreateAuthorDialog } from '../';
+import { Grid } from 'snake-ui';
 
 export default () => {
-  const authors = useSelector((state: any) => state.authors);
-  const createAuthorDialog = useContext(CreateAuthorDialog);
-
   return (
-    <>
-      <FormattedMessage id="common.title">
-        {(msg) => (
-          <TextField
-            name="title"
-            placeholder={msg}
-            style={{ marginBottom: 8 }}
-          />
-        )}
-      </FormattedMessage>
-      <FormattedMessage id="common.author">
-        {(msg: string) => (
-          <Select
-            name="author_id"
-            placeholder={msg}
-            options={authors.items.map((author: any) => ({
-              label: author.name,
-              value: author.id,
-            }))}
-            style={{ marginBottom: 8 }}
-            onAddButtonClick={() => createAuthorDialog.toggleDialog(true)}
-          />
-        )}
-      </FormattedMessage>
-      <FullEditor name="content" />
-    </>
+    <Grid container spacing={2}>
+      <Grid item xs={12}>
+        <FormattedMessage id="common.title">
+          {(msg) => <TextField name="title" placeholder={msg} />}
+        </FormattedMessage>
+      </Grid>
+
+      <Grid item xs={12}>
+        <SelectAuthor />
+      </Grid>
+
+      <Grid item xs={12}>
+        <FullEditor name="content" />
+      </Grid>
+    </Grid>
   );
 };

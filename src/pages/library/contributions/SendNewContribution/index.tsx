@@ -13,13 +13,13 @@ import { Form } from '@unform/web';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 
+import { Dropzone } from '../../../../components';
 import CreateAuthor from '../../../../components/authors/CreateAuthor';
 import BookForm from './forms/BookForm';
 import ArticleForm from './forms/ArticleForm';
 import VideoForm from './forms/VideoForm';
 import { convertToRaw } from 'draft-js';
 
-import { Dropzone } from 'components';
 import { useDispatch } from 'react-redux';
 import { createItemRequest } from '../../../../redux/actions/library';
 
@@ -38,7 +38,7 @@ export default () => {
 
   const formRef = useRef<FormHandles>(null);
 
-  const { goBack } = useHistory();
+  const { goBack, push } = useHistory();
   const dispatch = useDispatch();
 
   const handleForm = (formAttr: any) => {
@@ -55,26 +55,36 @@ export default () => {
           'editor-is-empty',
           'O conteúdo do artigo não pode estar vazio',
           function () {
-            return data.content.getCurrentContent().hasText();
+            return form === 'article'
+              ? data.content?.getCurrentContent()?.hasText()
+              : true;
           }
         ),
       });
       await schema.validate(data, {
         abortEarly: false,
       });
-      console.log(data);
 
-      dispatch(
-        createItemRequest({
-          ...data,
-          type: form,
-          content: JSON.stringify(
-            convertToRaw(data.content.getCurrentContent())
-          ),
-          cover: '',
-        })
+      let formData = new FormData();
+
+      formData.append('title', data.title);
+      formData.append('cover', data.cover);
+      formData.append('author_id', data.author_id);
+      formData.append('type', form as string);
+
+      if (form === 'video') formData.append('video_url', data.video_url);
+
+      formData.append(
+        'content',
+        form === 'article'
+          ? JSON.stringify(convertToRaw(data.content.getCurrentContent()))
+          : data.content
       );
+
+      dispatch(createItemRequest(formData, push('/library')));
     } catch (err) {
+      console.log(err);
+
       const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
@@ -167,7 +177,32 @@ export default () => {
                       Capa
                     </h3>
                     <CardBody>
-                      <Dropzone />
+                      <Dropzone
+                        name="cover"
+                        acceptedFormats={['.png', '.jpg', '.jpeg']}
+                        onDrop={(
+                          acceptedFiles: any,
+                          files: any,
+                          setFiles: any
+                        ) => {
+                          const newFiles: any = [];
+                          acceptedFiles.forEach((file: any) => {
+                            const fileName = String(file.name);
+                            const extension = file.name.split('.').pop();
+                            const size = file.size;
+                            const preview = URL.createObjectURL(file);
+                            newFiles.push({
+                              fileName,
+                              extension,
+                              size,
+                              preview,
+                              state: 'success',
+                            });
+                          });
+                          setFiles([...files, ...newFiles]);
+                        }}
+                        multiple
+                      />
                     </CardBody>
                   </Card>
                 </Grid>

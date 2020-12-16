@@ -13,15 +13,21 @@ function library(state = INITIAL_STATE, action) {
 
   switch (type) {
     case Types.GET_ITEMS_REQUEST:
+    case Types.GET_ITEMS_REQUEST:
     case Types.GET_SINGLE_ITEM_REQUEST:
       return { ...state, loading: true };
     case Types.GET_ITEMS_SUCCESS:
-    case Types.CREATE_ITEM_SUCCESS:
       return {
         ...state,
         items: payload,
         loading: false,
       };
+    case Types.CREATE_ITEM_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
     case Types.GET_SINGLE_ITEM_SUCCESS:
       return { ...state, singleItem: { ...payload }, loading: false };
     case Types.GET_RECENT_ITEMS_REQUEST:

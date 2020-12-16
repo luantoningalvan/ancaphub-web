@@ -10,9 +10,10 @@ export const Types = {
   LIBRARY_ERROR: 'library/library_error',
 };
 
-export const createItemRequest = (data) => ({
+export const createItemRequest = (data, callback) => ({
   type: Types.CREATE_ITEM_REQUEST,
   payload: data,
+  callback,
 });
 
 export const createItemSuccess = (data) => ({
