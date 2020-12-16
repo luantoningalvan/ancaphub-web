@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ThemeProvider from './Provider';
 import Header from './Header';
-import Sidenav from './Sidenav';
+import Navigation from './Navigation';
 import Main from './Main';
 
 const Template: React.FC = ({ children }) => {
@@ -20,11 +20,7 @@ const Template: React.FC = ({ children }) => {
         collapsed={collapsed}
         setCollapsed={handleCollapse}
       />
-      <Sidenav
-        user={auth.user}
-        collapsed={collapsed}
-        setCollapsed={handleCollapse}
-      />
+      <Navigation user={auth.user} />
       <Main>{children}</Main>
     </ThemeProvider>
   );

@@ -41,13 +41,13 @@ export const SearchContainer = styled.div`
     color: ${(props) => props.theme.palette.text.primary};
 
     > button {
-      border: none;
-      border-radius: 50%;
+      display: block;
+      position: relative;
+      margin-left: 8px;
       padding: 8px;
-      outline: none;
-      background: transparent;
-      cursor: pointer;
-      width: auto;
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
 
       &:hover {
         background: rgba(0, 0, 0, 0.15);

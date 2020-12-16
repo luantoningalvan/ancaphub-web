@@ -31,10 +31,12 @@ export const Logo = styled.div`
   .logo {
     display: flex;
     justify-content: flex-start;
-    width: 64px;
-    height: 64px;
+
     display: flex;
     justify-content: center;
+    height: 64px;
+    margin-left: 16px;
+
     svg {
       transition: fill 200ms ease-in-out;
       margin: 8px;
@@ -67,6 +69,9 @@ export const Logo = styled.div`
     .collapse-button {
       display: none;
     }
+    .logo {
+      width: 64px;
+    }
     flex: 0;
   }
 `;
@@ -78,7 +83,6 @@ export const HeaderMenu = styled.ul`
 
 export const HeaderMenuItem = styled.li<{ current?: boolean }>`
   list-style: none;
-  margin-right: 5px;
   cursor: pointer;
   color: ${(props) => props.theme.palette.text.primary};
 
@@ -93,6 +97,9 @@ export const HeaderMenuItem = styled.li<{ current?: boolean }>`
     margin-left: 8px;
     padding: 8px;
     border-radius: 50%;
+    height: 40px;
+    width: 40px;
+
     background: ${(props) =>
       props.current ? 'rgba(0,0,0,0.15)' : 'transparent'};
     transition: background 0.3s;

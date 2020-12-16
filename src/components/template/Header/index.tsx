@@ -24,7 +24,7 @@ import {
   Bell,
 } from './styles';
 
-import Search from '../Search';
+import Search from './Search';
 
 import { NotificationsItem } from '../../';
 import { logoutRequest as logout } from '../../../redux/actions/auth';
@@ -53,6 +53,12 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
   const [notificationsAnchor, setNotificationsAnchor] = useState<any>(null);
   const [optionsAnchor, setOptionsAnchor] = useState<any>(null);
 
+  const handleOpenBugReport = () => {
+    // @ts-ignore
+    global.Ybug.open();
+    setCollapsed(true);
+  };
+
   const escFunction = (event: any) => {
     if (event.keyCode === 16) {
       audio.play();
@@ -78,13 +84,6 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
     <>
       <AppBar>
         <Logo>
-          <button
-            type="button"
-            className="collapse-button"
-            onClick={() => setCollapsed(!collapsed)}
-          >
-            <MenuIcon />
-          </button>
           <div className="logo">
             <Link to="/">
               <AncapHubLogo />
@@ -94,11 +93,13 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
         <Search />
 
         <HeaderMenu>
-          <HeaderMenuItem current={url.includes('/messages')}>
+          {/**
+           * <HeaderMenuItem current={url.includes('/messages')}>
             <Link to="/messages">
               <MessageIcon />
             </Link>
           </HeaderMenuItem>
+           */}
           <HeaderMenuItem
             current={url.includes('/notifications')}
             onClick={(e) => setNotificationsAnchor(e.currentTarget)}
@@ -146,6 +147,7 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
               </CardBody>
             )}
           </Dropdown>
+
           <HeaderMenuItem onClick={(e) => setOptionsAnchor(e.currentTarget)}>
             <div>
               <ArrowDownIcon />
