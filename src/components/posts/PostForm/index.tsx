@@ -103,26 +103,15 @@ const PostForm: React.FC = () => {
   function handleSubmit() {
     const content = JSON.stringify(convertToRaw(contentState));
 
-    /*
-    let data;
-    if (media !== null) {
-      if (media.type === 'image') {
-        data = new FormData();
-        data.append('content', content);
-        data.append('mediaType', media.type);
-        data.append('file', media.data);
-      } else {
-        data = {
-          content,
-          mediaType: media.type,
-          media: media.data,
-        };
-      }
-    } else {
-      data = { content };
-    } */
+    let data = new FormData();
 
-    dispatch(createPostRequest({ content }));
+    data.append('content', content);
+
+    if (media && media.type === 'image') data.append('file', media.data);
+    if (media && media.type === 'embed') data.append('media', media.data);
+    if (media && media.type === 'poll') data.append('poll', media.data);
+
+    dispatch(createPostRequest(data));
     setMedia(null);
     setEditorState(EditorState.createEmpty());
   }
