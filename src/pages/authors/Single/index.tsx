@@ -19,8 +19,13 @@ const AuthorsIndex: React.FC = () => {
 
   useEffect(() => {
     dispatch(getSingleAuthorRequest(id));
-    dispatch(getItemsRequest({ author: id }));
   }, []);
+
+  useEffect(() => {
+    if (author.username === id) {
+      dispatch(getItemsRequest({ author: author.id }));
+    }
+  }, [author]);
 
   return (
     <>

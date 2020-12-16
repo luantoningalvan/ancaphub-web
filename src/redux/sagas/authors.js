@@ -22,6 +22,23 @@ function* getSingleAuthor({ payload }) {
   }
 }
 
+function* createAuthor({ payload, callback }) {
+  try {
+    const author = yield call(api.createAuthor, payload);
+    yield put(actions.createAuthorSuccess(author.data));
+    yield put(
+      addAlert({
+        title: 'Sucesso',
+        description: 'Autor criado com sucesso',
+        type: 'success',
+      })
+    );
+    callback && callback();
+  } catch (e) {
+    yield put(addAlert('error', e.message));
+  }
+}
+
 function* watchGetSingleAuthor() {
   yield takeLatest(actions.Types.GET_AUTHORS_REQUEST, getAuthors);
 }
@@ -30,4 +47,12 @@ function* watchGetAuthors() {
   yield takeLatest(actions.Types.GET_SINGLE_AUTHOR_REQUEST, getSingleAuthor);
 }
 
-export default [fork(watchGetAuthors), fork(watchGetSingleAuthor)];
+function* watchCreateAuthor() {
+  yield takeLatest(actions.Types.CREATE_AUTHORS_REQUEST, createAuthor);
+}
+
+export default [
+  fork(watchGetAuthors),
+  fork(watchGetSingleAuthor),
+  fork(watchCreateAuthor),
+];

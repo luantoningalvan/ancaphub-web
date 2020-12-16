@@ -1,3 +1,4 @@
+import { stat } from 'fs';
 import { Types } from '../actions/authors';
 
 const INITIAL_STATE = {
@@ -12,6 +13,7 @@ export default (state = INITIAL_STATE, action) => {
   switch (type) {
     case Types.GET_AUTHORS_REQUEST:
     case Types.GET_SINGLE_AUTHOR_REQUEST:
+    case Types.CREATE_AUTHORS_REQUEST:
       return {
         ...state,
         loading: true,
@@ -26,6 +28,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         author: payload,
+        loading: false,
+      };
+    case Types.CREATE_AUTHORS_SUCCESS:
+      return {
+        ...state,
+        items: [...state.items, action.payload],
         loading: false,
       };
     default:
