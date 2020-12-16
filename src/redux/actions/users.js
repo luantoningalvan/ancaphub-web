@@ -17,6 +17,8 @@ export const Types = {
   UPDATE_PROFILE_INFO_SUCCESS: 'users/update_profile_info_success',
   CREATE_USER_ERROR: 'users/create_user_error',
   GET_USERS_COUNT: 'users/get_users_count',
+  UPDATE_PROFILE_COVER_REQUEST: 'users/update_profile_cover_request',
+  UPDATE_PROFILE_COVER_SUCCESS: 'users/update_profile_cover_success',
 };
 
 export const getUsersRequest = (data) => ({
@@ -96,6 +98,16 @@ export const updateProfilePictureRequest = (data) => ({
 
 export const updateProfilePictureSuccess = (data) => ({
   type: Types.UPDATE_PROFILE_PICTURE_SUCCESS,
+  payload: data,
+});
+
+export const updateProfileCoverRequest = (data) => ({
+  type: Types.UPDATE_PROFILE_COVER_REQUEST,
+  payload: data,
+});
+
+export const updateProfileCoverSuccess = (data) => ({
+  type: Types.UPDATE_PROFILE_COVER_SUCCESS,
   payload: data,
 });
 

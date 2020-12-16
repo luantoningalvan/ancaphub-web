@@ -14,7 +14,15 @@ import {
 import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
 import defaultProfileCover from '../../assets/default-profile-cover.jpg';
 import { LoadContent } from '../../components';
-import { Paper, CircularLoader, Container, Tabs, Tab, Button } from 'snake-ui';
+import {
+  Paper,
+  CircularLoader,
+  Container,
+  Tabs,
+  Tab,
+  Button,
+  Grid,
+} from 'snake-ui';
 
 import FollowButton from '../../components/users/FollowButton';
 import EditProfile from '../../components/users/EditProfile';
@@ -24,6 +32,7 @@ import UserName from '../../components/users/UserName';
 import {
   getSingleUserRequest,
   updateProfilePictureRequest,
+  updateProfileCoverRequest,
 } from '../../redux/actions/users';
 import {
   ProfileHeader,
@@ -45,6 +54,7 @@ const Profiles = () => {
   const auth = useSelector((state: any) => state.auth);
   const { push } = useHistory();
   const [editAvatar, setEditAvatar] = useState(false);
+  const [editCover, setEditCover] = useState(false);
 
   const {
     handle,
@@ -73,27 +83,56 @@ const Profiles = () => {
     <Container>
       <LoadContent loading={loading}>
         {verifyIfIsOwnProfile && (
-          <EditAvatar
-            open={editAvatar}
-            dialogTitle="Alterar foto de perfil"
-            onClose={() => setEditAvatar(false)}
-            onUpdate={(data: any) =>
-              dispatch(updateProfilePictureRequest(data))
-            }
-          />
+          <>
+            <EditAvatar
+              open={editAvatar}
+              dialogTitle="Alterar foto de perfil"
+              onClose={() => setEditAvatar(false)}
+              onUpdate={(data: any) =>
+                dispatch(updateProfilePictureRequest(data))
+              }
+            />
+
+            <EditAvatar
+              open={editCover}
+              dialogTitle="Alterar capa de perfil"
+              onClose={() => setEditCover(false)}
+              aspect={3 / 1}
+              shape="rect"
+              onUpdate={(data: any) =>
+                dispatch(updateProfileCoverRequest(data))
+              }
+            />
+          </>
         )}
 
         <ProfileHeader>
           <div className="profile-cover">
-            <img src={defaultProfileCover} alt="default cover pic" />
+            <img
+              src={
+                user.cover_url && user.cover_url !== ''
+                  ? user.cover_url
+                  : defaultProfileCover
+              }
+              alt="default cover pic"
+            />
+            {verifyIfIsOwnProfile && (
+              <div
+                role="presentation"
+                className="edit-profile-cover"
+                onClick={() => setEditCover(true)}
+              >
+                <EditIcon size={22} />
+              </div>
+            )}
           </div>
-          <ProfilePicture>
+          <ProfilePicture isOwn={verifyIfIsOwnProfile}>
             <div className="avatar">
               <img
                 alt="user avatar"
                 src={
-                  user.avatar && user.avatar !== ''
-                    ? user.avatar
+                  user.avatar_url && user.avatar_url !== ''
+                    ? user.avatar_url
                     : defaultProfilePicture
                 }
               />
@@ -162,84 +201,88 @@ const Profiles = () => {
           </ProfileInfo>
         </ProfileHeader>
         <ProfileContent>
-          <UserAbout>
-            <Paper>
-              <h3>
-                <FormattedMessage id="common.about" description="Sobre" />
-              </h3>
-              {user.bio && <p>{user.bio}</p>}
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={5}>
+              <UserAbout>
+                <Paper>
+                  <h3>
+                    <FormattedMessage id="common.about" description="Sobre" />
+                  </h3>
+                  {user.bio && <p>{user.bio}</p>}
 
-              <ul>
-                {user.currentCity && (
-                  <li>
-                    <LocationIcon />
-                    <span>{user.currentCity}</span>
-                  </li>
-                )}
+                  <ul>
+                    {user.location && (
+                      <li>
+                        <LocationIcon />
+                        <span>{user.location}</span>
+                      </li>
+                    )}
 
-                {user.birthday && (
-                  <li>
-                    <BirthIcon />
-                    <span>
-                      <FormattedDate
-                        // DISCLAIMER: this is a temporary solution since
-                        // we still don't know why this bug is happening
-                        value={addDays(parseISO(user.birthday), 1)}
-                        year="numeric"
-                        month="long"
-                        day="2-digit"
-                      />
-                    </span>
-                  </li>
-                )}
+                    {user.birthday && (
+                      <li>
+                        <BirthIcon />
+                        <span>
+                          <FormattedDate
+                            // DISCLAIMER: this is a temporary solution since
+                            // we still don't know why this bug is happening
+                            value={addDays(parseISO(user.birthday), 1)}
+                            year="numeric"
+                            month="long"
+                            day="2-digit"
+                          />
+                        </span>
+                      </li>
+                    )}
 
-                {user.site && (
-                  <li>
-                    <SiteIcon />
-                    <span>
-                      <a
-                        href={user.site}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {user.site.length > 28
-                          ? `${user.site.substring(0, 28)}..`
-                          : user.site}
-                      </a>
-                    </span>
-                  </li>
-                )}
-              </ul>
-            </Paper>
-          </UserAbout>
-          <div>
-            <Paper className="profile-menu">
-              <Tabs style={{ height: 48, padding: '0px 8px' }}>
-                <Tab
-                  current={pageParam === undefined}
-                  label={<FormattedMessage id="common.feed" />}
-                  onClick={() => push(`/${handle}`)}
-                />
-                <Tab
-                  current={pageParam === 'following'}
-                  label={<FormattedMessage id="common.following" />}
-                  onClick={() => push(`/${handle}/following`)}
-                />
-                <Tab
-                  current={pageParam === 'followers'}
-                  label={<FormattedMessage id="common.followers" />}
-                  onClick={() => push(`/${handle}/followers`)}
-                />
-              </Tabs>
-            </Paper>
+                    {user.url && (
+                      <li>
+                        <SiteIcon />
+                        <span>
+                          <a
+                            href={user.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {user.url.length > 28
+                              ? `${user.url.substring(0, 28)}..`
+                              : user.url}
+                          </a>
+                        </span>
+                      </li>
+                    )}
+                  </ul>
+                </Paper>
+              </UserAbout>
+            </Grid>
+            <Grid item xs={12} md={7}>
+              <Paper className="profile-menu">
+                <Tabs style={{ height: 48, padding: '0px 8px' }}>
+                  <Tab
+                    current={pageParam === undefined}
+                    label={<FormattedMessage id="common.feed" />}
+                    onClick={() => push(`/${handle}`)}
+                  />
+                  <Tab
+                    current={pageParam === 'following'}
+                    label={<FormattedMessage id="common.following" />}
+                    onClick={() => push(`/${handle}/following`)}
+                  />
+                  <Tab
+                    current={pageParam === 'followers'}
+                    label={<FormattedMessage id="common.followers" />}
+                    onClick={() => push(`/${handle}/followers`)}
+                  />
+                </Tabs>
+              </Paper>
 
-            <div className="profile-content">
-              <Suspense fallback={<CircularLoader size={96} />}>
-                {/* @ts-ignore */}
-                <Template user={handle} />
-              </Suspense>
-            </div>
-          </div>
+              <div className="profile-content">
+                <Suspense fallback={<CircularLoader size={96} />}>
+                  {/* @ts-ignore */}
+                  <Template user={handle} />
+                </Suspense>
+              </div>
+            </Grid>
+          </Grid>
         </ProfileContent>
       </LoadContent>
     </Container>

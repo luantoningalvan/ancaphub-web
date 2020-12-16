@@ -23,13 +23,14 @@ export const createUser = ({ name, username, email, password, code }) =>
     code,
   });
 
-export const updateUserInfo = ({ name, bio, birthday, currentCity, site }) =>
+export const updateUserInfo = ({ name, bio, birthday, location, url }) =>
   axios.put('/users/profile', {
     name,
     bio,
     birthday,
-    currentCity,
-    site,
+    location,
+    url,
   });
 
 export const updateUserAvatar = (data) => axios.patch('/users/avatar', data);
+export const updateUserCover = (data) => axios.patch('/users/cover', data);

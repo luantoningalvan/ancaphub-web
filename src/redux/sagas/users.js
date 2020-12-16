@@ -92,7 +92,7 @@ function* updateUserInfo({ payload }) {
     yield put(actions.updateProfileInfoSuccess(result.data));
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Perfil atualizado com sucesso',
         type: 'success',
       })
@@ -108,8 +108,24 @@ function* updateUserAvatar({ payload }) {
     yield put(actions.updateProfilePictureSuccess(result.data));
     yield put(
       addAlert({
-        title: 'Suceso',
+        title: 'Sucesso',
         description: 'Avatar atualizado com sucesso',
+        type: 'success',
+      })
+    );
+  } catch (e) {
+    yield put(alerts.addAlert('error', e.message));
+  }
+}
+
+function* updateUserCover({ payload }) {
+  try {
+    const result = yield call(api.updateUserCover, payload);
+    yield put(actions.updateProfileCoverSuccess(result.data));
+    yield put(
+      addAlert({
+        title: 'Sucesso',
+        description: 'Capa atualizada com sucesso',
         type: 'success',
       })
     );
@@ -153,6 +169,10 @@ function* watchUpdateUserAvatar() {
   );
 }
 
+function* watchUpdateUserCover() {
+  yield takeLatest(actions.Types.UPDATE_PROFILE_COVER_REQUEST, updateUserCover);
+}
+
 export default [
   fork(watchGetUsersRequest),
   fork(watchLoadMoreUsersRequest),
@@ -162,4 +182,5 @@ export default [
   fork(watchUpdateUserInfo),
   fork(watchUpdateUserAvatar),
   fork(watchGetUserFollowing),
+  fork(watchUpdateUserCover),
 ];

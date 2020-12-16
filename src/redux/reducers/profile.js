@@ -19,6 +19,7 @@ export default (state = INITIAL_STATE, action) => {
         loading: true,
       };
     case UserTypes.UPDATE_PROFILE_PICTURE_SUCCESS:
+    case UserTypes.UPDATE_PROFILE_COVER_SUCCESS:
     case UserTypes.UPDATE_PROFILE_INFO_SUCCESS:
       return {
         ...state,

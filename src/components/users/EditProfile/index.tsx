@@ -23,15 +23,19 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Grid,
 } from 'snake-ui';
 
 const EditProfile = () => {
-  const { formatMessage } = useIntl();
-  const [open, setOpen] = React.useState(false);
-  const dispatch = useDispatch();
   const data = useSelector((state: any) => state.profile.user);
-  const handleClick = () => setOpen(!open);
+  const [open, setOpen] = React.useState(false);
+
   const editFormRef = useRef<FormHandles | null>(null);
+
+  const dispatch = useDispatch();
+  const { formatMessage } = useIntl();
+
+  const handleClick = () => setOpen(!open);
 
   async function handleSubmit(validatedData: any) {
     try {
@@ -52,17 +56,17 @@ const EditProfile = () => {
           160,
           formatMessage({ id: 'account.settings.validation.maxBioLength' })
         ),
-        site: Yup.string().url(
+        url: Yup.string().url(
           formatMessage({ id: 'account.settings.validation.invalidURL' })
         ),
         birthday: Yup.date()
+          .notRequired()
           .max(
             new Date(),
             formatMessage({
               id: 'account.settings.validation.invalidBirthDate',
             })
-          )
-          .notRequired(),
+          ),
       });
 
       await schema.validate(validatedData, {
@@ -98,8 +102,8 @@ const EditProfile = () => {
           initialData={{
             name: data.name,
             bio: data.bio || '',
-            currentCity: data.currentCity || '',
-            site: data.site || '',
+            location: data.location || '',
+            url: data.url || '',
             birthday:
               data.birthday && data.birthday !== null
                 ? data.birthday.substring(0, 10)
@@ -127,44 +131,57 @@ const EditProfile = () => {
               }
             />
             <CardBody>
-              <FormattedMessage id="common.name">
-                {(msg) => (
-                  <TextField icon={FiUser} placeholder={msg} name="name" />
-                )}
-              </FormattedMessage>
-              <FormattedMessage id="common.bio">
-                {(msg) => (
-                  <TextField
-                    icon={FiAlignJustify}
-                    placeholder={msg}
-                    name="bio"
-                  />
-                )}
-              </FormattedMessage>
-              <FormattedMessage id="nearby.location">
-                {(msg) => (
-                  <TextField
-                    icon={FiMapPin}
-                    placeholder={msg}
-                    name="currentCity"
-                  />
-                )}
-              </FormattedMessage>
-              <FormattedMessage id="common.website">
-                {(msg) => (
-                  <TextField icon={FiGlobe} placeholder={msg} name="site" />
-                )}
-              </FormattedMessage>
-              <FormattedMessage id="common.birthday">
-                {(msg) => (
-                  <TextField
-                    icon={FiCalendar}
-                    type="date"
-                    placeholder={msg}
-                    name="birthday"
-                  />
-                )}
-              </FormattedMessage>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <FormattedMessage id="common.name">
+                    {(msg) => (
+                      <TextField icon={FiUser} placeholder={msg} name="name" />
+                    )}
+                  </FormattedMessage>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormattedMessage id="common.bio">
+                    {(msg) => (
+                      <TextField
+                        icon={FiAlignJustify}
+                        placeholder={msg}
+                        name="bio"
+                        multiline
+                      />
+                    )}
+                  </FormattedMessage>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormattedMessage id="nearby.location">
+                    {(msg) => (
+                      <TextField
+                        icon={FiMapPin}
+                        placeholder={msg}
+                        name="location"
+                      />
+                    )}
+                  </FormattedMessage>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormattedMessage id="common.website">
+                    {(msg) => (
+                      <TextField icon={FiGlobe} placeholder={msg} name="url" />
+                    )}
+                  </FormattedMessage>
+                </Grid>
+                <Grid item xs={12}>
+                  <FormattedMessage id="common.birthday">
+                    {(msg) => (
+                      <TextField
+                        icon={FiCalendar}
+                        type="date"
+                        placeholder={msg}
+                        name="birthday"
+                      />
+                    )}
+                  </FormattedMessage>
+                </Grid>
+              </Grid>
             </CardBody>
           </Card>
         </Form>

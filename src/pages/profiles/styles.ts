@@ -6,11 +6,36 @@ export const ProfileHeader = styled.div`
   border-radius: 10px;
   margin-top: 15px;
   overflow: hidden;
+  position: relative;
 
   .profile-cover {
     width: 100%;
     height: 120px;
     overflow: hidden;
+
+    .edit-profile-cover {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      height: 40px;
+      width: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      display: none;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    &:hover {
+      .edit-profile-cover {
+        display: flex;
+      }
+    }
   }
 
   @media (min-width: 768px) {
@@ -235,10 +260,12 @@ export const UserAbout = styled.div`
 
       span {
         flex: 1;
+        font-size: 1rem;
       }
 
       a {
         color: ${(props) => props.theme.palette.text.primary};
+        font-size: 1rem;
       }
 
       svg {
@@ -264,11 +291,5 @@ export const ProfileContent = styled.div`
   .profile-menu {
     grid-area: profileMenu;
     margin-bottom: 16px;
-  }
-
-  @media (min-width: 768px) {
-    gap: 16px;
-    display: grid;
-    grid-template-columns: 3fr 7fr;
   }
 `;

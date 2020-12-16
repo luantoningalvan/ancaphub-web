@@ -53,7 +53,7 @@ const EditAvatar: React.FC<EditAvatarProps> = ({
     if (image.image) {
       const formData: any = new FormData();
       formData.append('data', JSON.stringify(cropInfo));
-      formData.append('avatar', image.image);
+      formData.append('image', image.image);
       onUpdate(formData);
       handleCrop();
       handleCancel();
@@ -65,7 +65,11 @@ const EditAvatar: React.FC<EditAvatarProps> = ({
       <CardHeader
         title={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <IconButton icon={<CloseIcon />} onClick={handleCancel} />
+            <IconButton
+              icon={<CloseIcon />}
+              onClick={handleCancel}
+              style={{ marginRight: 8 }}
+            />
             {dialogTitle}
           </div>
         }

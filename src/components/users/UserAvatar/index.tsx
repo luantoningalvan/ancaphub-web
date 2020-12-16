@@ -7,7 +7,8 @@ import defaultAvatar from '../../../assets/default-profile-picture.jpg';
 interface UserAvatarProps {
   user: {
     id: string;
-    avatar: string;
+    avatar?: string;
+    avatar_url?: string;
     username: string;
   };
   size?: number;
@@ -18,7 +19,11 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ user, size, ...props }) => (
   <Avatar size={size || 35} {...props}>
     <Link to={`/${user.username}`}>
       <img
-        src={user.avatar && user.avatar !== '' ? user.avatar : defaultAvatar}
+        src={
+          user.avatar_url && user.avatar_url !== ''
+            ? user.avatar_url
+            : defaultAvatar
+        }
         alt={user.username}
       />
     </Link>
