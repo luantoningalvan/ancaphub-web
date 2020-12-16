@@ -4,8 +4,8 @@ import { MiniLIbraryCardSyle } from './styles';
 
 const MiniLIbraryCard = ({ item }: any) => (
   <MiniLIbraryCardSyle
-    to={`/library/${item.type}s/${item._id}`}
-    cover={item.cover ? item.cover : defaultCover}
+    to={`/library/${item.type}s/${item.id}`}
+    cover={item.cover_url ? item.cover_url : defaultCover}
   >
     <div className="cover" />
     <div className="content">

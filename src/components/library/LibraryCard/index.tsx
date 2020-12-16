@@ -43,8 +43,8 @@ const ItemCard = ({ item }: any) => (
         <img
           alt="item cover"
           src={
-            item.cover && item.cover
-              ? item.cover
+            item.cover_url && item.cover_url
+              ? item.cover_url
               : types[item.type].defaultCover
           }
         />

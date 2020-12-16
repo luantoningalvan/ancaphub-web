@@ -35,7 +35,7 @@ const SingleVideo = () => {
                 className="videoPlayer"
                 width="100%"
                 height="100%"
-                url={singleItem.extraFields && singleItem.extraFields.videoUrl}
+                url={singleItem.video_url}
                 controls
                 config={{
                   youtube: {

@@ -50,13 +50,19 @@ interface PostCardProps {
     content: string;
     user: {
       id: string;
-      avatar: string;
+      avatar?: string;
+      avatar_url?: string;
       username: string;
     };
     hasLiked: boolean;
     hasShared: boolean;
-    media: any;
-    mediaType: any;
+    image?: string;
+    image_url?: string;
+    media?: string;
+    poll?: {
+      question: string;
+      options: { text: string; id: string }[];
+    };
     created_at: string;
     commentCount: number;
     likeCount: number;
@@ -137,12 +143,19 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
       )}
       <PostContainer>
         <div className="post-header">
-          <div className="profile-picture">
-            <img
-              alt="user avatar"
-              src={data.user.avatar ? data.user.avatar : defaultProfilePicture}
-            />
-          </div>
+          <Link to={`/${data.user.username}`}>
+            <div className="profile-picture">
+              <img
+                alt="user avatar"
+                src={
+                  data.user.avatar_url
+                    ? data.user.avatar_url
+                    : defaultProfilePicture
+                }
+              />
+            </div>
+          </Link>
+
           <div style={{ flex: 1 }}>
             <Link to={`/${data.user.username}`}>
               <UserName user={data.user} />
@@ -195,22 +208,19 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
           {/* Show post content  */}
           {showPostContent()}
           {/* If post has embed media type */}
-          {(data.media && data.media.mediaType) === 'embed' && (
+          {data.media && (
             <ReactPlayer
-              url={data.media.data}
+              url={data.media}
+              controls
               light
               style={{ marginTop: 16 }}
               width="100%"
             />
           )}
 
-          {data.media && data.media.mediaType === 'image' && (
-            <ImageBox src={data.media.data} />
-          )}
+          {data.image && <ImageBox src={data.image_url as string} />}
 
-          {data.media && data.media.mediaType === 'poll' && (
-            <PostPoll post={data} />
-          )}
+          {data.poll && <PostPoll post={data.poll} />}
 
           {(data.likeCount > 0 || data.commentCount > 0) && (
             <div className="post-counts">
