@@ -15,11 +15,11 @@ const FAQ: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();
 
   const handleDelete = (faqId: string) => {
-    dispatch(removeProjectFAQRequest({ projectId: project._id, faqId }));
+    dispatch(removeProjectFAQRequest({ projectId: project.id, faqId }));
   };
 
   const handleSubmit: SubmitHandler = (data, { reset }) => {
-    dispatch(addProjectFAQRequest({ data, id: project._id }));
+    dispatch(addProjectFAQRequest({ data, id: project.id }));
     reset();
   };
 
@@ -35,9 +35,9 @@ const FAQ: React.FC<{ project: any }> = ({ project }) => {
       {project.faq.map((question: any) => (
         <ProjectFAQCard
           question={question}
-          key={question._id}
+          key={question.id}
           showDeleteButton
-          onDelete={() => handleDelete(question._id)}
+          onDelete={() => handleDelete(question.id)}
         />
       ))}
 

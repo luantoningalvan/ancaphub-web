@@ -130,7 +130,7 @@ export default () => {
                       <InnerSearchGridContainer>
                         {Array.isArray(results) &&
                           results.map((user) => (
-                            <div key={user._id}>
+                            <div key={user.id}>
                               <UserCard user={user.user} />
                             </div>
                           ))}

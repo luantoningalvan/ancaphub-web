@@ -31,7 +31,7 @@ const ProjectPost = () => {
 
         {post.project && (
           <div className="project-avatar">
-            <Link to={`/projects/${post.project._id}`}>
+            <Link to={`/projects/${post.project.id}`}>
               <img
                 src={post.project.avatar || defaultProjectAvatar}
                 alt={post.project.name}

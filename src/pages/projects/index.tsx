@@ -47,7 +47,7 @@ const Projects = () => {
           {projects.length > 0 ? (
             <Grid container spacing={2}>
               {projects.map((project: any) => (
-                <Grid xs={12} md={6} lg={4} key={project._id}>
+                <Grid xs={12} md={6} lg={4} key={project.id}>
                   <ProjectCard data={project} />
                 </Grid>
               ))}

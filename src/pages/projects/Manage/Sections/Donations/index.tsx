@@ -16,12 +16,12 @@ const Donations: React.FC<{ project: any }> = ({ project }) => {
 
   const handleDelete = (donationId: string) => {
     dispatch(
-      removeProjectDonationRequest({ projectId: project._id, donationId })
+      removeProjectDonationRequest({ projectId: project.id, donationId })
     );
   };
 
   const handleSubmit: SubmitHandler = (data, { reset }) => {
-    dispatch(addProjectDonationRequest({ data, id: project._id }));
+    dispatch(addProjectDonationRequest({ data, id: project.id }));
     reset();
   };
 
@@ -43,9 +43,9 @@ const Donations: React.FC<{ project: any }> = ({ project }) => {
         {project.donation_methods.map((donation: any) => (
           <DonationCard
             donation={donation}
-            key={donation._id}
+            key={donation.id}
             showDeleteButton
-            onDelete={() => handleDelete(donation._id)}
+            onDelete={() => handleDelete(donation.id)}
           />
         ))}
       </div>

@@ -74,7 +74,7 @@ const SearchData = () => {
                   </h3>
                   <InnerSearchGridContainer>
                     {results.users.map((user: any) => (
-                      <UserCard user={user} key={user._id} />
+                      <UserCard user={user} key={user.id} />
                     ))}
                   </InnerSearchGridContainer>
                 </SearchResultType>
@@ -88,7 +88,7 @@ const SearchData = () => {
                   </h3>
                   <InnerSearchGridContainer>
                     {results.library.map((item: any) => (
-                      <LibraryCard key={item._id} item={item} />
+                      <LibraryCard key={item.id} item={item} />
                     ))}
                   </InnerSearchGridContainer>
                 </SearchResultType>
@@ -102,7 +102,7 @@ const SearchData = () => {
                   </h3>
                   <InnerSearchGridContainer>
                     {results.events.map((event: any) => (
-                      <EventCard key={event._id} event={event} />
+                      <EventCard key={event.id} event={event} />
                     ))}
                   </InnerSearchGridContainer>
                 </SearchResultType>

@@ -37,7 +37,7 @@ const LastItemsWidget = () => {
             <LastItems>
               {items ? (
                 items.map((item: any) => (
-                  <MiniLibraryCard key={item._id} item={item} />
+                  <MiniLibraryCard key={item.id} item={item} />
                 ))
               ) : (
                 <p>Nenhum item recente.</p> // translator's note: TRANSLATE THIS!

@@ -17,7 +17,7 @@ const About: React.FC<{ project: any }> = ({ project }) => {
     dispatch(
       updateProjectAboutRequest({
         data: { about: toRaw },
-        id: project._id,
+        id: project.id,
       })
     );
   };

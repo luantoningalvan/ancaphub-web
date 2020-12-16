@@ -5,7 +5,7 @@ const ProjectFaq = ({ project }: any) => {
   return (
     <>
       {project.faq.map((question: any) => (
-        <ProjectFAQCard question={question} key={question._id} />
+        <ProjectFAQCard question={question} key={question.id} />
       ))}
     </>
   );

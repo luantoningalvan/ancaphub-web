@@ -63,7 +63,7 @@ export default () => {
 
   const events = [
     {
-      _id: 1,
+      id: 1,
       start: Date.now(),
       end: Date.now(),
       title: 'AncapHub Week',
@@ -126,7 +126,7 @@ export default () => {
       <h3 style={{ marginTop: 24, fontSize: '1.7em' }}>Eventos Próximos</h3>
       <Grid container spacing={2} style={{ margin: '16px 0px' }}>
         {events.map((event) => (
-          <Grid item xs={3} key={event._id}>
+          <Grid item xs={3} key={event.id}>
             <EventCard event={event} />
           </Grid>
         ))}

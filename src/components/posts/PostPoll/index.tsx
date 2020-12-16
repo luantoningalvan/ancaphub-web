@@ -14,7 +14,7 @@ const PostPoll: React.FC<PostPollProps> = ({ post }) => {
   const dispatch = useDispatch();
   const [showingResults, setShowingResults] = React.useState(false);
 
-  const hasVoted = post.poll.allVotes.includes(user._id);
+  const hasVoted = post.poll.allVotes.includes(user.id);
 
   const handleVote = ({
     pollId,
@@ -46,11 +46,11 @@ const PostPoll: React.FC<PostPollProps> = ({ post }) => {
       {post.poll.options.map((option: any) => (
         <PostPollOption
           hasVoted={hasVoted}
-          key={option._id}
+          key={option.id}
           onClick={() =>
             handleVote({
               pollId: post.media.data,
-              postId: post._id,
+              postId: post.id,
               vote: option.title,
             })
           }
@@ -58,7 +58,7 @@ const PostPoll: React.FC<PostPollProps> = ({ post }) => {
           <div className="option-title">
             <div>
               <span>{option.title}</span>
-              {option.votes && option.votes.includes(user._id) && <VotedIcon />}
+              {option.votes && option.votes.includes(user.id) && <VotedIcon />}
             </div>
 
             {showingResults && (

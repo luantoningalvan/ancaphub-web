@@ -29,7 +29,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({ expanded, post, indent }) => {
         <div style={{ padding: '0px 16px 16px 16px', textAlign: 'center' }}>
           {comments !== undefined &&
             comments.map((comment: any) => (
-              <Comment key={comment._id} comment={comment} post={post} />
+              <Comment key={comment.id} comment={comment} post={post} />
             ))}
         </div>
       </div>

@@ -9,7 +9,7 @@ import { Paper, Grid } from 'snake-ui';
 const users = [
   {
     user: {
-      _id: '5e322ab7fefdfa7cb9843640',
+      id: '5e322ab7fefdfa7cb9843640',
       name: 'Samuel Casseb',
       username: 'cassebsamuel',
       avatar:
@@ -24,7 +24,7 @@ const users = [
   },
   {
     user: {
-      _id: '5e2f354bf125e30409ad20dd',
+      id: '5e2f354bf125e30409ad20dd',
       name: 'Leonardo',
       username: 'leonardo',
       bio: 'Oi.',
@@ -37,7 +37,7 @@ const users = [
   },
   {
     user: {
-      _id: '5e2f17eaf125e30409ad1f0d',
+      id: '5e2f17eaf125e30409ad1f0d',
       name: 'Lini',
       username: 'lini',
       avatar:
@@ -52,7 +52,7 @@ const users = [
   },
   {
     user: {
-      _id: '5e40ac5cfa661f054fde466b',
+      id: '5e40ac5cfa661f054fde466b',
       name: 'Lucas Zanotti',
       username: 'lucaszanotti',
       avatar:
@@ -67,7 +67,7 @@ const users = [
   },
   {
     user: {
-      _id: '5e2f5715f125e30409ad213d',
+      id: '5e2f5715f125e30409ad213d',
       name: '@WaifuSul',
       username: 'waifusul',
       avatar:
@@ -83,7 +83,7 @@ const users = [
   },
   {
     user: {
-      _id: '5e55391f5606b61e900b4159',
+      id: '5e55391f5606b61e900b4159',
       name: 'Victor Matheus',
       username: 'victor',
       avatar:

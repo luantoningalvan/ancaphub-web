@@ -32,7 +32,7 @@ const NewPost: React.FC<{ project: any }> = ({ project }) => {
     dispatch(
       createProjectPostRequest({
         history,
-        project: project._id,
+        project: project.id,
         data: formData,
       })
     );
@@ -47,7 +47,7 @@ const NewPost: React.FC<{ project: any }> = ({ project }) => {
               {
                 title: 'Postagens',
                 onClick: () =>
-                  history.push(`/projects/${project._id}/manage/posts`),
+                  history.push(`/projects/${project.id}/manage/posts`),
               },
               { title: 'Nova' },
             ]}
@@ -75,7 +75,12 @@ const NewPost: React.FC<{ project: any }> = ({ project }) => {
       </Paper>
 
       <h3 style={{ marginTop: 16 }}>Capa</h3>
-      <Dropzone onUpload={onUpload} file={image} style={{ marginTop: 8 }} />
+      <Dropzone
+        name="cover"
+        acceptedFormats={['.png']}
+        onDrop={() => {}}
+        style={{ marginTop: 8 }}
+      />
     </Form>
   );
 };

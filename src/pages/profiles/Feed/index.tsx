@@ -25,7 +25,7 @@ const Feed = ({ user }: any) => {
         {!loading ? (
           <>
             {Object.values(posts).map((item: any) => (
-              <PostCard data={item} key={item._id} />
+              <PostCard data={item} key={item.id} />
             ))}
           </>
         ) : (

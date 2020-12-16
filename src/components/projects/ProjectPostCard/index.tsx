@@ -8,6 +8,7 @@ import { Post } from './styles';
 
 const ProjectFeed = ({ post }: any) => {
   const getExperpt = () => {
+    /*
     const { blocks } = JSON.parse(post.content);
     const mappedBlocks = blocks.map(
       (block: any) => (!block.text.trim() && '\n') || block.text
@@ -18,13 +19,14 @@ const ProjectFeed = ({ post }: any) => {
       if (block === '\n') returned += block;
       else returned += `${block}\n`;
       return returned;
-    }, '');
+    }, '');*/
+    return 'asdasdasd';
   };
 
   return (
     <Post>
       <div className="post-cover">
-        <Link to={`/projects/${post.project._id}/posts/${post._id}`}>
+        <Link to={`/projects/${post.project.id}/posts/${post.id}`}>
           <img
             alt="cover"
             src={
@@ -40,8 +42,6 @@ const ProjectFeed = ({ post }: any) => {
           <CalendarIcon />
           <span>
             <FormattedDate
-              // DISCLAIMER: this is a temporary solution since
-              // we still don't know why this bug is happening
               value={addDays(parseISO(post.created_at), 1)}
               year="numeric"
               month="long"
@@ -49,7 +49,7 @@ const ProjectFeed = ({ post }: any) => {
             />
           </span>
         </div>
-        <Link to={`/projects/${post.project._id}/posts/${post._id}`}>
+        <Link to={`/projects/${post.project.id}/posts/${post.id}`}>
           <h3>{post.title}</h3>
         </Link>
         <p>{getExperpt().substring(0, 120)}...</p>

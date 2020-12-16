@@ -8,7 +8,7 @@ import { FiCrosshair } from 'react-icons/fi';
 const EventCard = ({ event }: any) => (
   <Event>
     <div className="event-cover">
-      <Link to={`/events/${event._id}`}>
+      <Link to={`/events/${event.id}`}>
         <img src={event.cover} alt="event cover" />
       </Link>
     </div>

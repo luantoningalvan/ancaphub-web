@@ -28,7 +28,7 @@ const NewPost = ({ project }: any) => {
   const postId = useQuery().get('postId');
 
   useEffect(() => {
-    dispatch(getSingleProjectPostRequest({ postId, projectId: project._id }));
+    dispatch(getSingleProjectPostRequest({ postId, projectId: project.id }));
   }, [dispatch, postId, project]);
 
   const handleSubmit: SubmitHandler = ({ title, content }) => {
@@ -36,7 +36,7 @@ const NewPost = ({ project }: any) => {
 
     dispatch(
       updateProjectPostRequest({
-        projectId: project._id,
+        projectId: project.id,
         postId,
         data: {
           title,
@@ -56,7 +56,7 @@ const NewPost = ({ project }: any) => {
                 {
                   title: 'Postagens',
                   onClick: () =>
-                    history.push(`/projects/${project._id}/manage/posts`),
+                    history.push(`/projects/${project.id}/manage/posts`),
                 },
                 { title: 'Nova' },
               ]}

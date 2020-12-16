@@ -9,13 +9,13 @@ const ProjectFeed = ({ project }: any) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getProjectPostsRequest(project._id));
-  }, [project._id, dispatch]);
+    dispatch(getProjectPostsRequest(project.id));
+  }, [project.id, dispatch]);
 
   return (
     <LoadContent loading={loadingPosts}>
       {posts.map((post: any) => (
-        <ProjectPostCard post={post} key={post._id} />
+        <ProjectPostCard post={post} key={post.id} />
       ))}
     </LoadContent>
   );
