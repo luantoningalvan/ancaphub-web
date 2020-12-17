@@ -42,6 +42,7 @@ import {
   likePostRequest,
   deletePostRequest,
   sharePostRequest,
+  unlikePostRequest,
 } from '../../../redux/actions/posts';
 
 interface PostCardProps {
@@ -64,8 +65,9 @@ interface PostCardProps {
       options: { text: string; id: string }[];
     };
     created_at: string;
-    commentCount: number;
-    likeCount: number;
+    spread_count: number;
+    comment_count: number;
+    favorite_count: number;
   };
 }
 
@@ -114,6 +116,10 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
 
   const handleLikePost = (id: string) => {
     dispatch(likePostRequest(id));
+  };
+
+  const handleUnikePost = (id: string) => {
+    dispatch(unlikePostRequest(id));
   };
 
   const handleSharePost = (id: string) => {
@@ -222,12 +228,12 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
 
           {data.poll && <PostPoll post={data.poll} />}
 
-          {(data.likeCount > 0 || data.commentCount > 0) && (
+          {(data.favorite_count > 0 || data.comment_count > 0) && (
             <div className="post-counts">
               <span onClick={() => setLikeBoxState(true)} role="presentation">
-                {`${data.likeCount} `}
+                {`${data.favorite_count} `}
                 <FormattedPlural
-                  value={data.likeCount}
+                  value={data.favorite_count}
                   one={
                     <FormattedMessage id="common.likeNoun">
                       {(txt: string) => <>{txt.toLowerCase()}</>}
@@ -241,9 +247,9 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
                 />
               </span>
               <span role="presentation" onClick={handleCommentBox}>
-                {` ${data.commentCount} `}
+                {` ${data.comment_count} `}
                 <FormattedPlural
-                  value={data.commentCount}
+                  value={data.comment_count}
                   one={
                     <FormattedMessage id="common.comment">
                       {(txt: string) => <>{txt.toLowerCase()}</>}
@@ -269,10 +275,14 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
           <div>
             <button
               type="button"
-              onClick={() => handleLikePost(data.id)}
+              onClick={() =>
+                data.hasLiked
+                  ? handleUnikePost(data.id)
+                  : handleLikePost(data.id)
+              }
               className={data.hasLiked ? 'pressed' : ''}
             >
-              {data.hasLiked ? <LikeIcon /> : <LikeIcon />}
+              <LikeIcon />
               <span>
                 <FormattedMessage id="common.like" />
               </span>

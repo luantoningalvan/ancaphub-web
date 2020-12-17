@@ -12,6 +12,8 @@ export const Types = {
   GET_USER_POSTS_ERROR: 'posts/get_user_posts_error',
   LIKE_POST_REQUEST: 'posts/like_post_request',
   LIKE_POST_SUCCESS: 'posts/like_post_success',
+  UNLIKE_POST_REQUEST: 'posts/unlike_post_request',
+  UNLIKE_POST_SUCCESS: 'posts/unlike_post_success',
   DELETE_POST_REQUEST: 'posts/delete_post_request',
   DELETE_POST_SUCCESS: 'posts/delete_post_success',
   SHARE_POST_REQUEST: 'posts/share_post_request',
@@ -90,6 +92,16 @@ export const likePostRequest = (postId) => ({
 
 export const likePostSuccess = (data) => ({
   type: Types.LIKE_POST_SUCCESS,
+  payload: data,
+});
+
+export const unlikePostRequest = (postId) => ({
+  type: Types.UNLIKE_POST_REQUEST,
+  payload: postId,
+});
+
+export const unlikePostSuccess = (data) => ({
+  type: Types.UNLIKE_POST_SUCCESS,
   payload: data,
 });
 

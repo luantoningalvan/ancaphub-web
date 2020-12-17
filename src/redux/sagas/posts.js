@@ -57,6 +57,15 @@ function* likePost(action) {
   }
 }
 
+function* unlikePost(action) {
+  try {
+    const unlikedPost = yield call(() => api.unlikePost(action.payload));
+    yield put(actions.unlikePostSuccess(unlikedPost.data));
+  } catch (e) {
+    yield put(actions.getPostsError({ errorMessage: e.message }));
+  }
+}
+
 function* getPostLikes(action) {
   try {
     const post = yield call(() => api.getLikes(action.payload));
@@ -107,6 +116,9 @@ function* watchLikePostRequest() {
   yield takeLatest(actions.Types.LIKE_POST_REQUEST, likePost);
 }
 
+function* watchUnlikePostRequest() {
+  yield takeLatest(actions.Types.UNLIKE_POST_REQUEST, unlikePost);
+}
 function* watchGetLikesRequest() {
   yield takeLatest(actions.Types.GET_POST_LIKE_REQUEST, getPostLikes);
 }
@@ -124,6 +136,7 @@ export default [
   fork(watchGetPostsRequest),
   fork(watchGetUserPostsRequest),
   fork(watchLikePostRequest),
+  fork(watchUnlikePostRequest),
   fork(watchGetLikesRequest),
   fork(watchVotePostPollRequest),
   fork(watchDeletePostRequest),

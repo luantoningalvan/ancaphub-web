@@ -39,6 +39,7 @@ export default (state = INITIAL_STATE, action) => {
         },
         loading: false,
       };
+    case Types.UNLIKE_POST_REQUEST:
     case Types.LIKE_POST_REQUEST:
       return {
         ...state,
@@ -60,6 +61,7 @@ export default (state = INITIAL_STATE, action) => {
       };
     }
 
+    case Types.UNLIKE_POST_SUCCESS:
     case Types.LIKE_POST_SUCCESS:
       return {
         ...state,
