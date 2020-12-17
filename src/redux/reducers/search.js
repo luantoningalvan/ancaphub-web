@@ -1,7 +1,11 @@
 import { Types } from '../actions/search';
 
 const INITIAL_STATE = {
-  results: {},
+  results: {
+    users: [],
+    projects: [],
+    library: [],
+  },
   loading: true,
 };
 

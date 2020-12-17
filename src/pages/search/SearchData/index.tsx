@@ -3,19 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { searchTermRequest as searchTerm } from '../../../redux/actions/search';
+
 import UserCard from '../../../components/users/UserCard';
 import LibraryCard from '../../../components/library/LibraryCard';
 import EventCard from '../../../components/events/EventCard';
+import AuthorCard from '../../../components/authors/AuthorCard';
+import ProjectCard from '../../../components/projects/ProjectCard';
 
 import { LoadContent } from '../../../components';
-import { Container, Card, CardHeader, List, ListItem } from 'snake-ui';
-import {
-  InnerSearchGridContainer,
-  SearchSidebarContainer,
-  SearchContentContainer,
-  SearchContainer,
-  SearchResultType,
-} from './styles';
+import { Container, Card, CardHeader, List, ListItem, Grid } from 'snake-ui';
+import { FiFilter } from 'react-icons/fi';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -36,13 +33,40 @@ const SearchData = () => {
     }
   }, [term, dispatch]);
 
+  const getCard = (key: string, item: any): React.ReactNode => {
+    switch (key) {
+      case 'users': {
+        return <UserCard user={item} />;
+      }
+      case 'library': {
+        return <LibraryCard item={item} />;
+      }
+      case 'events': {
+        return <EventCard event={item} />;
+      }
+      case 'authors': {
+        return <AuthorCard data={item} />;
+      }
+      case 'projects': {
+        return <ProjectCard data={item} />;
+      }
+    }
+  };
+
   return (
     <Container style={{ marginTop: 16 }}>
       <LoadContent loading={loading}>
-        <SearchContainer>
-          <SearchSidebarContainer>
+        <Grid container spacing={4}>
+          <Grid item xs={4}>
             <Card style={{ width: '100%' }}>
-              <CardHeader title={<FormattedMessage id="search.filter" />} />
+              <CardHeader
+                title={
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <FiFilter size={20} style={{ marginRight: 8 }} />{' '}
+                    <FormattedMessage id="search.filter" />
+                  </div>
+                }
+              />
               <List>
                 <ListItem
                   label={<FormattedMessage id="common.all" />}
@@ -62,53 +86,33 @@ const SearchData = () => {
                 />
               </List>
             </Card>
-          </SearchSidebarContainer>
-
-          <SearchContentContainer>
-            {results.users &&
-              results.users.length > 0 &&
-              (type === 'all' || type === 'users') && (
-                <SearchResultType>
-                  <h3>
-                    <FormattedMessage id="common.users" />
-                  </h3>
-                  <InnerSearchGridContainer>
-                    {results.users.map((user: any) => (
-                      <UserCard user={user} key={user.id} />
-                    ))}
-                  </InnerSearchGridContainer>
-                </SearchResultType>
-              )}
-            {results.users &&
-              results.library.length > 0 &&
-              (type === 'all' || type === 'library') && (
-                <SearchResultType>
-                  <h3>
-                    <FormattedMessage id="common.library" />
-                  </h3>
-                  <InnerSearchGridContainer>
-                    {results.library.map((item: any) => (
-                      <LibraryCard key={item.id} item={item} />
-                    ))}
-                  </InnerSearchGridContainer>
-                </SearchResultType>
-              )}
-            {results.users &&
-              results.events.length > 0 &&
-              (type === 'all' || type === 'events') && (
-                <SearchResultType>
-                  <h3>
-                    <FormattedMessage id="common.events" />
-                  </h3>
-                  <InnerSearchGridContainer>
-                    {results.events.map((event: any) => (
-                      <EventCard key={event.id} event={event} />
-                    ))}
-                  </InnerSearchGridContainer>
-                </SearchResultType>
-              )}
-          </SearchContentContainer>
-        </SearchContainer>
+          </Grid>
+          <Grid item xs={8}>
+            <Grid container spacing={4}>
+              {results &&
+                Object.entries(results).map(
+                  ([key, object]: any) =>
+                    object &&
+                    object?.length > 0 && (
+                      <Grid item xs={12}>
+                        <Grid container spacing={2}>
+                          <Grid item xs={12}>
+                            <h3>
+                              <FormattedMessage id={`common.${key}`} />
+                            </h3>
+                          </Grid>
+                          {object.map((element: any) => (
+                            <Grid item xs={4}>
+                              {getCard(key, element)}
+                            </Grid>
+                          ))}
+                        </Grid>
+                      </Grid>
+                    )
+                )}
+            </Grid>
+          </Grid>
+        </Grid>
       </LoadContent>
     </Container>
   );
