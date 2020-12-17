@@ -41,7 +41,10 @@ export default (state = INITIAL_STATE, action) => {
         isAuthenticated: false,
         token: null,
       };
+    case SettingsTypes.UPDATE_EMAIL_SUCCESS:
+    case SettingsTypes.UPDATE_USERNAME_SUCCESS:
     case SettingsTypes.UPDATE_GEOLOCATION_SUCCESS:
+    case UserTypes.UPDATE_PROFILE_PICTURE_SUCCESS:
       return {
         ...state,
         user: {

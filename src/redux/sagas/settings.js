@@ -16,7 +16,10 @@ function* updateUsername(action) {
       })
     );
   } catch (e) {
-    yield put(actions.settingsError({ errorMessage: e.message }));
+    yield put(
+      addAlert({ description: e.response.data.message, type: 'error' })
+    );
+    yield put(actions.settingsError({ errorMessage: e.response.data.message }));
   }
 }
 
@@ -32,7 +35,10 @@ function* updateEmail(action) {
       })
     );
   } catch (e) {
-    yield put(actions.settingsError({ errorMessage: e.message }));
+    yield put(
+      addAlert({ description: e.response.data.message, type: 'error' })
+    );
+    yield put(actions.settingsError({ errorMessage: e.response.data.message }));
   }
 }
 
@@ -48,7 +54,10 @@ function* updatePassword(action) {
       })
     );
   } catch (e) {
-    yield put(actions.settingsError({ errorMessage: e.message }));
+    yield put(
+      addAlert({ description: e.response.data.message, type: 'error' })
+    );
+    yield put(actions.settingsError({ errorMessage: e.response.data.message }));
   }
 }
 
@@ -57,7 +66,7 @@ function* updateGeolocation(action) {
     const response = yield call(api.updateGeoLocation, action.payload);
     yield put(actions.updateGeoLocationsSuccess(response.data));
   } catch (e) {
-    yield put(actions.settingsError({ errorMessage: e.message }));
+    yield put(actions.settingsError({ errorMessage: e.response.data.message }));
   }
 }
 
