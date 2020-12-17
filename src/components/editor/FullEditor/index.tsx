@@ -174,7 +174,7 @@ const FullEditor: React.FC<FullEditorProps> = (props) => {
     return false;
   };
 
-  const mapKeyToEditorCommand = (e: React.KeyboardEvent) => {
+  const mapKeyToEditorCommand = (e: any) => {
     if (e.key === '9') {
       const newEditorState = RichUtils.onTab(e, editorState, 4);
       if (newEditorState !== editorState) {

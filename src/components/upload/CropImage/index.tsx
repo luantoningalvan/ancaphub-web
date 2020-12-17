@@ -103,7 +103,6 @@ const EditAvatar: React.FC<EditAvatarProps> = ({
               value={zoom}
               min={1}
               max={3}
-              color="secondary"
               step={0.1}
               aria-labelledby="Zoom"
               onChange={(value: any) => setZoom(value)}

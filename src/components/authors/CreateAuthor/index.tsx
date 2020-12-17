@@ -1,4 +1,5 @@
-import { Form, FormHandles } from '@unform/core';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 import TextField from 'components/form/TextField';
 import Checkbox from 'components/form/Checkbox';
 import React, { useRef, useState } from 'react';

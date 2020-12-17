@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import ThemeProvider from '../../components/template/Provider';
 import { Button, Card, Container, Grid } from 'snake-ui';
@@ -20,6 +20,7 @@ const EmailForm = styled(Card)`
   }
 `;
 const Home = () => {
+  const formRef = useRef(null);
   return (
     <ThemeProvider>
       <Header />
@@ -46,13 +47,15 @@ const Home = () => {
               <h3>
                 <FormattedMessage id="container.signup.notifyMe" />
               </h3>
-              <Form onSubmit={() => {}}>
+              {/*@ts-ignore*/}
+              <Form onSubmit={() => formRef.current.submit()}>
                 <form
                   action="https://ancaphub.us4.list-manage.com/subscribe/post?u=8dcaecd3f32f00a2fc4a31b2d&amp;id=f8b522476f"
                   method="post"
                   id="mc-embedded-subscribe-form"
                   name="mc-embedded-subscribe-form"
                   target="_blank"
+                  ref={formRef}
                 >
                   <Grid container spacing={2}>
                     <Grid item xs={12}>

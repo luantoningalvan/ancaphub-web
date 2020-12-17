@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { TextField, UploadBox } from '../..';
 import { Button, Modal, Grid } from 'snake-ui';
-import { Form } from '@unform/core';
+import { Form } from '@unform/web';
 
 interface CreateEventProps {
   open: boolean;
