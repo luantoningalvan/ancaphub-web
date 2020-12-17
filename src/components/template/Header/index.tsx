@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fi';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Dropdown, CardBody, CardFooter, Menu } from 'snake-ui';
+import { Dropdown, CardBody, CardFooter, Menu, Button } from 'snake-ui';
 
 import {
   AppBar,
@@ -37,14 +37,13 @@ import notificationSound from '../../../assets/notification.mp3';
 const audio = new Audio(notificationSound);
 
 interface HeaderProps {
-  user: {
+  transparent?: boolean;
+  user?: {
     username: string;
   };
-  collapsed: boolean;
-  setCollapsed(value: boolean): void;
 }
 
-const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
+const Header: React.FC<HeaderProps> = ({ user, transparent }) => {
   const { url } = useRouteMatch();
   const { push } = useHistory();
 
@@ -56,7 +55,6 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
   const handleOpenBugReport = () => {
     // @ts-ignore
     global.Ybug.open();
-    setCollapsed(true);
   };
 
   const escFunction = (event: any) => {
@@ -82,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
 
   return (
     <>
-      <AppBar>
+      <AppBar transparent={transparent}>
         <Logo>
           <div className="logo">
             <Link to="/">
@@ -90,95 +88,106 @@ const Header: React.FC<HeaderProps> = ({ user, collapsed, setCollapsed }) => {
             </Link>
           </div>
         </Logo>
-        <Search />
-
+        {user && <Search />}
         <HeaderMenu>
-          {/**
+          {user ? (
+            <>
+              {/**
            * <HeaderMenuItem current={url.includes('/messages')}>
             <Link to="/messages">
               <MessageIcon />
             </Link>
           </HeaderMenuItem>
            */}
-          <HeaderMenuItem
-            current={url.includes('/notifications')}
-            onClick={(e) => setNotificationsAnchor(e.currentTarget)}
-          >
-            <div>
-              <Bell animated={animated}>
-                <AnimatedBell />
-              </Bell>
-              {notReadCount > 0 && <span className="badge" />}
-            </div>
-          </HeaderMenuItem>
-          <Dropdown
-            placement="bottom-end"
-            open={Boolean(notificationsAnchor)}
-            onClose={() => setNotificationsAnchor(null)}
-            anchorEl={notificationsAnchor}
-          >
-            <h3 style={{ padding: '16px 16px 0px 16px' }}>
-              <FormattedMessage id="common.notifications" />
-            </h3>
-            {notifications.length > 0 ? (
-              <>
-                <ul
-                  style={{
-                    maxWidth: 400,
-                    maxHeight: 400,
-                    overflowY: 'scroll',
-                  }}
-                >
-                  {notifications.map((notification: any) => (
-                    <NotificationsItem
-                      notification={notification}
-                      key={generate()}
+              <HeaderMenuItem
+                current={url.includes('/notifications')}
+                onClick={(e) => setNotificationsAnchor(e.currentTarget)}
+              >
+                <div>
+                  <Bell animated={animated}>
+                    <AnimatedBell />
+                  </Bell>
+                  {notReadCount > 0 && <span className="badge" />}
+                </div>
+              </HeaderMenuItem>
+              <Dropdown
+                placement="bottom-end"
+                open={Boolean(notificationsAnchor)}
+                onClose={() => setNotificationsAnchor(null)}
+                anchorEl={notificationsAnchor}
+              >
+                <h3 style={{ padding: '16px 16px 0px 16px' }}>
+                  <FormattedMessage id="common.notifications" />
+                </h3>
+                {notifications.length > 0 ? (
+                  <>
+                    <ul
+                      style={{
+                        maxWidth: 400,
+                        maxHeight: 400,
+                        overflowY: 'scroll',
+                      }}
+                    >
+                      {notifications.map((notification: any) => (
+                        <NotificationsItem
+                          notification={notification}
+                          key={generate()}
+                        />
+                      ))}
+                    </ul>
+                    <CardFooter
+                      link="/notifications"
+                      label={<FormattedMessage id="common.showMore" />}
                     />
-                  ))}
-                </ul>
-                <CardFooter
-                  link="/notifications"
-                  label={<FormattedMessage id="common.showMore" />}
-                />
-              </>
-            ) : (
-              <CardBody>
-                <FormattedMessage id="notifications.noNotificationsFound" />
-              </CardBody>
-            )}
-          </Dropdown>
+                  </>
+                ) : (
+                  <CardBody>
+                    <FormattedMessage id="notifications.noNotificationsFound" />
+                  </CardBody>
+                )}
+              </Dropdown>
 
-          <HeaderMenuItem onClick={(e) => setOptionsAnchor(e.currentTarget)}>
-            <div>
-              <ArrowDownIcon />
-            </div>
-          </HeaderMenuItem>
-          <Menu
-            placement="bottom-end"
-            open={Boolean(optionsAnchor)}
-            onClose={() => setOptionsAnchor(null)}
-            anchorEl={optionsAnchor}
-            options={[
-              {
-                label: <FormattedMessage id="common.profile" />,
-                onClick: () => push(`/${user.username}`),
-                icon: <ProfileIcon />,
-              },
-              {
-                label: <FormattedMessage id="common.settings" />,
-                onClick: () => push(`/settings`),
-                icon: <SettingsIcon />,
-              },
-              {
-                label: <FormattedMessage id="common.logout" />,
-                onClick: handleLogout,
-                icon: <LogoutIcon />,
-              },
-            ]}
-          />
+              <HeaderMenuItem
+                onClick={(e) => setOptionsAnchor(e.currentTarget)}
+              >
+                <div>
+                  <ArrowDownIcon />
+                </div>
+              </HeaderMenuItem>
+              <Menu
+                placement="bottom-end"
+                open={Boolean(optionsAnchor)}
+                onClose={() => setOptionsAnchor(null)}
+                anchorEl={optionsAnchor}
+                options={[
+                  {
+                    label: <FormattedMessage id="common.profile" />,
+                    onClick: () => push(`/${user?.username}`),
+                    icon: <ProfileIcon />,
+                  },
+                  {
+                    label: <FormattedMessage id="common.settings" />,
+                    onClick: () => push(`/settings`),
+                    icon: <SettingsIcon />,
+                  },
+                  {
+                    label: <FormattedMessage id="common.logout" />,
+                    onClick: handleLogout,
+                    icon: <LogoutIcon />,
+                  },
+                ]}
+              />
+            </>
+          ) : (
+            <>
+              <Button color="secondary" onClick={() => push('/signup')}>
+                Criar uma conta
+              </Button>
+            </>
+          )}
         </HeaderMenu>
       </AppBar>
-      <HeaderWrapper />
+      {!transparent && <HeaderWrapper />}
     </>
   );
 };

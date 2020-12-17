@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AppBar = styled.header`
+export const AppBar = styled.header<{ transparent?: boolean }>`
   background: ${(props) => props.theme.palette.paper};
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -12,6 +12,13 @@ export const AppBar = styled.header`
   top: 0;
   left: 0;
   z-index: 100;
+
+  ${(props) =>
+    props.transparent &&
+    css`
+      background: transparent;
+      box-shadow: none;
+    `}
 
   @media (min-width: 576px) {
     z-index: 180;

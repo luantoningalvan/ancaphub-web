@@ -7,19 +7,10 @@ import Main from './Main';
 
 const Template: React.FC = ({ children }) => {
   const auth = useSelector((state: any) => state.auth);
-  const [collapsed, setCollapsed] = useState(true);
-
-  const handleCollapse = (value: boolean) => {
-    setCollapsed(value || !collapsed);
-  };
 
   return (
-    <ThemeProvider collapsed={collapsed}>
-      <Header
-        user={auth.user}
-        collapsed={collapsed}
-        setCollapsed={handleCollapse}
-      />
+    <ThemeProvider>
+      <Header user={auth.user} />
       <Navigation user={auth.user} />
       <Main>{children}</Main>
     </ThemeProvider>

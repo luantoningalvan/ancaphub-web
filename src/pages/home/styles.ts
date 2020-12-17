@@ -1,154 +1,68 @@
 import styled from 'styled-components';
 
-export const HomeContainer = styled.div`
-  @media (min-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-    min-height: 100vh;
-    width: 100%;
-    .logo {
-      text-align: left;
-    }
-  }
-`;
-
-export const Presentation = styled.div`
-  display: none;
-  @media (min-width: 768px) {
-    flex: 1;
-    background: url('https://source.unsplash.com/collection/10626955/1600x900'),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 212, 255, 0) 100%);
-    background-position: center;
-    background-blend-mode: overlay;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 32px;
-
-    ul {
-      color: ${(props) => props.theme.palette.text.contrast};
-      margin: 16px 0px;
-
-      li {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        font-size: 25px;
-        font-weight: lighter;
-
-        & + li {
-          margin-top: 16px;
-        }
-
-        svg {
-          height: 25px;
-          width: 25px;
-          margin-right: 16px;
-        }
-      }
-    }
-
-    .logo {
-      text-align: left;
-    }
-  }
-`;
-
-export const AuthBox = styled.div`
+export const VideoLight = styled.div`
+  width: 100%;
+  height: 500px;
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: url('https://source.unsplash.com/collection/10626955/1600x900'),
-    rgba(0, 0, 0, 0.8);
-  background-position: center;
-  background-blend-mode: overlay;
-  background-size: cover;
+  justify-content: center;
 
-  .auth-content {
-    width: 100%;
-    max-width: 420px;
-    height: 100%;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
+  button {
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
 
-  .logo {
-    text-align: center;
-    margin-top: 16px;
     svg {
-      fill: #e0b30d;
-      width: 150px;
+      color: white;
+      stroke-width: 1;
     }
   }
+`;
 
-  .form {
-    width: 100%;
-    background: ${(props) => props.theme.palette.paper};
-    padding: 16px;
-    border-radius: 8px;
-  }
+export const CountDownContainer = styled.section<{ bg: string }>`
+  height: 100vh;
+  flex-direction: column;
+  width: 100%;
+  background: radial-gradient(
+      ellipse at center,
+      rgba(256, 256, 256, 0.2) 0%,
+      #080f20 100%
+    ),
+    url(${(props) => props.bg});
+  display: flex;
+  background-size: cover;
+  background-position: center;
+  justify-content: space-between;
+  padding: 64px 0px;
+  background-attachment: fixed;
+  align-items: center;
+`;
 
-  form {
+export const TimerContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  > div {
     display: flex;
     flex-direction: column;
-    width: 100%;
-
-    .form-row {
-      margin-top: 8px;
-      display: flex;
-
-      input + input {
-        margin-left: 8px;
-      }
-    }
-  }
-
-  h3 {
-    text-align: center;
-    font-size: 26px;
-    margin-bottom: 16px;
-  }
-
-  .switch-form {
-    width: 100%;
-    display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    margin: 32px 0px;
+    margin: 32px;
 
-    button {
-      color: ${(props) => props.theme.palette.text.primary};
-      border: none;
-      background: none;
-      font-size: 16px;
-      cursor: pointer;
+    .number {
+      font-size: 7rem;
       font-weight: bold;
-    }
-  }
-
-  @media (min-width: 768px) {
-    width: 100%;
-    max-width: 420px;
-    padding: 0px 32px;
-    background: ${(props) => props.theme.palette.paper};
-
-    .auth-content {
-      max-width: none;
-      padding: 0px;
+      color: #e0b30d;
+      text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
     }
 
-    .switch-form {
-      padding-top: 16px;
-      border-top: 1px solid ${(props) => props.theme.palette.border};
+    .type {
+      font-size: 2rem;
+      font-weight: lighter;
     }
   }
 `;

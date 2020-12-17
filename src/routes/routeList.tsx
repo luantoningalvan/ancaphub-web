@@ -1,4 +1,6 @@
 import Home from '../pages/home';
+import SignIn from '../pages/signin';
+import SignUp from '../pages/signup';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import ResetPassword from '../pages/auth/ResetPassword';
 
@@ -45,6 +47,18 @@ export default [
     exact: true,
     path: '/',
     component: Home,
+  },
+  {
+    isOpen: true,
+    exact: true,
+    path: '/signin',
+    component: SignIn,
+  },
+  {
+    isOpen: true,
+    exact: true,
+    path: '/signup',
+    component: SignUp,
   },
   {
     isOpen: true,
