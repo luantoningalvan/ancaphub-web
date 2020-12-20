@@ -297,7 +297,8 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
               </span>
             </button>
           </div>
-          <div>
+          {/**
+           * <div>
             <button
               onClick={() => handleSharePost(data.id)}
               className={data.hasShared ? 'pressed' : ''}
@@ -306,6 +307,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
               <span>Repassar</span>
             </button>
           </div>
+           */}
         </div>
         <CommentBox expanded={commentBoxState} post={data.id} />
       </PostContainer>

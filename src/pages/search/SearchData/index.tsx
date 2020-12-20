@@ -72,18 +72,21 @@ const SearchData = () => {
                   label={<FormattedMessage id="common.all" />}
                   onClick={() => push(`search?term=${term}&type=all`)}
                 />
-                <ListItem
-                  onClick={() => push(`search?term=${term}&type=library`)}
-                  label={<FormattedMessage id="common.library" />}
-                />
+
                 <ListItem
                   onClick={() => push(`search?term=${term}&type=users`)}
                   label={<FormattedMessage id="common.users" />}
+                />
+                {/**
+                                <ListItem
+                  onClick={() => push(`search?term=${term}&type=library`)}
+                  label={<FormattedMessage id="common.library" />}
                 />
                 <ListItem
                   onClick={() => push(`search?term=${term}&type=events`)}
                   label={<FormattedMessage id="common.events" />}
                 />
+                 */}
               </List>
             </Card>
           </Grid>

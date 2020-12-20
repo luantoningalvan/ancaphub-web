@@ -350,11 +350,13 @@ const PostForm: React.FC = () => {
               />
             </div>
 
-            <IconButton
+            {/**
+             * <IconButton
               icon={<PollIcon />}
               size="small" // @ts-ignore
               onClick={handleAddPoll}
             />
+             */}
 
             <IconButton
               icon={<EmbedIcon />}

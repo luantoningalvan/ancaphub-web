@@ -155,7 +155,7 @@ const Upload: React.FC<UploadProps> = (props) => {
                     </div>
 
                     {file.loading ? (
-                      <CircularLoader size={22} />
+                      <CircularLoader size={72} />
                     ) : (
                       <span className="upload-state-icon">
                         {file.state === 'success' ? (

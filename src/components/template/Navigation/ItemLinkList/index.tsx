@@ -6,6 +6,7 @@ import {
   FiFolder as LibraryIcon,
   FiFlag as ProjectsIcon,
   FiCalendar as EventsIcon,
+  FiUsers as GroupsIcon,
 } from 'react-icons/fi';
 
 import { FormattedMessage } from 'react-intl';
@@ -41,11 +42,19 @@ const ItemLinkList: React.FC = () => {
         label="Projetos"
         link="/projects"
       />
+
       <ItemLink
         current={url.includes('/events')}
         icon={<EventsIcon />}
         label="Eventos"
         link="/events"
+      />
+
+      <ItemLink
+        current={url.includes('/groups')}
+        icon={<GroupsIcon />}
+        label="Grupos"
+        link="/groups"
       />
     </ItemLinkListContainer>
   );

@@ -97,136 +97,141 @@ export default () => {
 
   return (
     <Container>
-      <CreateAuthorDialog.Provider
-        value={{ open: createAuthor, toggleDialog: setCreateAuthor }}
-      >
-        <CreateAuthor
-          open={createAuthor}
-          onClose={() => setCreateAuthor(false)}
-        />
-        <Form onSubmit={handleSubmit} ref={formRef}>
-          <Hero
-            title="Enviar contribuição"
-            description="Conheça as regras e o processo de aprovação antes de enviar sua contribuição"
-            actions={
-              <>
-                <Button color="neutral" onClick={() => goBack()} type="button">
-                  Cancelar
-                </Button>
-                <Button disabled={step === 1} style={{ marginLeft: 8 }}>
-                  Enviar
-                </Button>
-              </>
-            }
-          />
-          <Contribute>
-            {step === 1 && (
-              <>
-                <h3 style={{ marginTop: 32 }}>Selecione o tipo de material</h3>
+      {true ? (
+        <p></p>
+      ) : (
+        <>
+          <Form onSubmit={handleSubmit} ref={formRef}>
+            <Hero
+              title="Enviar contribuição"
+              description="Conheça as regras e o processo de aprovação antes de enviar sua contribuição"
+              actions={
+                <>
+                  <Button
+                    color="neutral"
+                    onClick={() => goBack()}
+                    type="button"
+                  >
+                    Cancelar
+                  </Button>
+                  <Button disabled={step === 1} style={{ marginLeft: 8 }}>
+                    Enviar
+                  </Button>
+                </>
+              }
+            />
+            <Contribute>
+              {step === 1 && (
+                <>
+                  <h3 style={{ marginTop: 32 }}>
+                    Selecione o tipo de material
+                  </h3>
 
-                <Grid container justifyContent="center">
-                  <Grid item xs={12} md={9} lg={8}>
-                    <Paper padding>
-                      <Grid container spacing={3} className="item-type-list">
-                        <Grid item xs={12} sm={4}>
-                          <div className="item-type">
-                            <button
-                              type="button"
-                              onClick={() => handleForm('article')}
-                            >
-                              <ArticleIcon />
-                              <h4>
-                                <FormattedMessage id="common.article" />
-                              </h4>
-                            </button>
-                          </div>
-                        </Grid>
+                  <Grid container justifyContent="center">
+                    <Grid item xs={12} md={9} lg={8}>
+                      <Paper padding>
+                        <Grid container spacing={3} className="item-type-list">
+                          <Grid item xs={12} sm={4}>
+                            <div className="item-type">
+                              <button
+                                type="button"
+                                onClick={() => handleForm('article')}
+                              >
+                                <ArticleIcon />
+                                <h4>
+                                  <FormattedMessage id="common.article" />
+                                </h4>
+                              </button>
+                            </div>
+                          </Grid>
 
-                        <Grid item xs={12} sm={4}>
-                          <div className="item-type">
-                            <button
-                              type="button"
-                              onClick={() => handleForm('book')}
-                            >
-                              <BookIcon />
-                              <h4>
-                                <FormattedMessage id="common.book" />
-                              </h4>
-                            </button>
-                          </div>
-                        </Grid>
+                          <Grid item xs={12} sm={4}>
+                            <div className="item-type">
+                              <button
+                                type="button"
+                                onClick={() => handleForm('book')}
+                              >
+                                <BookIcon />
+                                <h4>
+                                  <FormattedMessage id="common.book" />
+                                </h4>
+                              </button>
+                            </div>
+                          </Grid>
 
-                        <Grid item xs={12} sm={4}>
-                          <div className="item-type">
-                            <button
-                              type="button"
-                              onClick={() => handleForm('video')}
-                            >
-                              <VideoIcon />
-                              <h4>
-                                <FormattedMessage id="common.video" />
-                              </h4>
-                            </button>
-                          </div>
+                          <Grid item xs={12} sm={4}>
+                            <div className="item-type">
+                              <button
+                                type="button"
+                                onClick={() => handleForm('video')}
+                              >
+                                <VideoIcon />
+                                <h4>
+                                  <FormattedMessage id="common.video" />
+                                </h4>
+                              </button>
+                            </div>
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </Paper>
+                      </Paper>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+
+              {step === 2 && form !== undefined && (
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={8}>
+                    {/* @ts-ignore  */}
+                    <Paper padding>{forms[form]}</Paper>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Card>
+                      <h3
+                        style={{
+                          margin: 0,
+                          padding: '16px 16px 0px 16px',
+                          fontSize: '1rem',
+                        }}
+                      >
+                        Capa
+                      </h3>
+                      <CardBody>
+                        <Dropzone
+                          name="cover"
+                          acceptedFormats={['.png', '.jpg', '.jpeg']}
+                          onDrop={(
+                            acceptedFiles: any,
+                            files: any,
+                            setFiles: any
+                          ) => {
+                            const newFiles: any = [];
+                            acceptedFiles.forEach((file: any) => {
+                              const fileName = String(file.name);
+                              const extension = file.name.split('.').pop();
+                              const size = file.size;
+                              const preview = URL.createObjectURL(file);
+                              newFiles.push({
+                                fileName,
+                                extension,
+                                size,
+                                preview,
+                                state: 'success',
+                              });
+                            });
+                            setFiles([...files, ...newFiles]);
+                          }}
+                          multiple
+                        />
+                      </CardBody>
+                    </Card>
                   </Grid>
                 </Grid>
-              </>
-            )}
-
-            {step === 2 && form !== undefined && (
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={8}>
-                  <Paper padding>{forms[form]}</Paper>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <Card>
-                    <h3
-                      style={{
-                        margin: 0,
-                        padding: '16px 16px 0px 16px',
-                        fontSize: '1rem',
-                      }}
-                    >
-                      Capa
-                    </h3>
-                    <CardBody>
-                      <Dropzone
-                        name="cover"
-                        acceptedFormats={['.png', '.jpg', '.jpeg']}
-                        onDrop={(
-                          acceptedFiles: any,
-                          files: any,
-                          setFiles: any
-                        ) => {
-                          const newFiles: any = [];
-                          acceptedFiles.forEach((file: any) => {
-                            const fileName = String(file.name);
-                            const extension = file.name.split('.').pop();
-                            const size = file.size;
-                            const preview = URL.createObjectURL(file);
-                            newFiles.push({
-                              fileName,
-                              extension,
-                              size,
-                              preview,
-                              state: 'success',
-                            });
-                          });
-                          setFiles([...files, ...newFiles]);
-                        }}
-                        multiple
-                      />
-                    </CardBody>
-                  </Card>
-                </Grid>
-              </Grid>
-            )}
-          </Contribute>
-        </Form>
-      </CreateAuthorDialog.Provider>
+              )}
+            </Contribute>
+          </Form>
+        </>
+      )}
     </Container>
   );
 };

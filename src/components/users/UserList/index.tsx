@@ -24,7 +24,7 @@ const UserList: React.FC<{ users: any }> = ({ users }) => (
                 <span>{user.user.username}</span>
               </div>
             </div>
-            <FollowButton user={user.user} />
+            {/**<FollowButton user={user.user} /> */}
           </User>
         ))}
     </ul>

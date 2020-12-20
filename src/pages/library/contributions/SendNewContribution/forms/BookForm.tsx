@@ -5,16 +5,28 @@ import SelectAuthor from '../../../../../components/authors/SelectAuthor';
 
 import { FormattedMessage } from 'react-intl';
 import { Grid } from 'snake-ui';
+import api from 'api/axios';
+import axios from 'axios';
 
-const onDrop = (acceptedFiles: any, files: any, setFiles: any) => {
+const onDrop = async (acceptedFiles: any, files: any, setFiles: any) => {
   const newFiles: any = [];
+
   acceptedFiles.forEach((file: any) => {
     const fileName = String(file.name);
     const extension = file.name.split('.').pop();
     const size = file.size;
     const preview = URL.createObjectURL(file);
-    newFiles.push({ fileName, extension, size, preview, state: 'success' });
+    newFiles.push({ file, fileName, extension, size, preview, loading: true });
   });
+  setFiles([...files, ...newFiles]);
+
+  const getUrl = await api.get('/library/upload');
+  const { signedURL } = getUrl.data;
+  console.log(signedURL);
+
+  const uploadFile = await axios.put(signedURL, newFiles[0].file);
+
+  newFiles[0] = { ...newFiles[0], state: 'success', loading: false };
   setFiles([...files, ...newFiles]);
 };
 
