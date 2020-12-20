@@ -69,8 +69,7 @@ function* unlikePost(action) {
 function* getPostLikes(action) {
   try {
     const post = yield call(() => api.getLikes(action.payload));
-    yield putResolve(getUsersCount(post.data.likes));
-    yield putResolve(getUsersRelationsips(post.data.likes));
+    yield putResolve(getUsersRelationsips(post.data));
     yield put(actions.getPostLikesSuccess(post.data));
   } catch (e) {
     yield put(actions.getPostsError({ errorMessage: e.message }));

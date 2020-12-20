@@ -41,7 +41,7 @@ function* watchSearchTerm() {
 
 function* searchNearbyUsers(action) {
   try {
-    const response = yield call(api.serachNearbyUsers, action.payload);
+    const response = yield call(api.searchNearbyUsers, action.payload);
     yield put(getUsersCount(response.data));
     yield put(getUsersRelationsips(response.data));
     yield put(actions.searchNearbyUserSuccess(response.data));

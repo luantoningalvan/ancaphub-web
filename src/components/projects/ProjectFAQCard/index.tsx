@@ -14,17 +14,17 @@ interface ProjectFaqProps {
 }
 
 const ProjectFaq: React.FC<ProjectFaqProps> = ({
-  question,
+  question: questionItem,
   showDeleteButton,
   onDelete,
 }) => {
   const [open, setOpen] = useState(false);
-
+  const { question, answer } = questionItem;
   return (
-    <FAQQuestion key={question.question} open={open}>
+    <FAQQuestion key={question} open={open}>
       <Card>
         <CardHeader
-          title={question.question}
+          title={question}
           style={{ padding: '8px 16px' }}
           actions={[
             {
@@ -43,7 +43,7 @@ const ProjectFaq: React.FC<ProjectFaqProps> = ({
         />
         <Collapse expanded={open}>
           <CardBody>
-            <p>{question.answer}</p>
+            <p>{answer}</p>
           </CardBody>
         </Collapse>
       </Card>

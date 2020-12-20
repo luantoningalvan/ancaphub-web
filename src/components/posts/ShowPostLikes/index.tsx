@@ -28,7 +28,7 @@ const ShowPostLikes: React.FC<ShowPostLikesProps> = ({
   }, [open]);
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} style={{ width: 300 }}>
       {open && (
         <Card>
           <CardHeader // @ts-ignore
@@ -43,7 +43,7 @@ const ShowPostLikes: React.FC<ShowPostLikesProps> = ({
             ]}
           />
           {/* @ts-ignore */}
-          <CardBody style={{ overflowX: 'auto' }}>
+          <CardBody style={{ maxHeight: '80vh', overflowX: 'auto' }}>
             {likes.postLikesLoading ? (
               <div
                 style={{

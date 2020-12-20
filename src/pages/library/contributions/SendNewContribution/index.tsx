@@ -124,48 +124,64 @@ export default () => {
               <>
                 <h3 style={{ marginTop: 32 }}>Selecione o tipo de material</h3>
 
-                <Paper padding style={{ minWidth: 500 }}>
-                  <ul>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={() => handleForm('article')}
-                      >
-                        <ArticleIcon />
-                        <h4>
-                          <FormattedMessage id="common.article" />
-                        </h4>
-                      </button>
-                    </li>
+                <Grid container justifyContent="center">
+                  <Grid item xs={12} md={9} lg={8}>
+                    <Paper padding>
+                      <Grid container spacing={3} className="item-type-list">
+                        <Grid item xs={12} sm={4}>
+                          <div className="item-type">
+                            <button
+                              type="button"
+                              onClick={() => handleForm('article')}
+                            >
+                              <ArticleIcon />
+                              <h4>
+                                <FormattedMessage id="common.article" />
+                              </h4>
+                            </button>
+                          </div>
+                        </Grid>
 
-                    <li>
-                      <button type="button" onClick={() => handleForm('book')}>
-                        <BookIcon />
-                        <h4>
-                          <FormattedMessage id="common.book" />
-                        </h4>
-                      </button>
-                    </li>
+                        <Grid item xs={12} sm={4}>
+                          <div className="item-type">
+                            <button
+                              type="button"
+                              onClick={() => handleForm('book')}
+                            >
+                              <BookIcon />
+                              <h4>
+                                <FormattedMessage id="common.book" />
+                              </h4>
+                            </button>
+                          </div>
+                        </Grid>
 
-                    <li>
-                      <button type="button" onClick={() => handleForm('video')}>
-                        <VideoIcon />
-                        <h4>
-                          <FormattedMessage id="common.video" />
-                        </h4>
-                      </button>
-                    </li>
-                  </ul>
-                </Paper>
+                        <Grid item xs={12} sm={4}>
+                          <div className="item-type">
+                            <button
+                              type="button"
+                              onClick={() => handleForm('video')}
+                            >
+                              <VideoIcon />
+                              <h4>
+                                <FormattedMessage id="common.video" />
+                              </h4>
+                            </button>
+                          </div>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+                  </Grid>
+                </Grid>
               </>
             )}
 
             {step === 2 && form !== undefined && (
               <Grid container spacing={2}>
-                <Grid item xs={8}>
+                <Grid item xs={12} md={8}>
                   <Paper padding>{forms[form]}</Paper>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={12} md={4}>
                   <Card>
                     <h3
                       style={{

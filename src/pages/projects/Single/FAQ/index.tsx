@@ -4,9 +4,10 @@ import ProjectFAQCard from '../../../../components/projects/ProjectFAQCard';
 const ProjectFaq = ({ project }: any) => {
   return (
     <>
-      {project.faq.map((question: any) => (
-        <ProjectFAQCard question={question} key={question.id} />
-      ))}
+      {project.faq &&
+        JSON.parse(project.faq).map((question: any) => (
+          <ProjectFAQCard question={question} key={question.id} />
+        ))}
     </>
   );
 };

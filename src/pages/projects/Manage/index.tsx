@@ -61,7 +61,7 @@ const Settings = () => {
               <div className="group-name">
                 <img
                   className="icon"
-                  src={project.avatar || defaultProjectAvatar}
+                  src={project.avatar_url || defaultProjectAvatar}
                   alt="profile pic"
                 />
                 <h2>{project.name}</h2>

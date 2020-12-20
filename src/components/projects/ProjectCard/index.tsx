@@ -10,6 +10,7 @@ interface ProjectCardProps {
     id: string;
     name: string;
     cover: string;
+    cover_url: string;
     peopleWatching: number;
     hasEnrolled: boolean;
     description: string;
@@ -17,19 +18,18 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ data }) => {
-  const { id, name, cover, description } = data;
+  const { id, name, cover_url, description } = data;
   return (
     <div style={{ width: '100%' }}>
       <Paper>
         <Link to={`/projects/${id}`}>
-          <ProjectCover cover={cover || defaultProjectCover} />
+          <ProjectCover cover={cover_url || defaultProjectCover} />
         </Link>
         <ProjectInfo>
           <h4>
             <Link to="/projects/id">{name}</Link>
           </h4>
           <span>{description}</span>
-          <FollowProjectButton project={id} />
         </ProjectInfo>
       </Paper>
     </div>

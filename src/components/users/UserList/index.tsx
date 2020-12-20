@@ -15,9 +15,7 @@ const UserList: React.FC<{ users: any }> = ({ users }) => (
               <Link to={`/${user.user.username}`}>
                 <Avatar
                   src={
-                    user.user.avatar && user.user.avatar !== ''
-                      ? user.user.avatar
-                      : defaultAvatar
+                    user?.user?.avatar ? user.user.avatar_url : defaultAvatar
                   }
                 />
               </Link>
@@ -26,7 +24,7 @@ const UserList: React.FC<{ users: any }> = ({ users }) => (
                 <span>{user.user.username}</span>
               </div>
             </div>
-            <FollowButton user={user.user.username} />
+            <FollowButton user={user.user} />
           </User>
         ))}
     </ul>

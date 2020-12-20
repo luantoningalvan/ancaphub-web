@@ -26,7 +26,9 @@ interface GeneralProps {
   project: {
     id: string;
     cover?: string;
+    cover_url?: string;
     avatar?: string;
+    avatar_url?: string;
     type: string;
     links: any;
   };
@@ -98,7 +100,7 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
             <EditCoverContainer>
               <img
                 src={
-                  project.cover ||
+                  project.cover_url ||
                   'https://tokystorage.s3.amazonaws.com/images/default-cover.png'
                 }
                 alt="Profile cover"
@@ -140,7 +142,7 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
           <Grid item xs={4}>
             <EditAvatarContainer>
               <img
-                src={project.avatar || defaultProjectAvatar}
+                src={project.avatar_url || defaultProjectAvatar}
                 alt="Profile Pic"
               />
               <div className="buttons">

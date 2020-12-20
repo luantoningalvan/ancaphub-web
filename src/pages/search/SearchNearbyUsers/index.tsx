@@ -22,7 +22,9 @@ export default () => {
   const [radius, setRadius] = useState(50);
   const [location, setLastLocation] = useState({});
   const dispatch = useDispatch();
-  const geoLocation = useSelector((state: any) => state.auth.user.geoLocation);
+  const geoLocation = useSelector(
+    (state: any) => state.auth.settings.geolocation
+  );
   const { results, loading } = useSelector((state: any) => state.search);
 
   const handleRadius = (value: number) => setRadius(value);

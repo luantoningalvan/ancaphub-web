@@ -22,6 +22,7 @@ const ProjectDonationCard: React.FC<ProjectDonationCardProps> = ({
     return <FiCreditCard />;
   };
 
+  console.log(donation);
   return (
     <DonationCard>
       {showDeleteButton && (

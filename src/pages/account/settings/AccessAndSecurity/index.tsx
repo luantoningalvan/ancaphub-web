@@ -99,6 +99,7 @@ const AccessAndSecurity = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
+
       dispatch(updatePasswordRequest(data));
     } catch (err) {
       const validationErrors: { [key: string]: any } = {};
@@ -194,49 +195,59 @@ const AccessAndSecurity = () => {
                 onSubmit={handlePasswordSubmit}
                 ref={passwordFormRef}
               >
-                <FormattedMessage id="common.password">
-                  {(msg: string) => (
-                    <FormattedMessage
-                      id="common.newFemale"
-                      values={{ what: msg.toLowerCase() }}
-                    >
-                      {(_msg) => (
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <FormattedMessage id="account.settings.typeCurrentPassword">
+                      {(msg) => (
                         <TextField
-                          placeholder={_msg}
-                          name="new_password"
+                          placeholder={msg}
+                          name="current_password"
                           type="password"
+                          style={{ marginTop: 8 }}
                         />
                       )}
                     </FormattedMessage>
-                  )}
-                </FormattedMessage>
-                <FormattedMessage id="account.settings.confirmNewPassword">
-                  {(msg) => (
-                    <TextField
-                      placeholder={msg}
-                      name="confirm_new_password"
-                      type="password"
-                      style={{ marginTop: 8 }}
-                    />
-                  )}
-                </FormattedMessage>
-                <FormattedMessage id="account.settings.typeCurrentPassword">
-                  {(msg) => (
-                    <TextField
-                      placeholder={msg}
-                      name="current_password"
-                      type="password"
-                      style={{ marginTop: 8 }}
-                    />
-                  )}
-                </FormattedMessage>
-                <Button
-                  type="submit"
-                  color="secondary"
-                  style={{ marginTop: 16 }}
-                >
-                  <FormattedMessage id="common.change" />
-                </Button>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormattedMessage id="common.password">
+                      {(msg: string) => (
+                        <FormattedMessage
+                          id="common.newFemale"
+                          values={{ what: msg.toLowerCase() }}
+                        >
+                          {(_msg) => (
+                            <TextField
+                              placeholder={_msg}
+                              name="new_password"
+                              type="password"
+                            />
+                          )}
+                        </FormattedMessage>
+                      )}
+                    </FormattedMessage>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormattedMessage id="account.settings.confirmNewPassword">
+                      {(msg) => (
+                        <TextField
+                          placeholder={msg}
+                          name="confirm_new_password"
+                          type="password"
+                          style={{ marginTop: 8 }}
+                        />
+                      )}
+                    </FormattedMessage>
+                  </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    color="secondary"
+                    style={{ marginTop: 16 }}
+                  >
+                    <FormattedMessage id="common.change" />
+                  </Button>
+                </Grid>
               </Form>
             </Accordion>
           </Grid>

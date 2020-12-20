@@ -12,15 +12,17 @@ export const ProjectInfo = styled.div`
   padding: 20px;
   h4 {
     margin-bottom: 5px;
+    a {
+      font-size: 1.5rem;
+      text-decoration: none;
+      color: ${(props) => props.theme.palette.text.primary};
+    }
   }
-  a {
-    text-decoration: none;
-    color: ${(props) => props.theme.palette.text.primary};
-  }
+
   span {
     text-decoration: none;
     color: ${(props) => props.theme.palette.text.secondary};
     display: block;
-    margin-bottom: 15px;
+    font-size: 0.9rem;
   }
 `;

@@ -28,6 +28,7 @@ function* addComment({ payload }) {
     };
     yield put(actions.addCommentSuccess(data));
   } catch (e) {
+    console.log(e.message);
     yield put(addAlert('error', e.message));
   }
 }

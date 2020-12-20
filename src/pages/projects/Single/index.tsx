@@ -51,7 +51,7 @@ const SingleProject = () => {
 
   return (
     <LoadContent loading={loading}>
-      <ProjectBanner cover={project.cover}>
+      <ProjectBanner cover={project.cover_url}>
         <Container>
           <div
             style={{
@@ -63,7 +63,7 @@ const SingleProject = () => {
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <img
                 className="icon"
-                src={project.avatar || defaultProjectAvatar}
+                src={project.avatar_url || defaultProjectAvatar}
                 alt="profile pic"
               />
               <div>
@@ -101,8 +101,6 @@ const SingleProject = () => {
                 </Link>
               </div>
             </div>
-
-            <FollowProjectButton project={project._id} />
           </div>
         </Container>
       </ProjectBanner>

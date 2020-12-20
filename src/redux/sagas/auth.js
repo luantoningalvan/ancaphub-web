@@ -1,5 +1,6 @@
 import { takeLatest, call, fork, put } from 'redux-saga/effects';
 import * as actions from '../actions/auth';
+import {} from '../actions/notifications';
 import { addAlert } from '../actions/alerts';
 import * as api from '../../api/auth';
 
@@ -8,7 +9,7 @@ function* authUser(action) {
     const data = action.payload;
     const response = yield call(api.authUser, data);
     localStorage.setItem('token', response.data.token);
-    yield put(actions.authUserSuccess(response.data));
+    document.location.reload();
   } catch (e) {
     yield put(actions.authError({ errorMessage: e.message }));
     yield put(
@@ -23,8 +24,12 @@ function* authUser(action) {
 
 function* loadUser() {
   try {
-    const response = yield call(api.loadUser);
-    yield put(actions.loadUserSuccess(response.data));
+    const userData = yield call(api.loadUser);
+    const settingsData = yield call(api.loadSettings);
+
+    yield put(
+      actions.loadUserSuccess({ ...userData.data, settings: settingsData.data })
+    );
   } catch (e) {
     yield put(actions.authError({ errorMessage: e.message }));
   }

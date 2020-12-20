@@ -3,7 +3,7 @@ import { Form } from '@unform/web';
 import { SubmitHandler } from '@unform/core';
 import { useDispatch } from 'react-redux';
 import { convertToRaw } from 'draft-js';
-import { Button, Breadcrumbs } from 'snake-ui';
+import { Button, Breadcrumbs, Grid, Paper } from 'snake-ui';
 import { PageHeader } from '../../styles';
 import FullEditor from '../../../../../components/editor/FullEditor';
 import { updateProjectAboutRequest } from '../../../../../redux/actions/projects';
@@ -24,18 +24,25 @@ const About: React.FC<{ project: any }> = ({ project }) => {
 
   return (
     <Form onSubmit={handleSubmit} initialData={{ about: project.about }}>
-      <PageHeader>
-        <div className="page-title">
-          <Breadcrumbs list={[{ title: 'Seções' }, { title: 'Sobre' }]} />
-          <h2>Sobre</h2>
-        </div>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <PageHeader>
+            <div className="page-title">
+              <Breadcrumbs list={[{ title: 'Seções' }, { title: 'Sobre' }]} />
+              <h2>Sobre</h2>
+            </div>
 
-        <Button type="submit" color="secondary">
-          Salvar
-        </Button>
-      </PageHeader>
-      {/* @ts-ignore */}
-      <FullEditor name="about" />
+            <Button type="submit" color="secondary">
+              Salvar
+            </Button>
+          </PageHeader>
+        </Grid>
+        <Grid item xs={12}>
+          <Paper padding>
+            <FullEditor name="about" />
+          </Paper>
+        </Grid>
+      </Grid>
     </Form>
   );
 };

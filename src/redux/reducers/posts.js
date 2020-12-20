@@ -1,4 +1,5 @@
 import { Types } from '../actions/posts';
+import { Types as CommentTypes } from '../actions/comments';
 import arrayToObject from '../../utils/arrayToObject';
 
 const INITIAL_STATE = {
@@ -51,6 +52,32 @@ export default (state = INITIAL_STATE, action) => {
           },
         },
       };
+
+    case CommentTypes.ADD_COMMENT_SUCCESS: {
+      console.log(state.items, payload);
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [payload.postId]: {
+            ...state.items[payload.postId],
+            comment_count: state.items[payload.postId].comment_count + 1,
+          },
+        },
+      };
+    }
+
+    case CommentTypes.DELETE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [payload.postId]: {
+            ...state.items[payload.postId],
+            comment_count: state.items[payload.postId].comment_count - 1,
+          },
+        },
+      };
     case Types.DELETE_POST_SUCCESS: {
       const newObj = { ...state.items };
       delete newObj[payload];
@@ -62,6 +89,7 @@ export default (state = INITIAL_STATE, action) => {
     }
 
     case Types.UNLIKE_POST_SUCCESS:
+    case Types.LIKE_POST_SUCCESS:
     case Types.LIKE_POST_SUCCESS:
       return {
         ...state,
@@ -80,9 +108,9 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         items: {
           ...state.items,
-          [payload.id]: {
-            ...state.items[payload.id],
-            likes: payload.likes,
+          [payload[0].post_id]: {
+            ...state.items[payload[0].post_id],
+            likes: payload,
           },
         },
         postLikesLoading: false,

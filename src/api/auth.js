@@ -7,3 +7,4 @@ export const authUser = ({ email, password }) =>
   });
 
 export const loadUser = () => axios.get('/sessions');
+export const loadSettings = () => axios.get('/settings');

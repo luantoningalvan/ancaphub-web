@@ -4,6 +4,7 @@ import { Types as SettingsTypes } from '../actions/settings';
 
 const INITIAL_STATE = {
   user: {},
+  settings: {},
   isAuthenticated: null,
   token: localStorage.getItem('token'),
   errorMessage: '',
@@ -31,6 +32,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user: payload.user,
+        settings: payload.settings,
         isAuthenticated: true,
         loading: false,
       };
@@ -38,12 +40,19 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         user: {},
+        logout: {},
         isAuthenticated: false,
         token: null,
       };
+    case SettingsTypes.UPDATE_GEOLOCATION_SUCCESS:
+      return {
+        ...state,
+        settings: {
+          ...action.payload,
+        },
+      };
     case SettingsTypes.UPDATE_EMAIL_SUCCESS:
     case SettingsTypes.UPDATE_USERNAME_SUCCESS:
-    case SettingsTypes.UPDATE_GEOLOCATION_SUCCESS:
     case UserTypes.UPDATE_PROFILE_PICTURE_SUCCESS:
       return {
         ...state,

@@ -10,6 +10,9 @@ import {
 } from 'react-icons/gr';
 
 const LinksList = ({ links }: any) => {
+  console.log(JSON.parse(links));
+  return null;
+  /*
   const getIcon = (url: string) => {
     if (url.includes('facebook.com' || 'fb.com')) {
       return <FacebookLogo />;
@@ -45,6 +48,7 @@ const LinksList = ({ links }: any) => {
       </ul>
     </LinksListContainer>
   );
+  */
 };
 
 export default LinksList;

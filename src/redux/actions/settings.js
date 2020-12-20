@@ -31,9 +31,9 @@ export const updateUsernameSuccess = ({ username }) => ({
   payload: { username },
 });
 
-export const updatePasswordRequest = ({ currentPassword, newPassword }) => ({
+export const updatePasswordRequest = (data) => ({
   type: Types.UPDATE_PASSWORD_REQUEST,
-  payload: { currentPassword, newPassword },
+  payload: data,
 });
 
 export const updatePasswordSuccess = () => ({
