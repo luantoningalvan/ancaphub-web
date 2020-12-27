@@ -18,69 +18,19 @@ import Footer from '../../components/template/Footer';
 import ThemeProvider from '../../components/template/Provider';
 import { CountDownContainer, TimerContainer, VideoLight } from './styles';
 
+import mises from '../../assets/slider/mises.jpg';
+
 const Home = () => {
-  const [time, setTime] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
-  const [image, setImage] = useState('');
   const { formatMessage } = useIntl();
-
-  const countDownDate = new Date('Dec 20, 2020 22:00:00').getTime();
-
-  setInterval(function () {
-    var now = new Date().getTime();
-    var distance = countDownDate - now;
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    setTime({ days, hours, minutes, seconds });
-  }, 1000);
-
-  useEffect(() => {
-    const getRandomImage = async () => {
-      const res = { data: { image: 'https://ancaphub.com/slider/hayek.jpg' } };
-      setImage(res.data.image);
-    };
-
-    getRandomImage();
-  }, []);
 
   return (
     <ThemeProvider>
       <Header transparent />
-      <CountDownContainer bg={image}>
+      <CountDownContainer bg={mises}>
         <div></div>
-        <TimerContainer>
-          <div>
-            <span className="number">{String(time.days).padStart(2, '0')}</span>
-            <span className="type">dias</span>
-          </div>
-          <div>
-            <span className="number">
-              {String(time.hours).padStart(2, '0')}
-            </span>
-            <span className="type">horas</span>
-          </div>
-          <div>
-            <span className="number">
-              {String(time.minutes).padStart(2, '0')}
-            </span>
-            <span className="type">minutos</span>
-          </div>
-          <div>
-            <span className="number">
-              {String(time.seconds).padStart(2, '0')}
-            </span>
-            <span className="type">segundos</span>
-          </div>
-        </TimerContainer>
+        <div style={{ fontSize: '5rem' }}>
+          <h3>Em breve</h3>
+        </div>
         <Button
           variant="outlined" //@ts-ignore
           color="white"
