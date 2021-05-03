@@ -13,9 +13,10 @@ import SigninForm from '../../components/auth/SigninForm';
 import SignupForm from '../../components/auth/SignupForm';
 import { ReactComponent as AncapHubLogo } from '../../assets/ancaphub.svg';
 import { AuthBox, Presentation, HomeContainer } from './styles';
-import { useHistory } from 'react-router-dom';
+
 const Home = () => {
-  const { push } = useHistory();
+  const [form, setForm] = useState('signin');
+
   return (
     <ThemeProvider>
       <HomeContainer>
@@ -63,17 +64,32 @@ const Home = () => {
               <AncapHubLogo />
             </div>
             <div className="form">
-              <>
-                <h3>
-                  <FormattedMessage id="common.login" />
-                </h3>
-                <SigninForm />
-              </>
+              {form === 'signin' ? (
+                <>
+                  <h3>
+                    <FormattedMessage id="common.login" />
+                  </h3>
+                  <SigninForm />
+                </>
+              ) : (
+                <>
+                  <h3>
+                    <FormattedMessage id="common.register" />
+                  </h3>
+                  <SignupForm />
+                </>
+              )}
             </div>
             <div className="switch-form">
-              <button type="button" onClick={() => push('signup')}>
-                <FormattedMessage id="common.register" />
-              </button>
+              {form === 'signin' ? (
+                <button type="button" onClick={() => setForm('signup')}>
+                  <FormattedMessage id="common.register" />
+                </button>
+              ) : (
+                <button type="button" onClick={() => setForm('signin')}>
+                  <FormattedMessage id="home.form.hasAccount" />
+                </button>
+              )}
             </div>
           </div>
         </AuthBox>

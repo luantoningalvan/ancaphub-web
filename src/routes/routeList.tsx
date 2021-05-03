@@ -46,12 +46,6 @@ export default [
     isOpen: true,
     exact: true,
     path: '/',
-    component: Home,
-  },
-  {
-    isOpen: true,
-    exact: true,
-    path: '/signin',
     component: SignIn,
   },
   {
