@@ -1,8 +1,6 @@
-/* eslint-disable consistent-return */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { FiAlertCircle, FiChevronDown, FiPlusCircle } from 'react-icons/fi';
-import { useField } from '@unform/core';
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { FiAlertCircle, FiChevronDown, FiPlusCircle } from "react-icons/fi";
+import { useField } from "@unform/core";
 import {
   SelectContainer,
   SelectField,
@@ -10,8 +8,8 @@ import {
   SelectOption,
   AddOptionButton,
   Error,
-} from './styles';
-import { Dropdown } from 'snake-ui';
+} from "./styles";
+import { Dropdown } from "snake-ui";
 
 interface SelectProps {
   name: string;
@@ -46,14 +44,14 @@ const Select: React.FC<SelectProps> = ({
       const label = options.find((opt) => opt.value === defaultValue); // @ts-ignore
       return { value: defaultValue, label: label.label };
     }
-    return { value: '', label: '' };
+    return { value: "", label: "" };
   });
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value',
+      path: "value",
     });
   }, [fieldName, registerField]);
 
@@ -133,7 +131,7 @@ const Select: React.FC<SelectProps> = ({
                 setAnchorEl(null);
               }}
             >
-              {' '}
+              {" "}
               <FiPlusCircle size={18} />
               Adicionar
             </AddOptionButton>

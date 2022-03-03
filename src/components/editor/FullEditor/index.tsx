@@ -1,10 +1,6 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable consistent-return */
-
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { useField } from '@unform/core';
-import shortId from 'shortid';
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useField } from "@unform/core";
+import shortId from "shortid";
 import {
   MdFormatBold,
   MdFormatItalic,
@@ -14,27 +10,27 @@ import {
   MdFormatQuote,
   MdCode,
   MdFullscreen,
-} from 'react-icons/md';
+} from "react-icons/md";
 import {
   Editor,
   EditorState,
   RichUtils,
   getDefaultKeyBinding,
   convertFromRaw,
-} from 'draft-js';
+} from "draft-js";
 import {
   EditorContainer,
   EditorToolBar,
   ToggleButton,
   EditorContent,
-} from './styles';
-import 'draft-js/dist/Draft.css';
-import { IconButton } from 'snake-ui';
+} from "./styles";
+import "draft-js/dist/Draft.css";
+import { IconButton } from "snake-ui";
 
 function getBlockStyle(block: any) {
   switch (block.getType()) {
-    case 'blockquote':
-      return 'RichEditor-blockquote';
+    case "blockquote":
+      return "RichEditor-blockquote";
     default:
       return null;
   }
@@ -60,10 +56,10 @@ const StyleButton = ({ style, label, active, onToggle }: StyleButtonProps) => {
 };
 
 const BLOCK_TYPES = [
-  { label: <MdFormatListNumbered />, style: 'unordered-list-item' },
-  { label: <MdFormatListBulleted />, style: 'ordered-list-item' },
-  { label: <MdFormatQuote />, style: 'blockquote' },
-  { label: <MdCode />, style: 'code-block' },
+  { label: <MdFormatListNumbered />, style: "unordered-list-item" },
+  { label: <MdFormatListBulleted />, style: "ordered-list-item" },
+  { label: <MdFormatQuote />, style: "blockquote" },
+  { label: <MdCode />, style: "code-block" },
 ];
 
 const BlockStyleControls = (props: any) => {
@@ -90,9 +86,9 @@ const BlockStyleControls = (props: any) => {
 };
 
 const INLINE_STYLES = [
-  { label: <MdFormatBold />, style: 'BOLD' },
-  { label: <MdFormatItalic />, style: 'ITALIC' },
-  { label: <MdFormatUnderlined />, style: 'UNDERLINE' },
+  { label: <MdFormatBold />, style: "BOLD" },
+  { label: <MdFormatItalic />, style: "ITALIC" },
+  { label: <MdFormatUnderlined />, style: "UNDERLINE" },
 ];
 
 const InlineStyleControls = ({ editorState, onToggle }: any) => {
@@ -150,7 +146,7 @@ const FullEditor: React.FC<FullEditorProps> = (props) => {
     registerField({
       name: fieldName,
       ref: editor.current,
-      path: 'value',
+      path: "value",
     });
   }, [fieldName, registerField]);
 
@@ -175,7 +171,7 @@ const FullEditor: React.FC<FullEditorProps> = (props) => {
   };
 
   const mapKeyToEditorCommand = (e: any) => {
-    if (e.key === '9') {
+    if (e.key === "9") {
       const newEditorState = RichUtils.onTab(e, editorState, 4);
       if (newEditorState !== editorState) {
         onChange(newEditorState);
@@ -193,11 +189,11 @@ const FullEditor: React.FC<FullEditorProps> = (props) => {
     onChange(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
 
-  let className = 'RichEditor-editor';
+  let className = "RichEditor-editor";
   const contentState = editorState.getCurrentContent();
   if (!contentState.hasText()) {
-    if (contentState.getBlockMap().first().getType() !== 'unstyled') {
-      className += ' RichEditor-hidePlaceholder';
+    if (contentState.getBlockMap().first().getType() !== "unstyled") {
+      className += " RichEditor-hidePlaceholder";
     }
   }
 

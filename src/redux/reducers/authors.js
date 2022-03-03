@@ -1,5 +1,4 @@
-import { stat } from 'fs';
-import { Types } from '../actions/authors';
+import { Types } from "../actions/authors";
 
 const INITIAL_STATE = {
   items: [],

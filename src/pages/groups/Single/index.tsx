@@ -1,24 +1,21 @@
-import React, { Suspense, lazy } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
-import { FiSettings as SettingIcon } from 'react-icons/fi';
-import { GroupHeader } from './styles';
-import { Container, Tabs, Tab, CircularLoader } from 'snake-ui';
+import React, { Suspense, lazy } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import { FiSettings as SettingIcon } from "react-icons/fi";
+import { GroupHeader } from "./styles";
+import { Container, Tabs, Tab, CircularLoader } from "snake-ui";
 
-const GroupBoard = lazy(() => import('./Board'));
-const GroupChat = lazy(() => import('./Chat'));
-const GroupFiles = lazy(() => import('./Files'));
-const GroupMembers = lazy(() => import('./Members'));
-const GroupManage = lazy(() => import('./Manage'));
+const GroupBoard = lazy(() => import("./Board"));
+const GroupChat = lazy(() => import("./Chat"));
+const GroupFiles = lazy(() => import("./Files"));
+const GroupMembers = lazy(() => import("./Members"));
+const GroupManage = lazy(() => import("./Manage"));
 
 const SingleGroup = () => {
-  const [Page, setPage] = React.useState<React.ReactNode | undefined>(
-    undefined
-  );
-  const {
-    id: groupId,
-    page: groupPage,
-  }: { id: string; page: string } = useParams();
+  const [currentPage, setCurrentPage] = React.useState<string | undefined>();
+
+  const { id: groupId, page: groupPage }: { id: string; page: string } =
+    useParams();
 
   const pages: { [key: string]: React.ReactNode } = {
     undefined: <GroupBoard />,
@@ -31,7 +28,7 @@ const SingleGroup = () => {
   const { push } = useHistory();
 
   React.useEffect(() => {
-    setPage(pages[groupPage]);
+    setCurrentPage(groupPage);
   }, [groupPage]);
 
   return (
@@ -48,22 +45,22 @@ const SingleGroup = () => {
                 label={<FormattedMessage id="groups.board" />}
               />
               <Tab
-                current={groupPage === 'chat'}
+                current={groupPage === "chat"}
                 onClick={() => push(`/groups/${groupId}/chat`)}
                 label={<FormattedMessage id="groups.chat" />}
               />
               <Tab
-                current={groupPage === 'files'}
+                current={groupPage === "files"}
                 onClick={() => push(`/groups/${groupId}/files`)}
                 label={<FormattedMessage id="groups.files" />}
               />
               <Tab
-                current={groupPage === 'members'}
+                current={groupPage === "members"}
                 onClick={() => push(`/groups/${groupId}/members`)}
                 label={<FormattedMessage id="groups.members" />}
               />
               <Tab
-                current={groupPage === 'manage'}
+                current={groupPage === "manage"}
                 onClick={() => push(`/groups/${groupId}/manage`)}
                 label={<SettingIcon />}
               />
@@ -72,7 +69,9 @@ const SingleGroup = () => {
         </Container>
       </GroupHeader>
       <Container>
-        <Suspense fallback={<CircularLoader size={96} />}>{Page}</Suspense>
+        <Suspense fallback={<CircularLoader size={96} />}>
+          {currentPage && pages[currentPage]}
+        </Suspense>
       </Container>
     </>
   );

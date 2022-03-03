@@ -1,19 +1,19 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import ReactPlayer from 'react-player';
-import Categories from '../../../../components/categories/ShowCategories';
+import React from "react";
+import { FormattedMessage } from "react-intl";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import ReactPlayer from "react-player";
+import Categories from "../../../../components/categories/ShowCategories";
 import {
   Author,
   Banner,
   Title,
   PlayerWrapper,
   VideoContentContainer,
-} from './styles';
-import { Container } from 'snake-ui';
+} from "./styles";
+import { Container } from "snake-ui";
 
-import { getSingleItemRequest as getSingleItem } from '../../../../redux/actions/library';
+import { getSingleItemRequest as getSingleItem } from "../../../../redux/actions/library";
 
 const SingleVideo = () => {
   const { id }: { id: string } = useParams();
@@ -47,19 +47,19 @@ const SingleVideo = () => {
               />
             </PlayerWrapper>
             <div style={{ marginTop: 32 }}>
-              <Categories categories={singleItem.categories} />
+              <Categories categories={singleItem?.categories} />
 
-              <Title>{singleItem.title}</Title>
+              <Title>{singleItem?.title}</Title>
               <Author>
                 <FormattedMessage
                   id="library.videos.participants"
-                  values={{ participants: singleItem.author }}
+                  values={{ participants: singleItem?.author?.name }}
                 />
               </Author>
             </div>
           </Container>
         </Banner>
-        <VideoContentContainer>{singleItem.content}</VideoContentContainer>
+        <VideoContentContainer>{singleItem?.content}</VideoContentContainer>
       </>
     )
   );

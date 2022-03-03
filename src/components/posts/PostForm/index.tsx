@@ -1,23 +1,22 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useMemo, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import ReactPlayer from 'react-player';
-import { generate } from 'shortid';
+import React, { useState, useMemo, useRef } from "react";
+import { useDispatch } from "react-redux";
+import ReactPlayer from "react-player";
+import { generate } from "shortid";
 import {
   FiImage as ImageIcon,
   FiCode as EmbedIcon,
   FiBarChart as PollIcon,
   FiX as CloseIcon,
   FiPlusCircle as AddIcon,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import { EditorState, RichUtils, convertToRaw } from 'draft-js';
-import Editor from 'draft-js-plugins-editor';
-import createListPlugin from 'draft-js-list-plugin';
-import { FormattedMessage } from 'react-intl'; // @ts-ignore
-import createLinkifyPlugin from 'draft-js-linkify-plugin'; // @ts-ignore
-import createHashtagPlugin from 'draft-js-hashtag-plugin'; // @ts-ignore
-import createMentionPlugin from 'draft-js-mention-plugin';
+import { EditorState, RichUtils, convertToRaw } from "draft-js";
+import Editor from "draft-js-plugins-editor";
+import createListPlugin from "draft-js-list-plugin";
+import { FormattedMessage } from "react-intl"; // @ts-ignore
+import createLinkifyPlugin from "draft-js-linkify-plugin"; // @ts-ignore
+import createHashtagPlugin from "draft-js-hashtag-plugin"; // @ts-ignore
+import createMentionPlugin from "draft-js-mention-plugin";
 
 // Botões da inline toolbar
 import {
@@ -26,32 +25,32 @@ import {
   ItalicButton,
   UnderlineButton,
   UnorderedListButton,
-} from 'draft-js-buttons';
+} from "draft-js-buttons";
 
-import { Form } from '@unform/web';
-import { TextField } from '../..';
+import { Form } from "@unform/web";
+import { TextField } from "../..";
 
-import { Card, CardBody, CardFooter, IconButton, Button } from 'snake-ui';
+import { Card, CardBody, CardFooter, IconButton, Button } from "snake-ui";
 
 // Plugins customizados
-import basicTextStylePlugin from '../../editor/plugins/basicTextStylePlugin';
-import mentions from '../../editor/plugins/mentionPluginInfo';
+import basicTextStylePlugin from "../../editor/plugins/basicTextStylePlugin";
+import mentions from "../../editor/plugins/mentionPluginInfo";
 import inlineToolbar, {
   HeadlineButton,
-} from '../../editor/plugins/inlineToolbarPlugin';
+} from "../../editor/plugins/inlineToolbarPlugin";
 // CSS do editor
-import 'draft-js/dist/Draft.css';
-import 'draft-js-hashtag-plugin/lib/plugin.css';
-import '../../../assets/mentions.css';
-import '../../../assets/inline-toolbar.css';
+import "draft-js/dist/Draft.css";
+import "draft-js-hashtag-plugin/lib/plugin.css";
+import "../../../assets/mentions.css";
+import "../../../assets/inline-toolbar.css";
 
-import { createPostRequest } from '../../../redux/actions/posts';
+import { createPostRequest } from "../../../redux/actions/posts";
 
-import PostFormStyle from './styles';
+import PostFormStyle from "./styles";
 
 const mentionPlugin = createMentionPlugin({
-  mentionsPrefix: '@',
-  entityMutability: 'IMMUTABLE',
+  mentionsPrefix: "@",
+  entityMutability: "IMMUTABLE",
   supportWhitespace: true,
 });
 
@@ -70,7 +69,7 @@ const plugins = [
 ];
 
 type MediaType = {
-  type: 'image' | 'embed' | 'poll';
+  type: "image" | "embed" | "poll";
   data: any;
 };
 
@@ -84,7 +83,7 @@ const PostForm: React.FC = () => {
   const uploadInputRef = useRef(null);
   const preview = useMemo(
     () =>
-      media && media.type === 'image'
+      media && media.type === "image"
         ? URL.createObjectURL(media.data)
         : undefined,
     [media]
@@ -95,9 +94,9 @@ const PostForm: React.FC = () => {
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
       setEditorState(newState);
-      return 'handled';
+      return "handled";
     }
-    return 'not-handled';
+    return "not-handled";
   }
 
   function handleSubmit() {
@@ -105,11 +104,11 @@ const PostForm: React.FC = () => {
 
     let data = new FormData();
 
-    data.append('content', content);
+    data.append("content", content);
 
-    if (media && media.type === 'image') data.append('file', media.data);
-    if (media && media.type === 'embed') data.append('media', media.data);
-    if (media && media.type === 'poll') data.append('poll', media.data);
+    if (media && media.type === "image") data.append("file", media.data);
+    if (media && media.type === "embed") data.append("media", media.data);
+    if (media && media.type === "poll") data.append("poll", media.data);
 
     dispatch(createPostRequest(data));
     setMedia(null);
@@ -118,28 +117,28 @@ const PostForm: React.FC = () => {
 
   const handleAddImage = (e: any) => {
     setMedia({
-      type: 'image',
+      type: "image",
       data: e.target.files[0],
     });
   };
 
   const handleAddEmbed = () => {
     setMedia({
-      type: 'embed',
-      data: '',
+      type: "embed",
+      data: "",
     });
   };
 
   const handleAddPoll = () => {
     setMedia({
-      type: 'poll',
-      data: ['', ''],
+      type: "poll",
+      data: ["", ""],
     });
   };
 
   const addPollOption = () => {
     if (media && media.data.length < 4) {
-      setMedia({ ...media, data: [...media.data, ''] });
+      setMedia({ ...media, data: [...media.data, ""] });
     }
   };
 
@@ -153,7 +152,7 @@ const PostForm: React.FC = () => {
 
   const handleRemoveMedia = () => {
     setMedia(null); //@ts-ignore
-    document.getElementById('image-input').value = null;
+    document.getElementById("image-input").value = null;
   };
 
   // On search term changed
@@ -173,12 +172,12 @@ const PostForm: React.FC = () => {
 
   // Determine whether placeholder should be displayed (to avoid overlap with lists)
   const blockType = RichUtils.getCurrentBlockType(editorState);
-  const isOl = blockType === 'ordered-list-item';
-  const isUl = blockType === 'unordered-list-item';
+  const isOl = blockType === "ordered-list-item";
+  const isUl = blockType === "unordered-list-item";
   const placeholderIsVisible = !isOl && !isUl;
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: "100%" }}>
       <PostFormStyle>
         <Form onSubmit={handleSubmit}>
           <div className="text-box">
@@ -190,7 +189,7 @@ const PostForm: React.FC = () => {
                 placeholderIsVisible ? (
                   <FormattedMessage id="components.postNewStatus.thinking" />
                 ) : (
-                  ''
+                  ""
                 )
               }
               plugins={plugins}
@@ -222,7 +221,7 @@ const PostForm: React.FC = () => {
             </InlineToolbar>
             {media && (
               <div className="media-preview">
-                {media.type === 'image' && (
+                {media.type === "image" && (
                   <div className="image-box">
                     <IconButton
                       icon={<CloseIcon />} //@ts-ignore
@@ -232,7 +231,7 @@ const PostForm: React.FC = () => {
                     <img src={preview} alt="preview" />
                   </div>
                 )}
-                {media.type === 'poll' && (
+                {media.type === "poll" && (
                   <Card>
                     <div className="poll-box">
                       <ul>
@@ -243,7 +242,7 @@ const PostForm: React.FC = () => {
                           >
                             <FormattedMessage
                               id={`components.postForm.pollOptionNumber${
-                                index >= 2 ? 'Optional' : ''
+                                index >= 2 ? "Optional" : ""
                               }`}
                               values={{ optionNumber: index + 1 }}
                             >
@@ -268,10 +267,10 @@ const PostForm: React.FC = () => {
                       </ul>
                       <div
                         style={{
-                          display: 'flex',
-                          alignItems: 'flex-end',
+                          display: "flex",
+                          alignItems: "flex-end",
                           minWidth: 56,
-                          padding: '16px 8px',
+                          padding: "16px 8px",
                         }}
                       >
                         {media.data.length < 4 && (
@@ -290,7 +289,7 @@ const PostForm: React.FC = () => {
                     />
                   </Card>
                 )}
-                {media.type === 'embed' && (
+                {media.type === "embed" && (
                   <Card>
                     <CardBody>
                       <FormattedMessage id="components.postForm.videoUrl">
@@ -306,7 +305,7 @@ const PostForm: React.FC = () => {
                               name="url"
                               onChange={(e: any) =>
                                 setMedia({
-                                  type: 'embed',
+                                  type: "embed",
                                   data: e.target.value,
                                 })
                               }
@@ -314,7 +313,7 @@ const PostForm: React.FC = () => {
                           </>
                         )}
                       </FormattedMessage>
-                      {media.data !== '' && (
+                      {media.data !== "" && (
                         <ReactPlayer
                           url={media.data}
                           light
@@ -368,7 +367,7 @@ const PostForm: React.FC = () => {
               variant="contained"
               color="secondary"
               size="small"
-              style={{ marginLeft: 'auto' }}
+              style={{ marginLeft: "auto" }}
               disabled={!contentState.hasText()} // @ts-ignore
               onClick={handleSubmit}
             >

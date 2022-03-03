@@ -1,14 +1,8 @@
-import React from 'react';
-import ProjectFAQCard from '../../../../components/projects/ProjectFAQCard';
+import React from "react";
+import ProjectFAQCard from "../../../../components/projects/ProjectFAQCard";
 
 const ProjectFaq = ({ project }: any) => {
-  return (
-    <>
-      {project.faq &&
-        JSON.parse(project.faq).map((question: any) => (
-          <ProjectFAQCard question={question} key={question.id} />
-        ))}
-    </>
-  );
+  console.log(project.faq);
+  return <></>;
 };
 export default ProjectFaq;

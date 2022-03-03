@@ -1,5 +1,5 @@
-import React from 'react';
-import { LinksListContainer } from './styles';
+import React from "react";
+import { LinksListContainer } from "./styles";
 import {
   GrFacebook as FacebookLogo,
   GrTwitter as TwitterLogo,
@@ -7,26 +7,23 @@ import {
   GrYoutube as YoutubeLogo,
   GrMail as EmailLogo,
   GrAnchor as LinkLogo,
-} from 'react-icons/gr';
+} from "react-icons/gr";
 
 const LinksList = ({ links }: any) => {
-  console.log(JSON.parse(links));
-  return null;
-  /*
   const getIcon = (url: string) => {
-    if (url.includes('facebook.com' || 'fb.com')) {
+    if (url.includes("facebook.com" || "fb.com")) {
       return <FacebookLogo />;
     }
-    if (url.includes('twitter.com')) {
+    if (url.includes("twitter.com")) {
       return <TwitterLogo />;
     }
-    if (url.includes('instagram.com')) {
+    if (url.includes("instagram.com")) {
       return <InstagramLogo />;
     }
-    if (url.includes('youtube.com' || 'youtu.be')) {
+    if (url.includes("youtube.com" || "youtu.be")) {
       return <YoutubeLogo />;
     }
-    if (url.includes('@')) {
+    if (url.includes("@")) {
       return <EmailLogo />;
     }
 
@@ -41,14 +38,13 @@ const LinksList = ({ links }: any) => {
             <li key={link.url}>
               {getIcon(link.url)}
               <a href={link.url} target="_blank" rel="noopener noreferrer">
-                {link.url.split('/')[2]}
+                {link.url.split("/")[2]}
               </a>
             </li>
           ))}
       </ul>
     </LinksListContainer>
   );
-  */
 };
 
 export default LinksList;

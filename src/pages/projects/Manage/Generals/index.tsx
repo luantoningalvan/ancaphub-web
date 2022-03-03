@@ -1,26 +1,25 @@
-/* eslint-disable import/no-named-default */
-import React, { useState, useRef, useEffect } from 'react';
-import { Form } from '@unform/web';
-import { Scope, FormHandles } from '@unform/core';
-import { useDispatch } from 'react-redux';
-import { FiDelete } from 'react-icons/fi';
-import { IconButton, Button, Breadcrumbs, Grid } from 'snake-ui';
-import { TextField, Select } from '../../../../components';
-import { PageHeader } from '../styles';
-import { EditAvatarContainer, EditCoverContainer } from './styles';
+import React, { useState, useRef, useEffect } from "react";
+import { Form } from "@unform/web";
+import { Scope, FormHandles } from "@unform/core";
+import { useDispatch } from "react-redux";
+import { FiDelete } from "react-icons/fi";
+import { IconButton, Button, Breadcrumbs, Grid } from "snake-ui";
+import { TextField, Select } from "../../../../components";
+import { PageHeader } from "../styles";
+import { EditAvatarContainer, EditCoverContainer } from "./styles";
 import {
   default as EditAvatar,
   default as EditCover,
-} from '../../../../components/upload/CropImage';
-import defaultProjectAvatar from '../../../../assets/default-project-avatar.png';
+} from "../../../../components/upload/CropImage";
+import defaultProjectAvatar from "../../../../assets/default-project-avatar.png";
 import {
   updateProjectRequest,
   updateProjectAvatarRequest,
   updateProjectCoverRequest,
   removeProjectAvatarRequest,
   removeProjectCoverRequest,
-} from '../../../../redux/actions/projects';
-import projectCategories from '../../../../assets/project-categories';
+} from "../../../../redux/actions/projects";
+import projectCategories from "../../../../assets/project-categories";
 
 interface GeneralProps {
   project: {
@@ -52,7 +51,7 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
     }
   }, [formRef, project]);
 
-  const addSocialLink = () => setLinks([...links, { type: '', url: '' }]);
+  const addSocialLink = () => setLinks([...links, { type: "", url: "" }]);
   const removeSocialLink = (index: number) =>
     setLinks(links.filter((_, i) => index !== i));
 
@@ -83,13 +82,13 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
           <Grid item xs={12}>
             <PageHeader>
               <div className="page-title">
-                <Breadcrumbs list={[{ title: 'Gerais' }]} />
+                <Breadcrumbs list={[{ title: "Gerais" }]} />
                 <h2>Gerais</h2>
               </div>
 
               <Button
                 color="secondary"
-                style={{ float: 'right', marginTop: 16 }}
+                style={{ float: "right", marginTop: 16 }}
                 type="submit"
               >
                 Salvar
@@ -101,7 +100,7 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
               <img
                 src={
                   project.cover_url ||
-                  'https://tokystorage.s3.amazonaws.com/images/default-cover.png'
+                  "https://tokystorage.s3.amazonaws.com/images/default-cover.png"
                 }
                 alt="Profile cover"
               />
@@ -120,7 +119,7 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
                       onClick={() =>
                         dispatch(removeProjectCoverRequest(project.id))
                       }
-                      style={{ background: '#d62000' }}
+                      style={{ background: "#d62000" }}
                       type="button"
                     >
                       Remover Capa
@@ -160,7 +159,7 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
                         dispatch(removeProjectAvatarRequest(project.id))
                       }
                       type="button"
-                      style={{ background: '#d62000' }}
+                      style={{ background: "#d62000" }}
                     >
                       Remover Avatar
                     </Button>
@@ -217,8 +216,8 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
                     >
                       <li
                         style={{
-                          display: 'flex',
-                          alignItems: 'center',
+                          display: "flex",
+                          alignItems: "center",
                           marginBottom: 8,
                         }}
                       >
@@ -227,13 +226,13 @@ const Generals: React.FC<GeneralProps> = ({ project }) => {
                           placeholder="Rede"
                           name="type"
                           options={[
-                            { label: 'Facebook', value: 'facebook' },
-                            { label: 'Twitter', value: 'twitter' },
-                            { label: 'Instagram', value: 'instagram' },
-                            { label: 'YouTube', value: 'youtube' },
-                            { label: 'Site', value: 'site' },
+                            { label: "Facebook", value: "facebook" },
+                            { label: "Twitter", value: "twitter" },
+                            { label: "Instagram", value: "instagram" },
+                            { label: "YouTube", value: "youtube" },
+                            { label: "Site", value: "site" },
                           ]}
-                          style={{ margin: '0px 8px' }}
+                          style={{ margin: "0px 8px" }}
                         />
                         <IconButton
                           icon={<FiDelete />}
