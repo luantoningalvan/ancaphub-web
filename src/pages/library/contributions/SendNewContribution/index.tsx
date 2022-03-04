@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext, createContext } from "react";
+import React, { useRef, useState, createContext } from "react";
 import { FormattedMessage } from "react-intl";
 import {
   FiPlayCircle as VideoIcon,
@@ -10,11 +10,10 @@ import { Button, Container, Grid, Paper, Hero, Card, CardBody } from "snake-ui";
 import { Contribute } from "./styles";
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { Dropzone } from "../../../../components";
-import CreateAuthor from "../../../../components/authors/CreateAuthor";
 import BookForm from "./forms/BookForm";
 import ArticleForm from "./forms/ArticleForm";
 import VideoForm from "./forms/VideoForm";
@@ -38,7 +37,7 @@ export default () => {
 
   const formRef = useRef<FormHandles>(null);
 
-  const { goBack, push } = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleForm = (formAttr: any) => {
@@ -81,14 +80,14 @@ export default () => {
           : data.content
       );
 
-      dispatch(createItemRequest(formData, push("/library")));
+      dispatch(createItemRequest(formData, navigate("/library")));
     } catch (err) {
       console.log(err);
 
       const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message;
+          validationErrors[error.path as string] = error.message;
         });
         formRef?.current?.setErrors(validationErrors);
       }
@@ -103,7 +102,11 @@ export default () => {
           description="Conheça as regras e o processo de aprovação antes de enviar sua contribuição"
           actions={
             <>
-              <Button color="neutral" onClick={() => goBack()} type="button">
+              <Button
+                color="neutral"
+                onClick={() => navigate(-1)}
+                type="button"
+              >
                 Cancelar
               </Button>
               <Button disabled={step === 1} style={{ marginLeft: 8 }}>
@@ -201,7 +204,7 @@ export default () => {
                           const extension = file.name.split(".").pop();
                           const size = file.size;
                           const preview = URL.createObjectURL(file);
-                          newFiles.push({
+                          newFiles.navigate({
                             fileName,
                             extension,
                             size,

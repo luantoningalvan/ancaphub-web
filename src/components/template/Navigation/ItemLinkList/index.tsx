@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import React from "react";
 
 import {
   FiHome as NewsFeedIcon,
@@ -7,20 +6,18 @@ import {
   FiFlag as ProjectsIcon,
   FiCalendar as EventsIcon,
   FiUsers as GroupsIcon,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import { FormattedMessage } from 'react-intl';
-import { ItemLinkListContainer } from './styles';
+import { FormattedMessage } from "react-intl";
+import { ItemLinkListContainer } from "./styles";
 
-import ItemLink from '../ItemLink';
+import ItemLink from "../ItemLink";
 
 const ItemLinkList: React.FC = () => {
-  const { url } = useRouteMatch();
-
   return (
     <ItemLinkListContainer>
       <ItemLink
-        current={url === '/home'}
+        url={"/home"}
         icon={<NewsFeedIcon />}
         label={
           <FormattedMessage
@@ -31,27 +28,27 @@ const ItemLinkList: React.FC = () => {
         link="/home"
       />
       <ItemLink
-        current={url.includes('/library')}
+        url={"/library"}
         icon={<LibraryIcon />}
         label="Biblioteca"
         link="/library"
       />
       <ItemLink
-        current={url.includes('/projects')}
+        url={"/projects"}
         icon={<ProjectsIcon />}
         label="Projetos"
         link="/projects"
       />
 
       <ItemLink
-        current={url.includes('/events')}
+        url={"/events"}
         icon={<EventsIcon />}
         label="Eventos"
         link="/events"
       />
 
       <ItemLink
-        current={url.includes('/groups')}
+        url={"/groups"}
         icon={<GroupsIcon />}
         label="Grupos"
         link="/groups"

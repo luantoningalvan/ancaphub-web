@@ -1,12 +1,12 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import { useParams } from "react-router-dom";
 
-import About from './About';
-import Donations from './Donations';
-import FAQ from './FAQ';
+import About from "./About";
+import Donations from "./Donations";
+import FAQ from "./FAQ";
 
 const Sections = ({ project }: any) => {
-  const { subpage }: { subpage: string } = useParams();
+  const { subpage } = useParams<{ subpage: string }>();
 
   const subpageMap: { [key: string]: React.ReactNode } = {
     about: <About project={project} />,
@@ -14,7 +14,7 @@ const Sections = ({ project }: any) => {
     faq: <FAQ project={project} />,
   };
 
-  return subpageMap[subpage];
+  return subpageMap[subpage as string];
 };
 
 export default Sections;

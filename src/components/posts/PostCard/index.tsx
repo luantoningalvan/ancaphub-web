@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   FormattedRelativeTime,
   FormattedMessage,
   FormattedPlural,
-} from 'react-intl';
-import { parseISO, getTime, differenceInSeconds } from 'date-fns';
-import { Editor, EditorState, convertFromRaw } from 'draft-js';
-import { PostContent, PostContentWrapper, PostContainer } from './styles';
+} from "react-intl";
+import { parseISO, getTime, differenceInSeconds } from "date-fns";
+import { Editor, EditorState, convertFromRaw } from "draft-js";
+import { PostContent, PostContentWrapper, PostContainer } from "./styles";
 // @ts-ignore
-import createLinkifyPlugin from 'draft-js-linkify-plugin';
+import createLinkifyPlugin from "draft-js-linkify-plugin";
 // @ts-ignore
-import createHashtagPlugin from 'draft-js-hashtag-plugin';
+import createHashtagPlugin from "draft-js-hashtag-plugin";
 
-import 'draft-js-hashtag-plugin/lib/plugin.css';
+import "draft-js-hashtag-plugin/lib/plugin.css";
 
-import ReactPlayer from 'react-player';
+import ReactPlayer from "react-player";
 
 import {
   FiMoreVertical as MdMore,
@@ -23,27 +23,27 @@ import {
   FiMessageSquare as CommentIcon,
   FiTrash as DeleteIcon,
   FiShare2 as ShareIcon,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import { useDispatch } from 'react-redux';
-import UserName from '../../users/UserName';
-import basicTextStylePlugin from '../../editor/plugins/basicTextStylePlugin';
-import linkPluginOptions from '../../editor/plugins/addLinkPlugin';
-import { getAllDecorators } from '../../editor/utils/decorators';
-import CommentBox from '../../comments/CommentBox';
+import { useDispatch } from "react-redux";
+import UserName from "../../users/UserName";
+import basicTextStylePlugin from "../../editor/plugins/basicTextStylePlugin";
+import linkPluginOptions from "../../editor/plugins/addLinkPlugin";
+import { getAllDecorators } from "../../editor/utils/decorators";
+import CommentBox from "../../comments/CommentBox";
 
-import { ImageBox, ConfirmationDialog } from '../..';
-import { IconButton, Menu } from 'snake-ui';
+import { ImageBox, ConfirmationDialog } from "../..";
+import { IconButton, Menu } from "snake-ui";
 
-import defaultProfilePicture from '../../../assets/default-profile-picture.jpg';
-import LikeBox from '../ShowPostLikes';
-import PostPoll from '../PostPoll';
+import defaultProfilePicture from "../../../assets/default-profile-picture.jpg";
+import LikeBox from "../ShowPostLikes";
+import PostPoll from "../PostPoll";
 import {
   likePostRequest,
   deletePostRequest,
   sharePostRequest,
   unlikePostRequest,
-} from '../../../redux/actions/posts';
+} from "../../../redux/actions/posts";
 
 interface PostCardProps {
   data: {
@@ -135,10 +135,10 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
       {data.hasShared && (
         <span
           style={{
-            color: '#2699bd',
-            display: 'flex',
-            alignItems: 'center',
-            margin: '8px 0px',
+            color: "#2699bd",
+            display: "flex",
+            alignItems: "center",
+            margin: "8px 0px",
           }}
         >
           <ShareIcon style={{ marginRight: 8 }} />
@@ -236,12 +236,12 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
                   value={data.favorite_count}
                   one={
                     <FormattedMessage id="common.likeNoun">
-                      {(txt: string) => <>{txt.toLowerCase()}</>}
+                      {(txt) => <>{txt}</>}
                     </FormattedMessage>
                   }
                   other={
                     <FormattedMessage id="common.likePlural">
-                      {(txt: string) => <>{txt.toLowerCase()}</>}
+                      {(txt) => <>{txt}</>}
                     </FormattedMessage>
                   }
                 />
@@ -252,12 +252,12 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
                   value={data.comment_count}
                   one={
                     <FormattedMessage id="common.comment">
-                      {(txt: string) => <>{txt.toLowerCase()}</>}
+                      {(txt) => <>{txt}</>}
                     </FormattedMessage>
                   }
                   other={
                     <FormattedMessage id="common.comments">
-                      {(txt: string) => <>{txt.toLowerCase()}</>}
+                      {(txt) => <>{txt}</>}
                     </FormattedMessage>
                   }
                 />
@@ -280,7 +280,7 @@ const PostCard: React.FC<PostCardProps> = ({ data }) => {
                   ? handleUnikePost(data.id)
                   : handleLikePost(data.id)
               }
-              className={data.hasLiked ? 'pressed' : ''}
+              className={data.hasLiked ? "pressed" : ""}
             >
               <LikeIcon />
               <span>

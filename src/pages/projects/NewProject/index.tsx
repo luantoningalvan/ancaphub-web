@@ -1,22 +1,22 @@
-import React, { useCallback } from 'react';
-import { Form } from '@unform/web';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React, { useCallback } from "react";
+import { Form } from "@unform/web";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-import { createProjectRequest } from '../../../redux/actions/projects';
-import { TextField, Select } from '../../../components';
-import { Container, Paper, Hero, Button, Grid } from 'snake-ui';
-import projectCategories from '../../../assets/project-categories';
+import { createProjectRequest } from "../../../redux/actions/projects";
+import { TextField, Select } from "../../../components";
+import { Container, Paper, Hero, Button, Grid } from "snake-ui";
+import projectCategories from "../../../assets/project-categories";
 
 const NewProject = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = useCallback(
     (data) => {
-      dispatch(createProjectRequest({ data, history }));
+      dispatch(createProjectRequest({ data, navigate }));
     },
-    [dispatch, history]
+    [dispatch, navigate]
   );
 
   return (
@@ -34,18 +34,18 @@ const NewProject = () => {
       />
       <div
         style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           maxWidth: 600,
-          width: '100%',
-          margin: '16px auto',
+          width: "100%",
+          margin: "16px auto",
         }}
       >
         <Paper
           padding
-          style={{ width: '100%', marginTop: 32, overflow: 'inherit' }}
+          style={{ width: "100%", marginTop: 32, overflow: "inherit" }}
         >
           <Form onSubmit={handleSubmit}>
             <Grid container spacing={2}>

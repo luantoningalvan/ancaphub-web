@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import UserAvatar from '../../users/UserAvatar';
-import { addCommentRequest } from '../../../redux/actions/comments';
-import { CommentFormContainer, CommentInput } from './styles';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FormattedMessage } from "react-intl";
+import UserAvatar from "../../users/UserAvatar";
+import { addCommentRequest } from "../../../redux/actions/comments";
+import { CommentFormContainer, CommentInput } from "./styles";
 
 interface CommentFormProps {
   post: any;
 }
 
 const CommentForm: React.FC<CommentFormProps> = ({ post }) => {
-  const [commentData, setCommentData] = useState({ content: '' });
+  const [commentData, setCommentData] = useState({ content: "" });
   const authUser = useSelector((state: any) => state.auth.user);
 
   const dispatch = useDispatch();
@@ -20,10 +20,10 @@ const CommentForm: React.FC<CommentFormProps> = ({ post }) => {
   };
 
   const handleKeyPress = (e: any) => {
-    if (e.key === 'Enter') {
-      if (commentData.content !== '') {
+    if (e.key === "Enter") {
+      if (commentData.content !== "") {
         dispatch(addCommentRequest(commentData, post));
-        setCommentData({ content: '' });
+        setCommentData({ content: "" });
       }
     }
   };
@@ -32,10 +32,10 @@ const CommentForm: React.FC<CommentFormProps> = ({ post }) => {
     <CommentFormContainer>
       <UserAvatar user={authUser} style={{ marginRight: 10 }} />
       <FormattedMessage id="components.commentBox.writeAComment">
-        {(txt: string) => (
+        {(txt) => (
           <CommentInput
             type="text"
-            placeholder={txt}
+            placeholder={String(txt)}
             color="secondary"
             onKeyPress={handleKeyPress}
             value={commentData.content}

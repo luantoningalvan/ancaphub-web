@@ -1,13 +1,13 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from "react";
 
-import ThemeProvider from '../../components/template/Provider';
-import { Button, Card, Container, Grid } from 'snake-ui';
-import { FiCalendar } from 'react-icons/fi';
-import styled from 'styled-components';
-import TextField from '../../components/form/TextField';
-import { FormattedMessage } from 'react-intl';
-import { Form } from '@unform/web';
-import Header from 'components/template/Header';
+import ThemeProvider from "../../components/template/Provider";
+import { Button, Card, Container, Grid } from "snake-ui";
+import { FiCalendar } from "react-icons/fi";
+import styled from "styled-components";
+import TextField from "../../components/form/TextField";
+import { FormattedMessage } from "react-intl";
+import { Form } from "@unform/web";
+import Header from "components/template/Header";
 
 const EmailForm = styled(Card)`
   padding: 24px;
@@ -30,7 +30,7 @@ const Home = () => {
           spacing={4}
           justifyContent="center"
           alignItems="center"
-          style={{ margin: '32px 0' }}
+          style={{ margin: "32px 0" }}
         >
           <Grid item xs={12} md={4} lg={4}>
             <FiCalendar size={250} />
@@ -63,7 +63,7 @@ const Home = () => {
                         {(message) => (
                           <TextField
                             name="FULLNAME"
-                            placeholder={message as string}
+                            placeholder={String(message)}
                             required
                           />
                         )}
@@ -74,7 +74,7 @@ const Home = () => {
                         {(message) => (
                           <TextField
                             name="EMAIL"
-                            placeholder={message as string}
+                            placeholder={String(message)}
                             type="email"
                             required
                           />
@@ -85,9 +85,9 @@ const Home = () => {
                     <Grid item xs={12}>
                       <div
                         style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
                         }}
                       >
                         <span>

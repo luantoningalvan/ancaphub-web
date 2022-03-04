@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { FiSettings } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,10 +29,10 @@ const ProjectDonations = lazy(() => import("./Donations"));
 const SingleProject = () => {
   const dispatch = useDispatch();
   const { loading, project } = useSelector((state: any) => state.projects);
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
-  const { page: projectPage, projectId }: { projectId: string; page: string } =
-    useParams();
+  const { page: projectPage, projectId } =
+    useParams<{ projectId: string; page: string }>();
 
   const pages: { [key: string]: React.ReactNode } = {
     undefined: ProjectFeed,
@@ -45,7 +45,7 @@ const SingleProject = () => {
     dispatch(getSingleProjectRequest(projectId));
   }, [dispatch, projectId]);
 
-  const Template: any = pages[projectPage];
+  const Template: any = pages[projectPage as string];
 
   return (
     <LoadContent loading={loading}>
@@ -117,22 +117,22 @@ const SingleProject = () => {
                 <Tab
                   current={projectPage === undefined} //@ts-ignore
                   label={<FormattedMessage id="projects.news" />}
-                  onClick={() => push(`/projects/${projectId}`)}
+                  onClick={() => navigate(`/projects/${projectId}`)}
                 />
                 <Tab
                   current={projectPage === "faq"} //@ts-ignore
                   label={<FormattedMessage id="projects.faq" />}
-                  onClick={() => push(`/projects/${projectId}/faq`)}
+                  onClick={() => navigate(`/projects/${projectId}/faq`)}
                 />
                 <Tab
                   current={projectPage === "about"} //@ts-ignore
                   label={<FormattedMessage id="projects.about" />}
-                  onClick={() => push(`/projects/${projectId}/about`)}
+                  onClick={() => navigate(`/projects/${projectId}/about`)}
                 />
                 <Tab
                   current={projectPage === "donate"} //@ts-ignore
                   label={<FormattedMessage id="projects.donate" />}
-                  onClick={() => push(`/projects/${projectId}/donate`)}
+                  onClick={() => navigate(`/projects/${projectId}/donate`)}
                 />
               </Tabs>
             </Paper>

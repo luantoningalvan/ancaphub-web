@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
+import React, { useRef } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { FormHandles } from "@unform/core";
+import { Form } from "@unform/web";
 import {
   FiEdit as EditIcon,
   FiUser,
@@ -12,10 +12,10 @@ import {
   FiCalendar,
   FiMapPin,
   FiX as CloseIcon,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import { updateProfileInfoRequest } from '../../../redux/actions/users';
-import { TextField } from '../..';
+import { updateProfileInfoRequest } from "../../../redux/actions/users";
+import { TextField } from "../..";
 import {
   IconButton,
   Button,
@@ -24,7 +24,7 @@ import {
   CardBody,
   CardHeader,
   Grid,
-} from 'snake-ui';
+} from "snake-ui";
 
 const EditProfile = () => {
   const data = useSelector((state: any) => state.profile.user);
@@ -43,28 +43,28 @@ const EditProfile = () => {
         name: Yup.string()
           .min(
             3,
-            formatMessage({ id: 'account.settings.validation.nameShort' })
+            formatMessage({ id: "account.settings.validation.nameShort" })
           )
           .max(
             30,
-            formatMessage({ id: 'account.settings.validation.nameLong' })
+            formatMessage({ id: "account.settings.validation.nameLong" })
           )
           .required(
-            formatMessage({ id: 'account.settings.validation.nameRequired' })
+            formatMessage({ id: "account.settings.validation.nameRequired" })
           ),
         bio: Yup.string().max(
           160,
-          formatMessage({ id: 'account.settings.validation.maxBioLength' })
+          formatMessage({ id: "account.settings.validation.maxBioLength" })
         ),
         url: Yup.string().url(
-          formatMessage({ id: 'account.settings.validation.invalidURL' })
+          formatMessage({ id: "account.settings.validation.invalidURL" })
         ),
         birthday: Yup.date()
           .notRequired()
           .max(
             new Date(),
             formatMessage({
-              id: 'account.settings.validation.invalidBirthDate',
+              id: "account.settings.validation.invalidBirthDate",
             })
           ),
       });
@@ -77,7 +77,7 @@ const EditProfile = () => {
       const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message;
+          validationErrors[error.path as string] = error.message;
         });
         editFormRef?.current?.setErrors(validationErrors);
       }
@@ -96,14 +96,14 @@ const EditProfile = () => {
       <Modal
         onClose={handleClick}
         open={open}
-        style={{ width: '100%', maxWidth: 420 }}
+        style={{ width: "100%", maxWidth: 420 }}
       >
         <Form
           initialData={{
             name: data.name,
-            bio: data.bio || '',
-            location: data.location || '',
-            url: data.url || '',
+            bio: data.bio || "",
+            location: data.location || "",
+            url: data.url || "",
             birthday:
               data.birthday && data.birthday !== null
                 ? data.birthday.substring(0, 10)
@@ -122,7 +122,7 @@ const EditProfile = () => {
                 },
               ]}
               title={
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <IconButton icon={<CloseIcon />} onClick={handleClick} />
                   <span style={{ marginLeft: 8 }}>
                     <FormattedMessage id="components.editProfile.heading" />

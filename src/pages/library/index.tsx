@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { generate } from "shortid";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmpty } from "lodash";
 import LibraryCard from "../../components/library/LibraryCard";
@@ -50,8 +50,8 @@ const Library = () => {
   );
 
   const dispatch = useDispatch();
-  const { type: typeParam }: { type: string } = useParams();
-  const { push } = useHistory();
+  const { type: typeParam } = useParams<{ type: string }>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(loadCategoriesRequest());
@@ -59,7 +59,7 @@ const Library = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setType(() => typeParam);
+    setType(typeParam as string);
   }, [typeParam]);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const Library = () => {
         title={<FormattedMessage id="common.library" />}
         description={<FormattedMessage id="home.features.0" />}
         actions={
-          <Button onClick={() => push("/library/contribute")}>
+          <Button onClick={() => navigate("/library/contribute")}>
             <FiPlusCircle />
             Contribuir
           </Button>
@@ -137,7 +137,7 @@ const Library = () => {
                 ))}
               </LoadContent>
             </LibrarySidebarMenu>
-            <CardFooter label="Ver Todos" action={() => push("/authors")} />
+            <CardFooter label="Ver Todos" action={() => navigate("/authors")} />
           </Card>
         </LibrarySidebarContainer>
         <LibraryContentContainer>
@@ -146,22 +146,22 @@ const Library = () => {
               <Tab
                 label={<FormattedMessage id="common.all" />}
                 current={typeParam === undefined}
-                onClick={() => push("/library")}
+                onClick={() => navigate("/library")}
               />
               <Tab
                 label={<FormattedMessage id="library.articles" />}
                 current={typeParam === "articles"}
-                onClick={() => push("/library/articles")}
+                onClick={() => navigate("/library/articles")}
               />
               <Tab
                 label={<FormattedMessage id="library.books" />}
                 current={typeParam === "books"}
-                onClick={() => push("/library/books")}
+                onClick={() => navigate("/library/books")}
               />
               <Tab
                 label={<FormattedMessage id="library.videos" />}
                 current={typeParam === "videos"}
-                onClick={() => push("/library/videos")}
+                onClick={() => navigate("/library/videos")}
               />
             </Tabs>
           </Paper>

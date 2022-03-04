@@ -1,31 +1,31 @@
-import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import React from "react";
+import { FormattedMessage } from "react-intl";
 
 import {
   FiUser as AccountIcon,
   FiBell as NotificationsIcon,
   FiLock as PrivacyIcon,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import { useHistory, useLocation } from 'react-router-dom';
-import { Container, Paper, Hero, List, ListItem } from 'snake-ui';
+import { useNavigate, useLocation } from "react-router-dom";
+import { Container, Paper, Hero, List, ListItem } from "snake-ui";
 import {
   SettingsContainer,
   SettingsSidebarContainer,
   SettingsContentContainer,
-} from './styles';
+} from "./styles";
 
-import Notifications from './Notifications';
-import Privacy from './Privacy';
-import AccessAndSecurity from './AccessAndSecurity';
+import Notifications from "./Notifications";
+import Privacy from "./Privacy";
+import AccessAndSecurity from "./AccessAndSecurity";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 const Settings = () => {
-  const query: string | null = useQuery().get('tab');
-  const { push } = useHistory();
+  const query: string | null = useQuery().get("tab");
+  const navigate = useNavigate();
   const settingsMap: { [key: string]: any } = {
     notifications: <Notifications />,
     privacy: <Privacy />,
@@ -60,24 +60,24 @@ const Settings = () => {
             <List>
               <ListItem
                 current={
-                  query === 'access_and_security' ||
+                  query === "access_and_security" ||
                   query === null ||
                   settingsMap[query] === undefined
                 }
                 label={<FormattedMessage id="common.account" />}
-                onClick={() => push('/settings?tab=access_and_security')}
+                onClick={() => navigate("/settings?tab=access_and_security")}
                 icon={<AccountIcon />}
               />
               <ListItem
-                current={query === 'notifications'}
+                current={query === "notifications"}
                 label={<FormattedMessage id="common.notifications" />}
-                onClick={() => push('/settings?tab=notifications')}
+                onClick={() => navigate("/settings?tab=notifications")}
                 icon={<NotificationsIcon />}
               />
               <ListItem
-                current={query === 'privacy'}
+                current={query === "privacy"}
                 label={<FormattedMessage id="common.privacy" />}
-                onClick={() => push('/settings?tab=privacy')}
+                onClick={() => navigate("/settings?tab=privacy")}
                 icon={<PrivacyIcon />}
               />
             </List>

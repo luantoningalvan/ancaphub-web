@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 import {
   FiGrid,
@@ -6,36 +6,33 @@ import {
   // FiUsers,
   FiChevronLeft,
   FiEdit,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import { useParams, Link, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { LoadContent } from '../../../components';
-import { Container, Paper, List, ListItem } from 'snake-ui';
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { LoadContent } from "../../../components";
+import { Container, Paper, List, ListItem } from "snake-ui";
 import {
   SettingsContainer,
   SettingsSidebarContainer,
   SettingsContentContainer,
-} from './styles';
-import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
+} from "./styles";
+import defaultProjectAvatar from "../../../assets/default-project-avatar.png";
 
-import { getSingleProjectRequest } from '../../../redux/actions/projects';
+import { getSingleProjectRequest } from "../../../redux/actions/projects";
 
-import Generals from './Generals';
-import Posts from './Posts';
-import Sections from './Sections';
-import Roles from './Roles';
+import Generals from "./Generals";
+import Posts from "./Posts";
+import Sections from "./Sections";
+import Roles from "./Roles";
 
 const Settings = () => {
-  const {
-    projectId,
-    page,
-    subpage,
-  }: { projectId: string; page: string; subpage: string } = useParams();
+  const { projectId, page, subpage } =
+    useParams<{ projectId: string; page: string; subpage: string }>();
   const BASE_URL = `/projects/${projectId}/manage`;
 
   const dispatch = useDispatch();
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   const { project, loading } = useSelector((state: any) => state.projects);
 
@@ -50,7 +47,7 @@ const Settings = () => {
     dispatch(getSingleProjectRequest(projectId));
   }, [dispatch, projectId]);
 
-  const Template: any = settingsMap[page];
+  const Template: any = settingsMap[page as string];
 
   return (
     <Container>
@@ -69,39 +66,39 @@ const Settings = () => {
               <List>
                 <ListItem
                   current={
-                    page === 'generals' ||
+                    page === "generals" ||
                     page === null ||
-                    settingsMap[page] === undefined
+                    settingsMap[page as string] === undefined
                   }
                   label="Gerais"
-                  onClick={() => push(BASE_URL)}
+                  onClick={() => navigate(BASE_URL)}
                   icon={<FiSliders />}
                 />
                 <ListItem
-                  current={page === 'posts'}
+                  current={page === "posts"}
                   label="Publicaçoes"
-                  onClick={() => push(`${BASE_URL}/posts`)}
+                  onClick={() => navigate(`${BASE_URL}/posts`)}
                   icon={<FiEdit />}
                 />
                 <ListItem
-                  current={page === 'sections'}
+                  current={page === "sections"}
                   label="Seções"
                   icon={<FiGrid />}
                   options={[
                     {
-                      label: 'Sobre',
-                      onClick: () => push(`${BASE_URL}/sections/about`),
-                      current: page === 'sections' && subpage === 'about',
+                      label: "Sobre",
+                      onClick: () => navigate(`${BASE_URL}/sections/about`),
+                      current: page === "sections" && subpage === "about",
                     },
                     {
-                      label: 'Doações',
-                      onClick: () => push(`${BASE_URL}/sections/donations`),
-                      current: page === 'sections' && subpage === 'donations',
+                      label: "Doações",
+                      onClick: () => navigate(`${BASE_URL}/sections/donations`),
+                      current: page === "sections" && subpage === "donations",
                     },
                     {
-                      label: 'FAQ',
-                      onClick: () => push(`${BASE_URL}/sections/faq`),
-                      current: page === 'sections' && subpage === 'faq',
+                      label: "FAQ",
+                      onClick: () => navigate(`${BASE_URL}/sections/faq`),
+                      current: page === "sections" && subpage === "faq",
                     },
                   ]}
                 />

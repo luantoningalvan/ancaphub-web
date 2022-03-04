@@ -1,21 +1,19 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
-import { convertFromRaw, Editor, EditorState } from 'draft-js';
-import { FiCalendar as CalendarIcon } from 'react-icons/fi';
-import { FormattedDate } from 'react-intl';
-import { parseISO, addDays } from 'date-fns';
-import { LoadContent } from '../../../components';
-import { getSingleProjectPostRequest } from '../../../redux/actions/projects';
-import defaultProjectAvatar from '../../../assets/default-project-avatar.png';
-import { PostContainer } from './styles';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import { convertFromRaw, Editor, EditorState } from "draft-js";
+import { FiCalendar as CalendarIcon } from "react-icons/fi";
+import { FormattedDate } from "react-intl";
+import { parseISO, addDays } from "date-fns";
+import { LoadContent } from "../../../components";
+import { getSingleProjectPostRequest } from "../../../redux/actions/projects";
+import defaultProjectAvatar from "../../../assets/default-project-avatar.png";
+import { PostContainer } from "./styles";
 
 const ProjectPost = () => {
   const dispatch = useDispatch();
-  const {
-    projectId,
-    postId,
-  }: { projectId: string; postId: string } = useParams();
+  const { projectId, postId } =
+    useParams<{ projectId: string; postId: string }>();
   const { post, loadingPosts } = useSelector((state: any) => state.projects);
 
   useEffect(() => {

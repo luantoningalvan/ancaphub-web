@@ -1,26 +1,26 @@
 /* eslint-disable no-shadow */
-import React, { useState } from 'react';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import { FormattedMessage } from 'react-intl';
-import { FiSearch as SearchIcon } from 'react-icons/fi';
-import { uniqueId } from 'lodash';
-import { Button, Card, CardHeader, CardBody, Grid } from 'snake-ui';
+import React, { useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { FormattedMessage } from "react-intl";
+import { FiSearch as SearchIcon } from "react-icons/fi";
+import { uniqueId } from "lodash";
+import { Button, Card, CardHeader, CardBody, Grid } from "snake-ui";
 
-import MiniLibraryCard from '../../../../components/library/MiniLibraryCard';
-import MiniUserCard from '../../../../components/users/MiniUserCard';
-import { Sidebar, Toolbar } from './styles';
+import MiniLibraryCard from "../../../../components/library/MiniLibraryCard";
+import MiniUserCard from "../../../../components/users/MiniUserCard";
+import { Sidebar, Toolbar } from "./styles";
 
 const columnsFromBackend = {
   [uniqueId()]: {
-    name: 'A serem discutidos',
+    name: "A serem discutidos",
     items: [],
   },
   [uniqueId()]: {
-    name: 'Discutindo',
+    name: "Discutindo",
     items: [],
   },
   [uniqueId()]: {
-    name: 'Discutidos',
+    name: "Discutidos",
     items: [],
   },
 };
@@ -30,14 +30,14 @@ const masterItems = [
     id: uniqueId(),
     content: (
       <MiniLibraryCard
-        item={{ title: 'Teste', author: 'Tofas', cover: null }}
+        item={{ title: "Teste", author: "Tofas", cover: null }}
       />
     ),
   },
   {
     id: uniqueId(),
     content: (
-      <MiniUserCard user={{ name: 'Luan', username: 'luan', avatar: '' }} />
+      <MiniUserCard user={{ name: "Luan", username: "luan", avatar: "" }} />
     ),
   },
 ];
@@ -48,9 +48,9 @@ const onDragEnd = (result: any, columns: any, setColumns: any) => {
 
   if (
     source.droppableId !== destination.droppableId &&
-    destination.droppableId !== 'master'
+    destination.droppableId !== "master"
   ) {
-    if (source.droppableId === 'master') {
+    if (source.droppableId === "master") {
       const sourceColumn = masterItems;
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...masterItems];
@@ -116,7 +116,7 @@ const GroupBoard = () => {
             <Sidebar>
               <div className="search">
                 <FormattedMessage id="groups.board.searchComponent">
-                  {(msg: string) => <input type="text" placeholder={msg} />}
+                  {(msg) => <input type="text" placeholder={String(msg)} />}
                 </FormattedMessage>
                 <SearchIcon />
               </div>
@@ -144,15 +144,15 @@ const GroupBoard = () => {
                               {...provided.draggableProps}
                               {...provided.dragHandleProps}
                               style={{
-                                userSelect: 'none',
+                                userSelect: "none",
                                 padding: 8,
-                                margin: '0 0 8px 0',
-                                minHeight: '50px',
+                                margin: "0 0 8px 0",
+                                minHeight: "50px",
                                 borderRadius: 4,
                                 backgroundColor: snapshot.isDragging
-                                  ? 'rgba(0,0,0,0.6)'
-                                  : 'rgba(0,0,0,0.2)',
-                                color: 'white',
+                                  ? "rgba(0,0,0,0.6)"
+                                  : "rgba(0,0,0,0.2)",
+                                color: "white",
                                 ...provided.draggableProps.style,
                               }}
                             >
@@ -175,19 +175,19 @@ const GroupBoard = () => {
 
             <div
               style={{
-                display: 'flex',
-                width: '100%',
-                height: 'calc(100% - 50px)',
+                display: "flex",
+                width: "100%",
+                height: "calc(100% - 50px)",
                 paddingBottom: 16,
-                overflowX: 'scroll',
+                overflowX: "scroll",
               }}
             >
               {Object.entries(columns).map(([columnId, column]) => (
                 <div
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
                     marginRight: 16,
                   }}
                   key={columnId}
@@ -219,15 +219,15 @@ const GroupBoard = () => {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                     style={{
-                                      userSelect: 'none',
+                                      userSelect: "none",
                                       padding: 8,
-                                      margin: '0 0 8px 0',
-                                      minHeight: '50px',
+                                      margin: "0 0 8px 0",
+                                      minHeight: "50px",
                                       borderRadius: 4,
                                       backgroundColor: snapshot.isDragging
-                                        ? 'rgba(0,0,0,0.6)'
-                                        : 'rgba(0,0,0,0.2)',
-                                      color: 'white',
+                                        ? "rgba(0,0,0,0.6)"
+                                        : "rgba(0,0,0,0.2)",
+                                      color: "white",
                                       ...provided.draggableProps.style,
                                     }}
                                   >

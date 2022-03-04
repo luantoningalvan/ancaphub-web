@@ -1,35 +1,35 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState } from "react";
 import {
   FiSearch as SearchIcon,
   FiArrowLeft as BackIcon,
   FiCrosshair as LocateIcon,
-} from 'react-icons/fi';
-import { FormattedMessage } from 'react-intl';
-import { Link, useHistory } from 'react-router-dom';
-import clsx from 'clsx';
-import { IconButton } from 'snake-ui';
-import { SearchContainer } from './styles';
+} from "react-icons/fi";
+import { FormattedMessage } from "react-intl";
+import { Link, useNavigate } from "react-router-dom";
+import clsx from "clsx";
+import { IconButton } from "snake-ui";
+import { SearchContainer } from "./styles";
 
 const Search = () => {
-  const [term, setTerm] = useState('');
+  const [term, setTerm] = useState("");
   const [collapsed, setCollapsed] = useState(true);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const search = () => {
-    if (term !== '') {
-      history.push(`/search?term=${term}&type=all`);
+    if (term !== "") {
+      navigate(`/search?term=${term}&type=all`);
     }
   };
 
   const handleKeyPress = (e: any) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       search();
     }
   };
 
   return (
     <SearchContainer>
-      <div className={clsx('mobile-search', !collapsed && 'not-collapsed')}>
+      <div className={clsx("mobile-search", !collapsed && "not-collapsed")}>
         {collapsed ? (
           <IconButton
             icon={<SearchIcon />} // @ts-ignore

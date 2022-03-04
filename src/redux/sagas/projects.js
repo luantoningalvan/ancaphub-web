@@ -1,8 +1,8 @@
-import { takeLatest, call, fork, put } from 'redux-saga/effects';
+import { takeLatest, call, fork, put } from "redux-saga/effects";
 
-import * as actions from '../actions/projects';
-import * as api from '../../api/projects';
-import { addAlert } from '../actions/alerts';
+import * as actions from "../actions/projects";
+import * as api from "../../api/projects";
+import { addAlert } from "../actions/alerts";
 
 function* getProjects() {
   try {
@@ -29,12 +29,12 @@ function* createProject({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Projeto criado com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Projeto criado com sucesso",
+        type: "success",
       })
     );
-    yield call(payload.history.push(`/projects/${item.data.id}`));
+    yield call(payload.navigate(`/projects/${item.data.id}`));
   } catch (e) {
     yield put(actions.projectsError({ errorMessage: e.message }));
   }
@@ -46,9 +46,9 @@ function* updateProject({ payload }) {
     yield put(actions.updateProjectSuccess(item.data));
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Projeto atualizado com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Projeto atualizado com sucesso",
+        type: "success",
       })
     );
   } catch (e) {
@@ -98,9 +98,9 @@ function* updateProjectAbout({ payload }) {
     yield put(actions.updateProjectAboutSuccess(item.data));
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Seção sobre atualizada com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Seção sobre atualizada com sucesso",
+        type: "success",
       })
     );
   } catch (e) {
@@ -115,9 +115,9 @@ function* addProjectFAQ({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Questão criada com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Questão criada com sucesso",
+        type: "success",
       })
     );
   } catch (e) {
@@ -132,9 +132,9 @@ function* removeProjectFAQ({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Questão removida com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Questão removida com sucesso",
+        type: "success",
       })
     );
   } catch (e) {
@@ -149,9 +149,9 @@ function* addProjectDonation({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Forma de doação criada com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Forma de doação criada com sucesso",
+        type: "success",
       })
     );
   } catch (e) {
@@ -166,9 +166,9 @@ function* removeProjectDonation({ payload }) {
 
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Forma de doação removida com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Forma de doação removida com sucesso",
+        type: "success",
       })
     );
   } catch (e) {
@@ -202,14 +202,12 @@ function* createProjectPost({ payload }) {
     });
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Publicação realizada com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Publicação realizada com sucesso",
+        type: "success",
       })
     );
-    yield call(
-      payload.history.push(`/projects/${payload.project}/manage/posts`)
-    );
+    yield call(payload.navigate(`/projects/${payload.project}/manage/posts`));
     yield put(actions.createProjectSuccess(item.data));
   } catch (e) {
     yield put(actions.projectsError({ errorMessage: e.message }));
@@ -221,9 +219,9 @@ function* removeProjectPost({ payload }) {
     yield call(api.removeProjectPost, payload);
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Publicação removida com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Publicação removida com sucesso",
+        type: "success",
       })
     );
     yield put(actions.removeProjectPostSuccess(payload.postId));
@@ -246,9 +244,9 @@ function* updateProjectPost({ payload }) {
     const result = yield call(api.updateProjectPost, payload);
     yield put(
       addAlert({
-        title: 'Sucesso',
-        description: 'Publicação atualizada com sucesso',
-        type: 'success',
+        title: "Sucesso",
+        description: "Publicação atualizada com sucesso",
+        type: "success",
       })
     );
     yield put(actions.updateProjectPostSuccess(result));

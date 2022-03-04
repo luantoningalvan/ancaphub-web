@@ -1,17 +1,16 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import {
   DroppableArea,
   FileList,
   FileListItem,
   EmptyList,
   Avatar,
-} from './styles';
-import { FileIcon, defaultStyles } from 'react-file-icon';
-import { FiCheckCircle, FiPlusCircle, FiAlertTriangle } from 'react-icons/fi';
-import { Button, CircularLoader } from 'snake-ui';
-import { useDropzone } from 'react-dropzone';
-import filesize from 'filesize';
-import { useField, UnformField } from '@unform/core';
+} from "./styles";
+import { FiCheckCircle, FiPlusCircle, FiAlertTriangle } from "react-icons/fi";
+import { Button, CircularLoader } from "snake-ui";
+import { useDropzone } from "react-dropzone";
+import filesize from "filesize";
+import { useField, UnformField } from "@unform/core";
 
 export interface UploadProps {
   disabled?: boolean;
@@ -33,7 +32,7 @@ export interface FileProps {
   fileName: string;
   extension: string;
   size: number;
-  state?: 'success' | 'error';
+  state?: "success" | "error";
   loading?: boolean;
   preview?: any;
 }
@@ -58,9 +57,9 @@ const Upload: React.FC<UploadProps> = (props) => {
     registerField({
       name: fieldName,
       ref: dropzoneInputRef.current,
-      path: 'files[0]',
+      path: "files[0]",
       clearValue(ref: HTMLInputElement) {
-        ref.value = '';
+        ref.value = "";
       },
     });
   }, [fieldName, registerField]);
@@ -117,7 +116,7 @@ const Upload: React.FC<UploadProps> = (props) => {
       <DroppableArea {...getRootProps()} isOver={isOver} disabled={disabled}>
         <input
           {...getInputProps()}
-          style={{ display: 'none' }}
+          style={{ display: "none" }}
           ref={dropzoneInputRef}
         />
 
@@ -133,7 +132,7 @@ const Upload: React.FC<UploadProps> = (props) => {
                     state={file.state}
                     key={`${name}-file-${index}`}
                   >
-                    {['png', 'jpg', 'jpeg'].includes(file.extension) ? (
+                    {["png", "jpg", "jpeg"].includes(file.extension) ? (
                       <Avatar src={file.preview} />
                     ) : (
                       <div>{file.extension}</div>
@@ -142,7 +141,7 @@ const Upload: React.FC<UploadProps> = (props) => {
                     <div className="file-info">
                       <h5>{file.fileName}</h5>
                       <div>
-                        <span style={{ color: '#8B8B8B' }}>
+                        <span style={{ color: "#8B8B8B" }}>
                           {filesize(file.size)}
                         </span>
                         <button
@@ -158,7 +157,7 @@ const Upload: React.FC<UploadProps> = (props) => {
                       <CircularLoader size={72} />
                     ) : (
                       <span className="upload-state-icon">
-                        {file.state === 'success' ? (
+                        {file.state === "success" ? (
                           <FiCheckCircle />
                         ) : (
                           <FiAlertTriangle />
@@ -173,7 +172,7 @@ const Upload: React.FC<UploadProps> = (props) => {
                   <Button
                     variant="outlined"
                     onClick={handleOpenDialog}
-                    style={{ margin: '0px 16px 16px 16px' }}
+                    style={{ margin: "0px 16px 16px 16px" }}
                     data-testid={`${name}-add-more-button`}
                   >
                     <FiPlusCircle style={{ marginRight: 8 }} />

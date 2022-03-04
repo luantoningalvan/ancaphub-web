@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import { FiSettings as SettingIcon } from "react-icons/fi";
 import { GroupHeader } from "./styles";
@@ -14,8 +14,8 @@ const GroupManage = lazy(() => import("./Manage"));
 const SingleGroup = () => {
   const [currentPage, setCurrentPage] = React.useState<string | undefined>();
 
-  const { id: groupId, page: groupPage }: { id: string; page: string } =
-    useParams();
+  const { id: groupId, page: groupPage } =
+    useParams<{ id: string; page: string }>();
 
   const pages: { [key: string]: React.ReactNode } = {
     undefined: <GroupBoard />,
@@ -25,7 +25,7 @@ const SingleGroup = () => {
     manage: <GroupManage />,
   };
 
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     setCurrentPage(groupPage);
@@ -41,27 +41,27 @@ const SingleGroup = () => {
             <Tabs style={{ height: 64 }}>
               <Tab
                 current={groupPage === undefined}
-                onClick={() => push(`/groups/${groupId}`)}
+                onClick={() => navigate(`/groups/${groupId}`)}
                 label={<FormattedMessage id="groups.board" />}
               />
               <Tab
                 current={groupPage === "chat"}
-                onClick={() => push(`/groups/${groupId}/chat`)}
+                onClick={() => navigate(`/groups/${groupId}/chat`)}
                 label={<FormattedMessage id="groups.chat" />}
               />
               <Tab
                 current={groupPage === "files"}
-                onClick={() => push(`/groups/${groupId}/files`)}
+                onClick={() => navigate(`/groups/${groupId}/files`)}
                 label={<FormattedMessage id="groups.files" />}
               />
               <Tab
                 current={groupPage === "members"}
-                onClick={() => push(`/groups/${groupId}/members`)}
+                onClick={() => navigate(`/groups/${groupId}/members`)}
                 label={<FormattedMessage id="groups.members" />}
               />
               <Tab
                 current={groupPage === "manage"}
-                onClick={() => push(`/groups/${groupId}/manage`)}
+                onClick={() => navigate(`/groups/${groupId}/manage`)}
                 label={<SettingIcon />}
               />
             </Tabs>

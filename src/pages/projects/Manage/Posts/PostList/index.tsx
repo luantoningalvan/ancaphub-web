@@ -1,21 +1,21 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import { FiPlusCircle, FiEdit, FiTrash } from 'react-icons/fi';
-import { useDispatch, useSelector } from 'react-redux';
-import { FormattedDate } from 'react-intl';
-import { parseISO, addDays } from 'date-fns';
-import { Link, useHistory } from 'react-router-dom';
-import { LoadContent, ConfirmationDialog } from '../../../../../components';
-import { Button, Paper, IconButton, Breadcrumbs, Grid } from 'snake-ui';
-import { Table } from '../styles';
-import { PageHeader } from '../../styles';
+import React, { useEffect, useCallback, useState } from "react";
+import { FiPlusCircle, FiEdit, FiTrash } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { FormattedDate } from "react-intl";
+import { parseISO, addDays } from "date-fns";
+import { Link, useNavigate } from "react-router-dom";
+import { LoadContent, ConfirmationDialog } from "../../../../../components";
+import { Button, Paper, IconButton, Breadcrumbs, Grid } from "snake-ui";
+import { Table } from "../styles";
+import { PageHeader } from "../../styles";
 import {
   getProjectPostsRequest,
   removeProjectPostRequest,
-} from '../../../../../redux/actions/projects';
+} from "../../../../../redux/actions/projects";
 
 const PostList: React.FC<{ project: any }> = ({ project }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { posts, loadingPosts } = useSelector((state: any) => state.projects);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
@@ -33,7 +33,7 @@ const PostList: React.FC<{ project: any }> = ({ project }) => {
         <Grid item xs={12}>
           <PageHeader>
             <div className="page-title">
-              <Breadcrumbs list={[{ title: 'Postagens' }]} />
+              <Breadcrumbs list={[{ title: "Postagens" }]} />
               <h2>Postagens</h2>
             </div>
             <Link to="posts/new">
@@ -52,7 +52,7 @@ const PostList: React.FC<{ project: any }> = ({ project }) => {
                   <th>Título</th>
                   <th>Data</th>
                   <th>Autor</th>
-                  <th style={{ textAlign: 'right' }}>Ações</th>
+                  <th style={{ textAlign: "right" }}>Ações</th>
                 </thead>
 
                 <tbody>
@@ -72,7 +72,7 @@ const PostList: React.FC<{ project: any }> = ({ project }) => {
                         <IconButton
                           icon={<FiEdit />}
                           onClick={() =>
-                            history.push(
+                            navigate(
                               `/projects/${project.id}/manage/posts/edit?postId=${post.id}`
                             )
                           }

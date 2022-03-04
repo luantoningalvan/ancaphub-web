@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import Slider from 'rc-slider';
-import { useDispatch, useSelector } from 'react-redux';
-import { isEmpty } from 'lodash';
-import { FormattedMessage } from 'react-intl';
-import { FiCrosshair as LocateIcon } from 'react-icons/fi';
+import React, { useEffect, useState } from "react";
+import Slider from "rc-slider";
+import { useDispatch, useSelector } from "react-redux";
+import { isEmpty } from "lodash";
+import { FormattedMessage } from "react-intl";
+import { FiCrosshair as LocateIcon } from "react-icons/fi";
 import {
   SearchContainer,
   SearchContentContainer,
   SearchSidebarContainer,
   InnerSearchGridContainer,
   Message,
-} from './styles';
-import { searchNearbyUserRequest } from '../../../redux/actions/search';
-import { updateGeoLocationsRequest } from '../../../redux/actions/settings';
-import 'rc-slider/assets/index.css';
-import UserCard from '../../../components/users/UserCard';
-import { LoadContent } from '../../../components';
-import { Container, Hero, Paper, Switcher } from 'snake-ui';
+} from "./styles";
+import { searchNearbyUserRequest } from "../../../redux/actions/search";
+import { updateGeoLocationsRequest } from "../../../redux/actions/settings";
+import "rc-slider/assets/index.css";
+import UserCard from "../../../components/users/UserCard";
+import { LoadContent } from "../../../components";
+import { Container, Hero, Paper, Switcher } from "snake-ui";
 
 export default () => {
   const [radius, setRadius] = useState(50);
@@ -34,7 +34,7 @@ export default () => {
   };
 
   function updateLocation() {
-    if ('geolocation' in navigator) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setLastLocation({
@@ -100,9 +100,9 @@ export default () => {
                 <Paper padding>
                   <div
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
                     }}
                   >
                     <span>
@@ -110,12 +110,12 @@ export default () => {
                     </span>
                     {/* @ts-ignore */}
                     <Slider
-                      style={{ width: '100%', margin: '0px 16px' }}
+                      style={{ width: "100%", margin: "0px 16px" }}
                       value={radius}
                       min={10}
                       max={300}
                       step={10}
-                      onChange={handleRadius}
+                      onChange={(v) => handleRadius(v as number)}
                       onAfterChange={handleSearch}
                     />
                     <span>

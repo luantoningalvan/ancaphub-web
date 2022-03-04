@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { generate } from 'shortid';
-import { Link, useRouteMatch, useHistory } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import React, { useState } from "react";
+import { generate } from "shortid";
+import { Link, useMatch, useNavigate } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 import {
   FiUser as ProfileIcon,
@@ -10,29 +10,23 @@ import {
   FiSettings as SettingsIcon,
   FiMenu as MenuIcon,
   FiMessageCircle as MessageIcon,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { Dropdown, CardBody, CardFooter, Menu, Button } from 'snake-ui';
+import { useDispatch, useSelector } from "react-redux";
+import { Dropdown, CardBody, CardFooter, Menu, Button } from "snake-ui";
 
-import {
-  AppBar,
-  HeaderWrapper,
-  Logo,
-  HeaderMenu,
-  HeaderMenuItem,
-  Bell,
-} from './styles';
+import { AppBar, HeaderWrapper, Logo, HeaderMenu, Bell } from "./styles";
 
-import Search from './Search';
+import Search from "./Search";
 
-import { NotificationsItem } from '../../';
-import { logoutRequest as logout } from '../../../redux/actions/auth';
-import { switchColorMode as changeTheme } from '../../../redux/actions/settings';
-import { ReactComponent as AncapHubLogo } from '../../../assets/ancaphub.svg';
-import { ReactComponent as AnimatedBell } from '../../../assets/bell.svg';
+import { NotificationsItem } from "../../";
+import { logoutRequest as logout } from "../../../redux/actions/auth";
+import { switchColorMode as changeTheme } from "../../../redux/actions/settings";
+import { ReactComponent as AncapHubLogo } from "../../../assets/ancaphub.svg";
+import { ReactComponent as AnimatedBell } from "../../../assets/bell.svg";
 
-import notificationSound from '../../../assets/notification.mp3';
+import notificationSound from "../../../assets/notification.mp3";
+import { HeaderMenuItem } from "./HeaderMenuItem";
 
 const audio = new Audio(notificationSound);
 
@@ -44,8 +38,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ user, transparent }) => {
-  const { url } = useRouteMatch();
-  const { push } = useHistory();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [animated, setAnimated] = useState(false);
@@ -68,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({ user, transparent }) => {
     }
   };
 
-  document.addEventListener('keydown', escFunction);
+  document.addEventListener("keydown", escFunction);
 
   const { notifications, notReadCount } = useSelector(
     (state: any) => state.notifications
@@ -100,23 +93,25 @@ const Header: React.FC<HeaderProps> = ({ user, transparent }) => {
           </HeaderMenuItem>
            */}
               <HeaderMenuItem
-                current={url.includes('/notifications')}
+                url="/notifications"
                 onClick={(e) => setNotificationsAnchor(e.currentTarget)}
-              >
-                <div>
-                  <Bell animated={animated}>
-                    <AnimatedBell />
-                  </Bell>
-                  {notReadCount > 0 && <span className="badge" />}
-                </div>
-              </HeaderMenuItem>
+                icon={
+                  <div>
+                    <Bell animated={animated}>
+                      <AnimatedBell />
+                    </Bell>
+                    {notReadCount > 0 && <span className="badge" />}
+                  </div>
+                }
+              />
+
               <Dropdown
                 placement="bottom-end"
                 open={Boolean(notificationsAnchor)}
                 onClose={() => setNotificationsAnchor(null)}
                 anchorEl={notificationsAnchor}
               >
-                <h3 style={{ padding: '16px 16px 0px 16px' }}>
+                <h3 style={{ padding: "16px 16px 0px 16px" }}>
                   <FormattedMessage id="common.notifications" />
                 </h3>
                 {notifications.length > 0 ? (
@@ -125,7 +120,7 @@ const Header: React.FC<HeaderProps> = ({ user, transparent }) => {
                       style={{
                         maxWidth: 400,
                         maxHeight: 400,
-                        overflowY: 'scroll',
+                        overflowY: "scroll",
                       }}
                     >
                       {notifications.map((notification: any) => (
@@ -148,12 +143,14 @@ const Header: React.FC<HeaderProps> = ({ user, transparent }) => {
               </Dropdown>
 
               <HeaderMenuItem
+                url="/"
                 onClick={(e) => setOptionsAnchor(e.currentTarget)}
-              >
-                <div>
-                  <ArrowDownIcon />
-                </div>
-              </HeaderMenuItem>
+                icon={
+                  <div>
+                    <ArrowDownIcon />
+                  </div>
+                }
+              />
               <Menu
                 placement="bottom-end"
                 open={Boolean(optionsAnchor)}
@@ -162,12 +159,12 @@ const Header: React.FC<HeaderProps> = ({ user, transparent }) => {
                 options={[
                   {
                     label: <FormattedMessage id="common.profile" />,
-                    onClick: () => push(`/${user?.username}`),
+                    onClick: () => navigate(`/${user?.username}`),
                     icon: <ProfileIcon />,
                   },
                   {
                     label: <FormattedMessage id="common.settings" />,
-                    onClick: () => push(`/settings`),
+                    onClick: () => navigate(`/settings`),
                     icon: <SettingsIcon />,
                   },
                   {
@@ -180,7 +177,7 @@ const Header: React.FC<HeaderProps> = ({ user, transparent }) => {
             </>
           ) : (
             <>
-              <Button color="secondary" onClick={() => push('/signup')}>
+              <Button color="secondary" onClick={() => navigate("/signup")}>
                 Criar uma conta
               </Button>
             </>

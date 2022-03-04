@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { Form } from '@unform/web';
-import { FiLock } from 'react-icons/fi';
-import { useParams, Link } from 'react-router-dom';
-import { FormattedMessage, useIntl } from 'react-intl';
+import React, { useState, useRef } from "react";
+import { Form } from "@unform/web";
+import { FiLock } from "react-icons/fi";
+import { useParams, Link } from "react-router-dom";
+import { FormattedMessage, useIntl } from "react-intl";
 
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
-import { TextField } from '../../components';
+import { TextField } from "../../components";
 import {
   Button,
   Container,
@@ -14,13 +14,13 @@ import {
   CardBody,
   CardHeader,
   CircularLoader,
-} from 'snake-ui';
-import Provider from '../../components/template/Provider';
-import api from '../../api/axios';
-import { ReactComponent as AncapHubLogo } from '../../assets/ancaphub.svg';
+} from "snake-ui";
+import Provider from "../../components/template/Provider";
+import api from "../../api/axios";
+import { ReactComponent as AncapHubLogo } from "../../assets/ancaphub.svg";
 
 const ForgotPassword = () => {
-  const { token }: { user: string; token: string } = useParams();
+  const { token } = useParams<{ user: string; token: string }>();
   const [loading, setLoading] = useState(false);
   const [sended, setSended] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -33,25 +33,25 @@ const ForgotPassword = () => {
         password: Yup.string()
           .required(
             formatMessage({
-              id: 'account.settings.validation.currentPasswordRequired',
+              id: "account.settings.validation.currentPasswordRequired",
             })
           )
           .min(
             6,
             formatMessage({
-              id: 'account.settings.validation.minPasswordLength',
+              id: "account.settings.validation.minPasswordLength",
             })
           ),
         password_confirm: Yup.string()
           .required(
             formatMessage({
-              id: 'account.settings.validation.confirmPasswordRequired',
+              id: "account.settings.validation.confirmPasswordRequired",
             })
           )
           .oneOf(
-            [Yup.ref('password')],
+            [Yup.ref("password")],
             formatMessage({
-              id: 'account.settings.validation.passwordMismatch',
+              id: "account.settings.validation.passwordMismatch",
             })
           ),
       });
@@ -60,7 +60,7 @@ const ForgotPassword = () => {
       });
 
       setLoading(true);
-      await api.post('/password/reset', {
+      await api.post("/password/reset", {
         token,
         password: data.password,
       });
@@ -70,13 +70,13 @@ const ForgotPassword = () => {
       const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((yupError) => {
-          validationErrors[yupError.path] = yupError.message;
+          validationErrors[yupError.path as string] = yupError.message;
         });
         formRef?.current?.setErrors(validationErrors);
         return;
       }
 
-      setError('Não foi possível alterar a senha');
+      setError("Não foi possível alterar a senha");
       setSended(true);
       setLoading(false);
     }
@@ -87,17 +87,17 @@ const ForgotPassword = () => {
       <Container>
         <div
           style={{
-            minHeight: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <Link to="/">
             <AncapHubLogo fill="#e0b30d" height={120} />
           </Link>
-          <Card style={{ width: '100%', maxWidth: 400, marginTop: 32 }}>
+          <Card style={{ width: "100%", maxWidth: 400, marginTop: 32 }}>
             <CardHeader title="Resetar Senha" />
             <CardBody>
               {!loading ? (
@@ -149,7 +149,7 @@ const ForgotPassword = () => {
                   )}
                 </>
               ) : (
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
                   <CircularLoader size={72} />
                 </div>
               )}

@@ -1,19 +1,19 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { FormattedMessage, FormattedDate } from 'react-intl';
-import { parseISO, addDays } from 'date-fns';
+import React, { lazy, Suspense, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { FormattedMessage, FormattedDate } from "react-intl";
+import { parseISO, addDays } from "date-fns";
 import {
   FiGlobe as SiteIcon,
   FiCalendar as BirthIcon,
   FiMapPin as LocationIcon,
   FiEdit as EditIcon,
   FiMessageCircle as MessageIcon,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import defaultProfilePicture from '../../assets/default-profile-picture.jpg';
-import defaultProfileCover from '../../assets/default-profile-cover.jpg';
-import { LoadContent } from '../../components';
+import defaultProfilePicture from "../../assets/default-profile-picture.jpg";
+import defaultProfileCover from "../../assets/default-profile-cover.jpg";
+import { LoadContent } from "../../components";
 import {
   Paper,
   CircularLoader,
@@ -22,44 +22,42 @@ import {
   Tab,
   Button,
   Grid,
-} from 'snake-ui';
+} from "snake-ui";
 
-import FollowButton from '../../components/users/FollowButton';
-import EditProfile from '../../components/users/EditProfile';
-import EditAvatar from '../../components/upload/CropImage';
-import UserName from '../../components/users/UserName';
+import FollowButton from "../../components/users/FollowButton";
+import EditProfile from "../../components/users/EditProfile";
+import EditAvatar from "../../components/upload/CropImage";
+import UserName from "../../components/users/UserName";
 
 import {
   getSingleUserRequest,
   updateProfilePictureRequest,
   updateProfileCoverRequest,
-} from '../../redux/actions/users';
+} from "../../redux/actions/users";
 import {
   ProfileHeader,
   ProfilePicture,
   ProfileInfo,
   UserAbout,
   ProfileContent,
-} from './styles';
-import { useHistory } from 'react-router-dom';
+} from "./styles";
+import { useNavigate } from "react-router-dom";
 
-const Feed = lazy(() => import('./Feed'));
-const Lists = lazy(() => import('./Lists'));
-const Contributions = lazy(() => import('./Contributions'));
-const Followers = lazy(() => import('./Followers'));
-const Following = lazy(() => import('./Following'));
+const Feed = lazy(() => import("./Feed"));
+const Lists = lazy(() => import("./Lists"));
+const Contributions = lazy(() => import("./Contributions"));
+const Followers = lazy(() => import("./Followers"));
+const Following = lazy(() => import("./Following"));
 
 const Profiles = () => {
   const { user, loading } = useSelector((state: any) => state.profile);
   const auth = useSelector((state: any) => state.auth);
-  const { push } = useHistory();
+  const navigate = useNavigate();
   const [editAvatar, setEditAvatar] = useState(false);
   const [editCover, setEditCover] = useState(false);
 
-  const {
-    handle,
-    page: pageParam,
-  }: { handle: string; page: string } = useParams();
+  const { handle, page: pageParam } =
+    useParams<{ handle: string; page: string }>();
   const dispatch = useDispatch();
 
   const verifyIfIsOwnProfile =
@@ -77,7 +75,7 @@ const Profiles = () => {
     dispatch(getSingleUserRequest(handle));
   }, [handle, getSingleUserRequest]);
 
-  const Template: React.ReactNode = pages[pageParam];
+  const Template: React.ReactNode = pages[pageParam as string];
 
   return (
     <Container>
@@ -110,7 +108,7 @@ const Profiles = () => {
           <div className="profile-cover">
             <img
               src={
-                user.cover_url && user.cover_url !== ''
+                user.cover_url && user.cover_url !== ""
                   ? user.cover_url
                   : defaultProfileCover
               }
@@ -131,7 +129,7 @@ const Profiles = () => {
               <img
                 alt="user avatar"
                 src={
-                  user.avatar_url && user.avatar_url !== ''
+                  user.avatar_url && user.avatar_url !== ""
                     ? user.avatar_url
                     : defaultProfilePicture
                 }
@@ -180,10 +178,10 @@ const Profiles = () => {
                 <UserName user={user} fontSize={24} />
               </h3>
               <span>
-                @{user.username}{' '}
+                @{user.username}{" "}
                 {user.followed_by && (
                   <em>
-                    {' '}
+                    {" "}
                     - <FormattedMessage id="common.followsYou" />
                   </em>
                 )}
@@ -256,21 +254,21 @@ const Profiles = () => {
             </Grid>
             <Grid item xs={12} md={7}>
               <Paper className="profile-menu">
-                <Tabs style={{ height: 48, padding: '0px 8px' }}>
+                <Tabs style={{ height: 48, padding: "0px 8px" }}>
                   <Tab
                     current={pageParam === undefined}
                     label={<FormattedMessage id="common.feed" />}
-                    onClick={() => push(`/${handle}`)}
+                    onClick={() => navigate(`/${handle}`)}
                   />
                   <Tab
-                    current={pageParam === 'following'}
+                    current={pageParam === "following"}
                     label={<FormattedMessage id="common.following" />}
-                    onClick={() => push(`/${handle}/following`)}
+                    onClick={() => navigate(`/${handle}/following`)}
                   />
                   <Tab
-                    current={pageParam === 'followers'}
+                    current={pageParam === "followers"}
                     label={<FormattedMessage id="common.followers" />}
-                    onClick={() => push(`/${handle}/followers`)}
+                    onClick={() => navigate(`/${handle}/followers`)}
                   />
                 </Tabs>
               </Paper>

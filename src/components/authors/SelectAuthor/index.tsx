@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Select } from '../../';
-import { FormattedMessage } from 'react-intl';
-import { useSelector } from 'react-redux';
-import CreateAuthor from '../CreateAuthor';
+import React, { useState } from "react";
+import { Select } from "../../";
+import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
+import CreateAuthor from "../CreateAuthor";
 
 export default () => {
   const authors = useSelector((state: any) => state.authors);
@@ -15,10 +15,10 @@ export default () => {
         onClose={() => setCreateAuthor(false)}
       />
       <FormattedMessage id="common.author">
-        {(msg: string) => (
+        {(msg) => (
           <Select
             name="author_id"
-            placeholder={msg}
+            placeholder={String(msg)}
             options={authors.items.map((author: any) => ({
               label: author.name,
               value: author.id,

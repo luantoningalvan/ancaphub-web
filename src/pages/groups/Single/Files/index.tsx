@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 import {
   FiChevronDown as DropdownIcon,
   FiList as ListBoxIcon,
   FiGrid as GridIcon,
-} from 'react-icons/fi';
+} from "react-icons/fi";
 
-import FileIcon, { defaultStyles } from 'react-file-icon';
-import { FileExplorer, Toolbar } from './styles';
-import { Paper, IconButton, Menu } from 'snake-ui';
+import { defaultStyles, FileIcon } from "react-file-icon";
+import { FileExplorer, Toolbar } from "./styles";
+import { Paper, IconButton, Menu } from "snake-ui";
 
 const filelist = [
   {
-    name: '45 ACP Smith And Wesson',
-    updatedAt: '23/04/2020 às 18:37',
-    type: 'stl',
-    size: '4.23mb',
+    name: "45 ACP Smith And Wesson",
+    updatedAt: "23/04/2020 às 18:37",
+    type: "stl",
+    size: "4.23mb",
   },
   {
-    name: 'Hino união soviética',
-    updatedAt: '23/04/2020 às 18:37',
-    type: 'mp3',
-    size: '3.11mb',
+    name: "Hino união soviética",
+    updatedAt: "23/04/2020 às 18:37",
+    type: "mp3",
+    size: "3.11mb",
   },
 ];
 
@@ -69,7 +69,7 @@ const GroupFiles = () => {
             {filelist.map((file) => (
               <tr key={file.name}>
                 <td>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <div style={{ display: "flex", alignItems: "center" }}>
                     {/* @ts-ignore */}
                     <FileIcon
                       extension={file.type} // @ts-ignore

@@ -246,20 +246,17 @@ const PostForm: React.FC = () => {
                               }`}
                               values={{ optionNumber: index + 1 }}
                             >
-                              {(msg: string) => (
-                                <>
-                                  {/* @ts-ignore */}
-                                  <TextField
-                                    fullWidth
-                                    type="text"
-                                    placeholder={msg}
-                                    value={media.data[index]}
-                                    name={`options[${index}]`}
-                                    onChange={(e: any) =>
-                                      handleChangePollOption(index, e)
-                                    }
-                                  />
-                                </>
+                              {(msg) => (
+                                <TextField
+                                  fullWidth
+                                  type="text"
+                                  placeholder={msg}
+                                  value={media.data[index]}
+                                  name={`options[${index}]`}
+                                  onChange={(e: any) =>
+                                    handleChangePollOption(index, e)
+                                  }
+                                />
                               )}
                             </FormattedMessage>
                           </li>
@@ -293,24 +290,19 @@ const PostForm: React.FC = () => {
                   <Card>
                     <CardBody>
                       <FormattedMessage id="components.postForm.videoUrl">
-                        {(
-                          msg: string //@ts-ignore
-                        ) => (
-                          <>
-                            {/*@ts-ignore */}
-                            <TextField
-                              fullWidth
-                              placeholder={msg}
-                              value={media.data}
-                              name="url"
-                              onChange={(e: any) =>
-                                setMedia({
-                                  type: "embed",
-                                  data: e.target.value,
-                                })
-                              }
-                            />
-                          </>
+                        {(msg) => (
+                          <TextField
+                            fullWidth
+                            placeholder={msg}
+                            value={media.data}
+                            name="url"
+                            onChange={(e: any) =>
+                              setMedia({
+                                type: "embed",
+                                data: e.target.value,
+                              })
+                            }
+                          />
                         )}
                       </FormattedMessage>
                       {media.data !== "" && (

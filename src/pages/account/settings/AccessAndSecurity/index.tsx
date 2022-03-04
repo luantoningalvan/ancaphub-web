@@ -1,17 +1,17 @@
-import React, { useRef } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Form } from '@unform/web';
-import * as Yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useRef } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { Form } from "@unform/web";
+import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
 
-import { TextField } from '../../../../components';
-import { Button, Card, CardBody, CardHeader, Accordion, Grid } from 'snake-ui';
+import { TextField } from "../../../../components";
+import { Button, Card, CardBody, CardHeader, Accordion, Grid } from "snake-ui";
 
 import {
   updateEmailRequest,
   updateUsernameRequest,
   updatePasswordRequest,
-} from '../../../../redux/actions/settings';
+} from "../../../../redux/actions/settings";
 
 const AccessAndSecurity = () => {
   const { formatMessage } = useIntl();
@@ -25,14 +25,14 @@ const AccessAndSecurity = () => {
     try {
       const schema = Yup.object().shape({
         username: Yup.string()
-          .min(3, formatMessage({ id: 'settings.validation.usernameShort' }))
-          .max(20, formatMessage({ id: 'settings.validation.usernameLong' }))
+          .min(3, formatMessage({ id: "settings.validation.usernameShort" }))
+          .max(20, formatMessage({ id: "settings.validation.usernameLong" }))
           .matches(
             /^[a-zA-Z0-9_]+$/,
-            formatMessage({ id: 'settings.validation.regex' })
+            formatMessage({ id: "settings.validation.regex" })
           )
           .required(
-            formatMessage({ id: 'settings.validation.usernameRequired' })
+            formatMessage({ id: "settings.validation.usernameRequired" })
           ),
       });
 
@@ -44,7 +44,7 @@ const AccessAndSecurity = () => {
       const validationErrors: { [key: string]: any } = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message;
+          validationErrors[error.path as string] = error.message;
         });
         usernameFormRef.current.setErrors(validationErrors);
       }
@@ -55,8 +55,8 @@ const AccessAndSecurity = () => {
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
-          .email(formatMessage({ id: 'settings.validation.emailInvalid' }))
-          .required(formatMessage({ id: 'settings.validation.emailRequired' })),
+          .email(formatMessage({ id: "settings.validation.emailInvalid" }))
+          .required(formatMessage({ id: "settings.validation.emailRequired" })),
       });
       await schema.validate(data, {
         abortEarly: false,
@@ -66,7 +66,7 @@ const AccessAndSecurity = () => {
       const validationErrors: { [key: string]: any } = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message;
+          validationErrors[error.path as string] = error.message;
         });
         emailFormRef.current.setErrors(validationErrors);
       }
@@ -77,23 +77,23 @@ const AccessAndSecurity = () => {
     try {
       const schema = Yup.object().shape({
         current_password: Yup.string().required(
-          formatMessage({ id: 'settings.validation.currentPasswordRequired' })
+          formatMessage({ id: "settings.validation.currentPasswordRequired" })
         ),
         new_password: Yup.string()
           .required(
-            formatMessage({ id: 'settings.validation.currentPasswordRequired' })
+            formatMessage({ id: "settings.validation.currentPasswordRequired" })
           )
           .min(
             6,
-            formatMessage({ id: 'settings.validation.minPasswordLength' })
+            formatMessage({ id: "settings.validation.minPasswordLength" })
           ),
         confirm_new_password: Yup.string()
           .required(
-            formatMessage({ id: 'settings.validation.confirmPasswordRequired' })
+            formatMessage({ id: "settings.validation.confirmPasswordRequired" })
           )
           .oneOf(
-            [Yup.ref('new_password')],
-            formatMessage({ id: 'settings.validation.passwordMismatch' })
+            [Yup.ref("new_password")],
+            formatMessage({ id: "settings.validation.passwordMismatch" })
           ),
       });
       await schema.validate(data, {
@@ -105,7 +105,7 @@ const AccessAndSecurity = () => {
       const validationErrors: { [key: string]: any } = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message;
+          validationErrors[error.path as string] = error.message;
         });
         passwordFormRef.current.setErrors(validationErrors);
       }
@@ -124,9 +124,9 @@ const AccessAndSecurity = () => {
             <Accordion title={<FormattedMessage id="common.username" />}>
               <Form
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
                 }}
                 onSubmit={handleUsernameSubmit}
                 ref={usernameFormRef}
@@ -156,9 +156,9 @@ const AccessAndSecurity = () => {
             <Accordion title={<FormattedMessage id="common.email" />}>
               <Form
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
                 }}
                 onSubmit={handleEmailSubmit}
                 ref={emailFormRef}
@@ -188,9 +188,9 @@ const AccessAndSecurity = () => {
             <Accordion title={<FormattedMessage id="common.password" />}>
               <Form
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
                 }}
                 onSubmit={handlePasswordSubmit}
                 ref={passwordFormRef}
@@ -210,10 +210,10 @@ const AccessAndSecurity = () => {
                   </Grid>
                   <Grid item xs={12}>
                     <FormattedMessage id="common.password">
-                      {(msg: string) => (
+                      {(msg) => (
                         <FormattedMessage
                           id="common.newFemale"
-                          values={{ what: msg.toLowerCase() }}
+                          values={{ what: String(msg).toLowerCase() }}
                         >
                           {(_msg) => (
                             <TextField

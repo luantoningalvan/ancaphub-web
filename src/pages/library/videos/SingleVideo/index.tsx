@@ -16,7 +16,7 @@ import { Container } from "snake-ui";
 import { getSingleItemRequest as getSingleItem } from "../../../../redux/actions/library";
 
 const SingleVideo = () => {
-  const { id }: { id: string } = useParams();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
 
   React.useEffect(() => {

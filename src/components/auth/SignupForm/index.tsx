@@ -1,13 +1,13 @@
-import React, { useRef } from 'react';
-import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
-import { FormattedMessage, useIntl } from 'react-intl';
-import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { FiMail, FiLock, FiUser, FiAtSign } from 'react-icons/fi';
-import { TextField } from '../../';
-import { createUserRequest } from '../../../redux/actions/users';
-import { Button } from 'snake-ui';
+import React, { useRef } from "react";
+import { FormHandles } from "@unform/core";
+import { Form } from "@unform/web";
+import { FormattedMessage, useIntl } from "react-intl";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { FiMail, FiLock, FiUser, FiAtSign } from "react-icons/fi";
+import { TextField } from "../../";
+import { createUserRequest } from "../../../redux/actions/users";
+import { Button } from "snake-ui";
 
 const SignupForm = () => {
   const dispatch = useDispatch();
@@ -20,64 +20,64 @@ const SignupForm = () => {
         name: Yup.string()
           .min(
             3,
-            formatMessage({ id: 'account.settings.validation.usernameShort' })
+            formatMessage({ id: "account.settings.validation.usernameShort" })
           )
           .max(
             30,
-            formatMessage({ id: 'account.settings.validation.usernameLong' })
+            formatMessage({ id: "account.settings.validation.usernameLong" })
           )
           .required(
             formatMessage({
-              id: 'account.settings.validation.usernameRequired',
+              id: "account.settings.validation.usernameRequired",
             })
           ),
         username: Yup.string()
           .min(
             3,
-            formatMessage({ id: 'account.settings.validation.usernameShort' })
+            formatMessage({ id: "account.settings.validation.usernameShort" })
           )
           .max(
             20,
-            formatMessage({ id: 'account.settings.validation.usernameLong' })
+            formatMessage({ id: "account.settings.validation.usernameLong" })
           )
           .matches(
             /^[a-zA-Z0-9_]+$/,
-            formatMessage({ id: 'account.settings.validation.regex' })
+            formatMessage({ id: "account.settings.validation.regex" })
           )
           .required(
             formatMessage({
-              id: 'account.settings.validation.usernameRequired',
+              id: "account.settings.validation.usernameRequired",
             })
           ),
         email: Yup.string()
           .email(
-            formatMessage({ id: 'account.settings.validation.emailInvalid' })
+            formatMessage({ id: "account.settings.validation.emailInvalid" })
           )
           .required(
-            formatMessage({ id: 'account.settings.validation.emailRequired' })
+            formatMessage({ id: "account.settings.validation.emailRequired" })
           ),
         password: Yup.string()
           .required(
             formatMessage({
-              id: 'account.settings.validation.currentPasswordRequired',
+              id: "account.settings.validation.currentPasswordRequired",
             })
           )
           .min(
             6,
             formatMessage({
-              id: 'account.settings.validation.minPasswordLength',
+              id: "account.settings.validation.minPasswordLength",
             })
           ),
         confirmPassword: Yup.string()
           .required(
             formatMessage({
-              id: 'account.settings.validation.confirmPasswordRequired',
+              id: "account.settings.validation.confirmPasswordRequired",
             })
           )
           .oneOf(
-            [Yup.ref('password')],
+            [Yup.ref("password")],
             formatMessage({
-              id: 'account.settings.validation.passwordMismatch',
+              id: "account.settings.validation.passwordMismatch",
             })
           ),
       });
@@ -89,7 +89,7 @@ const SignupForm = () => {
       const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message;
+          validationErrors[error.path as string] = error.message;
         });
         signupFormRef?.current?.setErrors(validationErrors);
       }
@@ -168,7 +168,7 @@ const SignupForm = () => {
         </div>
 
         <div className="form-row">
-          <Button type="submit" color="secondary" style={{ width: '100%' }}>
+          <Button type="submit" color="secondary" style={{ width: "100%" }}>
             <FormattedMessage id="common.register" />
           </Button>
         </div>

@@ -1,15 +1,15 @@
-import React, { useRef } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
-import { Form } from '@unform/web';
-import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
-import { FiMail, FiLock } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-import { TextField } from '../../';
-import { Button } from 'snake-ui';
-import { FormHandles } from '@unform/core';
+import React, { useRef } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
+import { Form } from "@unform/web";
+import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { FiMail, FiLock } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { TextField } from "../../";
+import { Button } from "snake-ui";
+import { FormHandles } from "@unform/core";
 
-import { authUserRequest } from '../../../redux/actions/auth';
+import { authUserRequest } from "../../../redux/actions/auth";
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -20,13 +20,13 @@ const SignInForm = () => {
       const schema = Yup.object().shape({
         email: Yup.string()
           .email(
-            formatMessage({ id: 'account.settings.validation.emailInvalid' })
+            formatMessage({ id: "account.settings.validation.emailInvalid" })
           )
           .required(
-            formatMessage({ id: 'account.settings.validation.emailRequired' })
+            formatMessage({ id: "account.settings.validation.emailRequired" })
           ),
         password: Yup.string().required(
-          formatMessage({ id: 'account.settings.validation.passwordRequired' })
+          formatMessage({ id: "account.settings.validation.passwordRequired" })
         ),
       });
       await schema.validate(data, {
@@ -37,7 +37,7 @@ const SignInForm = () => {
       const validationErrors: any = {};
       if (err instanceof Yup.ValidationError) {
         err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message;
+          validationErrors[error.path as string] = error.message;
         });
         signupFormRef?.current?.setErrors(validationErrors);
       }
@@ -75,15 +75,15 @@ const SignInForm = () => {
           </FormattedMessage>
         </div>
         <div className="form-row">
-          <Button type="submit" color="secondary" style={{ width: '100%' }}>
+          <Button type="submit" color="secondary" style={{ width: "100%" }}>
             <FormattedMessage id="common.login" description="Login button" />
           </Button>
         </div>
 
         <div
-          style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}
+          style={{ display: "flex", justifyContent: "center", marginTop: 16 }}
         >
-          <Link to="/auth/forgot" style={{ color: '#bbb' }}>
+          <Link to="/auth/forgot" style={{ color: "#bbb" }}>
             <FormattedMessage id="common.forgotPassword" />
           </Link>
         </div>

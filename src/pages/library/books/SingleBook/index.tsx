@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { getSingleItemRequest } from '../../../../redux/actions/library';
-import { LoadContent } from '../../../../components';
-import { Paper, Container, Button, Menu } from 'snake-ui';
+import React, { useState, useEffect } from "react";
+import { FormattedMessage } from "react-intl";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getSingleItemRequest } from "../../../../redux/actions/library";
+import { LoadContent } from "../../../../components";
+import { Paper, Container, Button, Menu } from "snake-ui";
 
-import defaultThumbnail from '../../../../assets/default-book-cover.jpg';
-import Categories from '../../../../components/categories/ShowCategories';
+import defaultThumbnail from "../../../../assets/default-book-cover.jpg";
+import Categories from "../../../../components/categories/ShowCategories";
 
 import {
   BookDisplayContainer,
@@ -16,10 +16,10 @@ import {
   Banner,
   Author,
   BookCover,
-} from './styles';
+} from "./styles";
 
 function SingleBook() {
-  const { id }: { id: string } = useParams();
+  const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const [downloadAnchor, setDownloadAnchor] = useState(null);
 
@@ -66,7 +66,7 @@ function SingleBook() {
                       singleItem.files
                         ? singleItem.files.map((file: any) => ({
                             label: file.originalname,
-                            onClick: () => window.open(file.url, '_blank'),
+                            onClick: () => window.open(file.url, "_blank"),
                           }))
                         : []
                     }

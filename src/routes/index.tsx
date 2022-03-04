@@ -1,51 +1,56 @@
-import React from 'react';
+import React, { memo } from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import Template from '../components/template';
+  Routes,
+  Navigate,
+  useRoutes,
+} from "react-router-dom";
+import { useSelector } from "react-redux";
+import Template from "../components/template";
 
-import routeList from './routeList';
-import LoadScreen from '../pages/loading';
+import { RoutesList } from "./routeList";
+import LoadScreen from "../pages/loading";
 
-const Routes = () => {
+const RenderRouter = memo((route: any) => {
+  const { isAuthenticated } = useSelector((state: any) => state.auth);
+  console.log(route);
+
+  if (!route.isOpen) {
+    if (!isAuthenticated) {
+      console.log("1");
+      //return <Navigate to="/" replace />;
+    }
+
+    return (
+      <Template>
+        <route.component />
+      </Template>
+    );
+  }
+
+  if (isAuthenticated) {
+    console.log("2");
+    //return <Navigate to="/home" replace />;
+  }
+
+  return <route.component />;
+});
+
+const AppRoutes = () => {
   const { isAuthenticated, loading } = useSelector((state: any) => state.auth);
 
   return (
     <>
       {isAuthenticated !== null && !loading ? (
         <Router>
-          <Switch>
-            {routeList.map((route) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                exact={route.exact}
-                component={(props: any) => {
-                  if (!route.isOpen) {
-                    if (!isAuthenticated) {
-                      return <Redirect to="/" />;
-                    }
-
-                    return (
-                      <Template {...props}>
-                        <route.component {...props} />
-                      </Template>
-                    );
-                  }
-
-                  if (isAuthenticated) {
-                    return <Redirect to="/home" />;
-                  }
-
-                  return <route.component {...props} />;
-                }}
-              />
-            ))}
-          </Switch>
+          {!!isAuthenticated ? (
+            <Template>
+              <RoutesList />
+            </Template>
+          ) : (
+            <RoutesList />
+          )}
         </Router>
       ) : (
         <LoadScreen />
@@ -54,4 +59,4 @@ const Routes = () => {
   );
 };
 
-export default Routes;
+export default AppRoutes;
