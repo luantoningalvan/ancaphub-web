@@ -58,37 +58,39 @@ export const RoutesList = () => {
             element: <Feed />,
           },
           {
-            path: "library",
+            path: "/library",
             element: <Library />,
-            children: [
-              {
-                path: ":type",
-                element: <Library />,
-              },
-              {
-                path: "contribute",
-                element: <Contribute />,
-              },
-              {
-                path: "books/:id",
-                element: <SingeBook />,
-              },
-              {
-                path: "articles/:id",
-                element: <SingleArticle />,
-              },
-              {
-                path: "videos/:id",
-                element: <SingleVideo />,
-              },
-            ],
+          },
+          {
+            path: "/library/contribute",
+            element: <Contribute />,
+          },
+          {
+            path: "/library/books/:id",
+            element: <SingeBook />,
+          },
+          {
+            path: "/library/articles/:id",
+            element: <SingleArticle />,
+          },
+          {
+            path: "/library/videos/:id",
+            element: <SingleVideo />,
+          },
+          {
+            path: "/library/:type",
+            element: <Library />,
           },
           {
             path: "/groups",
             element: <Groups />,
           },
           {
-            path: "/groups/:id/:page?",
+            path: "/groups/:id",
+            element: <SingleGroup />,
+          },
+          {
+            path: "/groups/:id/:page",
             element: <SingleGroup />,
           },
           {
@@ -106,28 +108,34 @@ export const RoutesList = () => {
           {
             path: "projects",
             element: <Projects />,
-            children: [
-              {
-                path: ":projectId",
-                element: <SingleProject />,
-              },
-              {
-                path: ":projectId/:page",
-                element: <SingleProject />,
-              },
-              {
-                path: "new",
-                element: <NewProject />,
-              },
-              {
-                path: ":projectId/manage/:page?/:subpage?",
-                element: <ManageProject />,
-              },
-              {
-                path: ":projectId/posts/:postId",
-                element: <SingleProjectPost />,
-              },
-            ],
+          },
+          {
+            path: "/projects/:projectId",
+            element: <SingleProject />,
+          },
+          {
+            path: "/projects/:projectId/:page",
+            element: <SingleProject />,
+          },
+          {
+            path: "/projects/new",
+            element: <NewProject />,
+          },
+          {
+            path: "/projects/:projectId/manage",
+            element: <ManageProject />,
+          },
+          {
+            path: "/projects/:projectId/manage/:page",
+            element: <ManageProject />,
+          },
+          {
+            path: "/projects/:projectId/manage/:page/:subpage",
+            element: <ManageProject />,
+          },
+          {
+            path: "/projects/:projectId/posts/:postId",
+            element: <SingleProjectPost />,
           },
           {
             path: "/contributions",
@@ -156,6 +164,10 @@ export const RoutesList = () => {
             element: <Notifications />,
           },
           {
+            path: "/messages",
+            element: <Messages />,
+          },
+          {
             path: "/messages/:id?",
             element: <Messages />,
           },
@@ -168,7 +180,11 @@ export const RoutesList = () => {
             element: <NearbyUsers />,
           },
           {
-            path: "/:handle/:page?",
+            path: "/:handle",
+            element: <Profile />,
+          },
+          {
+            path: "/:handle/:page",
             element: <Profile />,
           },
           {

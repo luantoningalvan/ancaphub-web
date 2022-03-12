@@ -91,13 +91,13 @@ const NewPost: React.FC<{ project: any; editing?: boolean }> = ({
               </Grid>
               <Grid item xs={12}>
                 <FullEditor
-                  name="content"
+                  name="conetent"
                   initialState={
-                    editing
+                    post.content
                       ? EditorState.createWithContent(
                           convertFromRaw(JSON.parse(post.content))
                         )
-                      : null
+                      : EditorState.createEmpty()
                   }
                 />
               </Grid>

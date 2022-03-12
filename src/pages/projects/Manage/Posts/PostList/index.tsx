@@ -36,7 +36,7 @@ const PostList: React.FC<{ project: any }> = ({ project }) => {
               <Breadcrumbs list={[{ title: "Postagens" }]} />
               <h2>Postagens</h2>
             </div>
-            <Link to="posts/new">
+            <Link to="new">
               <Button color="primary">
                 <FiPlusCircle />
                 Nova
